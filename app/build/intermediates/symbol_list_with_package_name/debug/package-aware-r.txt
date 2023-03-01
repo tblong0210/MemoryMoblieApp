@@ -2710,6 +2710,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_border
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2728,6 +2729,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_rotate
 drawable ic_search_black_24
 drawable m3_appbar_background
 drawable m3_avd_hide_password
@@ -2901,9 +2903,11 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnViewEdit
 id buttonPanel
 id cache_measures
 id callMeasure
+id cancelViewEditBtn
 id cancel_button
 id carryVelocity
 id center
@@ -2940,6 +2944,7 @@ id currentState
 id custom
 id customPanel
 id cut
+id cutPic
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -2988,6 +2993,7 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filterPic
 id fitCenter
 id fitEnd
 id fitStart
@@ -3008,6 +3014,8 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
+id guideline
+id guideline3
 id header_title
 id hideable
 id home
@@ -3020,6 +3028,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imgViewEdit
 id immediateStop
 id included
 id indeterminate
@@ -3127,8 +3136,11 @@ id overshoot
 id packed
 id parallax
 id parent
+id parentOptionActions
 id parentPanel
 id parentRelative
+id parentSelection
+id parentViewEdit
 id parent_matrix
 id password_toggle
 id path
@@ -3143,14 +3155,26 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
+id rbCutFirstOption
+id rbCutFourthOption
+id rbCutSecondOption
+id rbCutThirdOption
+id rbFilterFirstOption
+id rbFilterSecondOption
+id rbFilterThirdOption
 id rectangles
 id reverseSawtooth
+id rgCut
+id rgFilter
 id right
 id rightToLeft
 id right_icon
 id right_side
+id rotateOption
+id rotatePic
 id rounded
 id row_index_key
+id saveViewEditBtn
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3247,6 +3271,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3402,6 +3427,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_view_edit
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
