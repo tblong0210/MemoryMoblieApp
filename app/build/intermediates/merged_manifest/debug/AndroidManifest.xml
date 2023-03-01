@@ -27,6 +27,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.MemoryMoblieApp" >
         <activity
+            android:name="com.example.memorymoblieapp.ViewEdit"
+            android:exported="false" />
+        <activity
             android:name="com.example.memorymoblieapp.MainActivity"
             android:exported="true" >
             <intent-filter>

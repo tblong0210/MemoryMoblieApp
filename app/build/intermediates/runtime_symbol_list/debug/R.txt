@@ -2709,6 +2709,7 @@ int drawable btn_radio_off_mtrl 0x7f07007e
 int drawable btn_radio_off_to_on_mtrl_animation 0x7f07007f
 int drawable btn_radio_on_mtrl 0x7f070080
 int drawable btn_radio_on_to_off_mtrl_animation 0x7f070081
+int drawable button_border 0x7f0700df
 int drawable design_fab_background 0x7f070082
 int drawable design_ic_visibility 0x7f070083
 int drawable design_ic_visibility_off 0x7f070084
@@ -2727,6 +2728,7 @@ int drawable ic_mtrl_checked_circle 0x7f070090
 int drawable ic_mtrl_chip_checked_black 0x7f070091
 int drawable ic_mtrl_chip_checked_circle 0x7f070092
 int drawable ic_mtrl_chip_close_circle 0x7f070093
+int drawable ic_rotate 0x7f0700e0
 int drawable ic_search_black_24 0x7f070094
 int drawable m3_appbar_background 0x7f070095
 int drawable m3_avd_hide_password 0x7f070096
@@ -2900,9 +2902,11 @@ int id bounce 0x7f08005e
 int id bounceBoth 0x7f08005f
 int id bounceEnd 0x7f080060
 int id bounceStart 0x7f080061
+int id btnViewEdit 0x7f0801ec
 int id buttonPanel 0x7f080062
 int id cache_measures 0x7f080063
 int id callMeasure 0x7f080064
+int id cancelViewEditBtn 0x7f0801f2
 int id cancel_button 0x7f080065
 int id carryVelocity 0x7f080066
 int id center 0x7f080067
@@ -2939,6 +2943,7 @@ int id currentState 0x7f080085
 int id custom 0x7f080086
 int id customPanel 0x7f080087
 int id cut 0x7f080088
+int id cutPic 0x7f0801f3
 int id date_picker_actions 0x7f080089
 int id decelerate 0x7f08008a
 int id decelerateAndComplete 0x7f08008b
@@ -2987,6 +2992,7 @@ int id fill 0x7f0800b5
 int id fill_horizontal 0x7f0800b6
 int id fill_vertical 0x7f0800b7
 int id filled 0x7f0800b8
+int id filterPic 0x7f0801f4
 int id fitCenter 0x7f0800b9
 int id fitEnd 0x7f0800ba
 int id fitStart 0x7f0800bb
@@ -3007,6 +3013,8 @@ int id graph_wrap 0x7f0800c9
 int id group_divider 0x7f0800ca
 int id grouping 0x7f0800cb
 int id groups 0x7f0800cc
+int id guideline 0x7f0801ee
+int id guideline3 0x7f0801f5
 int id header_title 0x7f0800cd
 int id hideable 0x7f0800ce
 int id home 0x7f0800cf
@@ -3019,6 +3027,7 @@ int id ifRoom 0x7f0800d5
 int id ignore 0x7f0800d6
 int id ignoreRequest 0x7f0800d7
 int id image 0x7f0800d8
+int id imgViewEdit 0x7f0801f6
 int id immediateStop 0x7f0800d9
 int id included 0x7f0800da
 int id indeterminate 0x7f0800db
@@ -3126,8 +3135,11 @@ int id overshoot 0x7f080140
 int id packed 0x7f080141
 int id parallax 0x7f080142
 int id parent 0x7f080143
+int id parentOptionActions 0x7f0801f7
 int id parentPanel 0x7f080144
 int id parentRelative 0x7f080145
+int id parentSelection 0x7f0801f8
+int id parentViewEdit 0x7f0801f0
 int id parent_matrix 0x7f080146
 int id password_toggle 0x7f080147
 int id path 0x7f080148
@@ -3142,14 +3154,26 @@ int id progress_circular 0x7f080150
 int id progress_horizontal 0x7f080151
 int id radio 0x7f080152
 int id ratio 0x7f080153
+int id rbCutFirstOption 0x7f0801f9
+int id rbCutFourthOption 0x7f0801fa
+int id rbCutSecondOption 0x7f0801fb
+int id rbCutThirdOption 0x7f0801fc
+int id rbFilterFirstOption 0x7f0801fd
+int id rbFilterSecondOption 0x7f0801fe
+int id rbFilterThirdOption 0x7f0801ff
 int id rectangles 0x7f080154
 int id reverseSawtooth 0x7f080155
+int id rgCut 0x7f080200
+int id rgFilter 0x7f080201
 int id right 0x7f080156
 int id rightToLeft 0x7f080157
 int id right_icon 0x7f080158
 int id right_side 0x7f080159
+int id rotateOption 0x7f080202
+int id rotatePic 0x7f080203
 int id rounded 0x7f08015a
 int id row_index_key 0x7f08015b
+int id saveViewEditBtn 0x7f080204
 int id save_non_transition_alpha 0x7f08015c
 int id save_overlay_view 0x7f08015d
 int id sawtooth 0x7f08015e
@@ -3246,6 +3270,7 @@ int id textSpacerNoButtons 0x7f0801b8
 int id textSpacerNoTitle 0x7f0801b9
 int id textStart 0x7f0801ba
 int id textTop 0x7f0801bb
+int id textView 0x7f0801ed
 int id text_input_end_icon 0x7f0801bc
 int id text_input_error_icon 0x7f0801bd
 int id text_input_start_icon 0x7f0801be
@@ -3401,6 +3426,7 @@ int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
 int layout activity_main 0x7f0b001c
+int layout activity_view_edit 0x7f0b006a
 int layout custom_dialog 0x7f0b001d
 int layout design_bottom_navigation_item 0x7f0b001e
 int layout design_bottom_sheet_dialog 0x7f0b001f
