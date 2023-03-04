@@ -10,7 +10,6 @@ color white
 drawable button_border
 drawable ic_launcher_background
 drawable ic_launcher_foreground
-drawable ic_rotate
 id btnViewEdit
 id cancelViewEditBtn
 id cutPic
@@ -38,6 +37,7 @@ layout activity_main
 layout activity_view_edit
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_rotate
 string app_name
 style Theme.MemoryMoblieApp
 xml backup_rules
