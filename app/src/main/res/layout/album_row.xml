@@ -16,6 +16,7 @@
             android:id="@+id/ivAlbum"
             android:layout_width="160dp"
             android:layout_height="160dp"
+            android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars"
             tools:ignore="ContentDescription">
         </ImageView>
