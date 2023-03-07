@@ -12,14 +12,29 @@
         android:layout_margin="10dp"
         app:cardCornerRadius="30dp">
 
-        <ImageView
-            android:id="@+id/ivAlbum"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars"
-            tools:ignore="ContentDescription">
-        </ImageView>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivAlbum"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars"
+                tools:ignore="ContentDescription">
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/ivMore"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/ic_more"
+                android:layout_gravity="end"
+                tools:ignore="ContentDescription,RtlHardcoded" />
+        </FrameLayout>
 
     </androidx.cardview.widget.CardView>
 
