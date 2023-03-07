@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:stretchColumns="*"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow tools:ignore="UselessParent"
+        android:layout_marginBottom="5dp">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_add"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_duplicate"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_trash"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_export"
+            tools:ignore="ContentDescription" />
+    </TableRow>
+
+    <TableRow tools:ignore="UselessParent">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Thêm vào album"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Duplicate"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Xóa"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Export"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            tools:ignore="HardcodedText">
+        </TextView>
+    </TableRow>
+
+</TableLayout>
