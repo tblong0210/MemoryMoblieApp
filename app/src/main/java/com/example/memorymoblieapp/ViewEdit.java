@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.memorymoblieapp.main.MainActivity;
+
 public class ViewEdit extends AppCompatActivity {
 
     ImageView imgViewEdit, rotateOption;
