@@ -2713,6 +2713,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_border
+drawable circle_unfill
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2734,6 +2735,11 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
 drawable image
+drawable image1
+drawable image2
+drawable image3
+drawable image4
+drawable logo
 drawable m3_appbar_background
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3020,6 +3026,7 @@ id ghost_view_holder
 id gone
 id graph
 id graph_wrap
+id grid_image
 id group_divider
 id grouping
 id groups
@@ -3036,10 +3043,12 @@ id iconCalender
 id iconImage
 id iconLocation
 id icon_group
+id icon_view
 id ifRoom
 id ignore
 id ignoreRequest
 id image
+id image_view
 id imgViewEdit
 id immediateStop
 id included
@@ -3052,6 +3061,7 @@ id item_touch_helper_previous_elevation
 id ivAlbum
 id ivAlbumContainer
 id ivImage
+id ivMore
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3477,7 +3487,10 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout filter_picture_fragment
 layout image_row
+layout image_select
 layout layout_bottom_navigation
+layout layout_grid_image
+layout layout_header
 layout layout_setting_image
 layout layout_view_details
 layout layout_view_image_default
@@ -3557,6 +3570,7 @@ mipmap ic_image
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap ic_location
+mipmap ic_more
 mipmap ic_pen
 mipmap ic_rotate_left
 mipmap ic_share

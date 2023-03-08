@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Thêm ImageView của bạn ở đây -->
+
+    <!-- Thêm ImageView của biểu tượng vào đây -->
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="150dp"
@@ -11,7 +13,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/image1" />
 
-    <!-- Thêm ImageView của biểu tượng vào đây -->
     <ImageView
         android:id="@+id/icon_view"
         android:layout_width="25dp"

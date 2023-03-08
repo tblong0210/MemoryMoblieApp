@@ -14,9 +14,9 @@ public class ListImage extends BaseAdapter  {
 
     public int[] imageArray = {
         R.drawable.image1,
-            R.drawable.image2,
-            R.drawable.image3,
-            R.drawable.image4
+        R.drawable.image2,
+        R.drawable.image3,
+        R.drawable.image4
     };
 
     public ListImage(Context mContext)
