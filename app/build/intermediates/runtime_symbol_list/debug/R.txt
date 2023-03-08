@@ -2814,6 +2814,7 @@ int drawable notification_template_icon_bg 0x7f0700e4
 int drawable notification_template_icon_low_bg 0x7f0700e5
 int drawable notification_tile_bg 0x7f0700e6
 int drawable notify_panel_notification_icon_bg 0x7f0700e7
+int drawable round_corner 0x7f0700ed
 int drawable search_view_bg 0x7f0700e8
 int drawable star 0x7f0700e9
 int drawable test_level_drawable 0x7f0700ea
@@ -3020,6 +3021,7 @@ int id fitToContents 0x7f0800c5
 int id fitXY 0x7f0800c6
 int id fixed 0x7f0800c7
 int id flip 0x7f0800c8
+int id flipPic 0x7f08022e
 int id floating 0x7f0800c9
 int id forever 0x7f0800ca
 int id fragment_container_view_tag 0x7f0800cb
@@ -3034,8 +3036,6 @@ int id grid_image 0x7f0800d3
 int id group_divider 0x7f0800d4
 int id grouping 0x7f0800d5
 int id groups 0x7f0800d6
-int id guideline 0x7f0800d7
-int id guideline3 0x7f0800d8
 int id header_title 0x7f0800d9
 int id hideable 0x7f0800da
 int id home 0x7f0800db
@@ -3205,6 +3205,7 @@ int id rbFilterSecondOption 0x7f08017e
 int id rbFilterThirdOption 0x7f08017f
 int id rectangles 0x7f080180
 int id relativeLayout 0x7f080181
+int id resizePic 0x7f08022f
 int id reverseSawtooth 0x7f080182
 int id rgBrightness 0x7f080183
 int id rgCrop 0x7f080184
@@ -3215,7 +3216,7 @@ int id right 0x7f080188
 int id rightToLeft 0x7f080189
 int id right_icon 0x7f08018a
 int id right_side 0x7f08018b
-int id rotateOption 0x7f08018c
+int id rotatePic 0x7f080230
 int id rounded 0x7f08018d
 int id row_index_key 0x7f08018e
 int id saveViewEditBtn 0x7f08018f
@@ -3573,6 +3574,7 @@ int layout selection_features_bar 0x7f0b0072
 int layout support_simple_spinner_dropdown_item 0x7f0b0073
 int layout title_content_container 0x7f0b0074
 int layout view_details 0x7f0b0075
+int menu menu_crop 0x7f0d0003
 int menu navigation_edit_view 0x7f0d0000
 int menu navigation_menu 0x7f0d0001
 int menu navigation_setting_image 0x7f0d0002
@@ -3587,6 +3589,7 @@ int mipmap ic_duplicate 0x7f0e0007
 int mipmap ic_emote 0x7f0e0008
 int mipmap ic_export 0x7f0e0009
 int mipmap ic_filter 0x7f0e000a
+int mipmap ic_flip 0x7f0e0017
 int mipmap ic_heart 0x7f0e000b
 int mipmap ic_heart_like 0x7f0e000c
 int mipmap ic_image 0x7f0e000d
@@ -3594,9 +3597,13 @@ int mipmap ic_launcher 0x7f0e000e
 int mipmap ic_launcher_round 0x7f0e000f
 int mipmap ic_location 0x7f0e0010
 int mipmap ic_more 0x7f0e0011
+int mipmap ic_paint 0x7f0e0018
 int mipmap ic_pen 0x7f0e0012
+int mipmap ic_resize 0x7f0e0019
 int mipmap ic_rotate_left 0x7f0e0013
 int mipmap ic_share 0x7f0e0014
+int mipmap ic_sticker 0x7f0e001a
+int mipmap ic_text 0x7f0e001b
 int mipmap ic_trash 0x7f0e0015
 int mipmap ic_view 0x7f0e0016
 int plurals mtrl_badge_content_description 0x7f0f0000
@@ -3630,13 +3637,19 @@ int string abc_toolbar_collapse_description 0x7f10001a
 int string action_back_edit_view 0x7f10001b
 int string action_brightness_edit_view 0x7f10001c
 int string action_crop_edit_view 0x7f10001d
+int string action_draw_edit_view 0x7f1000a7
 int string action_edit 0x7f10001e
 int string action_emote_edit_view 0x7f10001f
 int string action_favorite 0x7f100020
 int string action_filter_edit_view 0x7f100021
+int string action_flip_edit_view 0x7f1000a8
 int string action_more 0x7f100022
+int string action_resize_edit_view 0x7f1000a9
+int string action_rotate_edit_view 0x7f1000aa
 int string action_save_edit_view 0x7f100023
 int string action_share 0x7f100024
+int string action_sticker_edit_view 0x7f1000ab
+int string action_text_edit_view 0x7f1000ac
 int string action_trash 0x7f100025
 int string action_unfavorite 0x7f100026
 int string androidx_startup 0x7f100027

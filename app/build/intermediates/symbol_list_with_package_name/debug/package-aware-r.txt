@@ -2815,6 +2815,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable round_corner
 drawable search_view_bg
 drawable star
 drawable test_level_drawable
@@ -3021,6 +3022,7 @@ id fitToContents
 id fitXY
 id fixed
 id flip
+id flipPic
 id floating
 id forever
 id fragment_container_view_tag
@@ -3035,8 +3037,6 @@ id grid_image
 id group_divider
 id grouping
 id groups
-id guideline
-id guideline3
 id header_title
 id hideable
 id home
@@ -3206,6 +3206,7 @@ id rbFilterSecondOption
 id rbFilterThirdOption
 id rectangles
 id relativeLayout
+id resizePic
 id reverseSawtooth
 id rgBrightness
 id rgCrop
@@ -3216,7 +3217,7 @@ id right
 id rightToLeft
 id right_icon
 id right_side
-id rotateOption
+id rotatePic
 id rounded
 id row_index_key
 id saveViewEditBtn
@@ -3574,6 +3575,7 @@ layout selection_features_bar
 layout support_simple_spinner_dropdown_item
 layout title_content_container
 layout view_details
+menu menu_crop
 menu navigation_edit_view
 menu navigation_menu
 menu navigation_setting_image
@@ -3588,6 +3590,7 @@ mipmap ic_duplicate
 mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
+mipmap ic_flip
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image
@@ -3595,9 +3598,13 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap ic_location
 mipmap ic_more
+mipmap ic_paint
 mipmap ic_pen
+mipmap ic_resize
 mipmap ic_rotate_left
 mipmap ic_share
+mipmap ic_sticker
+mipmap ic_text
 mipmap ic_trash
 mipmap ic_view
 plurals mtrl_badge_content_description
@@ -3631,13 +3638,19 @@ string abc_toolbar_collapse_description
 string action_back_edit_view
 string action_brightness_edit_view
 string action_crop_edit_view
+string action_draw_edit_view
 string action_edit
 string action_emote_edit_view
 string action_favorite
 string action_filter_edit_view
+string action_flip_edit_view
 string action_more
+string action_resize_edit_view
+string action_rotate_edit_view
 string action_save_edit_view
 string action_share
+string action_sticker_edit_view
+string action_text_edit_view
 string action_trash
 string action_unfavorite
 string androidx_startup

@@ -47,12 +47,7 @@ public class ViewEdit extends AppCompatActivity {
         handleRgCropPicture();
         handleRgFilteringPicture();
 
-        rotateOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "Rotate Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
     }
 
@@ -256,7 +251,6 @@ public class ViewEdit extends AppCompatActivity {
     }
     private void initViews() {
         imgViewEdit = findViewById(R.id.imgViewEdit);
-        rotateOption = findViewById(R.id.rotateOption);
 
         rgCrop = findViewById(R.id.rgCrop);
         rgFilter = findViewById(R.id.rgFilter);
