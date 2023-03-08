@@ -97,18 +97,18 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/tran
 		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:12:9-53
 	android:dataExtractionRules
 		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:7:9-65
-activity#com.example.memorymoblieapp.ViewEdit
+activity#com.example.memorymoblieapp.view.ViewEdit
 ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:14:9-16:40
 	android:exported
 		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:16:13-37
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:15:13-37
-activity#com.example.memorymoblieapp.MainActivity
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:15:13-42
+activity#com.example.memorymoblieapp.main.MainActivity
 ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:17:9-25:20
 	android:exported
 		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:19:13-36
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:13-41
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:13-46
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:20:13-24:29
 action#android.intent.action.MAIN

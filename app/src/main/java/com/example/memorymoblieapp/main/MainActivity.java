@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.ViewEdit;
+import com.example.memorymoblieapp.view.ViewEdit;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;

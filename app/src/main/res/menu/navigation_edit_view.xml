@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/editPic"
+        android:id="@+id/cropPic"
         android:icon="@mipmap/ic_crop"
         android:title="Chỉnh sửa ảnh"/>
     <item android:title="Bộ lọc"

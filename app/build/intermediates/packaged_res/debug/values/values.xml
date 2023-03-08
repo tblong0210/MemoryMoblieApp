@@ -9,7 +9,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">Memory Moblie App</string>
-    <style name="Theme.MemoryMoblieApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.MemoryMoblieApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         
         <item name="colorPrimary">#AECBFA</item>
         <item name="colorPrimaryVariant">#6694DE</item>

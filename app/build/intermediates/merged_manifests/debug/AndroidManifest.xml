@@ -24,12 +24,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.MemoryMoblieApp" >
         <activity
-            android:name="com.example.memorymoblieapp.ViewEdit"
+            android:name="com.example.memorymoblieapp.view.ViewEdit"
             android:exported="false" />
         <activity
-            android:name="com.example.memorymoblieapp.MainActivity"
+            android:name="com.example.memorymoblieapp.main.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
