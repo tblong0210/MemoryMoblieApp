@@ -6,4 +6,11 @@
     <string name="action_share">Chia sẻ</string>
     <string name="action_trash">Thùng rác</string>
     <string name="action_more">Khác</string>
+    <string name="action_crop_edit_view">Cắt</string>
+    <string name="action_filter_edit_view">Bộ lọc</string>
+    <string name="action_brightness_edit_view">Độ sáng</string>
+    <string name="action_emote_edit_view">Emote</string>
+    <string name="action_other_edit_view">Khác</string>
+    <string name="action_back_edit_view">Trờ lại</string>
+    <string name="action_save_edit_view">Lưu</string>
 </resources>
