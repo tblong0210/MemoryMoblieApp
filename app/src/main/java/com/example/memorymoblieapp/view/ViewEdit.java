@@ -33,9 +33,6 @@ public class ViewEdit extends AppCompatActivity {
 
     BottomNavigationView nav_edit_view;
 
-    private Menu menu;
-    MenuItem menuItem, cropPic, filterPic, brightnessPic, emotePic, morePic;
-
     Button cancelViewEditBtn, saveViewEditBtn;
 
 

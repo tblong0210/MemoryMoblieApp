@@ -1317,6 +1317,7 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color custom_color_nav
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1887,6 +1888,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color primary
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2719,6 +2721,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable home
 drawable ic_add_background
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
@@ -2888,7 +2891,6 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
-id add_favorite
 id album
 id alertTitle
 id aligned
@@ -3006,6 +3008,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
+id favorite
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3115,7 +3118,6 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id more
-id morePic
 id motion_base
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
@@ -3353,6 +3355,7 @@ id txtLocationImage
 id txtNameImage
 id txtPathImage
 id unchecked
+id unfavorite
 id uniform
 id unlabeled
 id up
@@ -3625,6 +3628,18 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_back_edit_view
+string action_brightness_edit_view
+string action_crop_edit_view
+string action_edit
+string action_emote_edit_view
+string action_favorite
+string action_filter_edit_view
+string action_more
+string action_save_edit_view
+string action_share
+string action_trash
+string action_unfavorite
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior

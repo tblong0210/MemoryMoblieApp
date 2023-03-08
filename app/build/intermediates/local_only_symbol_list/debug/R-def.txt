@@ -1,6 +1,8 @@
 R_DEF: Internal format may change without notice
 local
 color black
+color custom_color_nav
+color primary
 color purple_200
 color purple_500
 color purple_700
@@ -11,6 +13,7 @@ color white
 drawable album
 drawable button_border
 drawable circle_unfill
+drawable home
 drawable ic_add_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -23,7 +26,6 @@ drawable logo
 drawable more
 drawable search_view_bg
 drawable star
-id add_favorite
 id album
 id brightnessPic
 id btnViewEdit
@@ -32,6 +34,7 @@ id container
 id cropPic
 id edit
 id emotePic
+id favorite
 id filterPic
 id grid_image
 id guideline
@@ -51,7 +54,6 @@ id ivImage
 id ivMore
 id menu_view_edit
 id more
-id morePic
 id navSetting
 id navigation_edit_view
 id navigation_view
@@ -91,6 +93,7 @@ id txtImgQuantity
 id txtLocationImage
 id txtNameImage
 id txtPathImage
+id unfavorite
 layout activity_main
 layout activity_view_edit
 layout album_row
@@ -130,6 +133,18 @@ mipmap ic_rotate_left
 mipmap ic_share
 mipmap ic_trash
 mipmap ic_view
+string action_back_edit_view
+string action_brightness_edit_view
+string action_crop_edit_view
+string action_edit
+string action_emote_edit_view
+string action_favorite
+string action_filter_edit_view
+string action_more
+string action_save_edit_view
+string action_share
+string action_trash
+string action_unfavorite
 string app_name
 style Theme.MemoryMoblieApp
 xml backup_rules
