@@ -9,11 +9,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MemoryMoblieApp"
+        android:theme="@style/Theme.MemoryMobileApp"
         tools:targetApi="31">
         <activity
             android:name=".ViewEdit"
             android:exported="false" />
+        <activity
+            android:name=".view.ViewImage"
+            android:exported="false" />
+        <activity
+            android:name=".view.ViewDetails"
+            android:exported="false" />
+
         <activity
             android:name=".main.MainActivity"
             android:exported="true">

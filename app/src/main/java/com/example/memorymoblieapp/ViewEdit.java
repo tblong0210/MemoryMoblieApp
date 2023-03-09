@@ -214,8 +214,6 @@ public class ViewEdit extends AppCompatActivity {
         rbFilterFirstOption = findViewById(R.id.rbFilterFirstOption);
         rbFilterSecondOption = findViewById(R.id.rbFilterSecondOption);
         rbFilterThirdOption = findViewById(R.id.rbFilterThirdOption);
-        cutPic=findViewById(R.id.cutPic);
-        rotatePic=findViewById(R.id.rotatePic);
         filterPic=findViewById(R.id.filterPic);
         cancelViewEditBtn=findViewById(R.id.cancelViewEditBtn);
         saveViewEditBtn=findViewById(R.id.saveViewEditBtn);

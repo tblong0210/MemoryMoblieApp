@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.ViewEdit;
+import com.example.memorymoblieapp.view.ViewImage;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
+                Intent intent = new Intent(MainActivity.this, ViewImage.class);
                 startActivity(intent);
             }
         });

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editPic"
+        android:icon="@mipmap/ic_crop"
+        android:title="Chỉnh sửa ảnh"/>
+    <item android:title="Bộ lọc"
+        android:id="@+id/filterPic"
+        android:icon="@mipmap/ic_filter" />
+    <item
+        android:id="@+id/brightnessPic"
+        android:icon="@mipmap/ic_brightness"
+        android:title="Độ sáng"/>
+    <item
+        android:id="@+id/emotePic"
+        android:icon="@mipmap/ic_emote"
+        android:title="Emote"
+        />
+    <item
+        android:id="@+id/morePic"
+        android:icon="@mipmap/ic_more"
+        android:title="Emote"
+        />
+</menu>

@@ -1365,6 +1365,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color light_blue
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -2719,6 +2720,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable home
 drawable ic_add_background
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
@@ -2888,7 +2890,6 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
-id add_favorite
 id album
 id alertTitle
 id aligned
@@ -2917,6 +2918,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id brightnessPic
 id btnViewEdit
 id buttonPanel
 id cache_measures
@@ -2958,7 +2960,6 @@ id currentState
 id custom
 id customPanel
 id cut
-id cutPic
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -2993,9 +2994,11 @@ id easeInOut
 id easeOut
 id east
 id edit
+id editPic
 id edit_query
 id elastic
 id embed
+id emotePic
 id end
 id endToStart
 id enterAlways
@@ -3004,6 +3007,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
+id favorite
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3049,6 +3053,8 @@ id ignore
 id ignoreRequest
 id image
 id image_view
+id imgBack
+id imgView
 id imgViewEdit
 id immediateStop
 id included
@@ -3110,6 +3116,7 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id more
+id morePic
 id motion_base
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
@@ -3135,6 +3142,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id navSetting
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3163,7 +3171,6 @@ id overshoot
 id packed
 id parallax
 id parent
-id parentOptionActions
 id parentPanel
 id parentRelative
 id parentSelection
@@ -3190,6 +3197,7 @@ id rbFilterFirstOption
 id rbFilterSecondOption
 id rbFilterThirdOption
 id rectangles
+id relativeLayout
 id reverseSawtooth
 id rgCut
 id rgFilter
@@ -3198,7 +3206,6 @@ id rightToLeft
 id right_icon
 id right_side
 id rotateOption
-id rotatePic
 id rounded
 id row_index_key
 id saveViewEditBtn
@@ -3240,6 +3247,8 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id setLockscreen
+id setWallpaper
 id share
 id sharedValueSet
 id sharedValueUnset
@@ -3342,7 +3351,7 @@ id unlabeled
 id up
 id useLogo
 id vertical_only
-id viewPicture
+id viewDetails
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3492,8 +3501,6 @@ layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
 layout layout_setting_image
-layout layout_view_details
-layout layout_view_image_default
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3557,13 +3564,22 @@ layout select_dialog_singlechoice_material
 layout selection_features_bar
 layout support_simple_spinner_dropdown_item
 layout title_content_container
+layout view_details
+menu more_setting_image
+menu navigation_edit_view
 menu navigation_menu
 menu navigation_setting_image
 mipmap ic_add
+mipmap ic_back
+mipmap ic_brightness
+mipmap ic_brightness_dark_light
 mipmap ic_calendar
+mipmap ic_crop
 mipmap ic_dots
 mipmap ic_duplicate
+mipmap ic_emote
 mipmap ic_export
+mipmap ic_filter
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image
@@ -3604,6 +3620,16 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_back
+string action_edit
+string action_favorite
+string action_lockscreen
+string action_more
+string action_share
+string action_trash
+string action_unfavorite
+string action_view_details
+string action_wallpaper
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -3732,6 +3758,7 @@ string searchview_navigation_content_description
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
+string view_details
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -4342,6 +4369,7 @@ style Theme_MaterialComponents_Light_NoActionBar
 style Theme_MaterialComponents_Light_NoActionBar_Bridge
 style Theme_MaterialComponents_NoActionBar
 style Theme_MaterialComponents_NoActionBar_Bridge
+style Theme_MemoryMobileApp
 style Theme_MemoryMoblieApp
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar

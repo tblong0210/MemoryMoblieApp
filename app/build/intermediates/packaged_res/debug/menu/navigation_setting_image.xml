@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/add_favorite"
+        android:id="@+id/favorite"
         android:icon="@mipmap/ic_heart"
-        android:title="Yêu thích"/>
+        android:title="@string/action_favorite" />
 
     <item
         android:id="@+id/edit"
         android:icon="@mipmap/ic_pen"
-        android:title="Chỉnh ảnh"/>
+        android:title="@string/action_edit"/>
 
     <item
         android:id="@+id/share"
         android:icon="@mipmap/ic_share"
-        android:title="Chia sẻ"/>
+        android:title="@string/action_share"/>
 
     <item
         android:id="@+id/trash"
         android:icon="@mipmap/ic_trash"
-        android:title="Thùng rác"/>
+        android:title="@string/action_trash"/>
 
     <item
         android:id="@+id/more"
         android:icon="@mipmap/ic_dots"
-        android:title="Khác"/>
+        android:title="@string/action_more"/>
 </menu>

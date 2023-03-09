@@ -6,4 +6,9 @@
     <string name="action_share">Chia sẻ</string>
     <string name="action_trash">Thùng rác</string>
     <string name="action_more">Khác</string>
+    <string name="action_back">Trở lại</string>
+    <string name="action_view_details">Chi tiết</string>
+    <string name="action_wallpaper">Đặt làm hình chờ</string>
+    <string name="action_lockscreen">Đặt làm hình khóa</string>
+    <string name="view_details">Chi tiết</string>
 </resources>

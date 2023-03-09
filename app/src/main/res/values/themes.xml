@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MemoryMoblieApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MemoryMobileApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#AECBFA</item>
         <item name="colorPrimaryVariant">#6694DE</item>

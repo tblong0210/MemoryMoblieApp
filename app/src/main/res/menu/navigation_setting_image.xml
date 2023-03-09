@@ -4,16 +4,7 @@
     <item
         android:id="@+id/favorite"
         android:icon="@mipmap/ic_heart"
-        android:title="@string/action_favorite"
-        app:showAsAction="ifRoom"
-        android:visible="false"/>
-
-    <item
-        android:id="@+id/unfavorite"
-        android:icon="@mipmap/ic_heart_like"
-        android:title="@string/action_unfavorite"
-        app:showAsAction="ifRoom"
-        />
+        android:title="@string/action_favorite" />
 
     <item
         android:id="@+id/edit"
@@ -23,15 +14,15 @@
     <item
         android:id="@+id/share"
         android:icon="@mipmap/ic_share"
-        android:title="Chia sẻ"/>
+        android:title="@string/action_share"/>
 
     <item
         android:id="@+id/trash"
         android:icon="@mipmap/ic_trash"
-        android:title="Thùng rác"/>
+        android:title="@string/action_trash"/>
 
     <item
         android:id="@+id/more"
         android:icon="@mipmap/ic_dots"
-        android:title="Khác"/>
+        android:title="@string/action_more"/>
 </menu>
