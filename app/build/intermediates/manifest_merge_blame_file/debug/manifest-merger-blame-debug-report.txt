@@ -6,107 +6,41 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="24"
-8-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml
+8-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml
+9-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml
 10
 11    <permission
-11-->[androidx.core:core:1.9.0] C:\Users\admin\.gradle\caches\transforms-3\48da4d468f697fb0fb5d56e4c7c822b9\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+11-->[androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
 12        android:name="com.example.memorymoblieapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.9.0] C:\Users\admin\.gradle\caches\transforms-3\48da4d468f697fb0fb5d56e4c7c822b9\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+12-->[androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
 13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.9.0] C:\Users\admin\.gradle\caches\transforms-3\48da4d468f697fb0fb5d56e4c7c822b9\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+13-->[androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
 14
 15    <uses-permission android:name="com.example.memorymoblieapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.9.0] C:\Users\admin\.gradle\caches\transforms-3\48da4d468f697fb0fb5d56e4c7c822b9\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.9.0] C:\Users\admin\.gradle\caches\transforms-3\48da4d468f697fb0fb5d56e4c7c822b9\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+15-->[androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
 16
 17    <application
-17-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:5:5-33:19
+17-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:5:5-33:19
 18        android:allowBackup="true"
-18-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:6:9-35
+18-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:6:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.9.0] C:\Users\admin\.gradle\caches\transforms-3\48da4d468f697fb0fb5d56e4c7c822b9\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+19-->[androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 20        android:dataExtractionRules="@xml/data_extraction_rules"
-20-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:7:9-65
+20-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:7:9-65
 21        android:debuggable="true"
 22        android:extractNativeLibs="false"
 23        android:fullBackupContent="@xml/backup_rules"
-23-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:8:9-54
+23-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:8:9-54
 24        android:icon="@mipmap/ic_launcher"
-24-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:9:9-43
+24-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:9:9-43
 25        android:label="@string/app_name"
-25-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:10:9-41
+25-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:10:9-41
 26        android:supportsRtl="true"
-<<<<<<< HEAD
-26-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:11:9-35
-27        android:testOnly="true"
-28        android:theme="@style/Theme.MemoryMobileApp" >
-28-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:12:9-53
-29        <activity
-29-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:14:9-16:40
-30            android:name="com.example.memorymoblieapp.ViewEdit"
-30-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:15:13-37
-31            android:exported="false" />
-31-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:16:13-37
-32        <activity
-32-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:17:9-19:40
-33            android:name="com.example.memorymoblieapp.view.ViewImage"
-33-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:18:13-43
-34            android:exported="false" />
-34-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:19:13-37
-35        <activity
-35-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:20:9-22:40
-36            android:name="com.example.memorymoblieapp.view.ViewDetails"
-36-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:21:13-45
-37            android:exported="false" />
-37-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:22:13-37
-38        <activity
-38-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:24:9-32:20
-39            android:name="com.example.memorymoblieapp.main.MainActivity"
-39-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:25:13-46
-40            android:exported="true" >
-40-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:26:13-36
-41            <intent-filter>
-41-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:27:13-31:29
-42                <action android:name="android.intent.action.MAIN" />
-42-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:28:17-69
-42-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:28:25-66
-43
-44                <category android:name="android.intent.category.LAUNCHER" />
-44-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:30:17-77
-44-->D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:30:27-74
-45            </intent-filter>
-46        </activity>
-47
-48        <provider
-48-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-49            android:name="androidx.startup.InitializationProvider"
-49-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-50            android:authorities="com.example.memorymoblieapp.androidx-startup"
-50-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-51            android:exported="false" >
-51-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-52            <meta-data
-52-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-53                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-53-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-54                android:value="androidx.startup" />
-54-->[androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
-55            <meta-data
-55-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\admin\.gradle\caches\transforms-3\b0761d22b5c86c7f873b7a426ffce717\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-56                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-56-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\admin\.gradle\caches\transforms-3\b0761d22b5c86c7f873b7a426ffce717\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
-57                android:value="androidx.startup" />
-57-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\admin\.gradle\caches\transforms-3\b0761d22b5c86c7f873b7a426ffce717\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-58        </provider>
-59    </application>
-60
-61</manifest>
-=======
 26-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:11:9-35
 27        android:testOnly="true"
-28        android:theme="@style/Theme.MemoryMoblieApp" >
+28        android:theme="@style/Theme.MemoryMobileApp" >
 28-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:12:9-53
 29        <activity
 29-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:14:9-16:40
@@ -115,45 +49,56 @@
 31            android:exported="false" />
 31-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:16:13-37
 32        <activity
-32-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:17:9-25:20
-33            android:name="com.example.memorymoblieapp.main.MainActivity"
-33-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:13-46
-34            android:exported="true" >
-34-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:19:13-36
-35            <intent-filter>
-35-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:20:13-24:29
-36                <action android:name="android.intent.action.MAIN" />
-36-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:21:17-69
-36-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:21:25-66
-37
-38                <category android:name="android.intent.category.LAUNCHER" />
-38-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:23:17-77
-38-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:23:27-74
-39            </intent-filter>
-40        </activity>
-41
-42        <provider
-42-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-43            android:name="androidx.startup.InitializationProvider"
-43-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
-44            android:authorities="com.example.memorymoblieapp.androidx-startup"
-44-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
-45            android:exported="false" >
-45-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
-46            <meta-data
-46-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-47                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-47-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
-48                android:value="androidx.startup" />
-48-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
-49            <meta-data
-49-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
-50                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-50-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
-51                android:value="androidx.startup" />
-51-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
-52        </provider>
-53    </application>
-54
-55</manifest>
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+32-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:17:9-19:40
+33            android:name="com.example.memorymoblieapp.view.ViewImage"
+33-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:13-43
+34            android:exported="false" />
+34-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:19:13-37
+35        <activity
+35-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:20:9-22:40
+36            android:name="com.example.memorymoblieapp.view.ViewDetails"
+36-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:21:13-45
+37            android:exported="false" />
+37-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:22:13-37
+38        <activity
+38-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:24:9-32:20
+39            android:name="com.example.memorymoblieapp.main.MainActivity"
+39-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:25:13-46
+40            android:exported="true" >
+40-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:26:13-36
+41            <intent-filter>
+41-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:27:13-31:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:28:17-69
+42-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:28:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:30:17-77
+44-->/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:30:27-74
+45            </intent-filter>
+46        </activity>
+47
+48        <provider
+48-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+49            android:name="androidx.startup.InitializationProvider"
+49-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+50            android:authorities="com.example.memorymoblieapp.androidx-startup"
+50-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+51            android:exported="false" >
+51-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+52            <meta-data
+52-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+53                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+53-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+54                android:value="androidx.startup" />
+54-->[androidx.emoji2:emoji2:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/b534eca45ae0368be30899d5007a440e/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+55            <meta-data
+55-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+56                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+56-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+57                android:value="androidx.startup" />
+57-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+58        </provider>
+59    </application>
+60
+61</manifest>

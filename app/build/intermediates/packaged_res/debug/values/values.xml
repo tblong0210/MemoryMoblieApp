@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-<<<<<<< HEAD
     <color name="light_blue">#AECBFA</color>
-=======
-    <color name="primary">#AECBFA</color>
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -13,21 +9,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< HEAD
     <string name="action_back">Trở lại</string>
-    <string name="action_edit">Chỉnh sửa</string>
-    <string name="action_favorite">Thêm yêu thích</string>
-    <string name="action_lockscreen">Đặt làm hình khóa</string>
-    <string name="action_more">Khác</string>
-    <string name="action_share">Chia sẻ</string>
-    <string name="action_trash">Thùng rác</string>
-    <string name="action_unfavorite">Xóa yêu thích</string>
-    <string name="action_view_details">Chi tiết</string>
-    <string name="action_wallpaper">Đặt làm hình chờ</string>
-    <string name="app_name">Memory</string>
-    <string name="view_details">Chi tiết</string>
-    <style name="Theme.MemoryMobileApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-=======
     <string name="action_back_edit_view">Trờ lại</string>
     <string name="action_brightness_edit_view">Độ sáng</string>
     <string name="action_crop_edit_view">Cắt</string>
@@ -37,6 +19,7 @@
     <string name="action_favorite">Thêm yêu thích</string>
     <string name="action_filter_edit_view">Bộ lọc</string>
     <string name="action_flip_edit_view">Lật ảnh</string>
+    <string name="action_lockscreen">Đặt làm hình khóa</string>
     <string name="action_more">Khác</string>
     <string name="action_resize_edit_view">Chỉnh ảnh</string>
     <string name="action_rotate_edit_view">Xoay ảnh</string>
@@ -46,9 +29,18 @@
     <string name="action_text_edit_view">Văn bản</string>
     <string name="action_trash">Thùng rác</string>
     <string name="action_unfavorite">Xóa yêu thích</string>
+    <string name="action_view_details">Chi tiết</string>
+    <string name="action_wallpaper">Đặt làm hình chờ</string>
     <string name="app_name">Memory</string>
-    <style name="Theme.MemoryMoblieApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+    <string name="view_details">Chi tiết</string>
+    <style name="CustomAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_in</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_out</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_in</item>
+
+    </style>
+    <style name="Theme.MemoryMobileApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         
         <item name="colorPrimary">#AECBFA</item>
         <item name="colorPrimaryVariant">#6694DE</item>
@@ -67,5 +59,6 @@
         
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         
+        <item name="android:windowAnimationStyle">@style/CustomAnimation</item>
     </style>
 </resources>

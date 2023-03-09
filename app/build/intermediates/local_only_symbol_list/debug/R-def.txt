@@ -1,12 +1,10 @@
 R_DEF: Internal format may change without notice
 local
+anim slide_in
+anim slide_out
 color black
-<<<<<<< HEAD
-color light_blue
-=======
 color custom_color_nav
-color primary
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+color light_blue
 color purple_200
 color purple_500
 color purple_700
@@ -31,19 +29,18 @@ drawable more
 drawable round_corner
 drawable search_view_bg
 drawable star
+id add
 id album
 id brightnessPic
 id btnViewEdit
 id cancelViewEditBtn
 id container
-<<<<<<< HEAD
-id edit
-id editPic
-=======
 id cropPic
+id delete
+id duplicate
 id edit
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id emotePic
+id export
 id favorite
 id filterPic
 id flipPic
@@ -63,14 +60,10 @@ id ivImage
 id ivMore
 id menu_view_edit
 id more
-<<<<<<< HEAD
-id morePic
-id navSetting
-=======
 id navSetting
 id navigation_edit_view
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id navigation_view
+id parentSearch
 id parentSelection
 id parentViewEdit
 id rbBrightnessFirstOption
@@ -86,12 +79,8 @@ id rbEmoteThirdOption
 id rbFilterFirstOption
 id rbFilterSecondOption
 id rbFilterThirdOption
+id recyclerView
 id relativeLayout
-<<<<<<< HEAD
-id rgCut
-id rgFilter
-id rotateOption
-=======
 id resizePic
 id rgBrightness
 id rgCrop
@@ -99,7 +88,6 @@ id rgEmote
 id rgFilter
 id rgMore
 id rotatePic
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id saveViewEditBtn
 id searchView
 id setLockscreen
@@ -116,15 +104,11 @@ id txtImgQuantity
 id txtLocationImage
 id txtNameImage
 id txtPathImage
-<<<<<<< HEAD
 id viewDetails
-=======
-id unfavorite
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 layout activity_main
 layout activity_view_edit
 layout album_row
-layout filter_picture_fragment
+layout filter_picture
 layout image_row
 layout image_select
 layout layout_bottom_navigation
@@ -134,16 +118,15 @@ layout layout_setting_image
 layout selection_features_bar
 layout title_content_container
 layout view_details
-<<<<<<< HEAD
-menu more_setting_image
-=======
 menu menu_crop
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
 menu navigation_setting_image
+menu selection_features_bar
 mipmap ic_add
 mipmap ic_back
+mipmap ic_back_silver
 mipmap ic_brightness
 mipmap ic_brightness_dark_light
 mipmap ic_calendar
@@ -153,10 +136,7 @@ mipmap ic_duplicate
 mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
-<<<<<<< HEAD
-=======
 mipmap ic_flip
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image
@@ -172,19 +152,9 @@ mipmap ic_share
 mipmap ic_sticker
 mipmap ic_text
 mipmap ic_trash
+mipmap ic_type_filter
 mipmap ic_view
-<<<<<<< HEAD
 string action_back
-string action_edit
-string action_favorite
-string action_lockscreen
-string action_more
-string action_share
-string action_trash
-string action_unfavorite
-string action_view_details
-string action_wallpaper
-=======
 string action_back_edit_view
 string action_brightness_edit_view
 string action_crop_edit_view
@@ -194,6 +164,7 @@ string action_emote_edit_view
 string action_favorite
 string action_filter_edit_view
 string action_flip_edit_view
+string action_lockscreen
 string action_more
 string action_resize_edit_view
 string action_rotate_edit_view
@@ -203,9 +174,11 @@ string action_sticker_edit_view
 string action_text_edit_view
 string action_trash
 string action_unfavorite
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+string action_view_details
+string action_wallpaper
 string app_name
 string view_details
+style CustomAnimation
 style Theme.MemoryMobileApp
 style Theme.MemoryMoblieApp
 xml backup_rules

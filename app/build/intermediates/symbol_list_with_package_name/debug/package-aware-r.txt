@@ -41,6 +41,8 @@ anim m3_side_sheet_slide_out
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
+anim slide_in
+anim slide_out
 animator design_appbar_state_list_animator
 animator design_fab_hide_motion_spec
 animator design_fab_show_motion_spec
@@ -1889,7 +1891,6 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
-color primary
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2969,6 +2970,7 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id delete
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -2993,12 +2995,12 @@ id dragRight
 id dragStart
 id dragUp
 id dropdown_menu
+id duplicate
 id easeIn
 id easeInOut
 id easeOut
 id east
 id edit
-id editPic
 id edit_query
 id elastic
 id embed
@@ -3010,6 +3012,7 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id export
 id fade
 id favorite
 id fill
@@ -3120,7 +3123,6 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id more
-id morePic
 id motion_base
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
@@ -3178,6 +3180,7 @@ id parallax
 id parent
 id parentPanel
 id parentRelative
+id parentSearch
 id parentSelection
 id parentViewEdit
 id parent_matrix
@@ -3208,11 +3211,9 @@ id rbFilterFirstOption
 id rbFilterSecondOption
 id rbFilterThirdOption
 id rectangles
+id recyclerView
 id relativeLayout
-<<<<<<< HEAD
-=======
 id resizePic
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id reverseSawtooth
 id rgBrightness
 id rgCrop
@@ -3223,11 +3224,7 @@ id right
 id rightToLeft
 id right_icon
 id right_side
-<<<<<<< HEAD
-id rotateOption
-=======
 id rotatePic
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id rounded
 id row_index_key
 id saveViewEditBtn
@@ -3368,16 +3365,12 @@ id txtLocationImage
 id txtNameImage
 id txtPathImage
 id unchecked
-id unfavorite
 id uniform
 id unlabeled
 id up
 id useLogo
 id vertical_only
-<<<<<<< HEAD
 id viewDetails
-=======
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3520,7 +3513,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout filter_picture_fragment
+layout filter_picture
 layout image_row
 layout image_select
 layout layout_bottom_navigation
@@ -3591,16 +3584,15 @@ layout selection_features_bar
 layout support_simple_spinner_dropdown_item
 layout title_content_container
 layout view_details
-<<<<<<< HEAD
-menu more_setting_image
-=======
 menu menu_crop
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
 menu navigation_setting_image
+menu selection_features_bar
 mipmap ic_add
 mipmap ic_back
+mipmap ic_back_silver
 mipmap ic_brightness
 mipmap ic_brightness_dark_light
 mipmap ic_calendar
@@ -3610,10 +3602,7 @@ mipmap ic_duplicate
 mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
-<<<<<<< HEAD
-=======
 mipmap ic_flip
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image
@@ -3629,6 +3618,7 @@ mipmap ic_share
 mipmap ic_sticker
 mipmap ic_text
 mipmap ic_trash
+mipmap ic_type_filter
 mipmap ic_view
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
@@ -3658,18 +3648,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
-<<<<<<< HEAD
 string action_back
-string action_edit
-string action_favorite
-string action_lockscreen
-string action_more
-string action_share
-string action_trash
-string action_unfavorite
-string action_view_details
-string action_wallpaper
-=======
 string action_back_edit_view
 string action_brightness_edit_view
 string action_crop_edit_view
@@ -3679,6 +3658,7 @@ string action_emote_edit_view
 string action_favorite
 string action_filter_edit_view
 string action_flip_edit_view
+string action_lockscreen
 string action_more
 string action_resize_edit_view
 string action_rotate_edit_view
@@ -3688,7 +3668,8 @@ string action_sticker_edit_view
 string action_text_edit_view
 string action_trash
 string action_unfavorite
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+string action_view_details
+string action_wallpaper
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -4102,6 +4083,7 @@ style Base_Widget_MaterialComponents_TextView
 style CardView
 style CardView_Dark
 style CardView_Light
+style CustomAnimation
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation
 style MaterialAlertDialog_Material3_Body_Text

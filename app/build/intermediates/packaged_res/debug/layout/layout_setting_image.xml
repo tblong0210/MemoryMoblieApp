@@ -9,7 +9,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="80dp"
         android:background="@color/light_blue">
 
@@ -28,21 +27,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-=======
-        android:layout_height="80dp">
-
-        <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_back"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/imgView"
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
