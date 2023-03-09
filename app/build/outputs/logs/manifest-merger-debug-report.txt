@@ -96,18 +96,31 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ad
 	android:theme
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:12:9-53
 	android:dataExtractionRules
+<<<<<<< HEAD
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:7:9-65
 activity#com.example.memorymoblieapp.ViewEdit
 ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:14:9-16:40
+=======
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:7:9-65
+activity#com.example.memorymoblieapp.view.ViewEdit
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:14:9-16:40
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 	android:exported
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:16:13-37
 	android:name
+<<<<<<< HEAD
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:15:13-37
 activity#com.example.memorymoblieapp.view.ViewImage
 ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:17:9-19:40
+=======
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:15:13-42
+activity#com.example.memorymoblieapp.main.MainActivity
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:17:9-25:20
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 	android:exported
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:19:13-37
 	android:name
+<<<<<<< HEAD
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:18:13-43
 activity#com.example.memorymoblieapp.view.ViewDetails
 ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:20:9-22:40
@@ -121,6 +134,9 @@ ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\sr
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:26:13-36
 	android:name
 		ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:25:13-46
+=======
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:13-46
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:27:13-31:29
 action#android.intent.action.MAIN

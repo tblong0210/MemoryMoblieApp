@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parentViewEdit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewEdit">
+    tools:context=".view.ViewEdit">
 
 
     <ImageView
         android:id="@+id/imgViewEdit"
         android:layout_width="421dp"
+<<<<<<< HEAD
         android:layout_height="180dp"
 
         android:src="@drawable/ic_launcher_background"
@@ -18,27 +19,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
+=======
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_launcher_background" />
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
     <RelativeLayout
         android:id="@+id/parentSelection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewEdit"
-        app:layout_constraintVertical_bias="0.8">
+        android:layout_marginTop="30dp"
+       android:layout_below="@+id/imgViewEdit">
 
         <RadioGroup
-            android:id="@+id/rgCut"
+            android:id="@+id/rgCrop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/rbCutFirstOption"
+                android:id="@+id/rbCropFirstOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
@@ -48,21 +51,21 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/rbCutSecondOption"
+                android:id="@+id/rbCropSecondOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:text="1:1" />
 
             <RadioButton
-                android:id="@+id/rbCutThirdOption"
+                android:id="@+id/rbCropThirdOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:text="3:4" />
 
             <RadioButton
-                android:id="@+id/rbCutFourthOption"
+                android:id="@+id/rbCropFourthOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4:16" />
@@ -99,10 +102,11 @@
 
         </RadioGroup>
 
-        <ImageView
-            android:id="@+id/rotateOption"
+        <RadioGroup
+            android:id="@+id/rgBrightness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_centerInParent="true"
             android:src="@mipmap/ic_rotate_left"
             android:visibility="gone" />
@@ -115,23 +119,110 @@
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintGuide_begin="520dp" />
+=======
+            android:layout_marginLeft="40dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <RadioButton
+                android:id="@+id/rbBrightnessFirstOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="Mặc định" />
+
+            <RadioButton
+                android:id="@+id/rbBrightnessSecondOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="50%" />
+
+            <RadioButton
+                android:id="@+id/rbBrightnessThirdOption"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="100%" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/rgEmote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <RadioButton
+                android:id="@+id/rbEmoteFirstOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="Vẽ" />
+
+            <RadioButton
+                android:id="@+id/rbEmoteSecondOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="Sticker" />
+
+            <RadioButton
+                android:id="@+id/rbEmoteThirdOption"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="Văn bản" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/rgMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+        </RadioGroup>
+
+
+    </RelativeLayout>
+
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
     
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+=======
+        >
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
         <Button
             android:id="@+id/cancelViewEditBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_toLeftOf="@+id/saveViewEditBtn"
             android:layout_marginRight="20dp"
             android:text="Trờ lại" />
+=======
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_toLeftOf="@+id/saveViewEditBtn"
+            android:text="@string/action_back_edit_view" />
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
         <Button
             android:id="@+id/saveViewEditBtn"
@@ -139,15 +230,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
+<<<<<<< HEAD
             android:text="Lưu" />
+=======
+            android:text="@string/action_save_edit_view" />
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
     </RelativeLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation_edit_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="421dp" />
+        app:labelVisibilityMode="unlabeled"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_corner"
+        app:menu="@menu/navigation_edit_view" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_view"
@@ -160,4 +260,4 @@
         app:menu="@menu/navigation_edit_view" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

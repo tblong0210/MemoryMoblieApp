@@ -4,7 +4,20 @@
     <item
         android:id="@+id/favorite"
         android:icon="@mipmap/ic_heart"
+<<<<<<< HEAD
         android:title="@string/action_favorite" />
+=======
+        android:title="@string/action_favorite"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/unfavorite"
+        android:icon="@mipmap/ic_heart_like"
+        android:title="@string/action_unfavorite"
+        app:showAsAction="ifRoom"
+        />
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
     <item
         android:id="@+id/edit"

@@ -1317,6 +1317,7 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color custom_color_nav
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1888,6 +1889,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color primary
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2814,6 +2816,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable round_corner
 drawable search_view_bg
 drawable star
 drawable test_level_drawable
@@ -2956,6 +2959,7 @@ id coordinator
 id cos
 id counterclockwise
 id cradle
+id cropPic
 id currentState
 id custom
 id customPanel
@@ -3020,6 +3024,7 @@ id fitToContents
 id fitXY
 id fixed
 id flip
+id flipPic
 id floating
 id forever
 id fragment_container_view_tag
@@ -3034,8 +3039,6 @@ id grid_image
 id group_divider
 id grouping
 id groups
-id guideline
-id guideline3
 id header_title
 id hideable
 id home
@@ -3106,6 +3109,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id menu_view_edit
 id message
 id middle
 id mini
@@ -3149,6 +3153,7 @@ id navigation_bar_item_icon_view
 id navigation_bar_item_labels_group
 id navigation_bar_item_large_label_view
 id navigation_bar_item_small_label_view
+id navigation_edit_view
 id navigation_header_container
 id navigation_view
 id never
@@ -3189,23 +3194,40 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
-id rbCutFirstOption
-id rbCutFourthOption
-id rbCutSecondOption
-id rbCutThirdOption
+id rbBrightnessFirstOption
+id rbBrightnessSecondOption
+id rbBrightnessThirdOption
+id rbCropFirstOption
+id rbCropFourthOption
+id rbCropSecondOption
+id rbCropThirdOption
+id rbEmoteFirstOption
+id rbEmoteSecondOption
+id rbEmoteThirdOption
 id rbFilterFirstOption
 id rbFilterSecondOption
 id rbFilterThirdOption
 id rectangles
 id relativeLayout
+<<<<<<< HEAD
+=======
+id resizePic
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id reverseSawtooth
-id rgCut
+id rgBrightness
+id rgCrop
+id rgEmote
 id rgFilter
+id rgMore
 id right
 id rightToLeft
 id right_icon
 id right_side
+<<<<<<< HEAD
 id rotateOption
+=======
+id rotatePic
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id rounded
 id row_index_key
 id saveViewEditBtn
@@ -3346,12 +3368,16 @@ id txtLocationImage
 id txtNameImage
 id txtPathImage
 id unchecked
+id unfavorite
 id uniform
 id unlabeled
 id up
 id useLogo
 id vertical_only
+<<<<<<< HEAD
 id viewDetails
+=======
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3565,7 +3591,11 @@ layout selection_features_bar
 layout support_simple_spinner_dropdown_item
 layout title_content_container
 layout view_details
+<<<<<<< HEAD
 menu more_setting_image
+=======
+menu menu_crop
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 menu navigation_edit_view
 menu navigation_menu
 menu navigation_setting_image
@@ -3580,6 +3610,10 @@ mipmap ic_duplicate
 mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
+<<<<<<< HEAD
+=======
+mipmap ic_flip
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image
@@ -3587,9 +3621,13 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap ic_location
 mipmap ic_more
+mipmap ic_paint
 mipmap ic_pen
+mipmap ic_resize
 mipmap ic_rotate_left
 mipmap ic_share
+mipmap ic_sticker
+mipmap ic_text
 mipmap ic_trash
 mipmap ic_view
 plurals mtrl_badge_content_description
@@ -3620,6 +3658,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+<<<<<<< HEAD
 string action_back
 string action_edit
 string action_favorite
@@ -3630,6 +3669,26 @@ string action_trash
 string action_unfavorite
 string action_view_details
 string action_wallpaper
+=======
+string action_back_edit_view
+string action_brightness_edit_view
+string action_crop_edit_view
+string action_draw_edit_view
+string action_edit
+string action_emote_edit_view
+string action_favorite
+string action_filter_edit_view
+string action_flip_edit_view
+string action_more
+string action_resize_edit_view
+string action_rotate_edit_view
+string action_save_edit_view
+string action_share
+string action_sticker_edit_view
+string action_text_edit_view
+string action_trash
+string action_unfavorite
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior

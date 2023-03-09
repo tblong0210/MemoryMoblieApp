@@ -25,17 +25,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:testOnly="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.MemoryMobileApp" >
+=======
+        android:theme="@style/Theme.MemoryMoblieApp" >
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
         <activity
-            android:name="com.example.memorymoblieapp.ViewEdit"
+            android:name="com.example.memorymoblieapp.view.ViewEdit"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name="com.example.memorymoblieapp.view.ViewImage"
             android:exported="false" />
         <activity
             android:name="com.example.memorymoblieapp.view.ViewDetails"
             android:exported="false" />
         <activity
+=======
+>>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
             android:name="com.example.memorymoblieapp.main.MainActivity"
             android:exported="true" >
             <intent-filter>

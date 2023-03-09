@@ -12,7 +12,7 @@
         android:theme="@style/Theme.MemoryMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".ViewEdit"
+            android:name=".view.ViewEdit"
             android:exported="false" />
         <activity
             android:name=".view.ViewImage"
