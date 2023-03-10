@@ -31,17 +31,21 @@ drawable search_view_bg
 drawable star
 id add
 id album
+id brightnessOption
 id brightnessPic
 id btnViewEdit
 id cancelViewEditBtn
 id container
+id cropOption
 id cropPic
 id delete
 id duplicate
 id edit
+id emoteOption
 id emotePic
 id export
 id favorite
+id filterOption
 id filterPic
 id flipPic
 id grid_image
@@ -63,6 +67,7 @@ id more
 id navSetting
 id navigation_edit_view
 id navigation_view
+id paintPic
 id parentSearch
 id parentSelection
 id parentViewEdit
@@ -94,6 +99,8 @@ id setLockscreen
 id setWallpaper
 id share
 id star
+id stickerPic
+id textPic
 id textView
 id trash
 id txtAlbumName
@@ -104,6 +111,7 @@ id txtImgQuantity
 id txtLocationImage
 id txtNameImage
 id txtPathImage
+id typeFilter
 id viewDetails
 layout activity_main
 layout activity_view_edit

@@ -2921,6 +2921,7 @@ int id bounce 0x7f08005f
 int id bounceBoth 0x7f080060
 int id bounceEnd 0x7f080061
 int id bounceStart 0x7f080062
+int id brightnessOption 0x7f080235
 int id brightnessPic 0x7f080063
 int id btnViewEdit 0x7f080064
 int id buttonPanel 0x7f080065
@@ -2959,6 +2960,7 @@ int id coordinator 0x7f080085
 int id cos 0x7f080086
 int id counterclockwise 0x7f080087
 int id cradle 0x7f080088
+int id cropOption 0x7f080236
 int id cropPic 0x7f080089
 int id currentState 0x7f08008a
 int id custom 0x7f08008b
@@ -3003,6 +3005,7 @@ int id edit 0x7f0800b1
 int id edit_query 0x7f0800b2
 int id elastic 0x7f0800b3
 int id embed 0x7f0800b4
+int id emoteOption 0x7f080237
 int id emotePic 0x7f0800b5
 int id end 0x7f0800b6
 int id endToStart 0x7f0800b7
@@ -3018,6 +3021,7 @@ int id fill 0x7f0800c0
 int id fill_horizontal 0x7f0800c1
 int id fill_vertical 0x7f0800c2
 int id filled 0x7f0800c3
+int id filterOption 0x7f080238
 int id filterPic 0x7f0800c4
 int id fitCenter 0x7f0800c5
 int id fitEnd 0x7f0800c6
@@ -3175,6 +3179,7 @@ int id outline 0x7f08015d
 int id outward 0x7f08015e
 int id overshoot 0x7f08015f
 int id packed 0x7f080160
+int id paintPic 0x7f080239
 int id parallax 0x7f080161
 int id parent 0x7f080162
 int id parentPanel 0x7f080163
@@ -3302,6 +3307,7 @@ int id startToEnd 0x7f0801dc
 int id startVertical 0x7f0801dd
 int id staticLayout 0x7f0801de
 int id staticPostLayout 0x7f0801df
+int id stickerPic 0x7f08023a
 int id stop 0x7f0801e0
 int id stretch 0x7f0801e1
 int id submenuarrow 0x7f0801e2
@@ -3324,6 +3330,7 @@ int id tag_window_insets_animation_callback 0x7f0801f2
 int id text 0x7f0801f3
 int id text2 0x7f0801f4
 int id textEnd 0x7f0801f5
+int id textPic 0x7f08023b
 int id textSpacerNoButtons 0x7f0801f6
 int id textSpacerNoTitle 0x7f0801f7
 int id textStart 0x7f0801f8
@@ -3363,6 +3370,7 @@ int id txtImgQuantity 0x7f080219
 int id txtLocationImage 0x7f08021a
 int id txtNameImage 0x7f08021b
 int id txtPathImage 0x7f08021c
+int id typeFilter 0x7f08023c
 int id unchecked 0x7f08021d
 int id uniform 0x7f08021e
 int id unlabeled 0x7f08021f

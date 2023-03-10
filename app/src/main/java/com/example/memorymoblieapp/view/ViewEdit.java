@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -24,12 +25,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ViewEdit extends AppCompatActivity {
 
-    private ImageView imgViewEdit, rotateOption;
-    private RadioGroup rgCrop, rgFilter, rgBrightness, rgEmote;
-    private RadioButton rbCropFirstOption, rbCropSecondOption, rbCropThirdOption, rbCropFourthOption,
-            rbFilterFirstOption, rbFilterSecondOption, rbFilterThirdOption,
-            rbBrightntessFirstOption, rbBrightntessSecondOption, rbBrightntessThirdOption,
-            rbEmoteFirstOption, rbEmoteSecondOption, rbEmoteThirdOption;
+    private ImageView rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
+    private LinearLayout emoteOption, cropOption, filterOption, brightnessOption;
 
     BottomNavigationView nav_edit_view;
 
@@ -45,16 +42,16 @@ public class ViewEdit extends AppCompatActivity {
         initViews();
         initOptionActions();
 
-        handleRgCropPicture();
-        handleRgFilteringPicture();
-
+        handleCropPicture();
+        handleFilteringPicture();
+        handleEmotePicture();
 
 
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
@@ -64,187 +61,56 @@ public class ViewEdit extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void refreshPicture(){
+    private void refreshPicture() {
 
     }
 
-    private void handleRgCropPicture(){
-        int checkedButton = rgCrop.getCheckedRadioButtonId();
-        switch (checkedButton) {
-            case R.id.rbCropFirstOption:
-                Toast.makeText(ViewEdit.this, "Default", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.rbCropSecondOption:
-                Toast.makeText(ViewEdit.this, "1:1", Toast.LENGTH_SHORT).show();
-                break;
+    private void handleCropPicture() {
 
-            case R.id.rbCropThirdOption:
-                Toast.makeText(ViewEdit.this, "3:4", Toast.LENGTH_SHORT).show();
 
-                break;
-
-            case R.id.rbCropFourthOption:
-                Toast.makeText(ViewEdit.this, "4:16", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-
-            rgCrop.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i) {
-                    case R.id.rbCropFirstOption:
-                        Toast.makeText(ViewEdit.this, "Default", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.rbCropSecondOption:
-                        Toast.makeText(ViewEdit.this, "1:1", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.rbCropThirdOption:
-                        Toast.makeText(ViewEdit.this, "3:4", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.rbCropFourthOption:
-                        Toast.makeText(ViewEdit.this, "4:16", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-
-                }
-            }
-        });
     }
 
-    private void handleRgFilteringPicture(){
-        int checkedButton = rgFilter.getCheckedRadioButtonId();
-        switch (checkedButton) {
-            case R.id.rbFilterFirstOption:
-                Toast.makeText(ViewEdit.this, "Free", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.rbFilterSecondOption:
-                Toast.makeText(ViewEdit.this, "Ruc rp", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.rbFilterThirdOption:
-                Toast.makeText(ViewEdit.this, "Sac hong", Toast.LENGTH_SHORT).show();
-
-                break;
-            default:
-                break;
-
-        }
-
-        rgFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i) {
-                    case R.id.rbFilterFirstOption:
-                        Toast.makeText(ViewEdit.this, "Free", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.rbFilterSecondOption:
-                        Toast.makeText(ViewEdit.this, "Ruc rp", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.rbFilterThirdOption:
-                        Toast.makeText(ViewEdit.this, "Sac hong", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+    private void handleFilteringPicture() {
     }
 
-    private void initOptionActions(){
+    private void handleEmotePicture(){}
+    private void initOptionActions() {
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.cropPic:
-                        rgCrop.clearCheck();
-                        rgCrop.setVisibility(View.VISIBLE);
+                       cropOption.setVisibility(View.VISIBLE);
 
-                        rgFilter.clearCheck();
-                        rgFilter.setVisibility(View.GONE);
-
-
-                        rgBrightness.clearCheck();
-                        rgBrightness.setVisibility(View.GONE);
-
-
-                        rgEmote.clearCheck();
-                        rgEmote.setVisibility(View.GONE);
-
-
-
-//                rotateOption.setVisibility(View.VISIBLE);
-//                rotatePic.setEnabled(false);
-//                filterPic.getResources().getColor(R.color.black);
-
+                       filterOption.setVisibility(View.GONE);
+                       brightnessOption.setVisibility(View.GONE);
+                       emoteOption.setVisibility(View.GONE);
                         refreshPicture();
                         break;
 
                     case R.id.filterPic:
-                        rgFilter.clearCheck();
-                        rgFilter.setVisibility(View.VISIBLE);
+                        filterOption.setVisibility(View.VISIBLE);
 
-
-                        rgCrop.clearCheck();
-                        rgCrop.setVisibility(View.GONE);
-
-
-                        rgBrightness.clearCheck();
-                        rgBrightness.setVisibility(View.GONE);
-
-
-                        rgEmote.clearCheck();
-                        rgEmote.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
+                        brightnessOption.setVisibility(View.GONE);
+                        emoteOption.setVisibility(View.GONE);
 
                         break;
                     case R.id.brightnessPic:
-                        rgBrightness.clearCheck();
-                        rgBrightness.setVisibility(View.VISIBLE);
+                        brightnessOption.setVisibility(View.VISIBLE);
 
-
-                        rgCrop.clearCheck();
-                        rgCrop.setVisibility(View.GONE);
-
-                        rgFilter.clearCheck();
-                        rgFilter.setVisibility(View.GONE);
-
-                        rgEmote.clearCheck();
-                        rgEmote.setVisibility(View.GONE);
-
-
-//                rotateOption.setVisibility(View.VISIBLE);
-//                rotatePic.setEnabled(false);
-//                filterPic.getResources().getColor(R.color.black);
+                        filterOption.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
+                        emoteOption.setVisibility(View.GONE);
 
                         refreshPicture();
                         break;
                     case R.id.emotePic:
-                        rgEmote.clearCheck();
-                        rgEmote.setVisibility(View.VISIBLE);
+                        emoteOption.setVisibility(View.VISIBLE);
 
-
-                        rgCrop.clearCheck();
-                        rgCrop.setVisibility(View.GONE);
-
-
-                        rgBrightness.clearCheck();
-                        rgBrightness.setVisibility(View.GONE);
-
-
-                        rgFilter.clearCheck();
-                        rgFilter.setVisibility(View.GONE);
-
-
-
-//                rotateOption.setVisibility(View.VISIBLE);
-//                rotatePic.setEnabled(false);
-//                filterPic.getResources().getColor(R.color.black);
+                        filterOption.setVisibility(View.GONE);
+                        brightnessOption.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
 
                         refreshPicture();
                         break;
@@ -262,33 +128,26 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
     }
+
     private void initViews() {
-        imgViewEdit = findViewById(R.id.imgViewEdit);
+        rotatePic = findViewById(R.id.rotatePic);
+        flipPic = findViewById(R.id.flipPic);
+        resizePic = findViewById(R.id.resizePic);
+        paintPic = findViewById(R.id.paintPic);
+        stickerPic = findViewById(R.id.stickerPic);
+        textPic= findViewById(R.id.textPic);
 
-        rgCrop = findViewById(R.id.rgCrop);
-        rgFilter = findViewById(R.id.rgFilter);
-        rgEmote = findViewById(R.id.rgEmote);
-        rgBrightness = findViewById(R.id.rgBrightness);
+        emoteOption= findViewById(R.id.emoteOption);
+        cropOption= findViewById(R.id.cropOption);
+        filterOption= findViewById(R.id.filterOption);
+        brightnessOption= findViewById(R.id.brightnessOption);
 
-        rbCropFirstOption = findViewById(R.id.rbCropFirstOption);
-        rbCropSecondOption = findViewById(R.id.rbCropSecondOption);
-        rbCropThirdOption = findViewById(R.id.rbCropThirdOption);
-        rbCropFourthOption = findViewById(R.id.rbCropFourthOption);
 
-        rbFilterFirstOption = findViewById(R.id.rbFilterFirstOption);
-        rbFilterSecondOption = findViewById(R.id.rbFilterSecondOption);
-        rbFilterThirdOption = findViewById(R.id.rbFilterThirdOption);
 
-        rbBrightntessFirstOption= findViewById(R.id.rbBrightnessFirstOption);
-        rbBrightntessSecondOption = findViewById(R.id.rbBrightnessSecondOption);
-        rbBrightntessThirdOption = findViewById(R.id.rbBrightnessThirdOption);
+        nav_edit_view = findViewById(R.id.navigation_edit_view);
+        cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
+        saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
 
-        rbEmoteFirstOption = findViewById(R.id.rbEmoteFirstOption);
-        rbEmoteSecondOption = findViewById(R.id.rbEmoteSecondOption);
-        rbEmoteThirdOption = findViewById(R.id.rbEmoteThirdOption);
 
-        nav_edit_view= findViewById(R.id.navigation_edit_view);
-        cancelViewEditBtn=findViewById(R.id.cancelViewEditBtn);
-        saveViewEditBtn=findViewById(R.id.saveViewEditBtn);
     }
 }

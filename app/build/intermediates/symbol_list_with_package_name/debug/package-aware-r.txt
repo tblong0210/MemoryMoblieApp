@@ -2922,6 +2922,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id brightnessOption
 id brightnessPic
 id btnViewEdit
 id buttonPanel
@@ -2960,6 +2961,7 @@ id coordinator
 id cos
 id counterclockwise
 id cradle
+id cropOption
 id cropPic
 id currentState
 id custom
@@ -3004,6 +3006,7 @@ id edit
 id edit_query
 id elastic
 id embed
+id emoteOption
 id emotePic
 id end
 id endToStart
@@ -3019,6 +3022,7 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filterOption
 id filterPic
 id fitCenter
 id fitEnd
@@ -3176,6 +3180,7 @@ id outline
 id outward
 id overshoot
 id packed
+id paintPic
 id parallax
 id parent
 id parentPanel
@@ -3303,6 +3308,7 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id stickerPic
 id stop
 id stretch
 id submenuarrow
@@ -3325,6 +3331,7 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
+id textPic
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -3364,6 +3371,7 @@ id txtImgQuantity
 id txtLocationImage
 id txtNameImage
 id txtPathImage
+id typeFilter
 id unchecked
 id uniform
 id unlabeled
