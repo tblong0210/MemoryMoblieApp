@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.memorymoblieapp.R;
 
 public class ViewDetails extends AppCompatActivity {
-    private ImageView btnBackStatus;
     private TextView txtDateCreated;
     private TextView txtNameImage;
     private TextView txtImageCapacity;
@@ -29,7 +28,6 @@ public class ViewDetails extends AppCompatActivity {
     }
 
     private void initViews(){
-        btnBackStatus = findViewById(R.id.imgBack);
         txtDateCreated = findViewById(R.id.txtDateCreated);
         txtNameImage = findViewById(R.id.txtNameImage);
         txtImageCapacity = findViewById(R.id.txtImageCapacity);
@@ -39,12 +37,6 @@ public class ViewDetails extends AppCompatActivity {
     }
 
     private void initActions(){
-        btnBackStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Back", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
+
     }
 }

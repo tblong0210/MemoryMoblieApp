@@ -18,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ViewImage extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    private ImageView btnBackStatus;
     private ImageView imageView;
     private boolean isFavorite = false;
     @Override
@@ -30,20 +29,11 @@ public class ViewImage extends AppCompatActivity {
     }
 
     private void initViews(){
-        btnBackStatus = findViewById(R.id.imgBack);
         bottomNavigationView = findViewById(R.id.navSetting);
         imageView = findViewById(R.id.imgView);
     }
 
     private void initActions(){
-        btnBackStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Back", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.favorite:
