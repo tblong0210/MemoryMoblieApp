@@ -3064,6 +3064,8 @@ id ignoreRequest
 id image
 id image_view
 id imgBack
+id imgName
+id imgRecView
 id imgView
 id imgViewEdit
 id immediateStop
@@ -3188,6 +3190,7 @@ id parentRelative
 id parentSearch
 id parentSelection
 id parentViewEdit
+id parent_list_image
 id parent_matrix
 id password_toggle
 id path
@@ -3504,6 +3507,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout filter_picture
+layout image_list_item
 layout image_row
 layout image_select
 layout layout_bottom_navigation

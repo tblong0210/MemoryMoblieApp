@@ -2,6 +2,8 @@ package com.example.memorymoblieapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,14 +21,21 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.example.memorymoblieapp.Image;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.adapter.ImageRecViewAdapter;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 public class ViewEdit extends AppCompatActivity {
 
     private ImageView rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
     private LinearLayout emoteOption, cropOption, filterOption, brightnessOption;
+    private RecyclerView imgRecView;
+
+
 
     BottomNavigationView nav_edit_view;
 
@@ -39,7 +48,17 @@ public class ViewEdit extends AppCompatActivity {
         setContentView(R.layout.activity_view_edit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         initViews();
+        ArrayList<Image> images = new ArrayList<>();
+        images.add(new Image("1","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvur-5jUOa0e0hhRoHwWtCT4-s8j9wpJfijUt0f8rxpw&s"));
+        images.add(new Image("2","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRC5bfTQ93UUCjJ9qivDBbj6KYdXdfwSiqIKf-5MoSlA&s"));
+
+        ImageRecViewAdapter adapter = new ImageRecViewAdapter(this);
+        adapter.setImages(images);
+        imgRecView.setAdapter(adapter);
+        imgRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         initOptionActions();
 
     }
@@ -206,6 +225,7 @@ public class ViewEdit extends AppCompatActivity {
         cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
         saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
 
+        imgRecView= findViewById(R.id.imgRecView);
 
     }
 }

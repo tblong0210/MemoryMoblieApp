@@ -59,25 +59,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
-            android:visibility="gone">
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imgRecView"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_rotate_left" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_flip" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_resize" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,23 +75,6 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_rotate_left" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_flip" />
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_resize" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,7 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/paintPic"
@@ -135,6 +106,8 @@
                 android:layout_marginRight="30dp"
                 android:src="@mipmap/ic_text" />
         </LinearLayout>
+        
+
     </RelativeLayout>
 
 

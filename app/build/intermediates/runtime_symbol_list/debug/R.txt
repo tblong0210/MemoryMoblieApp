@@ -3063,6 +3063,8 @@ int id ignoreRequest 0x7f0800e9
 int id image 0x7f0800ea
 int id image_view 0x7f0800eb
 int id imgBack 0x7f0800ec
+int id imgName 0x7f08023d
+int id imgRecView 0x7f08023e
 int id imgView 0x7f0800ed
 int id imgViewEdit 0x7f0800ee
 int id immediateStop 0x7f0800ef
@@ -3187,6 +3189,7 @@ int id parentRelative 0x7f080164
 int id parentSearch 0x7f080165
 int id parentSelection 0x7f080166
 int id parentViewEdit 0x7f080167
+int id parent_list_image 0x7f08023f
 int id parent_matrix 0x7f080168
 int id password_toggle 0x7f080169
 int id path 0x7f08016a
@@ -3503,6 +3506,7 @@ int layout design_navigation_menu_item 0x7f0b002c
 int layout design_text_input_end_icon 0x7f0b002d
 int layout design_text_input_start_icon 0x7f0b002e
 int layout filter_picture 0x7f0b002f
+int layout image_list_item 0x7f0b0076
 int layout image_row 0x7f0b0030
 int layout image_select 0x7f0b0031
 int layout layout_bottom_navigation 0x7f0b0032
