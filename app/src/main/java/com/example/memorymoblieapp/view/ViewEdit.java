@@ -42,11 +42,6 @@ public class ViewEdit extends AppCompatActivity {
         initViews();
         initOptionActions();
 
-        handleCropPicture();
-        handleFilteringPicture();
-        handleEmotePicture();
-
-
     }
 
     @Override
@@ -65,15 +60,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void handleCropPicture() {
 
-
-    }
-
-    private void handleFilteringPicture() {
-    }
-
-    private void handleEmotePicture(){}
     private void initOptionActions() {
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -127,6 +114,77 @@ public class ViewEdit extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        rotatePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ViewEdit.this, "rotated Image", Toast.LENGTH_SHORT).show();
+                handleRotateImage();
+            }
+        });
+
+        flipPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ViewEdit.this, "Flip Image", Toast.LENGTH_SHORT).show();
+                handleFlipImage();
+            }
+        });
+
+        resizePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ViewEdit.this, "Resize Image", Toast.LENGTH_SHORT).show();
+                handleResizeImage();
+            }
+        });
+
+        paintPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ViewEdit.this, "Draw Image", Toast.LENGTH_SHORT).show();
+                handleAddPaintImage();
+            }
+        });
+
+        stickerPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ViewEdit.this, "Add sticker Image", Toast.LENGTH_SHORT).show();
+                handleAddStickerImage();
+            }
+        });
+
+        textPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ViewEdit.this, "Add text Image", Toast.LENGTH_SHORT).show();
+                handleAddTextImage();
+            }
+        });
+
+
+    }
+
+    private void handleRotateImage(){
+
+    }
+    private void handleFlipImage(){
+
+    }
+    private void handleResizeImage(){
+
+    }
+
+    private void handleAddPaintImage(){
+
+    }
+
+    private void handleAddStickerImage(){
+
+    }
+    private void handleAddTextImage(){
+
     }
 
     private void initViews() {
