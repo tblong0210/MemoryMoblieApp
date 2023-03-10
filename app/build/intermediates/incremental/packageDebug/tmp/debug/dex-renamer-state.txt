@@ -1,26 +1,14 @@
-<<<<<<< HEAD
-#Thu Mar 09 00:29:40 ICT 2023
-=======
-#Wed Mar 08 23:15:38 ICT 2023
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
+#Thu Mar 09 14:35:00 ICT 2023
 path.4=6/classes.dex
 path.3=3/classes.dex
 path.2=14/classes.dex
 path.1=0/classes.dex
 path.0=classes.dex
-<<<<<<< HEAD
-base.4=D\:\\source\\Java\\AndroidStudioProjects\\my-source\\MemoryMoblieApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.3=D\:\\source\\Java\\AndroidStudioProjects\\my-source\\MemoryMoblieApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\3\\classes.dex
-base.2=D\:\\source\\Java\\AndroidStudioProjects\\my-source\\MemoryMoblieApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.1=D\:\\source\\Java\\AndroidStudioProjects\\my-source\\MemoryMoblieApp\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.0=D\:\\source\\Java\\AndroidStudioProjects\\my-source\\MemoryMoblieApp\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-=======
 base.4=/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
 base.3=/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/build/intermediates/dex/debug/mergeProjectDexDebug/3/classes.dex
 base.2=/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
 base.1=/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.0=/Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex

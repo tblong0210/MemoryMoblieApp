@@ -11,19 +11,9 @@
     <ImageView
         android:id="@+id/imgViewEdit"
         android:layout_width="421dp"
-<<<<<<< HEAD
-        android:layout_height="180dp"
-
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
-=======
         android:layout_height="300dp"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_launcher_background" />
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
     <RelativeLayout
         android:id="@+id/parentSelection"
@@ -106,20 +96,6 @@
             android:id="@+id/rgBrightness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:layout_centerInParent="true"
-            android:src="@mipmap/ic_rotate_left"
-            android:visibility="gone" />
-    </RelativeLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintGuide_begin="520dp" />
-=======
             android:layout_marginLeft="40dp"
             android:orientation="horizontal"
             android:visibility="gone"
@@ -192,37 +168,24 @@
 
     </RelativeLayout>
 
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
     
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-=======
         >
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
         <Button
             android:id="@+id/cancelViewEditBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:layout_toLeftOf="@+id/saveViewEditBtn"
-            android:layout_marginRight="20dp"
-            android:text="Trờ lại" />
-=======
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="30dp"
             android:layout_toLeftOf="@+id/saveViewEditBtn"
             android:text="@string/action_back_edit_view" />
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
 
         <Button
             android:id="@+id/saveViewEditBtn"
@@ -230,11 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="10dp"
-<<<<<<< HEAD
-            android:text="Lưu" />
-=======
             android:text="@string/action_save_edit_view" />
->>>>>>> 848bf78c4f11e2f34c69c52f3d0d58a1487eb7be
     </RelativeLayout>
 
 
@@ -247,16 +206,6 @@
         android:layout_margin="20dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/round_corner"
-        app:menu="@menu/navigation_edit_view" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation_edit_view" />
 
 
