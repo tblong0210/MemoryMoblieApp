@@ -35,7 +35,7 @@ public class ViewEdit extends AppCompatActivity {
     private LinearLayout emoteOption, cropOption, filterOption, brightnessOption;
     private RecyclerView imgRecView;
 
-
+    private ArrayList<Image> images;
 
     BottomNavigationView nav_edit_view;
 
@@ -51,14 +51,6 @@ public class ViewEdit extends AppCompatActivity {
 
 
         initViews();
-        ArrayList<Image> images = new ArrayList<>();
-        images.add(new Image("1","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvur-5jUOa0e0hhRoHwWtCT4-s8j9wpJfijUt0f8rxpw&s"));
-        images.add(new Image("2","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRC5bfTQ93UUCjJ9qivDBbj6KYdXdfwSiqIKf-5MoSlA&s"));
-
-        ImageRecViewAdapter adapter = new ImageRecViewAdapter(this);
-        adapter.setImages(images);
-        imgRecView.setAdapter(adapter);
-        imgRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         initOptionActions();
 
     }
@@ -226,6 +218,15 @@ public class ViewEdit extends AppCompatActivity {
         saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
 
         imgRecView= findViewById(R.id.imgRecView);
+        //set adapter to imgRecView
+        images = new ArrayList<>();
+        images.add(new Image("1","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvur-5jUOa0e0hhRoHwWtCT4-s8j9wpJfijUt0f8rxpw&s"));
+        images.add(new Image("2","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRC5bfTQ93UUCjJ9qivDBbj6KYdXdfwSiqIKf-5MoSlA&s"));
+
+        ImageRecViewAdapter adapter = new ImageRecViewAdapter(this);
+        adapter.setImages(images);
+        imgRecView.setAdapter(adapter);
+        imgRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
     }
 }

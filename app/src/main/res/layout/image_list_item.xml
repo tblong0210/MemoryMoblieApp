@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/parent_list_image">
-<TextView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_list_image"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Image name"
-    android:id="@+id/imgName"/>
-</RelativeLayout>
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_margin="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/imgName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Image name"
+            android:textStyle="bold"
+            android:layout_marginTop="3dp"/>
+
+        <ImageView
+            android:id="@+id/imgItemViewEdit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/imgName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_launcher_background" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
