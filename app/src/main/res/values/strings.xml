@@ -23,4 +23,9 @@
     <string name="action_draw_edit_view">Vẽ</string>
     <string name="action_sticker_edit_view">Sticker</string>
     <string name="action_text_edit_view">Văn bản</string>
+    <string name="activity_edit_view"></string>
+    <string name="activity_image_view"></string>
+    <string name="activity_detail_view"></string>
+
+
 </resources>

@@ -3669,6 +3669,9 @@ int string action_trash 0x7f10002d
 int string action_unfavorite 0x7f10002e
 int string action_view_details 0x7f10002f
 int string action_wallpaper 0x7f100030
+int string activity_detail_view 0x7f1000b2
+int string activity_edit_view 0x7f1000b3
+int string activity_image_view 0x7f1000b4
 int string androidx_startup 0x7f100031
 int string app_name 0x7f100032
 int string appbar_scrolling_view_behavior 0x7f100033

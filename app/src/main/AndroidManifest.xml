@@ -13,17 +13,20 @@
         tools:targetApi="31">
         <activity
             android:name=".view.ViewEdit"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_edit_view"/>
         <activity
             android:name=".view.ViewImage"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_image_view"/>
         <activity
             android:name=".view.ViewDetails"
             android:exported="false" />
 
         <activity
             android:name=".main.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
