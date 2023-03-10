@@ -165,7 +165,116 @@
             >
         </RadioGroup>
 
+        <LinearLayout
+            android:id="@+id/cropOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_rotate_left"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_flip"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_resize"
+                android:layout_marginRight="30dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/filterOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_rotate_left"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_flip"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_resize"
+                android:layout_marginRight="30dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/brightnessOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_rotate_left"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_flip"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_resize"
+                android:layout_marginRight="30dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emoteOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_paint"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_sticker"
+                android:layout_marginRight="30dp"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ic_text"
+                android:layout_marginRight="30dp"
+                />
+        </LinearLayout>
     </RelativeLayout>
 
     
