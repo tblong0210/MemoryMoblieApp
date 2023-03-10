@@ -33,6 +33,7 @@
             app:iconifiedByDefault="false"/>
 
         <ImageView
+            android:id="@+id/typeFilter"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:paddingTop="15dp"
