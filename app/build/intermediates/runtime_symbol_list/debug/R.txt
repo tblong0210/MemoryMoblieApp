@@ -3025,8 +3025,11 @@ int id fill 0x7f0800c3
 int id fill_horizontal 0x7f0800c4
 int id fill_vertical 0x7f0800c5
 int id filled 0x7f0800c6
+int id filterItemViewEdit 0x7f080234
+int id filterName 0x7f080235
 int id filterOption 0x7f0800c7
 int id filterPic 0x7f0800c8
+int id filterRecView 0x7f080236
 int id fitCenter 0x7f0800c9
 int id fitEnd 0x7f0800ca
 int id fitStart 0x7f0800cb
@@ -3068,9 +3071,6 @@ int id ignoreRequest 0x7f0800ee
 int id image 0x7f0800ef
 int id image_view 0x7f0800f0
 int id imgBack 0x7f0800f1
-int id imgItemViewEdit 0x7f0800f2
-int id imgName 0x7f0800f3
-int id imgRecView 0x7f0800f4
 int id imgView 0x7f0800f5
 int id imgViewEdit 0x7f0800f6
 int id immediateStop 0x7f0800f7
@@ -3196,7 +3196,7 @@ int id parentSearch 0x7f08016e
 int id parentSelection 0x7f08016f
 int id parentViewEdit 0x7f080170
 int id parent_list_brightness 0x7f080233
-int id parent_list_image 0x7f080171
+int id parent_list_filter 0x7f080237
 int id parent_matrix 0x7f080172
 int id password_toggle 0x7f080173
 int id path 0x7f080174
@@ -3513,8 +3513,8 @@ int layout design_navigation_menu 0x7f0b002b
 int layout design_navigation_menu_item 0x7f0b002c
 int layout design_text_input_end_icon 0x7f0b002d
 int layout design_text_input_start_icon 0x7f0b002e
+int layout filter_list_item 0x7f0b0078
 int layout filter_picture 0x7f0b002f
-int layout image_list_item 0x7f0b0030
 int layout image_row 0x7f0b0031
 int layout image_select 0x7f0b0032
 int layout layout_bottom_navigation 0x7f0b0033
@@ -3595,8 +3595,10 @@ int mipmap ic_add 0x7f0e0000
 int mipmap ic_back 0x7f0e0001
 int mipmap ic_back_silver 0x7f0e0002
 int mipmap ic_brightness 0x7f0e0003
-int mipmap ic_brightness_dark_light 0x7f0e0004
+int mipmap ic_brightness_contrast 0x7f0e001e
+int mipmap ic_brightness_level 0x7f0e001f
 int mipmap ic_calendar 0x7f0e0005
+int mipmap ic_contrast 0x7f0e0020
 int mipmap ic_crop 0x7f0e0006
 int mipmap ic_dots 0x7f0e0007
 int mipmap ic_duplicate 0x7f0e0008
@@ -3615,6 +3617,7 @@ int mipmap ic_paint 0x7f0e0014
 int mipmap ic_pen 0x7f0e0015
 int mipmap ic_resize 0x7f0e0016
 int mipmap ic_rotate_left 0x7f0e0017
+int mipmap ic_shadow 0x7f0e0021
 int mipmap ic_share 0x7f0e0018
 int mipmap ic_sticker 0x7f0e0019
 int mipmap ic_text 0x7f0e001a

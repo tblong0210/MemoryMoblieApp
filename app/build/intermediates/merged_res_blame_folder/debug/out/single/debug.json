@@ -36,6 +36,10 @@
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/color/custom_color_nav.xml"
     },
     {
+        "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_shadow.png.flat",
+        "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_shadow.png"
+    },
+    {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/menu_more_setting_image.xml.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/menu/more_setting_image.xml"
     },
@@ -92,6 +96,10 @@
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/xml/backup_rules.xml"
     },
     {
+        "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/layout_filter_list_item.xml.flat",
+        "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/layout/filter_list_item.xml"
+    },
+    {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/layout_album_row.xml.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/layout/album_row.xml"
     },
@@ -118,10 +126,6 @@
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_flip.png.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_flip.png"
-    },
-    {
-        "merged": "com.example.memorymoblieapp-merged_res-30:/layout_brightness_list_item.xml.flat",
-        "source": "com.example.memorymoblieapp-main-32:/layout/brightness_list_item.xml"
     },
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_add.png.flat",
@@ -164,6 +168,10 @@
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
+        "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_brightness_contrast.png.flat",
+        "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_brightness_contrast.png"
+    },
+    {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/anim_slide_in.xml.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/anim/slide_in.xml"
     },
@@ -186,6 +194,10 @@
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_brightness_level.png.flat",
+        "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_brightness_level.png"
     },
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-xhdpi_ic_launcher.webp.flat",
@@ -214,6 +226,10 @@
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/drawable_album.xml.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/drawable/album.xml"
+    },
+    {
+        "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_contrast.png.flat",
+        "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_contrast.png"
     },
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_share.png.flat",
@@ -246,10 +262,6 @@
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-anydpi-v33_ic_launcher.xml.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-anydpi-v33/ic_launcher.xml"
-    },
-    {
-        "merged": "com.example.memorymoblieapp-merged_res-30:/layout_image_list_item.xml.flat",
-        "source": "com.example.memorymoblieapp-main-32:/layout/image_list_item.xml"
     },
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/menu_selection_features_bar.xml.flat",
@@ -338,6 +350,10 @@
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/mipmap-hdpi_ic_location.png.flat",
         "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/mipmap-hdpi/ic_location.png"
+    },
+    {
+        "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/layout_brightness_list_item.xml.flat",
+        "source": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-main-32:/layout/brightness_list_item.xml"
     },
     {
         "merged": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/drawable_button_border.xml.flat",

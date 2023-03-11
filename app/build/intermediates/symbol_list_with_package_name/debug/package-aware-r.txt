@@ -3026,8 +3026,11 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filterItemViewEdit
+id filterName
 id filterOption
 id filterPic
+id filterRecView
 id fitCenter
 id fitEnd
 id fitStart
@@ -3069,9 +3072,6 @@ id ignoreRequest
 id image
 id image_view
 id imgBack
-id imgItemViewEdit
-id imgName
-id imgRecView
 id imgView
 id imgViewEdit
 id immediateStop
@@ -3197,7 +3197,7 @@ id parentSearch
 id parentSelection
 id parentViewEdit
 id parent_list_brightness
-id parent_list_image
+id parent_list_filter
 id parent_matrix
 id password_toggle
 id path
@@ -3514,8 +3514,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout filter_list_item
 layout filter_picture
-layout image_list_item
 layout image_row
 layout image_select
 layout layout_bottom_navigation
@@ -3596,8 +3596,10 @@ mipmap ic_add
 mipmap ic_back
 mipmap ic_back_silver
 mipmap ic_brightness
-mipmap ic_brightness_dark_light
+mipmap ic_brightness_contrast
+mipmap ic_brightness_level
 mipmap ic_calendar
+mipmap ic_contrast
 mipmap ic_crop
 mipmap ic_dots
 mipmap ic_duplicate
@@ -3616,6 +3618,7 @@ mipmap ic_paint
 mipmap ic_pen
 mipmap ic_resize
 mipmap ic_rotate_left
+mipmap ic_shadow
 mipmap ic_share
 mipmap ic_sticker
 mipmap ic_text
