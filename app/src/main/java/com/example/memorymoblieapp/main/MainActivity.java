@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.example.memorymoblieapp.R;
 
-import com.example.memorymoblieapp.view.ViewImage;
+import com.example.memorymoblieapp.fragment.AlbumFragment;
 
 import com.example.memorymoblieapp.view.ViewEdit;
 
@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // FragmentAlbum
+        AlbumFragment fragmentAlbum = new AlbumFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, fragmentAlbum).commit();
 
         btnViewEdit = findViewById(R.id.btnViewEdit);
 
