@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-27:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
                     "source": "/Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/res/values-fr-rCA/values-fr-rCA.xml",

@@ -42,17 +42,23 @@ public class ImageRecViewAdapter extends RecyclerView.Adapter<ImageRecViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.imgName.setText(images.get(position).getName());
         String name = images.get(position).getName();
+        holder.imgItemViewEdit.setImageResource(images.get(position).getImageResource());
         holder.parent_list_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         });
+//
+//        Glide.with(context)
+//                .asBitmap()
+//                .load(images.get(position).getImageUrl())
+//                .into(holder.imgItemViewEdit);
 
-        Glide.with(context)
-                .asBitmap()
-                .load(images.get(position).getImageUrl())
-                .into(holder.imgItemViewEdit);
+//        Glide.with(context)
+//                .asBitmap()
+//                .load(R.drawable.image1)
+//                .into(holder.imgItemViewEdit);
     }
 
     @Override

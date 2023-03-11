@@ -14,6 +14,7 @@ color teal_700
 color white
 drawable album
 drawable button_border
+drawable circle_shape
 drawable circle_unfill
 drawable home
 drawable ic_add_background
@@ -31,8 +32,11 @@ drawable search_view_bg
 drawable star
 id add
 id album
+id brightnessItemViewEdit
+id brightnessName
 id brightnessOption
 id brightnessPic
+id brightnessRecView
 id btnViewEdit
 id cancelViewEditBtn
 id container
@@ -56,6 +60,7 @@ id icon_view
 id image
 id image_view
 id imgBack
+id imgItemViewEdit
 id imgName
 id imgRecView
 id imgView
@@ -73,6 +78,7 @@ id paintPic
 id parentSearch
 id parentSelection
 id parentViewEdit
+id parent_list_brightness
 id parent_list_image
 id recyclerView
 id relativeLayout
@@ -101,6 +107,7 @@ id viewDetails
 layout activity_main
 layout activity_view_edit
 layout album_row
+layout brightness_list_item
 layout filter_picture
 layout image_list_item
 layout image_row

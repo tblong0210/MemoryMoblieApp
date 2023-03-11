@@ -21,8 +21,10 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.Image;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.adapter.BrightnessRecViewAdapter;
 import com.example.memorymoblieapp.adapter.ImageRecViewAdapter;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,9 +35,10 @@ public class ViewEdit extends AppCompatActivity {
 
     private ImageView rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
     private LinearLayout emoteOption, cropOption, filterOption, brightnessOption;
-    private RecyclerView imgRecView;
+    private RecyclerView filterRecView, brightnessRecView;
 
     private ArrayList<Image> images;
+    private ArrayList<Brightness> brightnesses;
 
     BottomNavigationView nav_edit_view;
 
@@ -217,16 +220,47 @@ public class ViewEdit extends AppCompatActivity {
         cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
         saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
 
-        imgRecView= findViewById(R.id.imgRecView);
+        filterRecView= findViewById(R.id.imgRecView);
         //set adapter to imgRecView
         images = new ArrayList<>();
-        images.add(new Image("1","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvur-5jUOa0e0hhRoHwWtCT4-s8j9wpJfijUt0f8rxpw&s"));
-        images.add(new Image("2","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRC5bfTQ93UUCjJ9qivDBbj6KYdXdfwSiqIKf-5MoSlA&s"));
+        images.add(new Image("1",R.drawable.image1));
+        images.add(new Image("2",R.drawable.image2));
+        images.add(new Image("3",R.drawable.image3));
+        images.add(new Image("4",R.drawable.image4));
+        images.add(new Image("5",R.drawable.image1));
+        images.add(new Image("6",R.drawable.image2));
+        images.add(new Image("7",R.drawable.image3));
+        images.add(new Image("8",R.drawable.image4));
+        images.add(new Image("9",R.drawable.image1));
+        images.add(new Image("10",R.drawable.image2));
+        images.add(new Image("11",R.drawable.image3));
+        images.add(new Image("12",R.drawable.image4));
 
-        ImageRecViewAdapter adapter = new ImageRecViewAdapter(this);
-        adapter.setImages(images);
-        imgRecView.setAdapter(adapter);
-        imgRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        ImageRecViewAdapter adapterFilter = new ImageRecViewAdapter(this);
+        adapterFilter.setImages(images);
+        filterRecView.setAdapter(adapterFilter);
+        filterRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        brightnessRecView= findViewById(R.id.brightnessRecView);
+        //set adapter to imgRecView
+        brightnesses = new ArrayList<>();
+        brightnesses.add(new Brightness("1",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("2",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("3",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("4",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("5",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("6",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("7",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("8",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("9",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("10",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("11",R.mipmap.ic_brightness_dark_light));
+        brightnesses.add(new Brightness("12",R.mipmap.ic_brightness_dark_light));
+
+        BrightnessRecViewAdapter adapterBrightness = new BrightnessRecViewAdapter(this);
+        adapterBrightness.setBrightnesses(brightnesses);
+        brightnessRecView.setAdapter(adapterBrightness);
+        brightnessRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
     }
 }

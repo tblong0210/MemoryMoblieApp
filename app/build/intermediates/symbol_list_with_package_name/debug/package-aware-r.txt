@@ -2717,6 +2717,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_border
+drawable circle_shape
 drawable circle_unfill
 drawable design_fab_background
 drawable design_ic_visibility
@@ -2922,8 +2923,11 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id brightnessItemViewEdit
+id brightnessName
 id brightnessOption
 id brightnessPic
+id brightnessRecView
 id btnViewEdit
 id buttonPanel
 id cache_measures
@@ -3039,6 +3043,7 @@ id frost
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
+id glide_custom_view_target_tag
 id gone
 id graph
 id graph_wrap
@@ -3064,6 +3069,7 @@ id ignoreRequest
 id image
 id image_view
 id imgBack
+id imgItemViewEdit
 id imgName
 id imgRecView
 id imgView
@@ -3190,6 +3196,7 @@ id parentRelative
 id parentSearch
 id parentSelection
 id parentViewEdit
+id parent_list_brightness
 id parent_list_image
 id parent_matrix
 id password_toggle
@@ -3490,6 +3497,7 @@ layout abc_tooltip
 layout activity_main
 layout activity_view_edit
 layout album_row
+layout brightness_list_item
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

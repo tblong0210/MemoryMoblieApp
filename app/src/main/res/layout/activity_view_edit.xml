@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:id="@+id/rotatePic"
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
+            android:visibility="gone"
             >
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
@@ -73,7 +75,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
-            android:visibility="gone">
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/brightnessRecView"/>
 
         </LinearLayout>
 

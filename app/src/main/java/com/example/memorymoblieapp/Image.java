@@ -2,11 +2,13 @@ package com.example.memorymoblieapp;
 
 public class Image {
     private String name;
-    private String imageUrl;
 
-    public Image(String name, String imageUrl) {
+
+    private int imageResource;
+
+    public Image(String name, int imageResource) {
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.imageResource = imageResource;
     }
 
     public String getName() {
@@ -17,19 +19,19 @@ public class Image {
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public int getImageResource() {
+        return imageResource;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageResource(int imageResource) {
+        this.imageResource = imageResource;
     }
 
     @Override
     public String toString() {
         return "Image{" +
                 "name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
+                ", imageResource=" + imageResource +
                 '}';
     }
 }
