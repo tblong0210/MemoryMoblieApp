@@ -6,7 +6,7 @@
     android:layout_margin="10dp">
 
     <ImageView
-        android:id="@+id/ivAlbum"
+        android:id="@+id/ivImage"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
             android:layout_marginStart="10dp"
             android:text="Name: "
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="HardcodedText">
         </TextView>
 
@@ -37,7 +37,7 @@
             android:layout_marginStart="10dp"
             android:text="Created date: "
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="HardcodedText">
         </TextView>
 
@@ -48,7 +48,7 @@
             android:layout_marginStart="10dp"
             android:text="Size: "
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="HardcodedText">
         </TextView>
 
@@ -59,7 +59,7 @@
             android:layout_marginStart="10dp"
             android:text="Dimensions: "
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="HardcodedText">
         </TextView>
 
@@ -70,7 +70,7 @@
             android:layout_marginStart="10dp"
             android:text="Location: "
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="HardcodedText">
         </TextView>
 

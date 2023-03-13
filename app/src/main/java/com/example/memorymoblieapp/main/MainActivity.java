@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.example.memorymoblieapp.R;
 
-import com.example.memorymoblieapp.fragment.ImageDetailFragment;
+import com.example.memorymoblieapp.fragment.ImageFragment;
 import com.example.memorymoblieapp.view.ViewEdit;
 
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         // FragmentAlbum
 //        AlbumFragment albumFragment = new AlbumFragment();
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, albumFragment).commit();
-        ImageDetailFragment imageFragment = new ImageDetailFragment();
+        ImageFragment imageFragment = new ImageFragment(true);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, imageFragment).commit();
 
         btnViewEdit = findViewById(R.id.btnViewEdit);
