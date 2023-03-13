@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/ivAlbum"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/backgrounds/scenic">
+    </ImageView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtImageName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Name: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Size: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtDimensions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Dimensions: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Location: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText">
+        </TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

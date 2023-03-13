@@ -29,7 +29,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.album_row, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.album_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -37,7 +37,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(albums.get(position).getName());
-        holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " ảnh");
+        holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " images");
         holder.img.setImageResource(Integer.parseInt(Integer.toString(albums.get(position).getImg())));
     }
 
@@ -46,10 +46,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         return albums.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView quantity;
         ImageView img;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txtAlbumName);

@@ -25,9 +25,12 @@ public class AlbumFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View albumsFragment = inflater.inflate(R.layout.album_fragment, container, false);
         RecyclerView recycler = albumsFragment.findViewById(R.id.albumRecView);
+
+        // LayoutManager
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
+
         albumList = new ArrayList<Album>();
         addAlbumList();
         adapter = new AlbumAdapter(albumList, context);
