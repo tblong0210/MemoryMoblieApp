@@ -37,6 +37,7 @@ public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.
     @Override
     public void onBindViewHolder(@NonNull ImageDetailAdapter.ViewHolder holder, int position) {
         holder.name.setText("Name: " + images.get(position).getName());
+        holder.createdDate.setText("Created date: " + images.get(position).getCreatedDate());
         holder.size.setText("Size: " + images.get(position).getSize());
         holder.dimensions.setText("Dimensions: " + images.get(position).getDimensions());
         holder.location.setText("Location: " + images.get(position).getLocation());
@@ -50,6 +51,7 @@ public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
+        TextView createdDate;
         TextView size;
         TextView dimensions;
         TextView location;
@@ -58,6 +60,7 @@ public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txtImageName);
+            createdDate = (TextView) itemView.findViewById(R.id.txtCreatedDate);
             size = (TextView) itemView.findViewById(R.id.txtSize);
             dimensions = (TextView) itemView.findViewById(R.id.txtDimensions);
             location = (TextView) itemView.findViewById(R.id.txtLocation);

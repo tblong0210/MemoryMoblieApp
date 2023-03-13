@@ -2,14 +2,16 @@ package com.example.memorymoblieapp.obj;
 
 public class Image {
     private String name;
+    private String createdDate;
     private String size;
     private String dimensions;
     private String location;
     private int img;
 
-    public Image(String name, String size, String dimensions, String location, int img) {
+    public Image(String name, String size, String createdDate, String dimensions, String location, int img) {
         this.name = name;
         this.size = size;
+        this.createdDate = createdDate;
         this.dimensions = dimensions;
         this.location = location;
         this.img = img;
@@ -29,6 +31,14 @@ public class Image {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getDimensions() {
