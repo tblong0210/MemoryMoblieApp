@@ -100,8 +100,6 @@
                 app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/menu_emote_option"/>
         </RelativeLayout>
-
-
     </RelativeLayout>
 
 

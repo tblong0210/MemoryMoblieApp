@@ -3166,6 +3166,8 @@ id mtrl_view_tag_bottom_padding
 id multiply
 id name
 id navSetting
+id nav_crop_option
+id nav_emote_option
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3219,6 +3221,10 @@ id radio
 id ratio
 id rectangles
 id recyclerView
+<<<<<<< HEAD
+=======
+id relativeLayoutButton
+>>>>>>> 79f3dee852133f032c8cd01db18755828f94ae59
 id resizePic
 id reverseSawtooth
 id right
@@ -3601,6 +3607,8 @@ layout support_simple_spinner_dropdown_item
 layout title_content_container
 layout view_details
 menu menu_crop
+menu menu_crop_option
+menu menu_emote_option
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
