@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Name: "
+            android:text="Tên: "
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="HardcodedText">
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Created date: "
+            android:text="Ngày tạo: "
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="HardcodedText">
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Size: "
+            android:text="Dung lượng: "
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="HardcodedText">
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Dimensions: "
+            android:text="Kích thước: "
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="HardcodedText">
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Location: "
+            android:text="Địa điểm: "
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="HardcodedText">

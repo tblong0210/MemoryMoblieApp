@@ -45,11 +45,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder holder, int position) {
         if (detailed) {
-            holder.name.setText("Name: " + images.get(position).getName());
-            holder.createdDate.setText("Created date: " + images.get(position).getCreatedDate());
-            holder.size.setText("Size: " + images.get(position).getSize());
-            holder.dimensions.setText("Dimensions: " + images.get(position).getDimensions());
-            holder.location.setText("Location: " + images.get(position).getLocation());
+            holder.name.setText("Tên: " + images.get(position).getName());
+            holder.createdDate.setText("Ngày tạo: " + images.get(position).getCreatedDate());
+            holder.size.setText("Dung lượng: " + images.get(position).getSize());
+            holder.dimensions.setText("Kích thước: " + images.get(position).getDimensions());
+            holder.location.setText("Địa điểm: " + images.get(position).getLocation());
         }
         holder.img.setImageResource(Integer.parseInt(Integer.toString(images.get(position).getImg())));
     }
