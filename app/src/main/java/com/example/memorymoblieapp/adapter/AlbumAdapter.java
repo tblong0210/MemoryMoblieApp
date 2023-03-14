@@ -37,7 +37,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(albums.get(position).getName());
-        holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " images");
+        holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " ảnh");
         holder.img.setImageResource(Integer.parseInt(Integer.toString(albums.get(position).getImg())));
     }
 
