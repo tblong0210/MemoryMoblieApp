@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imgViewEdit"
-        android:layout_width="421dp"
-        android:layout_height="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_launcher_background" />
 
@@ -19,8 +19,8 @@
         android:id="@+id/parentSelection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgViewEdit"
-        android:layout_marginTop="30dp">
+        android:layout_marginBottom="20dp"
+        android:layout_alignTop="@+id/navigation_edit_view">
 
 
         <LinearLayout
@@ -114,35 +114,33 @@
                 android:layout_marginRight="30dp"
                 android:src="@mipmap/ic_text" />
         </LinearLayout>
-        
-
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/relativeLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
 
-        <Button
-            android:id="@+id/cancelViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_toLeftOf="@+id/saveViewEditBtn"
-            android:text="@string/action_back_edit_view" />
+<!--        <Button-->
+<!--            android:id="@+id/cancelViewEditBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="30dp"-->
+<!--            android:layout_marginEnd="30dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_marginBottom="30dp"-->
+<!--            android:layout_toLeftOf="@+id/saveViewEditBtn"-->
+<!--            android:text="@string/action_back_edit_view" />-->
 
-        <Button
-            android:id="@+id/saveViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:text="@string/action_save_edit_view" />
-    </RelativeLayout>
+<!--        <Button-->
+<!--            android:id="@+id/saveViewEditBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:text="@string/action_save_edit_view" />-->
+<!--    </RelativeLayout>-->
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -150,13 +148,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="20dp"
         android:background="@drawable/round_corner"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation_edit_view" />
-
 
 </RelativeLayout>

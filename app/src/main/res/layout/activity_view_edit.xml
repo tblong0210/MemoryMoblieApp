@@ -8,51 +8,49 @@
     tools:context=".view.ViewEdit">
 
 
-    <ImageView
-        android:id="@+id/imgViewEdit"
-        android:layout_width="421dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_launcher_background" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayoutButton"
+        android:layout_above="@id/parentSelection">
+
+        <ImageView
+            android:id="@+id/imgViewEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_launcher_background" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/parentSelection"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgViewEdit"
-        android:layout_marginTop="30dp">
+        android:layout_above="@+id/navigation_edit_view"
+        >
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/cropOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            >
+            android:visibility="gone">
 
-            <ImageView
-                android:id="@+id/rotatePic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_rotate_left" />
-
-            <ImageView
-                android:id="@+id/flipPic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_flip" />
-
-            <ImageView
-                android:id="@+id/resizePic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_resize" />
-        </LinearLayout>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_crop_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_corner"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_crop_option" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/filterOption"
@@ -61,6 +59,7 @@
             android:layout_centerInParent="true"
             android:orientation="horizontal"
             android:visibility="gone"
+            android:layout_marginBottom="20dp"
             >
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
@@ -75,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:layout_marginBottom="20dp"
             >
 
             <androidx.recyclerview.widget.RecyclerView
@@ -85,42 +85,28 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/emoteOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal"
             android:visibility="gone">
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_emote_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/round_corner"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_emote_option"/>
+        </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/paintPic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_paint" />
-
-            <ImageView
-                android:id="@+id/stickerPic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_sticker" />
-
-            <ImageView
-                android:id="@+id/textPic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="30dp"
-                android:src="@mipmap/ic_text" />
-        </LinearLayout>
-        
 
     </RelativeLayout>
 
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/relativeLayoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -150,11 +136,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/round_corner"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation_edit_view" />
 

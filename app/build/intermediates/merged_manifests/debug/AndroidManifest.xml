@@ -40,6 +40,9 @@
             android:name="com.example.memorymoblieapp.view.ViewDetails"
             android:exported="false" />
         <activity
+            android:name="com.example.memorymoblieapp.view.ViewSearch"
+            android:exported="false" />
+        <activity
             android:name="com.example.memorymoblieapp.main.MainActivity"
             android:exported="true" >
             <intent-filter>

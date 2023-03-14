@@ -26,7 +26,7 @@ import com.example.memorymoblieapp.fragment.LoveFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
-     
+
     ActivityMainBinding binding;
 
     @SuppressLint("MissingInflatedId")
@@ -39,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
         // FragmentAlbum
 //        AlbumFragment albumFragment = new AlbumFragment();
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, albumFragment).commit();
-          replaceFragment(new ImageFragment());
-         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
-            
+        replaceFragment(new ImageFragment());
+        binding.bottomNavigationView.setOnItemSelectedListener(item ->{
+
             switch(item.getItemId()) {
                 case R.id.image:
                     replaceFragment(new ImageFragment());
                     break;
                 case R.id.album:
-                   replaceFragment(new AlbumFragment());
+                    replaceFragment(new AlbumFragment());
                     break;
                 case R.id.love:
                     replaceFragment(new LoveFragment());
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    
-     private void replaceFragment(Fragment fragment)
+
+    private void replaceFragment(Fragment fragment)
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction  =  fragmentManager.beginTransaction();

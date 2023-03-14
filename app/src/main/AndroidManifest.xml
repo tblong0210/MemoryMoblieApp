@@ -22,6 +22,9 @@
         <activity
             android:name=".view.ViewDetails"
             android:exported="false" />
+        <activity
+            android:name=".view.ViewSearch"
+            android:exported="false" />
 
         <activity
             android:name=".main.MainActivity"

@@ -214,8 +214,8 @@ public class ViewEdit extends AppCompatActivity {
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
-        cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
-        saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
+       // cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
+        //saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
 
         filterRecView= findViewById(R.id.filterRecView);
         //set adapter to imgRecView
