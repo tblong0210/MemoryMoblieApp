@@ -93,11 +93,14 @@ package com.example.memorymoblieapp.main;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.memorymoblieapp.R;
 
@@ -109,6 +112,7 @@ import com.example.memorymoblieapp.view.ViewEdit;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
