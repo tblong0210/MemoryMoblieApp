@@ -19,162 +19,110 @@
         android:id="@+id/parentSelection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-       android:layout_below="@+id/imgViewEdit">
+        android:layout_below="@+id/imgViewEdit"
+        android:layout_marginTop="30dp">
 
-        <RadioGroup
-            android:id="@+id/rgCrop"
+
+        <LinearLayout
+            android:id="@+id/cropOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            >
+
+            <ImageView
+                android:id="@+id/rotatePic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_rotate_left" />
+
+            <ImageView
+                android:id="@+id/flipPic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_flip" />
+
+            <ImageView
+                android:id="@+id/resizePic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_resize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/filterOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
             android:visibility="gone"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rbCropFirstOption"
+            >
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:checked="true"
-                android:text="Free"
-                android:textColor="#00BCD4"
-                android:textStyle="bold" />
+                android:id="@+id/filterRecView"/>
 
-            <RadioButton
-                android:id="@+id/rbCropSecondOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="1:1" />
+        </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/rbCropThirdOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="3:4" />
-
-            <RadioButton
-                android:id="@+id/rbCropFourthOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4:16" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rgFilter"
+        <LinearLayout
+            android:id="@+id/brightnessOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/brightnessRecView"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emoteOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <RadioButton
-                android:id="@+id/rbFilterFirstOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Mặc định" />
+            <ImageView
+                android:id="@+id/paintPic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_paint" />
 
-            <RadioButton
-                android:id="@+id/rbFilterSecondOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Rực rỡ" />
+            <ImageView
+                android:id="@+id/stickerPic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_sticker" />
 
-            <RadioButton
-                android:id="@+id/rbFilterThirdOption"
-                android:layout_width="107dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Ửng hồng" />
-
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rgBrightness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-
-            <RadioButton
-                android:id="@+id/rbBrightnessFirstOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Mặc định" />
-
-            <RadioButton
-                android:id="@+id/rbBrightnessSecondOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="50%" />
-
-            <RadioButton
-                android:id="@+id/rbBrightnessThirdOption"
-                android:layout_width="107dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="100%" />
-
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rgEmote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-
-            <RadioButton
-                android:id="@+id/rbEmoteFirstOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Vẽ" />
-
-            <RadioButton
-                android:id="@+id/rbEmoteSecondOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Sticker" />
-
-            <RadioButton
-                android:id="@+id/rbEmoteThirdOption"
-                android:layout_width="107dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="Văn bản" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/rgMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-        </RadioGroup>
-
+            <ImageView
+                android:id="@+id/textPic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/ic_text" />
+        </LinearLayout>
+        
 
     </RelativeLayout>
 
-    
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/cancelViewEditBtn"
@@ -197,15 +145,17 @@
     </RelativeLayout>
 
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_edit_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:labelVisibilityMode="unlabeled"
-        android:layout_margin="20dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/round_corner"
+        app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation_edit_view" />
 
 

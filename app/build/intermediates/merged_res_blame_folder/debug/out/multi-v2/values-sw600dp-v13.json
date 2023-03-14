@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-27:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",

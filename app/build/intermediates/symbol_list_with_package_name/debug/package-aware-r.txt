@@ -2717,6 +2717,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_border
+drawable circle_shape
 drawable circle_unfill
 drawable design_fab_background
 drawable design_ic_visibility
@@ -2922,7 +2923,11 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id brightnessItemViewEdit
+id brightnessName
+id brightnessOption
 id brightnessPic
+id brightnessRecView
 id btnViewEdit
 id buttonPanel
 id cache_measures
@@ -2960,6 +2965,7 @@ id coordinator
 id cos
 id counterclockwise
 id cradle
+id cropOption
 id cropPic
 id currentState
 id custom
@@ -3004,6 +3010,7 @@ id edit
 id edit_query
 id elastic
 id embed
+id emoteOption
 id emotePic
 id end
 id endToStart
@@ -3019,7 +3026,11 @@ id fill
 id fill_horizontal
 id fill_vertical
 id filled
+id filterItemViewEdit
+id filterName
+id filterOption
 id filterPic
+id filterRecView
 id fitCenter
 id fitEnd
 id fitStart
@@ -3035,6 +3046,7 @@ id frost
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
+id glide_custom_view_target_tag
 id gone
 id graph
 id graph_wrap
@@ -3176,6 +3188,7 @@ id outline
 id outward
 id overshoot
 id packed
+id paintPic
 id parallax
 id parent
 id parentPanel
@@ -3183,6 +3196,8 @@ id parentRelative
 id parentSearch
 id parentSelection
 id parentViewEdit
+id parent_list_brightness
+id parent_list_filter
 id parent_matrix
 id password_toggle
 id path
@@ -3197,29 +3212,11 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
-id rbBrightnessFirstOption
-id rbBrightnessSecondOption
-id rbBrightnessThirdOption
-id rbCropFirstOption
-id rbCropFourthOption
-id rbCropSecondOption
-id rbCropThirdOption
-id rbEmoteFirstOption
-id rbEmoteSecondOption
-id rbEmoteThirdOption
-id rbFilterFirstOption
-id rbFilterSecondOption
-id rbFilterThirdOption
 id rectangles
 id recyclerView
 id relativeLayout
 id resizePic
 id reverseSawtooth
-id rgBrightness
-id rgCrop
-id rgEmote
-id rgFilter
-id rgMore
 id right
 id rightToLeft
 id right_icon
@@ -3303,6 +3300,7 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id stickerPic
 id stop
 id stretch
 id submenuarrow
@@ -3325,6 +3323,7 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
+id textPic
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -3364,6 +3363,7 @@ id txtImgQuantity
 id txtLocationImage
 id txtNameImage
 id txtPathImage
+id typeFilter
 id unchecked
 id uniform
 id unlabeled
@@ -3497,6 +3497,7 @@ layout abc_tooltip
 layout activity_main
 layout activity_view_edit
 layout album_row
+layout brightness_list_item
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3513,6 +3514,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout filter_list_item
 layout filter_picture
 layout image_row
 layout image_select
@@ -3594,8 +3596,10 @@ mipmap ic_add
 mipmap ic_back
 mipmap ic_back_silver
 mipmap ic_brightness
-mipmap ic_brightness_dark_light
+mipmap ic_brightness_contrast
+mipmap ic_brightness_level
 mipmap ic_calendar
+mipmap ic_contrast
 mipmap ic_crop
 mipmap ic_dots
 mipmap ic_duplicate
@@ -3614,6 +3618,7 @@ mipmap ic_paint
 mipmap ic_pen
 mipmap ic_resize
 mipmap ic_rotate_left
+mipmap ic_shadow
 mipmap ic_share
 mipmap ic_sticker
 mipmap ic_text
