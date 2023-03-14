@@ -40,6 +40,7 @@ public class ViewEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_edit);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initViews();
         initOptionActions();
@@ -49,6 +50,18 @@ public class ViewEdit extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void refreshPicture(){

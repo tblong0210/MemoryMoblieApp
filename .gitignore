@@ -13,4 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+<<<<<<< HEAD
 /app/build
+=======
+
+>>>>>>> 56a938245e5483fb1673dbedadf06fe4ce0b0056

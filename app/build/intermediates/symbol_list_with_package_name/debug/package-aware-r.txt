@@ -3670,6 +3670,9 @@ string action_trash
 string action_unfavorite
 string action_view_details
 string action_wallpaper
+string activity_detail_view
+string activity_edit_view
+string activity_image_view
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior

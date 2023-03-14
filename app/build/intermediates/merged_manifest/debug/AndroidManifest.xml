@@ -28,10 +28,12 @@
         android:theme="@style/Theme.MemoryMobileApp" >
         <activity
             android:name="com.example.memorymoblieapp.view.ViewEdit"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_edit_view" />
         <activity
             android:name="com.example.memorymoblieapp.view.ViewImage"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_image_view" />
         <activity
             android:name="com.example.memorymoblieapp.view.ViewDetails"
             android:exported="false" />
