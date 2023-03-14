@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -28,13 +29,14 @@ import java.util.ArrayList;
 public class ViewEdit extends AppCompatActivity {
 
     private ImageView imgViewEdit, rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
-    private LinearLayout emoteOption, cropOption, filterOption, brightnessOption;
+    private LinearLayout  filterOption, brightnessOption;
+    private RelativeLayout emoteOption, cropOption;
     private RecyclerView filterRecView, brightnessRecView;
 
     private ArrayList<Filter> filters;
     private ArrayList<Brightness> brightnesses;
 
-    BottomNavigationView nav_edit_view;
+    BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option;
 
     Button cancelViewEditBtn, saveViewEditBtn;
 
@@ -115,6 +117,50 @@ public class ViewEdit extends AppCompatActivity {
                 return true;
             }
         });
+        nav_crop_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.rotatePic:
+                        Toast.makeText(ViewEdit.this, "Rotate", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.flipPic:
+                        Toast.makeText(ViewEdit.this, "Flip", Toast.LENGTH_SHORT).show();
+
+                        break;
+                    case R.id.resizePic:
+                        Toast.makeText(ViewEdit.this, "Resize", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+
+        nav_emote_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.paintPic:
+                        Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.stickerPic:
+                        Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
+
+                        break;
+                    case R.id.textPic:
+                        Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
+                        break;
+                   
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
         cancelViewEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,55 +169,9 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
 
-        rotatePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "rotated Image", Toast.LENGTH_SHORT).show();
-                handleRotateImage();
-            }
-        });
 
-        flipPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "Flip Image", Toast.LENGTH_SHORT).show();
-                handleFlipImage();
-            }
-        });
 
-        resizePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "Resize Image", Toast.LENGTH_SHORT).show();
-                handleResizeImage();
-            }
-        });
-
-        paintPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "Draw Image", Toast.LENGTH_SHORT).show();
-                handleAddPaintImage();
-            }
-        });
-
-        stickerPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "Add sticker Image", Toast.LENGTH_SHORT).show();
-                handleAddStickerImage();
-            }
-        });
-
-        textPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ViewEdit.this, "Add text Image", Toast.LENGTH_SHORT).show();
-                handleAddTextImage();
-            }
-        });
-
-        imgViewEdit.setImageResource(R.drawable.image1);
+//        imgViewEdit.setImageResource(R.drawable.image1);
 
 
     }
@@ -199,12 +199,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private void initViews() {
         imgViewEdit = findViewById(R.id.imgViewEdit);
-        rotatePic = findViewById(R.id.rotatePic);
-        flipPic = findViewById(R.id.flipPic);
-        resizePic = findViewById(R.id.resizePic);
-        paintPic = findViewById(R.id.paintPic);
-        stickerPic = findViewById(R.id.stickerPic);
-        textPic= findViewById(R.id.textPic);
+
 
         emoteOption= findViewById(R.id.emoteOption);
         cropOption= findViewById(R.id.cropOption);
@@ -214,6 +209,9 @@ public class ViewEdit extends AppCompatActivity {
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
+        nav_crop_option = findViewById(R.id.nav_crop_option);
+        nav_emote_option = findViewById(R.id.nav_emote_option);
+        
         cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
         saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
 

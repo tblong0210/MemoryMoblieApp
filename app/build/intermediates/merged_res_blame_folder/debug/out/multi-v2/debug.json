@@ -566,21 +566,6 @@
             ]
         },
         {
-            "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-w480dp-port-v13_values-w480dp-port-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-w480dp-port-v13/values-w480dp-port-v13.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,114,170,226,293,358,413,478",
-                        "endColumns": "58,55,55,66,64,54,64,68",
-                        "endOffsets": "109,165,221,288,353,408,473,542"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-v17_values-v17.arsc.flat",
             "map": [
                 {
@@ -592,6 +577,21 @@
                         "endLines": "4,8,11,14,17,21,24,28,32,36,39,42,45,49,52,56,60",
                         "endColumns": "12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12",
                         "endOffsets": "223,451,609,759,931,1156,1326,1554,1778,2020,2191,2365,2534,2807,3007,3211,3540"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-w480dp-port-v13_values-w480dp-port-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,170,226,293,358,413,478",
+                        "endColumns": "58,55,55,66,64,54,64,68",
+                        "endOffsets": "109,165,221,288,353,408,473,542"
                     }
                 }
             ]
@@ -1771,6 +1771,21 @@
             ]
         },
         {
+            "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-w600dp-land-v13_values-w600dp-land-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-de_values-de.arsc.flat",
             "map": [
                 {
@@ -1829,36 +1844,6 @@
             ]
         },
         {
-            "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-w600dp-land-v13_values-w600dp-land-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "54",
-                        "endOffsets": "105"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-h320dp-port-v13_values-h320dp-port-v13.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "75",
-                        "endOffsets": "126"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-am_values-am.arsc.flat",
             "map": [
                 {
@@ -1912,6 +1897,21 @@
                         "endLines": "5,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94",
                         "endColumns": "12,70,67,74,81,80,88,101,76,63,84,61,57,84,62,61,57,65,61,54,95,56,58,55,66,104,79,80,128,72,70,81,50,50,65,65,72,80,67,72,70,66,84,66,86,87,73,67,84,50,63,79,81,61,63,62,94,88,84,90,54,54,75",
                         "endOffsets": "306,2995,3063,3138,3220,3301,3390,3492,3569,3633,3718,3780,3838,3923,3986,4048,4106,4172,4234,4289,4385,4442,4501,4557,4624,4729,4809,4890,5019,5092,5163,5245,5296,5347,5413,5479,5552,5633,5701,5774,5845,5912,5997,6064,6151,6239,6313,6381,6466,6517,6581,6661,6743,6805,6869,6932,7027,7116,7201,7292,7347,7402,7478"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/trandungtien/.gradle/daemon/7.5/com.example.memorymoblieapp-merged_res-30:/values-h320dp-port-v13_values-h320dp-port-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "75",
+                        "endOffsets": "126"
                     }
                 }
             ]

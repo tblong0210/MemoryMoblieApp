@@ -2896,6 +2896,7 @@ id actions
 id activity_chooser_view_content
 id add
 id album
+id albumRecView
 id alertTitle
 id aligned
 id all
@@ -2919,6 +2920,7 @@ id beginning
 id bestChoice
 id blocking
 id bottom
+id bottomNavigationView
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3042,6 +3044,7 @@ id flipPic
 id floating
 id forever
 id fragment_container_view_tag
+id frame_layout_navigation
 id frost
 id fullscreen_header
 id ghost_view
@@ -3070,6 +3073,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageRecView
 id image_view
 id imgBack
 id imgView
@@ -3161,6 +3165,8 @@ id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
 id navSetting
+id nav_crop_option
+id nav_emote_option
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3214,7 +3220,7 @@ id radio
 id ratio
 id rectangles
 id recyclerView
-id relativeLayout
+id relativeLayoutButton
 id resizePic
 id reverseSawtooth
 id right
@@ -3328,7 +3334,6 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3356,13 +3361,18 @@ id transition_transform
 id trash
 id triangle
 id txtAlbumName
+id txtCreatedDate
 id txtDateCreated
+id txtDimensions
 id txtImageCapacity
+id txtImageName
 id txtImageSize
 id txtImgQuantity
+id txtLocation
 id txtLocationImage
 id txtNameImage
 id txtPathImage
+id txtSize
 id typeFilter
 id unchecked
 id uniform
@@ -3496,7 +3506,8 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
 layout activity_view_edit
-layout album_row
+layout album_fragment
+layout album_item
 layout brightness_list_item
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3516,7 +3527,13 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout filter_list_item
 layout filter_picture
-layout image_row
+layout fragment_album
+layout fragment_image
+layout fragment_love
+layout image_detail_fragment
+layout image_detail_item
+layout image_fragment
+layout image_item
 layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
@@ -3587,6 +3604,8 @@ layout support_simple_spinner_dropdown_item
 layout title_content_container
 layout view_details
 menu menu_crop
+menu menu_crop_option
+menu menu_emote_option
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
