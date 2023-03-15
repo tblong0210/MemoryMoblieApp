@@ -2934,6 +2934,7 @@ id btnViewEdit
 id buttonPanel
 id cache_measures
 id callMeasure
+id cancelViewEditBtn
 id cancel_button
 id carryVelocity
 id center
@@ -3221,10 +3222,7 @@ id radio
 id ratio
 id rectangles
 id recyclerView
-<<<<<<< HEAD
-=======
 id relativeLayoutButton
->>>>>>> 79f3dee852133f032c8cd01db18755828f94ae59
 id resizePic
 id reverseSawtooth
 id right
@@ -3234,6 +3232,7 @@ id right_side
 id rotatePic
 id rounded
 id row_index_key
+id saveViewEditBtn
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth

@@ -40,6 +40,7 @@ id brightnessOption
 id brightnessPic
 id brightnessRecView
 id btnViewEdit
+id cancelViewEditBtn
 id container
 id cropOption
 id cropPic
@@ -88,12 +89,10 @@ id parentViewEdit
 id parent_list_brightness
 id parent_list_filter
 id recyclerView
-<<<<<<< HEAD
-=======
 id relativeLayoutButton
->>>>>>> 79f3dee852133f032c8cd01db18755828f94ae59
 id resizePic
 id rotatePic
+id saveViewEditBtn
 id searchView
 id setLockscreen
 id setWallpaper
