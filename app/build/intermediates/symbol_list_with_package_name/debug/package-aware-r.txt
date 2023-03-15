@@ -2739,7 +2739,11 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_save
 drawable ic_search_black_24
+drawable ic_undo
+drawable ic_view_detail
+drawable ic_view_grid
 drawable image
 drawable image1
 drawable image2
@@ -3075,6 +3079,7 @@ id ignoreRequest
 id image
 id imageRecView
 id image_view
+id imgBtnChangeView
 id imgView
 id imgViewEdit
 id immediateStop
@@ -3102,6 +3107,7 @@ id linear
 id listMode
 id list_item
 id location
+id love
 id m3_side_sheet
 id marquee
 id masked
@@ -3221,10 +3227,6 @@ id radio
 id ratio
 id rectangles
 id recyclerView
-<<<<<<< HEAD
-=======
-id relativeLayoutButton
->>>>>>> 79f3dee852133f032c8cd01db18755828f94ae59
 id resizePic
 id reverseSawtooth
 id right
@@ -3234,6 +3236,7 @@ id right_side
 id rotatePic
 id rounded
 id row_index_key
+id saveViewEdit
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3302,7 +3305,6 @@ id src_atop
 id src_in
 id src_over
 id standard
-id star
 id start
 id startHorizontal
 id startToEnd
@@ -3337,6 +3339,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3378,6 +3381,7 @@ id txtPathImage
 id txtSize
 id typeFilter
 id unchecked
+id undoViewEdit
 id uniform
 id unlabeled
 id up
@@ -3609,6 +3613,7 @@ layout view_details
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
+menu menu_view_edit
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
@@ -3647,7 +3652,6 @@ mipmap ic_sticker
 mipmap ic_text
 mipmap ic_trash
 mipmap ic_type_filter
-mipmap ic_view
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description

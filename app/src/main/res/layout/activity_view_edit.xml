@@ -11,13 +11,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayoutButton"
         android:layout_above="@id/parentSelection">
 
         <ImageView
+            android:layout_marginTop="80dp"
             android:id="@+id/imgViewEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_launcher_background" />
     </RelativeLayout>
@@ -103,30 +103,7 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/cancelViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_toLeftOf="@+id/saveViewEditBtn"
-            android:text="@string/action_back_edit_view" />
-
-        <Button
-            android:id="@+id/saveViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:text="@string/action_save_edit_view" />
-    </RelativeLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

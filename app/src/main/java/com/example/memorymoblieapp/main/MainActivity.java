@@ -122,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
 //        AlbumFragment2 albumFragment = new AlbumFragment2();
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, albumFragment).commit();
 
-        ImageFragment2 imageFragment = new ImageFragment2(true);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, imageFragment).commit();
-
-        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_title_content_container, titleContentContainerFragment).commit();
+//        ImageFragment2 imageFragment = new ImageFragment2(true);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, imageFragment).commit();
+//
+//        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_title_content_container, titleContentContainerFragment).commit();
 
 
         btnViewEdit = findViewById(R.id.btnViewEdit);

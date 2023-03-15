@@ -20,6 +20,10 @@ drawable home
 drawable ic_add_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_save
+drawable ic_undo
+drawable ic_view_detail
+drawable ic_view_grid
 drawable image
 drawable image1
 drawable image2
@@ -66,6 +70,7 @@ id icon_view
 id image
 id imageRecView
 id image_view
+id imgBtnChangeView
 id imgView
 id imgViewEdit
 id ivAlbum
@@ -73,6 +78,7 @@ id ivAlbumContainer
 id ivImage
 id ivMore
 id location
+id love
 id menu_view_edit
 id more
 id name
@@ -88,19 +94,16 @@ id parentViewEdit
 id parent_list_brightness
 id parent_list_filter
 id recyclerView
-<<<<<<< HEAD
-=======
-id relativeLayoutButton
->>>>>>> 79f3dee852133f032c8cd01db18755828f94ae59
 id resizePic
 id rotatePic
+id saveViewEdit
 id searchView
 id setLockscreen
 id setWallpaper
 id share
-id star
 id stickerPic
 id textPic
+id textView
 id trash
 id txtAlbumName
 id txtCreatedDate
@@ -116,6 +119,7 @@ id txtNameImage
 id txtPathImage
 id txtSize
 id typeFilter
+id undoViewEdit
 id viewDetails
 layout activity_main
 layout activity_view_edit
@@ -142,6 +146,7 @@ layout view_details
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
+menu menu_view_edit
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
@@ -180,7 +185,6 @@ mipmap ic_sticker
 mipmap ic_text
 mipmap ic_trash
 mipmap ic_type_filter
-mipmap ic_view
 string action_back
 string action_back_edit_view
 string action_brightness_edit_view
