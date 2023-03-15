@@ -25,10 +25,12 @@
         app:cardBackgroundColor="#C2E8FF"
         app:cardCornerRadius="20dp">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/ic_view"
+        <ImageButton
+            android:id="@+id/imgBtnChangeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_view_grid"
+            android:backgroundTint="@android:color/transparent"
             android:layout_gravity="center"
             tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
