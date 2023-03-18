@@ -92,31 +92,24 @@ package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
-import com.example.memorymoblieapp.fragment.TitleContentContainerFragment;
-import com.example.memorymoblieapp.view.ViewEdit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
-    public static boolean detailed;
+    public static boolean detailed; // view option of image fragment
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -132,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() != R.id.love)
-                    frameLayoutNavigation.setVisibility(View.GONE);
+//                if (item.getItemId() != R.id.love)
+//                    frameLayoutNavigation.setVisibility(View.GONE);
 
                 switch (item.getItemId()) {
                     case R.id.image:
@@ -146,11 +139,11 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.love:
-                        frameLayoutNavigation.setVisibility(View.VISIBLE);
-                        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment(detailed, "Yêu thích");
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, titleContentContainerFragment).commit();
+//                        frameLayoutNavigation.setVisibility(View.VISIBLE);
+//                        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment(detailed, "Yêu thích");
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, titleContentContainerFragment).commit();
 
-                        ImageFragment2 imageFragment = new ImageFragment2(detailed);
+                        ImageFragment2 imageFragment = new ImageFragment2("Yêu thích");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
                         return true;
 
