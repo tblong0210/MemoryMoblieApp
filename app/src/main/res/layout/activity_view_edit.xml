@@ -11,15 +11,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/parentSelection">
+        android:layout_above="@id/parentSelection"
+        android:layout_margin="30dp">
 
         <ImageView
-            android:layout_marginTop="80dp"
             android:id="@+id/imgViewEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_marginTop="80dp"
+            android:src="@drawable/image1" />
     </RelativeLayout>
 
 
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_crop_option"
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginBottom="20dp"
             >
 

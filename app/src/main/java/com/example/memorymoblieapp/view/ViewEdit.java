@@ -139,7 +139,9 @@ public class ViewEdit extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.rotatePic:
-                        Toast.makeText(ViewEdit.this, "Rotate", Toast.LENGTH_SHORT).show();
+                        String r = String.valueOf(imgViewEdit.getRotationX());
+                        Toast.makeText(ViewEdit.this,"Rotate Degree: "  + r , Toast.LENGTH_SHORT).show();
+                        imgViewEdit.setRotation(imgViewEdit.getRotation() + 90);
                         break;
 
                     case R.id.flipPic:
