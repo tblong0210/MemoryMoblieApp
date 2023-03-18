@@ -21,6 +21,11 @@ drawable home
 drawable ic_add_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+<<<<<<< HEAD
+=======
+drawable ic_save
+drawable ic_undo
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 drawable ic_view_detail
 drawable ic_view_grid
 drawable image
@@ -71,6 +76,10 @@ id image
 id imageRecView
 id image_view
 id imgBtnChangeView
+<<<<<<< HEAD
+=======
+id imgView
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id imgViewEdit
 id ivAlbum
 id ivAlbumContainer
@@ -94,10 +103,16 @@ id parentViewEdit
 id parent_list_brightness
 id parent_list_filter
 id recyclerView
+<<<<<<< HEAD
 id relativeLayoutButton
 id resizePic
 id rotatePic
 id saveViewEditBtn
+=======
+id resizePic
+id rotatePic
+id saveViewEdit
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id searchView
 id setLockscreen
 id setWallpaper
@@ -120,6 +135,7 @@ id txtNameImage
 id txtPathImage
 id txtSize
 id typeFilter
+id undoViewEdit
 id viewDetails
 layout activity_main
 layout activity_view_edit
@@ -147,6 +163,7 @@ layout view_details
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
+menu menu_view_edit
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu

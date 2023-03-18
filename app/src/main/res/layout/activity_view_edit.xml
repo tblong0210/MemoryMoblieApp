@@ -10,15 +10,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayoutButton"
-        android:layout_above="@id/parentSelection">
+        android:layout_above="@id/parentSelection"
+        android:layout_margin="30dp">
 
         <ImageView
             android:id="@+id/imgViewEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_marginTop="80dp"
+            android:src="@drawable/image1" />
     </RelativeLayout>
 
 
@@ -36,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_crop_option"
@@ -68,23 +69,30 @@
                 android:id="@+id/filterRecView"/>
 
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/brightnessOption"
+
+        <LinearLayout
+            android:id="@+id/brightnessOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:orientation="horizontal"
                 android:visibility="visible"
                 android:layout_marginBottom="20dp"
-                >
+                />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/brightnessRecView"/>
             </LinearLayout>
 
 <!--            <com.google.android.material.slider.Slider-->
@@ -119,30 +127,7 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/cancelViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_toLeftOf="@+id/saveViewEditBtn"
-            android:text="@string/action_back_edit_view" />
-
-        <Button
-            android:id="@+id/saveViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:text="@string/action_save_edit_view" />
-    </RelativeLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

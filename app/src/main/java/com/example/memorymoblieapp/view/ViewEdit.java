@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -55,11 +57,24 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_view_edit,menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
+            case R.id.undoViewEdit:
+                Toast.makeText(this, "Undo", Toast.LENGTH_SHORT).show();
+                refreshPicture();
+            case R.id.saveViewEdit:
+                Toast.makeText(this, "Save Picture", Toast.LENGTH_SHORT).show();
+                savePicture();
             default:
                 break;
         }
@@ -69,7 +84,9 @@ public class ViewEdit extends AppCompatActivity {
     private void refreshPicture() {
 
     }
+    private void savePicture(){
 
+    }
 
     private void initOptionActions() {
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -122,7 +139,9 @@ public class ViewEdit extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.rotatePic:
-                        Toast.makeText(ViewEdit.this, "Rotate", Toast.LENGTH_SHORT).show();
+                        String r = String.valueOf(imgViewEdit.getRotationX());
+                        Toast.makeText(ViewEdit.this,"Rotate Degree: "  + r , Toast.LENGTH_SHORT).show();
+                        imgViewEdit.setRotation(imgViewEdit.getRotation() + 90);
                         break;
 
                     case R.id.flipPic:
@@ -159,13 +178,6 @@ public class ViewEdit extends AppCompatActivity {
                         break;
                 }
                 return true;
-            }
-        });
-        cancelViewEditBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewEdit.this, MainActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -212,8 +224,7 @@ public class ViewEdit extends AppCompatActivity {
         nav_crop_option = findViewById(R.id.nav_crop_option);
         nav_emote_option = findViewById(R.id.nav_emote_option);
 
-        cancelViewEditBtn = findViewById(R.id.cancelViewEditBtn);
-        saveViewEditBtn = findViewById(R.id.saveViewEditBtn);
+
 
         filterRecView= findViewById(R.id.filterRecView);
         //set adapter to imgRecView

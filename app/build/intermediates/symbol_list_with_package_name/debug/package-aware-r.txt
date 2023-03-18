@@ -2740,7 +2740,12 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_save
 drawable ic_search_black_24
+<<<<<<< HEAD
+=======
+drawable ic_undo
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 drawable ic_view_detail
 drawable ic_view_grid
 drawable image
@@ -3080,6 +3085,10 @@ id image
 id imageRecView
 id image_view
 id imgBtnChangeView
+<<<<<<< HEAD
+=======
+id imgView
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id imgViewEdit
 id immediateStop
 id included
@@ -3227,7 +3236,10 @@ id radio
 id ratio
 id rectangles
 id recyclerView
+<<<<<<< HEAD
 id relativeLayoutButton
+=======
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id resizePic
 id reverseSawtooth
 id right
@@ -3237,7 +3249,11 @@ id right_side
 id rotatePic
 id rounded
 id row_index_key
+<<<<<<< HEAD
 id saveViewEditBtn
+=======
+id saveViewEdit
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3382,6 +3398,7 @@ id txtPathImage
 id txtSize
 id typeFilter
 id unchecked
+id undoViewEdit
 id uniform
 id unlabeled
 id up
@@ -3614,6 +3631,7 @@ layout view_details
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
+menu menu_view_edit
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu

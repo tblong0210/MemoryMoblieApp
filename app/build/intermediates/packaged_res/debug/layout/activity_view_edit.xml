@@ -7,18 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewEdit">
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayoutButton"
-        android:layout_above="@id/parentSelection">
+        android:layout_above="@id/parentSelection"
+        android:layout_margin="30dp">
 
         <ImageView
             android:id="@+id/imgViewEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_marginTop="80dp"
+            android:src="@drawable/image1" />
     </RelativeLayout>
 
 
@@ -119,6 +124,7 @@
     </RelativeLayout>
 
 
+<<<<<<< HEAD
     <RelativeLayout
         android:id="@+id/relativeLayoutButton"
         android:layout_width="match_parent"
@@ -143,6 +149,9 @@
             android:layout_marginRight="10dp"
             android:text="@string/action_save_edit_view" />
     </RelativeLayout>
+=======
+
+>>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
