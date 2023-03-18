@@ -90,6 +90,7 @@
 
 package com.example.memorymoblieapp.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -97,6 +98,7 @@ import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -108,15 +110,43 @@ import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
 import com.example.memorymoblieapp.fragment.TitleContentContainerFragment;
 import com.example.memorymoblieapp.view.ViewEdit;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.image:
+                        Toast.makeText(getBaseContext(), "Image", Toast.LENGTH_LONG).show();
+                        return true;
+
+                    case R.id.album:
+                        Toast.makeText(getBaseContext(), "Album", Toast.LENGTH_LONG).show();
+                        return true;
+
+                    case R.id.love:
+                        Toast.makeText(getBaseContext(), "Love", Toast.LENGTH_LONG).show();
+                        return true;
+
+                    case R.id.more:
+                        Toast.makeText(getBaseContext(), "More", Toast.LENGTH_LONG).show();
+                        return true;
+                }
+                return false;
+            }
+        });
 
         // FragmentAlbum
 //        AlbumFragment2 albumFragment = new AlbumFragment2();
@@ -129,14 +159,14 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_title_content_container, titleContentContainerFragment).commit();
 
 
-        btnViewEdit = findViewById(R.id.btnViewEdit);
-
-        btnViewEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
-                startActivity(intent);
-            }
-        });
+//        btnViewEdit = findViewById(R.id.btnViewEdit);
+//
+//        btnViewEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }
