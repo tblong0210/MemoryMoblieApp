@@ -2,6 +2,7 @@ R_DEF: Internal format may change without notice
 local
 anim slide_in
 anim slide_out
+color bg_nav
 color black
 color custom_color_nav
 color light_blue
@@ -20,6 +21,8 @@ drawable home
 drawable ic_add_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_view_detail
+drawable ic_view_grid
 drawable image
 drawable image1
 drawable image2
@@ -67,13 +70,15 @@ id icon_view
 id image
 id imageRecView
 id image_view
-id imgView
+id imgBtnChangeView
 id imgViewEdit
 id ivAlbum
 id ivAlbumContainer
 id ivImage
 id ivMore
+id largePictureFull
 id location
+id love
 id menu_view_edit
 id more
 id name
@@ -97,9 +102,9 @@ id searchView
 id setLockscreen
 id setWallpaper
 id share
-id star
 id stickerPic
 id textPic
+id textView
 id trash
 id txtAlbumName
 id txtCreatedDate
@@ -134,6 +139,7 @@ layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
+layout layout_image_full
 layout layout_setting_image
 layout selection_features_bar
 layout title_content_container
@@ -179,7 +185,6 @@ mipmap ic_sticker
 mipmap ic_text
 mipmap ic_trash
 mipmap ic_type_filter
-mipmap ic_view
 string action_back
 string action_back_edit_view
 string action_brightness_edit_view

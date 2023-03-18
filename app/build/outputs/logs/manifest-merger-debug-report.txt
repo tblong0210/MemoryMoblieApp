@@ -4,6 +4,7 @@ ADDED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\sr
 INJECTED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:2:1-41:12
 INJECTED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:2:1-41:12
 INJECTED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml:2:1-41:12
+MERGED from [androidx.databinding:viewbinding:7.4.1] C:\Users\admin\.gradle\caches\transforms-3\5e4f587c049de9aef1689456d23061a8\transformed\viewbinding-7.4.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\admin\.gradle\caches\transforms-3\f283efa8ceabc1e2d98d55cda5c65724\transformed\glide-4.11.0\AndroidManifest.xml:2:1-12:12
 MERGED from [com.google.android.material:material:1.8.0] C:\Users\admin\.gradle\caches\transforms-3\dfe455107600617cfcbe36a5c8cee19f\transformed\material-1.8.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\ee0027bc9d5788a8013686284e27f76a\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -11,10 +12,9 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\admin\.g
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\admin\.gradle\caches\transforms-3\f9cbea646069e80afa4058702cbf29bd\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\admin\.gradle\caches\transforms-3\901bd1e79ca3a5e2188025eed5ecc80d\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\admin\.gradle\caches\transforms-3\9c216459d7d77a898439125486cbda00\transformed\gifdecoder-4.11.0\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\c3a1ab20ac714d105a420e4de11de0ab\transformed\exifinterface-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\d79342ee9818b768bd3b596a7b57b752\transformed\viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\admin\.gradle\caches\transforms-3\e662a78d598a403fc10bb2550268231c\transformed\fragment-1.3.6\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\dcab2ccd2afeb68d5dbad6d576d2d43c\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\c3a1ab20ac714d105a420e4de11de0ab\transformed\exifinterface-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.activity:activity:1.6.0] C:\Users\admin\.gradle\caches\transforms-3\a767196ac7dee22e27f85827d6433d9a\transformed\activity-1.6.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\6f3a0090af60fda4ed7dae7881f0c443\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\b534eca45ae0368be30899d5007a440e\transformed\emoji2-1.2.0\AndroidManifest.xml:17:1-35:12
@@ -22,6 +22,7 @@ MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\admin\.gradle\ca
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\a2e230625f9cadea5eed95dc3ca61391\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\ee3ae8f1d764d3914a415879637879bb\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.transition:transition:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\3c95aa9aa58eb5547a0a9586ce3ea2fe\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\dcab2ccd2afeb68d5dbad6d576d2d43c\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\85fd1d3c9f702ad2a1060334e8ba52fe\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\ffa6ff59be780381963989a9f5cf67d3\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\dc97d6ce0b4fe9761cb7382a11c15f82\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -156,6 +157,8 @@ uses-sdk
 INJECTED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml
 INJECTED from D:\source\Java\AndroidStudioProjects\my-source\MemoryMoblieApp\app\src\main\AndroidManifest.xml
+MERGED from [androidx.databinding:viewbinding:7.4.1] C:\Users\admin\.gradle\caches\transforms-3\5e4f587c049de9aef1689456d23061a8\transformed\viewbinding-7.4.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:7.4.1] C:\Users\admin\.gradle\caches\transforms-3\5e4f587c049de9aef1689456d23061a8\transformed\viewbinding-7.4.1\AndroidManifest.xml:5:5-44
 MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\admin\.gradle\caches\transforms-3\f283efa8ceabc1e2d98d55cda5c65724\transformed\glide-4.11.0\AndroidManifest.xml:6:5-8:41
 MERGED from [com.github.bumptech.glide:glide:4.11.0] C:\Users\admin\.gradle\caches\transforms-3\f283efa8ceabc1e2d98d55cda5c65724\transformed\glide-4.11.0\AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.android.material:material:1.8.0] C:\Users\admin\.gradle\caches\transforms-3\dfe455107600617cfcbe36a5c8cee19f\transformed\material-1.8.0\AndroidManifest.xml:20:5-22:41
@@ -170,14 +173,12 @@ MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\admin\.gradle\caches\t
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\admin\.gradle\caches\transforms-3\901bd1e79ca3a5e2188025eed5ecc80d\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\admin\.gradle\caches\transforms-3\9c216459d7d77a898439125486cbda00\transformed\gifdecoder-4.11.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] C:\Users\admin\.gradle\caches\transforms-3\9c216459d7d77a898439125486cbda00\transformed\gifdecoder-4.11.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\c3a1ab20ac714d105a420e4de11de0ab\transformed\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\c3a1ab20ac714d105a420e4de11de0ab\transformed\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\d79342ee9818b768bd3b596a7b57b752\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\d79342ee9818b768bd3b596a7b57b752\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\admin\.gradle\caches\transforms-3\e662a78d598a403fc10bb2550268231c\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\admin\.gradle\caches\transforms-3\e662a78d598a403fc10bb2550268231c\transformed\fragment-1.3.6\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\dcab2ccd2afeb68d5dbad6d576d2d43c\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\dcab2ccd2afeb68d5dbad6d576d2d43c\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\c3a1ab20ac714d105a420e4de11de0ab\transformed\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\c3a1ab20ac714d105a420e4de11de0ab\transformed\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.6.0] C:\Users\admin\.gradle\caches\transforms-3\a767196ac7dee22e27f85827d6433d9a\transformed\activity-1.6.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.6.0] C:\Users\admin\.gradle\caches\transforms-3\a767196ac7dee22e27f85827d6433d9a\transformed\activity-1.6.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\6f3a0090af60fda4ed7dae7881f0c443\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:5:5-44
@@ -192,6 +193,8 @@ MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\admin\.g
 MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\ee3ae8f1d764d3914a415879637879bb\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.transition:transition:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\3c95aa9aa58eb5547a0a9586ce3ea2fe\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.transition:transition:1.2.0] C:\Users\admin\.gradle\caches\transforms-3\3c95aa9aa58eb5547a0a9586ce3ea2fe\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\dcab2ccd2afeb68d5dbad6d576d2d43c\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\dcab2ccd2afeb68d5dbad6d576d2d43c\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\85fd1d3c9f702ad2a1060334e8ba52fe\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\admin\.gradle\caches\transforms-3\85fd1d3c9f702ad2a1060334e8ba52fe\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\admin\.gradle\caches\transforms-3\ffa6ff59be780381963989a9f5cf67d3\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44

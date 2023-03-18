@@ -5,11 +5,13 @@
         android:id="@+id/image"
         android:icon="@drawable/image"
         android:title="Ảnh"/>
-    <item android:title="Album"
-        android:id="@+id/album"
-        android:icon="@drawable/album" />
     <item
-        android:id="@+id/star"
+        android:id="@+id/album"
+        android:icon="@drawable/album"
+        android:title="Album"
+        />
+    <item
+        android:id="@+id/love"
         android:icon="@drawable/star"
         android:title="Yêu thích"/>
     <item
@@ -18,6 +20,7 @@
         android:title="Khác"
         />
 </menu>
+
 
 
 

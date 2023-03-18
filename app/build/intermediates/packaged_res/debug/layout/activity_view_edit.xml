@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewEdit">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,7 +46,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/round_corner"
+                android:background="@color/light_blue"
+                app:itemIconTint="@color/black"
+
                 app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/menu_crop_option" />
         </RelativeLayout>
@@ -67,23 +68,38 @@
                 android:id="@+id/filterRecView"/>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/brightnessOption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            android:layout_marginBottom="20dp"
-            >
-
-            <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/brightnessOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/brightnessRecView"/>
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:layout_marginBottom="20dp"
+                >
 
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/brightnessRecView"/>
+            </LinearLayout>
+
+<!--            <com.google.android.material.slider.Slider-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/brightnessOption"-->
+<!--                android:contentDescription="test"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:layout_marginEnd="30dp"-->
+<!--                android:valueFrom="-100.0"-->
+<!--                android:valueTo="100.0"-->
+<!--                android:value="0.0"-->
+<!--                android:stepSize="1.0" />-->
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/emoteOption"
@@ -135,6 +151,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
+        android:background="@color/light_blue"
+        app:itemIconTint="@color/black"
         app:menu="@menu/navigation_edit_view" />
 
 

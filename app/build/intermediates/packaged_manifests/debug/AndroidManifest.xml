@@ -26,7 +26,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.MemoryMobileApp" >
         <activity
             android:name="com.example.memorymoblieapp.view.ViewEdit"

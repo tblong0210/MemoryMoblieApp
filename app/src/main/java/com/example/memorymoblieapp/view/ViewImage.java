@@ -13,31 +13,51 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.memorymoblieapp.ControlImage.ViewPagerAdapter;
+import com.example.memorymoblieapp.ControlImage.ZoomableViewPager;
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Locale;
 
 public class ViewImage extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    private ImageView imageView;
+    ZoomableViewPager mViewPaper;
+    ViewPagerAdapter mViewPaperAdapter;
     private boolean isFavorite = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_setting_image);
+        setContentView(R.layout.control_image_container);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initViews();
         initActions();
     }
 
-    private void initViews(){
+    private void initViews() {
+        File[] pictureFiles;
+        File pictureFile;
+        Intent intent = getIntent();
+        pictureFile = new File(intent.getStringExtra("pathToPicturesFolder"));
+        pictureFiles = pictureFile.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String s) {
+                return s.toLowerCase(Locale.ROOT).endsWith("png") || s.toLowerCase(Locale.ROOT).endsWith("jpg");
+            }
+        });
+
         bottomNavigationView = findViewById(R.id.navSetting);
-        imageView = findViewById(R.id.imgView);
+        mViewPaper = findViewById(R.id.viewPaperMain);
+        mViewPaperAdapter = new ViewPagerAdapter(this, pictureFiles);
+        mViewPaper.setAdapter(mViewPaperAdapter);
     }
 
-    private void initActions(){
+    private void initActions() {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.favorite:
                     // Đánh dấu trạng thái yêu thích
                     isFavorite = !isFavorite;
@@ -69,7 +89,7 @@ public class ViewImage extends AppCompatActivity {
         });
     }
 
-    private void createMenuPopup(View item, int menuItem){
+    private void createMenuPopup(View item, int menuItem) {
         PopupMenu popupMenu = new PopupMenu(item.getContext(), item);
         popupMenu.inflate(menuItem);
         popupMenu.setGravity(Gravity.END);
@@ -77,15 +97,13 @@ public class ViewImage extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 int item = menuItem.getItemId();
-                if(item == R.id.viewDetails){
+                if (item == R.id.viewDetails) {
                     Toast.makeText(ViewImage.this, "View details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ViewImage.this, ViewDetails.class);
                     startActivity(intent);
-                }
-                else if(item == R.id.setWallpaper){
+                } else if (item == R.id.setWallpaper) {
                     Toast.makeText(ViewImage.this, "Set Wallpaper", Toast.LENGTH_SHORT).show();
-                }
-                else if(item == R.id.setLockscreen){
+                } else if (item == R.id.setLockscreen) {
                     Toast.makeText(ViewImage.this, "Set Lockscreen", Toast.LENGTH_SHORT).show();
                 }
                 return true;

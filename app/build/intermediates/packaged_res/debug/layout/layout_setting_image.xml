@@ -7,27 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewImage">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="80dp">
-
-        <ImageView
-            android:id="@+id/imgView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:layout_centerInParent="true"
-            android:src="@drawable/image1" />
-    </RelativeLayout>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navSetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-70dp"
         android:paddingBottom="20dp"
+        android:background="@color/bg_nav"
+        android:backgroundTint="@color/black"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation_setting_image" />
 

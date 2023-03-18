@@ -1306,6 +1306,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color bg_nav
 color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
@@ -2740,6 +2741,8 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_search_black_24
+drawable ic_view_detail
+drawable ic_view_grid
 drawable image
 drawable image1
 drawable image2
@@ -3076,7 +3079,7 @@ id ignoreRequest
 id image
 id imageRecView
 id image_view
-id imgView
+id imgBtnChangeView
 id imgViewEdit
 id immediateStop
 id included
@@ -3093,6 +3096,7 @@ id ivMore
 id jumpToEnd
 id jumpToStart
 id labeled
+id largePictureFull
 id layout
 id left
 id leftToRight
@@ -3103,6 +3107,7 @@ id linear
 id listMode
 id list_item
 id location
+id love
 id m3_side_sheet
 id marquee
 id masked
@@ -3301,7 +3306,6 @@ id src_atop
 id src_in
 id src_over
 id standard
-id star
 id start
 id startHorizontal
 id startToEnd
@@ -3336,6 +3340,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3540,6 +3545,7 @@ layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
+layout layout_image_full
 layout layout_setting_image
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
@@ -3646,7 +3652,6 @@ mipmap ic_sticker
 mipmap ic_text
 mipmap ic_trash
 mipmap ic_type_filter
-mipmap ic_view
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description

@@ -168,6 +168,10 @@
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\mipmap-hdpi\\ic_text.png"
     },
     {
+        "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\drawable_ic_view_grid.xml.flat",
+        "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\drawable\\ic_view_grid.xml"
+    },
+    {
         "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\mipmap-hdpi_ic_brightness_contrast.png.flat",
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\mipmap-hdpi\\ic_brightness_contrast.png"
     },
@@ -220,10 +224,6 @@
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\layout\\view_details.xml"
     },
     {
-        "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\mipmap-hdpi_ic_view.png.flat",
-        "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\mipmap-hdpi\\ic_view.png"
-    },
-    {
         "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\layout_title_content_container.xml.flat",
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\layout\\title_content_container.xml"
     },
@@ -256,6 +256,10 @@
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\layout\\filter_list_item.xml"
     },
     {
+        "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\drawable_ic_view_detail.xml.flat",
+        "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\drawable\\ic_view_detail.xml"
+    },
+    {
         "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\layout_fragment_image.xml.flat",
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\layout\\fragment_image.xml"
     },
@@ -274,6 +278,10 @@
     {
         "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\layout_image_select.xml.flat",
         "source": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-main-32:\\layout\\image_select.xml"
+    },
+    {
+        "merged": "com.example.memorymoblieapp-merged_res-30:/layout_layout_image_full.xml.flat",
+        "source": "com.example.memorymoblieapp-main-32:/layout/layout_image_full.xml"
     },
     {
         "merged": "C:\\Users\\admin\\.gradle\\daemon\\7.5\\com.example.memorymoblieapp-merged_res-30:\\mipmap-hdpi_ic_export.png.flat",
