@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
     ArrayList<Album> albums;
     Context context;
+    ImageView ivMore;
 
     public AlbumAdapter(ArrayList<Album> albums, Context context) {
         this.albums = albums;
@@ -30,6 +31,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.album_item, parent, false);
+        ivMore = (ImageView) itemView.findViewById(R.id.ivMore);
         return new ViewHolder(itemView);
     }
 
@@ -37,7 +39,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(albums.get(position).getName());
-        holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " ảnh");
+
+        if(albums.get(position).getQuantity() >= 0)
+            holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " ảnh");
+        else {
+            holder.quantity.setText("");
+            ivMore.setVisibility(View.GONE);
+        }
+
         holder.img.setImageResource(Integer.parseInt(Integer.toString(albums.get(position).getImg())));
     }
 

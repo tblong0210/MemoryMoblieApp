@@ -40,6 +40,7 @@ public class AlbumFragment2 extends Fragment {
     }
 
     private void addAlbumList() {
+        albumList.add(new Album("Album mới", -1, R.mipmap.ic_add_album));
         albumList.add(new Album("Test", 3, R.drawable.image1));
         albumList.add(new Album("Test", 3, R.drawable.image1));
         albumList.add(new Album("Test", 3, R.drawable.image1));
