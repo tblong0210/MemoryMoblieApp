@@ -116,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        FrameLayout frameLayoutNavigation = (FrameLayout) findViewById(R.id.frame_layout_navigation);
         detailed = false;
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -125,9 +123,6 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                if (item.getItemId() != R.id.love)
-//                    frameLayoutNavigation.setVisibility(View.GONE);
-
                 switch (item.getItemId()) {
                     case R.id.image:
                         Toast.makeText(getBaseContext(), "Image", Toast.LENGTH_LONG).show();
@@ -139,10 +134,6 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.love:
-//                        frameLayoutNavigation.setVisibility(View.VISIBLE);
-//                        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment(detailed, "Yêu thích");
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, titleContentContainerFragment).commit();
-
                         ImageFragment2 imageFragment = new ImageFragment2("Yêu thích");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
                         return true;

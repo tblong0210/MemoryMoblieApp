@@ -26,7 +26,7 @@ public class ImageFragment2 extends Fragment {
     ArrayList<Image> ImageList;
     ImageAdapter adapter;
     private Context context;
-    private String title = "";
+    private final String title;
 
     public ImageFragment2(String title) {
         this.title = title;
