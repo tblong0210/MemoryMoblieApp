@@ -116,6 +116,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
+    public static boolean detailed;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -123,11 +124,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FrameLayout frameLayoutNavigation = (FrameLayout) findViewById(R.id.frame_layout_navigation);
+        detailed = false;
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() != R.id.love)
+                    frameLayoutNavigation.setVisibility(View.GONE);
+
                 switch (item.getItemId()) {
                     case R.id.image:
                         Toast.makeText(getBaseContext(), "Image", Toast.LENGTH_LONG).show();
@@ -135,18 +142,23 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.album:
                         AlbumFragment2 albumFragment = new AlbumFragment2();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, albumFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, albumFragment).commit();
                         return true;
 
                     case R.id.love:
-                        ImageFragment2 imageFragment = new ImageFragment2(true);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, imageFragment).commit();
+                        frameLayoutNavigation.setVisibility(View.VISIBLE);
+                        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment(detailed, "Yêu thích");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, titleContentContainerFragment).commit();
+
+                        ImageFragment2 imageFragment = new ImageFragment2(detailed);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
                         return true;
 
                     case R.id.more:
                         Toast.makeText(getBaseContext(), "More", Toast.LENGTH_LONG).show();
                         return true;
                 }
+
                 return false;
             }
         });
