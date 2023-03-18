@@ -101,6 +101,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -133,11 +134,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.album:
-                        Toast.makeText(getBaseContext(), "Album", Toast.LENGTH_LONG).show();
+                        AlbumFragment2 albumFragment = new AlbumFragment2();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, albumFragment).commit();
                         return true;
 
                     case R.id.love:
-                        Toast.makeText(getBaseContext(), "Love", Toast.LENGTH_LONG).show();
+                        ImageFragment2 imageFragment = new ImageFragment2(true);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_navigation, imageFragment).commit();
                         return true;
 
                     case R.id.more:
