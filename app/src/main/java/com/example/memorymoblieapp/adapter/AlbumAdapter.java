@@ -26,7 +26,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     static ArrayList<Album> albums;
     Context context;
     TextView txtImgQuantity;
-    ImageView ivMore;
+    @SuppressLint("StaticFieldLeak")
+    static ImageView ivMore;
+    @SuppressLint("StaticFieldLeak")
+    static ImageView ivAlbum;
 
     public AlbumAdapter(ArrayList<Album> albums, Context context) {
         AlbumAdapter.albums = albums;
@@ -40,6 +43,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         View itemView = layoutInflater.inflate(R.layout.album_item, parent, false);
         txtImgQuantity = (TextView) itemView.findViewById(R.id.txtImgQuantity);
         ivMore = (ImageView) itemView.findViewById(R.id.ivMore);
+        ivAlbum = (ImageView) itemView.findViewById(R.id.ivAlbum);
         return new ViewHolder(itemView);
     }
 
@@ -75,7 +79,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             quantity = (TextView) itemView.findViewById(R.id.txtImgQuantity);
             img = (ImageView) itemView.findViewById(R.id.ivAlbum);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            ivMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), albums.get(getAdapterPosition()).getName() + " more", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            ivAlbum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (getAdapterPosition() == 0) {
