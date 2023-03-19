@@ -87,18 +87,18 @@ public class ImageFragment2 extends Fragment {
     }
 
     private void addImageList() {
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        ImageList.add(new Image("Test.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image7.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image8.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image9.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image10.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image11.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image12.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        ImageList.add(new Image("image13.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
     }
 }

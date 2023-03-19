@@ -40,16 +40,16 @@ public class AlbumFragment2 extends Fragment {
     }
 
     private void addAlbumList() {
-        albumList.add(new Album("Album mới", -1, R.mipmap.ic_add_album));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
+        albumList.add(new Album("", -1, R.mipmap.ic_add_album));
+        albumList.add(new Album("Album1", 3, R.drawable.image1));
+        albumList.add(new Album("Album2", 3, R.drawable.image1));
+        albumList.add(new Album("Album3", 3, R.drawable.image1));
+        albumList.add(new Album("Album4", 3, R.drawable.image1));
+        albumList.add(new Album("Album5", 3, R.drawable.image1));
+        albumList.add(new Album("Album6", 3, R.drawable.image1));
+        albumList.add(new Album("Album7", 3, R.drawable.image1));
+        albumList.add(new Album("Album8", 3, R.drawable.image1));
+        albumList.add(new Album("Album9", 3, R.drawable.image1));
+        albumList.add(new Album("Album10", 3, R.drawable.image1));
     }
 }
