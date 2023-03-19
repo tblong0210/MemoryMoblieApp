@@ -45,7 +45,6 @@ public class AlbumFragment2 extends Fragment {
 
     @SuppressLint("NotifyDataSetChanged")
     static public void updateItem(int position){
-//        adapter.notifyDataSetChanged();
         adapter.notifyItemChanged(position);
     }
 
