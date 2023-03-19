@@ -58,7 +58,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ivMore.setVisibility(View.GONE);
         }
 
-        holder.quantity.setText(Integer.toString(albums.get(position).getQuantity()) + " ảnh");
+        holder.quantity.setText(Integer.toString(albums.get(position).getImgList().size()) + " ảnh");
 
         holder.img.setImageResource(Integer.parseInt(Integer.toString(albums.get(position).getImg())));
     }

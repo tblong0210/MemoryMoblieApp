@@ -1,13 +1,15 @@
 package com.example.memorymoblieapp.obj;
 
+import java.util.ArrayList;
+
 public class Album {
     private String name;
-    private int quantity;
+    private ArrayList<Image> imgList;
     private int img;
 
-    public Album(String name, int quantity, int img) {
+    public Album(String name, ArrayList<Image> imgList, int img) {
         this.name = name;
-        this.quantity = quantity;
+        this.imgList = imgList;
         this.img = img;
     }
 
@@ -19,12 +21,12 @@ public class Album {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public ArrayList<Image> getImgList() {
+        return imgList;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setImgList(ArrayList<Image> imgList) {
+        this.imgList = imgList;
     }
 
     public int getImg() {

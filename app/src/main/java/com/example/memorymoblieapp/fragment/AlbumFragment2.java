@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.AlbumAdapter;
 import com.example.memorymoblieapp.obj.Album;
+import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class AlbumFragment2 extends Fragment {
         recycler.setLayoutManager(gridLayoutManager);
 
         albumList = new ArrayList<Album>();
-        albumList.add(new Album("", -1, R.mipmap.ic_add_album));
+        albumList.add(new Album("", new ArrayList<Image>(), R.mipmap.ic_add_album));
         addAlbumList();
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);
@@ -41,15 +42,17 @@ public class AlbumFragment2 extends Fragment {
     }
 
     private void addAlbumList() {
-        albumList.add(new Album("Album1", 3, R.drawable.image1));
-        albumList.add(new Album("Album2", 3, R.drawable.image1));
-        albumList.add(new Album("Album3", 3, R.drawable.image1));
-        albumList.add(new Album("Album4", 3, R.drawable.image1));
-        albumList.add(new Album("Album5", 3, R.drawable.image1));
-        albumList.add(new Album("Album6", 3, R.drawable.image1));
-        albumList.add(new Album("Album7", 3, R.drawable.image1));
-        albumList.add(new Album("Album8", 3, R.drawable.image1));
-        albumList.add(new Album("Album9", 3, R.drawable.image1));
-        albumList.add(new Album("Album10", 3, R.drawable.image1));
+        ArrayList<Image> imgList = new ArrayList<Image>();
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        albumList.add(new Album("Album1", new ArrayList<Image>(), R.drawable.image1));
+        albumList.add(new Album("Album2", imgList, R.drawable.image1));
+        albumList.add(new Album("Album3", imgList, R.drawable.image1));
+        albumList.add(new Album("Album4", imgList, R.drawable.image1));
+        albumList.add(new Album("Album5", imgList, R.drawable.image1));
+        albumList.add(new Album("Album6", imgList, R.drawable.image1));
+        albumList.add(new Album("Album7", imgList, R.drawable.image1));
+        albumList.add(new Album("Album8", imgList, R.drawable.image1));
+        albumList.add(new Album("Album9", imgList, R.drawable.image1));
+        albumList.add(new Album("Album10", imgList, R.drawable.image1));
     }
 }
