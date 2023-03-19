@@ -17,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.Album;
+import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
 
@@ -102,7 +104,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String newAlbumName = input.getText().toString();
-                                Toast.makeText(view.getContext(), newAlbumName, Toast.LENGTH_LONG).show();
+                                if (newAlbumName.isBlank())
+                                    newAlbumName = "Album mới";
+                                AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<Image>(), R.mipmap.ic_album));
+                                AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
                             }
                         });
                         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -113,9 +118,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         });
 
                         builder.show();
-                    }
-
-                    else {
+                    } else {
                         Toast.makeText(view.getContext(), albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
                     }
                 }
