@@ -32,6 +32,7 @@ public class AlbumFragment2 extends Fragment {
         recycler.setLayoutManager(gridLayoutManager);
 
         albumList = new ArrayList<Album>();
+        albumList.add(new Album("", -1, R.mipmap.ic_add_album));
         addAlbumList();
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);
@@ -40,7 +41,6 @@ public class AlbumFragment2 extends Fragment {
     }
 
     private void addAlbumList() {
-        albumList.add(new Album("", -1, R.mipmap.ic_add_album));
         albumList.add(new Album("Album1", 3, R.drawable.image1));
         albumList.add(new Album("Album2", 3, R.drawable.image1));
         albumList.add(new Album("Album3", 3, R.drawable.image1));
