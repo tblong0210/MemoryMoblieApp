@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -48,6 +51,8 @@ public class ViewEdit extends AppCompatActivity {
     private ArrayList<Filter> filters;
     private ArrayList<Brightness> brightnesses;
 
+    private Bitmap originImage;
+
 
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option;
 
@@ -80,7 +85,7 @@ public class ViewEdit extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
-            case R.id.undoViewEdit:
+            case R.id.resetViewEdit:
                 Toast.makeText(this, "Undo", Toast.LENGTH_SHORT).show();
                 refreshPicture();
             case R.id.saveViewEdit:
@@ -93,7 +98,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void refreshPicture() {
-
+        imgViewEdit.setImageBitmap(originImage);
     }
     private void savePicture() {
 //        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
@@ -156,14 +161,12 @@ public class ViewEdit extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.rotatePic:
-                        String r = String.valueOf(imgViewEdit.getRotationX());
-                        Toast.makeText(ViewEdit.this,"Rotate Degree: "  + r , Toast.LENGTH_SHORT).show();
-                        imgViewEdit.setRotation(imgViewEdit.getRotation() - 90);
+                        handleRotateImage();
                         break;
 
                     case R.id.flipPic:
                         Toast.makeText(ViewEdit.this, "Flip", Toast.LENGTH_SHORT).show();
-
+                        handleFlipImage();
                         break;
                     case R.id.resizePic:
 
@@ -191,6 +194,7 @@ public class ViewEdit extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.paintPic:
                         Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
+                        handleAddPaintImage();
                         break;
 
                     case R.id.stickerPic:
@@ -216,9 +220,23 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleRotateImage(){
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
+        Matrix matrix = new Matrix();
+        matrix.setRotate(90);
+        Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+        imgViewEdit.setImageBitmap(rotatedBitmap);
+        //originalBitmap.recycle();
 
     }
     private void handleFlipImage(){
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
+        Matrix matrix = new Matrix();
+        matrix.setScale(-1, 1);
+        Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+        imgViewEdit.setImageBitmap(flippedBitmap);
+        //originalBitmap.recycle();
 
     }
     private void handleResizeImage(float firstRatio, float secondRatio){
@@ -230,14 +248,24 @@ public class ViewEdit extends AppCompatActivity {
 
         int targetWidth, targetHeight;
 
-        // For 9:16 aspect ratio
         targetWidth = originalWidth;
         targetHeight = (int) (targetWidth * firstRatio / secondRatio);
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, targetWidth, targetHeight, false);
         imgViewEdit.setImageBitmap(resizedBitmap);
+        //originalBitmap.recycle();
     }
 
     private void handleAddPaintImage(){
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
+        Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        canvas.drawBitmap(originalBitmap, 0, 0, null);
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStrokeWidth(10);
+        canvas.drawLine(100, 100, 500, 500, paint);
+        imgViewEdit.setImageBitmap(newBitmap);
 
     }
 
@@ -250,6 +278,8 @@ public class ViewEdit extends AppCompatActivity {
 
     private void initViews() {
         imgViewEdit = findViewById(R.id.imgViewEdit);
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        originImage = drawable.getBitmap();
         doneImage= findViewById(R.id.doneImage);
 
 

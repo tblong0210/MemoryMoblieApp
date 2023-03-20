@@ -3152,7 +3152,7 @@ id flipPic
 id floating
 id forever
 id fragment_container_view_tag
-id frame_layout_navigation
+id frame_layout_content
 id frost
 id fullscreen_header
 id gallery_number
@@ -3182,7 +3182,6 @@ id ignore
 id ignoreRequest
 id image
 id imageRecView
-id imageView
 id image_view
 id image_view_crop
 id image_view_logo
@@ -3351,6 +3350,7 @@ id ratio
 id rectangles
 id recyclerView
 id recyclerview_gallery_images
+id resetViewEdit
 id resizePic
 id reverseSawtooth
 id right
@@ -3413,11 +3413,9 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
-id simpleText
 id sin
 id skipCollapsed
 id skipped
-id slectImageBtn
 id slide
 id snackbar_action
 id snackbar_text
@@ -3527,12 +3525,12 @@ id txtLocationImage
 id txtNameImage
 id txtPathImage
 id txtSize
+id txtTitle
 id typeFilter
 id ucrop
 id ucrop_frame
 id ucrop_photobox
 id unchecked
-id undoViewEdit
 id uniform
 id unlabeled
 id up
@@ -3668,7 +3666,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_crop
 layout activity_main
 layout activity_view_edit
 layout album_fragment
@@ -3767,7 +3764,6 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout selection_features_bar
 layout support_simple_spinner_dropdown_item
-layout title_content_container
 layout ucrop_activity_photobox
 layout ucrop_aspect_ratio
 layout ucrop_controls
@@ -3794,6 +3790,8 @@ menu ucrop_menu_activity
 mipmap ic_16_9
 mipmap ic_3_4
 mipmap ic_add
+mipmap ic_add_album
+mipmap ic_album
 mipmap ic_back
 mipmap ic_back_silver
 mipmap ic_brightness

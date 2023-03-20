@@ -63,7 +63,7 @@ id filterPic
 id filterRecView
 id firstResizePic
 id flipPic
-id frame_layout_navigation
+id frame_layout_content
 id gallery_number
 id grid_image
 id iconCalender
@@ -71,7 +71,6 @@ id iconImage
 id iconLocation
 id image
 id imageRecView
-id imageView
 id image_view
 id imgBtnChangeView
 id imgView
@@ -98,6 +97,7 @@ id parent_list_brightness
 id parent_list_filter
 id recyclerView
 id recyclerview_gallery_images
+id resetViewEdit
 id resizePic
 id rotatePic
 id saveViewEdit
@@ -106,8 +106,6 @@ id secondResizePic
 id setLockscreen
 id setWallpaper
 id share
-id simpleText
-id slectImageBtn
 id stickerPic
 id tempLayout
 id textPic
@@ -126,10 +124,9 @@ id txtLocationImage
 id txtNameImage
 id txtPathImage
 id txtSize
+id txtTitle
 id typeFilter
-id undoViewEdit
 id viewDetails
-layout activity_crop
 layout activity_main
 layout activity_view_edit
 layout album_fragment
@@ -151,7 +148,6 @@ layout layout_grid_image
 layout layout_header
 layout layout_setting_image
 layout selection_features_bar
-layout title_content_container
 layout view_details
 menu menu_crop
 menu menu_crop_option
@@ -166,6 +162,8 @@ menu selection_features_bar
 mipmap ic_16_9
 mipmap ic_3_4
 mipmap ic_add
+mipmap ic_add_album
+mipmap ic_album
 mipmap ic_back
 mipmap ic_back_silver
 mipmap ic_brightness

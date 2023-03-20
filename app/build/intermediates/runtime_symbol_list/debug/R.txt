@@ -3151,7 +3151,7 @@ int id flipPic 0x7f0800de
 int id floating 0x7f0800df
 int id forever 0x7f0800e0
 int id fragment_container_view_tag 0x7f0800e1
-int id frame_layout_navigation 0x7f0800e2
+int id frame_layout_content 0x7f08027b
 int id frost 0x7f0800e3
 int id fullscreen_header 0x7f0800e4
 int id gallery_number 0x7f0800e5
@@ -3181,7 +3181,6 @@ int id ignore 0x7f0800fc
 int id ignoreRequest 0x7f0800fd
 int id image 0x7f0800fe
 int id imageRecView 0x7f0800ff
-int id imageView 0x7f080100
 int id image_view 0x7f080101
 int id image_view_crop 0x7f080102
 int id image_view_logo 0x7f080103
@@ -3350,6 +3349,7 @@ int id ratio 0x7f0801a5
 int id rectangles 0x7f0801a6
 int id recyclerView 0x7f0801a7
 int id recyclerview_gallery_images 0x7f0801a8
+int id resetViewEdit 0x7f08027c
 int id resizePic 0x7f0801a9
 int id reverseSawtooth 0x7f0801aa
 int id right 0x7f0801ab
@@ -3412,11 +3412,9 @@ int id shortcut 0x7f0801e3
 int id showCustom 0x7f0801e4
 int id showHome 0x7f0801e5
 int id showTitle 0x7f0801e6
-int id simpleText 0x7f0801e7
 int id sin 0x7f0801e8
 int id skipCollapsed 0x7f0801e9
 int id skipped 0x7f0801ea
-int id slectImageBtn 0x7f0801eb
 int id slide 0x7f0801ec
 int id snackbar_action 0x7f0801ed
 int id snackbar_text 0x7f0801ee
@@ -3526,12 +3524,12 @@ int id txtLocationImage 0x7f080255
 int id txtNameImage 0x7f080256
 int id txtPathImage 0x7f080257
 int id txtSize 0x7f080258
+int id txtTitle 0x7f08027d
 int id typeFilter 0x7f080259
 int id ucrop 0x7f08025a
 int id ucrop_frame 0x7f08025b
 int id ucrop_photobox 0x7f08025c
 int id unchecked 0x7f08025d
-int id undoViewEdit 0x7f08025e
 int id uniform 0x7f08025f
 int id unlabeled 0x7f080260
 int id up 0x7f080261
@@ -3667,7 +3665,6 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0b0018
 int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
-int layout activity_crop 0x7f0b001c
 int layout activity_main 0x7f0b001d
 int layout activity_view_edit 0x7f0b001e
 int layout album_fragment 0x7f0b001f
@@ -3766,7 +3763,6 @@ int layout select_dialog_multichoice_material 0x7f0b007b
 int layout select_dialog_singlechoice_material 0x7f0b007c
 int layout selection_features_bar 0x7f0b007d
 int layout support_simple_spinner_dropdown_item 0x7f0b007e
-int layout title_content_container 0x7f0b007f
 int layout ucrop_activity_photobox 0x7f0b0080
 int layout ucrop_aspect_ratio 0x7f0b0081
 int layout ucrop_controls 0x7f0b0082
@@ -3793,6 +3789,8 @@ int menu ucrop_menu_activity 0x7f0d000a
 int mipmap ic_16_9 0x7f0e0000
 int mipmap ic_3_4 0x7f0e0001
 int mipmap ic_add 0x7f0e0002
+int mipmap ic_add_album 0x7f0e0022
+int mipmap ic_album 0x7f0e0023
 int mipmap ic_back 0x7f0e0003
 int mipmap ic_back_silver 0x7f0e0004
 int mipmap ic_brightness 0x7f0e0005

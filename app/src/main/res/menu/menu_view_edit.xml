@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/undoViewEdit"
+        android:id="@+id/resetViewEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"

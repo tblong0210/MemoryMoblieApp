@@ -94,8 +94,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -104,6 +106,7 @@ import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.view.ViewEdit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -158,14 +161,14 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_title_content_container, titleContentContainerFragment).commit();
 
 
-//        btnViewEdit = findViewById(R.id.btnViewEdit);
-//
-//        btnViewEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
-//                startActivity(intent);
-//            }
-//        });
+        btnViewEdit = findViewById(R.id.btnViewEdit);
+
+        btnViewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
+                startActivity(intent);
+            }
+        });
     }
 }
