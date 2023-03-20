@@ -7,20 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewEdit">
 
-
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/tempLayout"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:id="@+id/doneImage"/>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tempLayout"
         android:layout_above="@id/parentSelection"
-        android:layout_margin="30dp">
+        >
 
         <ImageView
             android:id="@+id/imgViewEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/image1" />
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/image1"/>
+
     </RelativeLayout>
 
 

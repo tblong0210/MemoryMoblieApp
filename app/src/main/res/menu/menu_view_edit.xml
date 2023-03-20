@@ -6,16 +6,14 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@drawable/ic_undo"
         app:showAsAction="always"
-        android:title="Undo" />
+        android:title="Reset" />
 
     <item
         android:id="@+id/saveViewEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@drawable/ic_save"
         app:showAsAction="always"
         android:title="Save" />
 

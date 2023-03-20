@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-ja/values-ja.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-29:/values-ja/values-ja.xml",
             "map": [
                 {
                     "source": "/Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/res/values-ja/values-ja.xml",
@@ -18,6 +18,23 @@
                         "startOffsets": "7350",
                         "endColumns": "100",
                         "endOffsets": "7446"
+                    }
+                },
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/res/values-ja/values-ja.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,97,153,208,257,301",
+                        "endColumns": "41,55,54,48,43,42",
+                        "endOffsets": "92,148,203,252,296,339"
+                    },
+                    "to": {
+                        "startLines": "97,98,99,100,101,102",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "7451,7493,7549,7604,7653,7697",
+                        "endColumns": "41,55,54,48,43,42",
+                        "endOffsets": "7488,7544,7599,7648,7692,7735"
                     }
                 },
                 {

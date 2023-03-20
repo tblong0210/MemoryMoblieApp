@@ -9,10 +9,10 @@ MERGED from [com.github.bumptech.glide:glide:4.11.0] /Users/trandungtien/.gradle
 MERGED from [com.google.android.material:material:1.8.0] /Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.cardview:cardview:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/ee0027bc9d5788a8013686284e27f76a/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/trandungtien/.gradle/caches/transforms-3/ddf83f750e2b46d45c980e431ca0a682/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.krokyze:ucropnedit:2.2.6-2] /Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/trandungtien/.gradle/caches/transforms-3/f9cbea646069e80afa4058702cbf29bd/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/trandungtien/.gradle/caches/transforms-3/901bd1e79ca3a5e2188025eed5ecc80d/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] /Users/trandungtien/.gradle/caches/transforms-3/9c216459d7d77a898439125486cbda00/transformed/gifdecoder-4.11.0/AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.exifinterface:exifinterface:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/c3a1ab20ac714d105a420e4de11de0ab/transformed/exifinterface-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/d79342ee9818b768bd3b596a7b57b752/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.3.6] /Users/trandungtien/.gradle/caches/transforms-3/e662a78d598a403fc10bb2550268231c/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.6.0] /Users/trandungtien/.gradle/caches/transforms-3/a767196ac7dee22e27f85827d6433d9a/transformed/activity-1.6.0/AndroidManifest.xml:17:1-22:12
@@ -37,6 +37,7 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/trandungtien/.gr
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /Users/trandungtien/.gradle/caches/transforms-3/b0761d22b5c86c7f873b7a426ffce717/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:17:1-37:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /Users/trandungtien/.gradle/caches/transforms-3/b27e62dc621b1294b7f65008fe732148/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.savedstate:savedstate:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/d38e461d20efd20af56e8e34655cfb01/transformed/savedstate-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.exifinterface:exifinterface:1.1.0] /Users/trandungtien/.gradle/caches/transforms-3/a03781d6c947eb3010f40a466a4a4446/transformed/exifinterface-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/trandungtien/.gradle/caches/transforms-3/2588dbebb914a4847c23b9e2e9390de9/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/trandungtien/.gradle/caches/transforms-3/9b7de33db6878c842f3a569e4f99463f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/666783bae71031cb449f42748cc82aaf/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
@@ -68,11 +69,11 @@ INJECTED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/
 	xmlns:android
 		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:4:5-66
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:5:5-67
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:4:22-64
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:5:22-64
 application
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:5:5-39:19
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:7:5-39:19
 MERGED from [com.github.bumptech.glide:glide:4.11.0] /Users/trandungtien/.gradle/caches/transforms-3/f283efa8ceabc1e2d98d55cda5c65724/transformed/glide-4.11.0/AndroidManifest.xml:10:5-20
 MERGED from [com.github.bumptech.glide:glide:4.11.0] /Users/trandungtien/.gradle/caches/transforms-3/f283efa8ceabc1e2d98d55cda5c65724/transformed/glide-4.11.0/AndroidManifest.xml:10:5-20
 MERGED from [com.google.android.material:material:1.8.0] /Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/AndroidManifest.xml:24:5-20
@@ -94,55 +95,55 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/trandungtien/.gradle
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.9.0] /Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:11:9-35
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:13:9-35
 	android:label
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:10:9-41
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:12:9-41
 	android:fullBackupContent
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:8:9-54
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:10:9-54
 	tools:targetApi
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:13:9-29
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:15:9-29
 	android:icon
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:9:9-43
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:11:9-43
 	android:allowBackup
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:6:9-35
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:8:9-35
 	android:theme
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:12:9-53
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:14:9-53
 	android:dataExtractionRules
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:7:9-65
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:9:9-65
 activity#com.example.memorymoblieapp.view.ViewEdit
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:14:9-17:57
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:16:9-19:58
 	android:label
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:17:13-55
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:19:13-55
 	android:exported
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:16:13-37
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:13-37
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:15:13-42
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:17:13-42
 activity#com.example.memorymoblieapp.view.ViewImage
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:18:9-21:58
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:20:9-23:59
 	android:label
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:21:13-56
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:23:13-56
 	android:exported
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:20:13-37
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:22:13-37
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:19:13-43
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:21:13-43
 activity#com.example.memorymoblieapp.view.ViewDetails
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:22:9-24:40
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:24:9-26:40
 	android:exported
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:24:13-37
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:23:13-45
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:25:13-45
 activity#com.example.memorymoblieapp.view.ViewSearch
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:25:9-27:40
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:27:9-29:40
 	android:exported
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:27:13-37
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:26:13-44
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:28:13-44
 activity#com.example.memorymoblieapp.main.MainActivity
-ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:29:9-38:20
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:30:9-38:20
 	android:exported
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:31:13-36
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:32:13-36
 	android:name
-		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:30:13-46
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:31:13-46
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:33:13-37:29
 action#android.intent.action.MAIN
@@ -167,14 +168,14 @@ MERGED from [androidx.cardview:cardview:1.0.0] /Users/trandungtien/.gradle/cache
 MERGED from [androidx.cardview:cardview:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/ee0027bc9d5788a8013686284e27f76a/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/trandungtien/.gradle/caches/transforms-3/ddf83f750e2b46d45c980e431ca0a682/transformed/constraintlayout-2.1.4/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/trandungtien/.gradle/caches/transforms-3/ddf83f750e2b46d45c980e431ca0a682/transformed/constraintlayout-2.1.4/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.krokyze:ucropnedit:2.2.6-2] /Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.krokyze:ucropnedit:2.2.6-2] /Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/trandungtien/.gradle/caches/transforms-3/f9cbea646069e80afa4058702cbf29bd/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/trandungtien/.gradle/caches/transforms-3/f9cbea646069e80afa4058702cbf29bd/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/trandungtien/.gradle/caches/transforms-3/901bd1e79ca3a5e2188025eed5ecc80d/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/trandungtien/.gradle/caches/transforms-3/901bd1e79ca3a5e2188025eed5ecc80d/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] /Users/trandungtien/.gradle/caches/transforms-3/9c216459d7d77a898439125486cbda00/transformed/gifdecoder-4.11.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.github.bumptech.glide:gifdecoder:4.11.0] /Users/trandungtien/.gradle/caches/transforms-3/9c216459d7d77a898439125486cbda00/transformed/gifdecoder-4.11.0/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.exifinterface:exifinterface:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/c3a1ab20ac714d105a420e4de11de0ab/transformed/exifinterface-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.exifinterface:exifinterface:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/c3a1ab20ac714d105a420e4de11de0ab/transformed/exifinterface-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/d79342ee9818b768bd3b596a7b57b752/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/trandungtien/.gradle/caches/transforms-3/d79342ee9818b768bd3b596a7b57b752/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] /Users/trandungtien/.gradle/caches/transforms-3/e662a78d598a403fc10bb2550268231c/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
@@ -223,6 +224,8 @@ MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /Users/trandungtien/.gr
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /Users/trandungtien/.gradle/caches/transforms-3/b27e62dc621b1294b7f65008fe732148/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/d38e461d20efd20af56e8e34655cfb01/transformed/savedstate-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.2.0] /Users/trandungtien/.gradle/caches/transforms-3/d38e461d20efd20af56e8e34655cfb01/transformed/savedstate-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.1.0] /Users/trandungtien/.gradle/caches/transforms-3/a03781d6c947eb3010f40a466a4a4446/transformed/exifinterface-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.1.0] /Users/trandungtien/.gradle/caches/transforms-3/a03781d6c947eb3010f40a466a4a4446/transformed/exifinterface-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/trandungtien/.gradle/caches/transforms-3/2588dbebb914a4847c23b9e2e9390de9/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/trandungtien/.gradle/caches/transforms-3/2588dbebb914a4847c23b9e2e9390de9/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/trandungtien/.gradle/caches/transforms-3/9b7de33db6878c842f3a569e4f99463f/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41

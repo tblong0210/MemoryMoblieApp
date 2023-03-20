@@ -6,10 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,12 +29,16 @@ import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.BrightnessRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
-import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewEdit extends AppCompatActivity {
+
 
     private ImageView imgViewEdit, rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
     private LinearLayout  filterOption, brightnessOption;
@@ -38,9 +48,10 @@ public class ViewEdit extends AppCompatActivity {
     private ArrayList<Filter> filters;
     private ArrayList<Brightness> brightnesses;
 
+
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option;
 
-    Button cancelViewEditBtn, saveViewEditBtn;
+    Button doneImage;
 
 
     @Override
@@ -84,8 +95,14 @@ public class ViewEdit extends AppCompatActivity {
     private void refreshPicture() {
 
     }
-    private void savePicture(){
-
+    private void savePicture() {
+//        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+//        Bitmap createdImage = drawable.getBitmap();
+//        File pictureFile = new File("/user/abc", createdImage.toString() + ".jpg");
+//        FileOutputStream out = new FileOutputStream(pictureFile);
+//        createdImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+//        out.flush();
+//        out.close();
     }
 
     private void initOptionActions() {
@@ -141,7 +158,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.rotatePic:
                         String r = String.valueOf(imgViewEdit.getRotationX());
                         Toast.makeText(ViewEdit.this,"Rotate Degree: "  + r , Toast.LENGTH_SHORT).show();
-                        imgViewEdit.setRotation(imgViewEdit.getRotation() + 90);
+                        imgViewEdit.setRotation(imgViewEdit.getRotation() - 90);
                         break;
 
                     case R.id.flipPic:
@@ -149,8 +166,18 @@ public class ViewEdit extends AppCompatActivity {
 
                         break;
                     case R.id.resizePic:
+
                         Toast.makeText(ViewEdit.this, "Resize", Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.firstResizePic:
+                        handleResizeImage(16f,9f);
+                        break;
+
+                    case R.id.secondResizePic:
+                        handleResizeImage(3f,4f);
+                        break;
+
+
                     default:
                         break;
                 }
@@ -194,8 +221,20 @@ public class ViewEdit extends AppCompatActivity {
     private void handleFlipImage(){
 
     }
-    private void handleResizeImage(){
+    private void handleResizeImage(float firstRatio, float secondRatio){
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
 
+        int originalWidth = originalBitmap.getWidth();
+        int originalHeight = originalBitmap.getHeight();
+
+        int targetWidth, targetHeight;
+
+        // For 9:16 aspect ratio
+        targetWidth = originalWidth;
+        targetHeight = (int) (targetWidth * firstRatio / secondRatio);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, targetWidth, targetHeight, false);
+        imgViewEdit.setImageBitmap(resizedBitmap);
     }
 
     private void handleAddPaintImage(){
@@ -211,6 +250,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private void initViews() {
         imgViewEdit = findViewById(R.id.imgViewEdit);
+        doneImage= findViewById(R.id.doneImage);
 
 
         emoteOption= findViewById(R.id.emoteOption);

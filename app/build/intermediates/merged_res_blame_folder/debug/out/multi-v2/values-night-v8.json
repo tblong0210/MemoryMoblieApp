@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-29:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-night-v8/values-night-v8.xml",

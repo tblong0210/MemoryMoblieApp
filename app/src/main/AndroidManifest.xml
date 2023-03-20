@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,22 +16,20 @@
         <activity
             android:name=".view.ViewEdit"
             android:exported="false"
-            android:label="@string/activity_edit_view"/>
+            android:label="@string/activity_edit_view" />
         <activity
             android:name=".view.ViewImage"
             android:exported="false"
-            android:label="@string/activity_image_view"/>
+            android:label="@string/activity_image_view" />
         <activity
             android:name=".view.ViewDetails"
             android:exported="false" />
         <activity
             android:name=".view.ViewSearch"
             android:exported="false" />
-
         <activity
             android:name=".main.MainActivity"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

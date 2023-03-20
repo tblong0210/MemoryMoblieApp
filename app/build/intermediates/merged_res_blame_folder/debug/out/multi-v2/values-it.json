@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-it/values-it.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-29:/values-it/values-it.xml",
             "map": [
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/res/values-it/values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,120,179",
+                        "endColumns": "64,58,50",
+                        "endOffsets": "115,174,225"
+                    },
+                    "to": {
+                        "startLines": "97,98,99",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "8233,8298,8357",
+                        "endColumns": "64,58,50",
+                        "endOffsets": "8293,8352,8403"
+                    }
+                },
                 {
                     "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-it/values-it.xml",
                     "from": {

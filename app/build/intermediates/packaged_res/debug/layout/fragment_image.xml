@@ -3,13 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ImageFragment"
+    tools:context=".main.MainActivity"
     android:background="@color/black">
-
+    <!--    tools:context=".fragment.ImageFragment"-->
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Imageeeeee" />
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image1" />
+
+
+<!--    <ToggleButton-->
+<!--        android:id="@+id/toggleButton"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--&lt;!&ndash;        android:background="@drawable/toggle_selector_image"&ndash;&gt;-->
+<!--        android:text="ToggleButton"-->
+<!--        android:textOff=""-->
+<!--        android:textOn=""-->
+<!--        android:onClick="onClickToggleSelectImage"/>-->
+
 
 </FrameLayout>
