@@ -92,35 +92,31 @@ package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
-import com.example.memorymoblieapp.fragment.TitleContentContainerFragment;
-import com.example.memorymoblieapp.view.ViewEdit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
+    public static boolean detailed; // view option of image fragment
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        detailed = false;
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -133,17 +129,20 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.album:
-                        Toast.makeText(getBaseContext(), "Album", Toast.LENGTH_LONG).show();
+                        AlbumFragment2 albumFragment = new AlbumFragment2();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, albumFragment).commit();
                         return true;
 
                     case R.id.love:
-                        Toast.makeText(getBaseContext(), "Love", Toast.LENGTH_LONG).show();
+                        ImageFragment2 imageFragment = new ImageFragment2("Yêu thích");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
                         return true;
 
                     case R.id.more:
                         Toast.makeText(getBaseContext(), "More", Toast.LENGTH_LONG).show();
                         return true;
                 }
+
                 return false;
             }
         });

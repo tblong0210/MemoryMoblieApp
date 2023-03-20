@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,12 +18,12 @@ import com.example.memorymoblieapp.obj.Image;
 import java.util.ArrayList;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-    ArrayList<Image> images;
+    static ArrayList<Image> images;
     Context context;
     static boolean detailed;
 
     public ImageAdapter(ArrayList<Image> images, Context context, boolean detailed) {
-        this.images = images;
+        ImageAdapter.images = images;
         this.context = context;
         ImageAdapter.detailed = detailed;
     }
@@ -77,6 +78,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 location = (TextView) itemView.findViewById(R.id.txtLocation);
             }
             img = (ImageView) itemView.findViewById(R.id.ivImage);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), images.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }

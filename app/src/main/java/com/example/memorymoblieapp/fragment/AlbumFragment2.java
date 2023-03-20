@@ -1,5 +1,6 @@
 package com.example.memorymoblieapp.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.AlbumAdapter;
 import com.example.memorymoblieapp.obj.Album;
+import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
 
 public class AlbumFragment2 extends Fragment {
-    ArrayList<Album> albumList;
-    AlbumAdapter adapter;
+    public static ArrayList<Album> albumList;
+    @SuppressLint("StaticFieldLeak")
+    static AlbumAdapter adapter;
     private Context context;
 
     @Override
@@ -32,6 +35,7 @@ public class AlbumFragment2 extends Fragment {
         recycler.setLayoutManager(gridLayoutManager);
 
         albumList = new ArrayList<Album>();
+        albumList.add(new Album("", new ArrayList<Image>(), R.mipmap.ic_add_album));
         addAlbumList();
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);
@@ -39,16 +43,15 @@ public class AlbumFragment2 extends Fragment {
         return albumsFragment;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    static public void updateItem(int position){
+        adapter.notifyItemChanged(position);
+    }
+
     private void addAlbumList() {
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
-        albumList.add(new Album("Test", 3, R.drawable.image1));
+        ArrayList<Image> imgList = new ArrayList<Image>();
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        albumList.add(new Album("Album1", new ArrayList<Image>(), R.drawable.image1));
+        albumList.add(new Album("Album2", imgList, R.drawable.image1));
     }
 }
