@@ -103,6 +103,7 @@ id rotatePic
 id saveViewEdit
 id searchView
 id secondResizePic
+id seekBar
 id setLockscreen
 id setWallpaper
 id share

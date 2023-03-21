@@ -3399,6 +3399,7 @@ int id search_view_toolbar 0x7f0801d6
 int id search_view_toolbar_container 0x7f0801d7
 int id search_voice_btn 0x7f0801d8
 int id secondResizePic 0x7f0801d9
+int id seekBar 0x7f08027e
 int id select_dialog_listview 0x7f0801da
 int id selected 0x7f0801db
 int id selection_type 0x7f0801dc
