@@ -9,7 +9,7 @@
         android:icon="@mipmap/ic_brightness_level" />
 
     <item
-        android:id="@+id/flipPic"
+        android:id="@+id/contrastPic"
         android:title="Contrast"
         android:layout_width="30dp"
         android:layout_height="30dp"

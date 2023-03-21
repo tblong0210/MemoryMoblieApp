@@ -57,7 +57,7 @@ public class ViewEdit extends AppCompatActivity {
     private Bitmap originImage;
 
 
-    BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option;
+    BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
     Button doneImage;
 
@@ -215,6 +215,26 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
 
+        nav_brightness_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.brightnessLevelPic:
+                        Toast.makeText(ViewEdit.this, "brightness", Toast.LENGTH_SHORT).show();
+                        handleAddPaintImage();
+                        break;
+
+                    case R.id.contrastPic:
+                        Toast.makeText(ViewEdit.this, "contrast", Toast.LENGTH_SHORT).show();
+
+                        break;
+
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
 
 
 //        imgViewEdit.setImageResource(R.drawable.image1);
@@ -296,6 +316,7 @@ public class ViewEdit extends AppCompatActivity {
         nav_edit_view = findViewById(R.id.navigation_edit_view);
         nav_crop_option = findViewById(R.id.nav_crop_option);
         nav_emote_option = findViewById(R.id.nav_emote_option);
+        nav_brightness_option = findViewById(R.id.nav_brightness_option);
 
 
 
