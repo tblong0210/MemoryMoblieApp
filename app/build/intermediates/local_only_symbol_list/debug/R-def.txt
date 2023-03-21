@@ -51,7 +51,6 @@ id cropOption
 id cropPic
 id date
 id delete
-id doneImage
 id duplicate
 id edit
 id emoteOption
@@ -112,7 +111,6 @@ id setLockscreen
 id setWallpaper
 id share
 id stickerPic
-id tempLayout
 id textPic
 id textView
 id trash

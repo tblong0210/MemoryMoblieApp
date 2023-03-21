@@ -7,20 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewEdit">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:id="@+id/tempLayout"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            android:id="@+id/doneImage"/>
-    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tempLayout"
         android:layout_above="@id/parentSelection"
         >
 
@@ -49,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_crop_option"
@@ -86,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginBottom="20dp"
             >
 
@@ -113,7 +103,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:max="100"
-                android:progress="50"
+                android:progress="100"
+                android:visibility="visible"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
                 android:layout_below="@+id/nav_brightness_option"
@@ -126,7 +117,7 @@
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
                 android:max="100"
-                android:progress="50"
+                android:progress="0"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
                 android:layout_below="@+id/nav_brightness_option"

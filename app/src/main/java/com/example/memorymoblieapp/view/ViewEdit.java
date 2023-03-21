@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -61,7 +63,6 @@ public class ViewEdit extends AppCompatActivity {
 
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
-    Button doneImage;
 
 
     @Override
@@ -104,6 +105,17 @@ public class ViewEdit extends AppCompatActivity {
 
     private void refreshPicture() {
         imgViewEdit.setImageBitmap(originImage);
+        seekBarBrightnessLevel.setProgress(100);
+        seekBarContrast.setProgress(0);
+        imgViewEdit.setAlpha(1.0f);
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.set(new float[] {
+                1, 0, 0, 0, 0,
+                0, 1, 0, 0, 0,
+                0, 0, 1, 0, 0,
+                0, 0, 0, 1, 0
+        });
+        imgViewEdit.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
     }
     private void savePicture() {
 //        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
@@ -328,6 +340,31 @@ public class ViewEdit extends AppCompatActivity {
 
     }
     private void handleContrastLevel(){
+        seekBarContrast.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // Update the contrast level of the image
+                float contrast = (float) ((progress + 10) / 10.0);
+                ColorMatrix colorMatrix = new ColorMatrix();
+                colorMatrix.set(new float[] {
+                        contrast, 0, 0, 0, 0,
+                        0, contrast, 0, 0, 0,
+                        0, 0, contrast, 0, 0,
+                        0, 0, 0, 1, 0
+                });
+                imgViewEdit.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // Not needed for this example
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // Not needed for this example
+            }
+        });
 
     }
     private void handleAddStickerImage(){
@@ -341,7 +378,6 @@ public class ViewEdit extends AppCompatActivity {
         imgViewEdit = findViewById(R.id.imgViewEdit);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
-        doneImage= findViewById(R.id.doneImage);
 
 
         emoteOption= findViewById(R.id.emoteOption);
