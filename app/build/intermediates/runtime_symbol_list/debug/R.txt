@@ -3027,6 +3027,7 @@ int id bounceBoth 0x7f080062
 int id bounceEnd 0x7f080063
 int id bounceStart 0x7f080064
 int id brightnessItemViewEdit 0x7f080065
+int id brightnessLevelPic 0x7f08027f
 int id brightnessName 0x7f080066
 int id brightnessOption 0x7f080067
 int id brightnessPic 0x7f080068
@@ -3064,6 +3065,7 @@ int id content 0x7f080087
 int id contentPanel 0x7f080088
 int id contiguous 0x7f080089
 int id continuousVelocity 0x7f08008a
+int id contrastPic 0x7f080280
 int id contrast_scroll_wheel 0x7f08008b
 int id controls_shadow 0x7f08008c
 int id controls_wrapper 0x7f08008d
@@ -3293,6 +3295,7 @@ int id mtrl_view_tag_bottom_padding 0x7f08016d
 int id multiply 0x7f08016e
 int id name 0x7f08016f
 int id navSetting 0x7f080170
+int id nav_brightness_option 0x7f080281
 int id nav_crop_option 0x7f080171
 int id nav_emote_option 0x7f080172
 int id navigation_bar_item_active_indicator_view 0x7f080173
@@ -3399,7 +3402,8 @@ int id search_view_toolbar 0x7f0801d6
 int id search_view_toolbar_container 0x7f0801d7
 int id search_voice_btn 0x7f0801d8
 int id secondResizePic 0x7f0801d9
-int id seekBar 0x7f08027e
+int id seekBarBrightnessLevel 0x7f080282
+int id seekBarContrast 0x7f080283
 int id select_dialog_listview 0x7f0801da
 int id selected 0x7f0801db
 int id selection_type 0x7f0801dc
@@ -3776,6 +3780,7 @@ int layout ucrop_layout_scale_wheel 0x7f0b0088
 int layout ucrop_layout_sharpness_wheel 0x7f0b0089
 int layout ucrop_view 0x7f0b008a
 int layout view_details 0x7f0b008b
+int menu menu_brightness_option 0x7f0d000b
 int menu menu_crop 0x7f0d0000
 int menu menu_crop_option 0x7f0d0001
 int menu menu_emote_option 0x7f0d0002

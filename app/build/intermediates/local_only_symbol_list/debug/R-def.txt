@@ -39,12 +39,14 @@ id album
 id albumRecView
 id bottomNavigationView
 id brightnessItemViewEdit
+id brightnessLevelPic
 id brightnessName
 id brightnessOption
 id brightnessPic
 id brightnessRecView
 id btnViewEdit
 id container
+id contrastPic
 id cropOption
 id cropPic
 id date
@@ -85,6 +87,7 @@ id menu_view_edit
 id more
 id name
 id navSetting
+id nav_brightness_option
 id nav_crop_option
 id nav_emote_option
 id navigation_edit_view
@@ -103,7 +106,8 @@ id rotatePic
 id saveViewEdit
 id searchView
 id secondResizePic
-id seekBar
+id seekBarBrightnessLevel
+id seekBarContrast
 id setLockscreen
 id setWallpaper
 id share
@@ -150,6 +154,7 @@ layout layout_header
 layout layout_setting_image
 layout selection_features_bar
 layout view_details
+menu menu_brightness_option
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option

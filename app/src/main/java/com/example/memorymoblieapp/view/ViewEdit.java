@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -221,11 +223,16 @@ public class ViewEdit extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.brightnessLevelPic:
                         Toast.makeText(ViewEdit.this, "brightness", Toast.LENGTH_SHORT).show();
-                        handleAddPaintImage();
+                        seekBarContrast.setVisibility(View.GONE);
+                        seekBarBrightnessLevel.setVisibility(View.VISIBLE);
+                        handleBrightnessLevel();
                         break;
 
                     case R.id.contrastPic:
                         Toast.makeText(ViewEdit.this, "contrast", Toast.LENGTH_SHORT).show();
+                        seekBarContrast.setVisibility(View.VISIBLE);
+                        seekBarBrightnessLevel.setVisibility(View.GONE);
+                        handleContrastLevel();
 
                         break;
 
@@ -292,6 +299,37 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+
+
+    private void handleBrightnessLevel(){
+
+        seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // calculate brightness value from progress (0-100)
+                float brightness = (float) progress / 100 ;
+
+                // create a color filter with the calculated brightness
+                ColorFilter filter = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    filter = new LightingColorFilter(Color.rgb(brightness, brightness, brightness), 0);
+                }
+
+                // apply the color filter to the ImageView
+                imgViewEdit.setColorFilter(filter);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+    }
+    private void handleContrastLevel(){
+
+    }
     private void handleAddStickerImage(){
 
     }

@@ -3028,6 +3028,7 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id brightnessItemViewEdit
+id brightnessLevelPic
 id brightnessName
 id brightnessOption
 id brightnessPic
@@ -3065,6 +3066,7 @@ id content
 id contentPanel
 id contiguous
 id continuousVelocity
+id contrastPic
 id contrast_scroll_wheel
 id controls_shadow
 id controls_wrapper
@@ -3294,6 +3296,7 @@ id mtrl_view_tag_bottom_padding
 id multiply
 id name
 id navSetting
+id nav_brightness_option
 id nav_crop_option
 id nav_emote_option
 id navigation_bar_item_active_indicator_view
@@ -3400,7 +3403,8 @@ id search_view_toolbar
 id search_view_toolbar_container
 id search_voice_btn
 id secondResizePic
-id seekBar
+id seekBarBrightnessLevel
+id seekBarContrast
 id select_dialog_listview
 id selected
 id selection_type
@@ -3777,6 +3781,7 @@ layout ucrop_layout_scale_wheel
 layout ucrop_layout_sharpness_wheel
 layout ucrop_view
 layout view_details
+menu menu_brightness_option
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
