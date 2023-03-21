@@ -43,6 +43,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class ViewEdit extends AppCompatActivity {
@@ -125,6 +126,24 @@ public class ViewEdit extends AppCompatActivity {
 //        createdImage.compress(Bitmap.CompressFormat.PNG, 100, out);
 //        out.flush();
 //        out.close();
+
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        String filename = "modified_image.jpg";
+        File file = new File(getExternalFilesDir(null), filename);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            System.out.println("Image saved to " + file.getAbsolutePath());
+            Toast.makeText(ViewEdit.this, "Image saved to " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initOptionActions() {

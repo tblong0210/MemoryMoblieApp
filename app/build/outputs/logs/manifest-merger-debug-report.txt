@@ -72,6 +72,10 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:5:5-67
 	android:name
 		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:6:22-78
 application
 ADDED from /Users/trandungtien/AndroidStudioProjects/Project/MemoryMoblieApp/app/src/main/AndroidManifest.xml:7:5-39:19
 MERGED from [com.github.bumptech.glide:glide:4.11.0] /Users/trandungtien/.gradle/caches/transforms-3/f283efa8ceabc1e2d98d55cda5c65724/transformed/glide-4.11.0/AndroidManifest.xml:10:5-20
