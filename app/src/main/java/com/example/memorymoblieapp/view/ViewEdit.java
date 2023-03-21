@@ -200,13 +200,14 @@ public class ViewEdit extends AppCompatActivity {
                         handleRotateImage();
                         break;
 
-                    case R.id.flipPic:
+                    case R.id.flipHorizontalPic:
                         Toast.makeText(ViewEdit.this, "Flip", Toast.LENGTH_SHORT).show();
-                        handleFlipImage();
+                        handleFlipImageHorizontal();
                         break;
-                    case R.id.resizePic:
+                    case R.id.flipVerticalPic:
 
                         Toast.makeText(ViewEdit.this, "Resize", Toast.LENGTH_SHORT).show();
+                        handleFlipImageVertical();
                         break;
                     case R.id.firstResizePic:
                         handleResizeImage(16f,9f);
@@ -290,11 +291,25 @@ public class ViewEdit extends AppCompatActivity {
         //originalBitmap.recycle();
 
     }
-    private void handleFlipImage(){
+    private void handleFlipImageHorizontal(){
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
         Matrix matrix = new Matrix();
         matrix.setScale(-1, 1);
+        matrix.postTranslate(originalBitmap.getWidth(), 0);
+
+        Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
+        imgViewEdit.setImageBitmap(flippedBitmap);
+        //originalBitmap.recycle();
+
+    }
+
+    private void handleFlipImageVertical(){
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
+        Matrix matrix = new Matrix();
+        matrix.setScale(1, -1);
+        matrix.postTranslate(0,originalBitmap.getHeight());
         Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(flippedBitmap);
         //originalBitmap.recycle();

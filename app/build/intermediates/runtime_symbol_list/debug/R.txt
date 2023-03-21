@@ -3148,7 +3148,9 @@ int id fitToContents 0x7f0800dc
 int id fitXY 0x7f0800dd
 int id fixed 0x7f0800de
 int id flip 0x7f0800df
+int id flipHorizontalPic 0x7f08027e
 int id flipPic 0x7f0800e0
+int id flipVerticalPic 0x7f08027f
 int id floating 0x7f0800e1
 int id forever 0x7f0800e2
 int id fragment_container_view_tag 0x7f0800e3
@@ -3809,6 +3811,8 @@ int mipmap ic_emote 0x7f0e000f
 int mipmap ic_export 0x7f0e0010
 int mipmap ic_filter 0x7f0e0011
 int mipmap ic_flip 0x7f0e0012
+int mipmap ic_flip_horizontal 0x7f0e0024
+int mipmap ic_flip_vertical 0x7f0e0025
 int mipmap ic_heart 0x7f0e0013
 int mipmap ic_heart_like 0x7f0e0014
 int mipmap ic_image 0x7f0e0015

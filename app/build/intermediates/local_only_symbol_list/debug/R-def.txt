@@ -63,7 +63,9 @@ id filterOption
 id filterPic
 id filterRecView
 id firstResizePic
+id flipHorizontalPic
 id flipPic
+id flipVerticalPic
 id frame_layout_content
 id gallery_number
 id grid_image
@@ -182,6 +184,8 @@ mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
 mipmap ic_flip
+mipmap ic_flip_horizontal
+mipmap ic_flip_vertical
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image

@@ -3149,7 +3149,9 @@ id fitToContents
 id fitXY
 id fixed
 id flip
+id flipHorizontalPic
 id flipPic
+id flipVerticalPic
 id floating
 id forever
 id fragment_container_view_tag
@@ -3810,6 +3812,8 @@ mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
 mipmap ic_flip
+mipmap ic_flip_horizontal
+mipmap ic_flip_vertical
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image
