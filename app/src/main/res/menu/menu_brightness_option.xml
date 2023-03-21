@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/brightnessLevelPic"
+        android:title="Brightness Level"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@mipmap/ic_brightness_level" />
+
+    <item
+        android:id="@+id/flipPic"
+        android:title="Contrast"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@mipmap/ic_brightness_contrast" />
+
+
+</menu>

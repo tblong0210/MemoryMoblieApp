@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 
@@ -44,9 +45,11 @@ public class ViewEdit extends AppCompatActivity {
 
 
     private ImageView imgViewEdit, rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
-    private LinearLayout  filterOption, brightnessOption;
-    private RelativeLayout emoteOption, cropOption;
+    private LinearLayout  filterOption;
+    private RelativeLayout emoteOption, cropOption, brightnessOption;
     private RecyclerView filterRecView, brightnessRecView;
+
+    private SeekBar seekBarBrightnessLevel, seekBarContrast;
 
     private ArrayList<Filter> filters;
     private ArrayList<Brightness> brightnesses;
@@ -337,6 +340,9 @@ public class ViewEdit extends AppCompatActivity {
         adapterBrightness.setBrightnesses(brightnesses);
         brightnessRecView.setAdapter(adapterBrightness);
         brightnessRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        seekBarContrast = findViewById(R.id.seekBarContrast);
+        seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
 
     }
 }

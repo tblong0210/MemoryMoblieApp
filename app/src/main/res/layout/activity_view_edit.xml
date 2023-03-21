@@ -80,7 +80,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/brightnessOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,32 +89,51 @@
             android:visibility="visible"
             android:layout_marginBottom="20dp"
             >
-            <RelativeLayout
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/brightnessRecView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/brightnessRecView"
-                    android:layout_marginBottom="20dp"
-                    android:layout_centerInParent="true"/>
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_brightness_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/round_corner"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_brightness_option"/>
 
-                <SeekBar
-                    android:id="@+id/seekBarBrightness"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:max="100"
-                    android:progress="50"
-                    android:progressTint="@color/black"
-                    android:thumbTint="@color/design_default_color_primary"
-                    android:layout_below="@+id/brightnessRecView"
-                    android:layout_gravity="bottom" />
-            </RelativeLayout>
+            <SeekBar
+                android:id="@+id/seekBarBrightnessLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:max="100"
+                android:progress="50"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/design_default_color_primary"
+                android:layout_below="@+id/nav_brightness_option"
+                android:layout_gravity="bottom" />
+
+            <SeekBar
+                android:id="@+id/seekBarContrast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                android:max="100"
+                android:progress="50"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/design_default_color_primary"
+                android:layout_below="@+id/nav_brightness_option"
+                android:layout_gravity="bottom" />
 
 
-
-        </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/emoteOption"
