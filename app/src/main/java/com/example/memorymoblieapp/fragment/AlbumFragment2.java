@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,6 @@ import com.example.memorymoblieapp.obj.Album;
 import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class AlbumFragment2 extends Fragment {
     public static ArrayList<Album> albumList;
@@ -30,7 +30,7 @@ public class AlbumFragment2 extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View albumsFragment = inflater.inflate(R.layout.album_fragment, container, false);
         RecyclerView recycler = albumsFragment.findViewById(R.id.albumRecView);
 
