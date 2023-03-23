@@ -17,12 +17,17 @@ import com.example.memorymoblieapp.obj.Album;
 import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AlbumFragment2 extends Fragment {
     public static ArrayList<Album> albumList;
     @SuppressLint("StaticFieldLeak")
     static AlbumAdapter adapter;
     private Context context;
+
+    public AlbumFragment2(ArrayList<Album> albumList) {
+        AlbumFragment2.albumList = albumList;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,9 +39,9 @@ public class AlbumFragment2 extends Fragment {
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
 
-        albumList = new ArrayList<Album>();
-        albumList.add(new Album("", new ArrayList<Image>(), R.mipmap.ic_add_album));
-        addAlbumList();
+        if (albumList.isEmpty() || !albumList.get(0).getName().isBlank())
+            albumList.add(0, new Album("", new ArrayList<Image>(), R.mipmap.ic_add_album));
+
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);
 
@@ -44,14 +49,7 @@ public class AlbumFragment2 extends Fragment {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    static public void updateItem(int position){
+    static public void updateItem(int position) {
         adapter.notifyItemChanged(position);
-    }
-
-    private void addAlbumList() {
-        ArrayList<Image> imgList = new ArrayList<Image>();
-        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        albumList.add(new Album("Album1", new ArrayList<Image>(), R.drawable.image1));
-        albumList.add(new Album("Album2", imgList, R.drawable.image1));
     }
 }

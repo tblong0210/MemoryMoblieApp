@@ -99,20 +99,25 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.obj.Album;
+import com.example.memorymoblieapp.obj.Image;
 import com.example.memorymoblieapp.view.ViewEdit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
+    public ArrayList<Album> albumList;
+    ArrayList<Image> imageList;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -120,6 +125,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         detailed = false;
+        albumList = new ArrayList<Album>();
+        addAlbumList();
+        imageList = new ArrayList<Image>();
+        addImageList();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -132,12 +141,12 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.album:
-                        AlbumFragment2 albumFragment = new AlbumFragment2();
+                        AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, albumFragment).commit();
                         return true;
 
                     case R.id.love:
-                        ImageFragment2 imageFragment = new ImageFragment2("Yêu thích");
+                        ImageFragment2 imageFragment = new ImageFragment2(imageList, "Yêu thích");
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
                         return true;
 
@@ -150,17 +159,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // FragmentAlbum
-//        AlbumFragment2 albumFragment = new AlbumFragment2();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, albumFragment).commit();
-
-//        ImageFragment2 imageFragment = new ImageFragment2(true);
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolder, imageFragment).commit();
-//
-//        TitleContentContainerFragment titleContentContainerFragment = new TitleContentContainerFragment();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_title_content_container, titleContentContainerFragment).commit();
-
-
         btnViewEdit = findViewById(R.id.btnViewEdit);
 
         btnViewEdit.setOnClickListener(new View.OnClickListener() {
@@ -170,5 +168,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void addAlbumList() {
+        ArrayList<Image> imgList = new ArrayList<Image>();
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        albumList.add(new Album("Album1", new ArrayList<Image>(), R.drawable.image1));
+        albumList.add(new Album("Album2", imgList, R.drawable.image1));
+    }
+
+    private void addImageList() {
+        imageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image7.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image8.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image9.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image10.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image11.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image12.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imageList.add(new Image("image13.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
     }
 }
