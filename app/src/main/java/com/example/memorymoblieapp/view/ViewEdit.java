@@ -170,6 +170,7 @@ public class ViewEdit extends AppCompatActivity {
                         break;
                     case R.id.brightnessPic:
                         brightnessOption.setVisibility(View.VISIBLE);
+                        nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
 
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);

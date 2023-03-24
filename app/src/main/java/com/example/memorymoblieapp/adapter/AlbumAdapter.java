@@ -14,10 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
+import com.example.memorymoblieapp.fragment.ImageFragment2;
 import com.example.memorymoblieapp.obj.Album;
 import com.example.memorymoblieapp.obj.Image;
 
@@ -25,7 +28,8 @@ import java.util.ArrayList;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
     static ArrayList<Album> albums;
-    Context context;
+    @SuppressLint("StaticFieldLeak")
+    static Context context;
     TextView txtImgQuantity;
     @SuppressLint("StaticFieldLeak")
     static ImageView ivMore;
@@ -34,7 +38,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     public AlbumAdapter(ArrayList<Album> albums, Context context) {
         AlbumAdapter.albums = albums;
-        this.context = context;
+        AlbumAdapter.context = context;
     }
 
     @NonNull
@@ -118,7 +122,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                         builder.show();
                     } else {
-                        Toast.makeText(view.getContext(), albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                        ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getImgList(), albums.get(getAdapterPosition()).getName());
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                        fragmentTransaction.addToBackStack("album");
                     }
                 }
             });

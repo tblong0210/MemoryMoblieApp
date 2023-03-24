@@ -92,6 +92,8 @@ package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -111,6 +113,7 @@ import com.example.memorymoblieapp.view.ViewEdit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean detailed; // view option of image fragment
     public ArrayList<Album> albumList;
     ArrayList<Image> imageList;
+    BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -130,28 +134,35 @@ public class MainActivity extends AppCompatActivity {
         imageList = new ArrayList<Image>();
         addImageList();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.image:
                         Toast.makeText(getBaseContext(), "Image", Toast.LENGTH_LONG).show();
+                        // fragmentTransaction.replace(...).commit();
+                        fragmentTransaction.addToBackStack("image");
                         return true;
 
                     case R.id.album:
                         AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, albumFragment).commit();
+                        fragmentTransaction.replace(R.id.frame_layout_content, albumFragment).commit();
+                        fragmentTransaction.addToBackStack("album");
                         return true;
 
                     case R.id.love:
                         ImageFragment2 imageFragment = new ImageFragment2(imageList, "Yêu thích");
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
+                        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                        fragmentTransaction.addToBackStack("love");
                         return true;
 
                     case R.id.more:
                         Toast.makeText(getBaseContext(), "More", Toast.LENGTH_LONG).show();
+                        // fragmentTransaction.replace(...).commit();
+                        fragmentTransaction.addToBackStack("more");
                         return true;
                 }
 
@@ -170,8 +181,44 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+
+        if (backStackEntryCount >= 2) {
+            FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
+            String fragmentName = backStackEntry.getName();
+            if (fragmentName != null) {
+                switch (fragmentName) {
+                    case "image":
+                        bottomNavigationView.getMenu().findItem(R.id.image).setChecked(true);
+                        break;
+                    case "album":
+                        bottomNavigationView.getMenu().findItem(R.id.album).setChecked(true);
+                        break;
+                    case "love":
+                        bottomNavigationView.getMenu().findItem(R.id.love).setChecked(true);
+                        break;
+                    case "more":
+                        bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
+                        break;
+                }
+            }
+        }
+
+        if (fragmentManager.getBackStackEntryCount() > 0)
+            fragmentManager.popBackStack();
+        else
+            super.onBackPressed();
+    }
+
     private void addAlbumList() {
         ArrayList<Image> imgList = new ArrayList<Image>();
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
         imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
         albumList.add(new Album("Album1", new ArrayList<Image>(), R.drawable.image1));
         albumList.add(new Album("Album2", imgList, R.drawable.image1));
