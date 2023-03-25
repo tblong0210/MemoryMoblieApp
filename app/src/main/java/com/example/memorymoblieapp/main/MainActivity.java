@@ -98,9 +98,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.memorymoblieapp.R;
@@ -113,14 +115,14 @@ import com.example.memorymoblieapp.view.ViewEdit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
     public ArrayList<Album> albumList;
-    ArrayList<Image> imageList;
+    ArrayList<Image> lovedImageList;
+    ArrayList<Image> deletedImageList;
     BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")
@@ -131,8 +133,10 @@ public class MainActivity extends AppCompatActivity {
         detailed = false;
         albumList = new ArrayList<Album>();
         addAlbumList();
-        imageList = new ArrayList<Image>();
-        addImageList();
+        lovedImageList = new ArrayList<Image>();
+        addLovedImageList();
+        deletedImageList = new ArrayList<Image>();
+        addDeletedImageList();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -142,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.image:
-                        Toast.makeText(getBaseContext(), "Image", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Image", Toast.LENGTH_LONG).show();
                         // fragmentTransaction.replace(...).commit();
                         fragmentTransaction.addToBackStack("image");
                         return true;
@@ -154,15 +158,29 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.love:
-                        ImageFragment2 imageFragment = new ImageFragment2(imageList, "Yêu thích");
-                        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                        ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích");
+                        fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                         fragmentTransaction.addToBackStack("love");
                         return true;
 
                     case R.id.more:
-                        Toast.makeText(getBaseContext(), "More", Toast.LENGTH_LONG).show();
-                        // fragmentTransaction.replace(...).commit();
+                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
+                        popupMenu.inflate(R.menu.more_menu);
+                        popupMenu.setOnMenuItemClickListener(menuItem -> {
+                            int itemId = menuItem.getItemId();
+                            if (R.id.recycleBin == itemId) {
+                                ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác");
+                                fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
+                            } else if (R.id.URL == itemId) {
+                                Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
+                            } else if (R.id.settings == itemId) {
+                                Toast.makeText(MainActivity.this, "Cài đặt", Toast.LENGTH_LONG).show();
+                            }
+                            return true;
+                        });
+                        popupMenu.show();
                         fragmentTransaction.addToBackStack("more");
+
                         return true;
                 }
 
@@ -224,19 +242,27 @@ public class MainActivity extends AppCompatActivity {
         albumList.add(new Album("Album2", imgList, R.drawable.image1));
     }
 
-    private void addImageList() {
-        imageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image7.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image8.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image9.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image10.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image11.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image12.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imageList.add(new Image("image13.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+    private void addLovedImageList() {
+        lovedImageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image7.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image8.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image9.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image10.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image11.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image12.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add(new Image("image13.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+    }
+
+    private void addDeletedImageList() {
+        deletedImageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        deletedImageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        deletedImageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        deletedImageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        deletedImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
     }
 }
