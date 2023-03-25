@@ -9,18 +9,35 @@
         android:icon="@mipmap/ic_rotate_left" />
 
     <item
-        android:id="@+id/flipPic"
-        android:title="flip"
+        android:id="@+id/flipHorizontalPic"
+        android:title="Flip Horizontal"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@mipmap/ic_flip" />
+        android:icon="@mipmap/ic_flip_horizontal" />
 
     <item
-        android:id="@+id/resizePic"
-        android:title="resize"
+        android:id="@+id/flipVerticalPic"
+        android:title="Flip Vertical"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@mipmap/ic_resize" />
+        android:icon="@mipmap/ic_flip_vertical" />
+
+    <item
+        android:id="@+id/firstResizePic"
+        android:title="16:9"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@mipmap/ic_16_9" />
+
+    <item
+        android:id="@+id/secondResizePic"
+        android:title="4:3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@mipmap/ic_3_4"/>
+
 </menu>

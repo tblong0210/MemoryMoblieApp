@@ -43,7 +43,6 @@
         <activity
             android:name=".view.ViewSearch"
             android:exported="false" />
-
         <activity
             android:name=".main.MainActivity"
             android:exported="true" >

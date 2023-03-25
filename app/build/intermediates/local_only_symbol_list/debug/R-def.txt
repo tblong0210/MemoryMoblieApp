@@ -40,11 +40,13 @@ id album
 id albumRecView
 id bottomNavigationView
 id brightnessItemViewEdit
+id brightnessLevelPic
 id brightnessName
 id brightnessOption
 id brightnessPic
 id brightnessRecView
 id container
+id contrastPic
 id cropOption
 id cropPic
 id date
@@ -60,8 +62,15 @@ id filterName
 id filterOption
 id filterPic
 id filterRecView
+id firstResizePic
+id flipHorizontalPic
 id flipPic
+<<<<<<< HEAD
 id frame_layout_navigation
+=======
+id flipVerticalPic
+id frame_layout_content
+>>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id gallery_number
 id grid_image
 id iconCalender
@@ -84,6 +93,7 @@ id menu_view_edit
 id more
 id name
 id navSetting
+id nav_brightness_option
 id nav_crop_option
 id nav_emote_option
 id navigation_edit_view
@@ -96,10 +106,17 @@ id parent_list_brightness
 id parent_list_filter
 id recyclerView
 id recyclerview_gallery_images
+<<<<<<< HEAD
+=======
+id resetViewEdit
+>>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id resizePic
 id rotatePic
 id saveViewEdit
 id searchView
+id secondResizePic
+id seekBarBrightnessLevel
+id seekBarContrast
 id setLockscreen
 id setWallpaper
 id share
@@ -120,8 +137,8 @@ id txtLocationImage
 id txtNameImage
 id txtPathImage
 id txtSize
+id txtTitle
 id typeFilter
-id undoViewEdit
 id viewDetails
 id viewPaperMain
 layout activity_main
@@ -146,8 +163,8 @@ layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
 layout selection_features_bar
-layout title_content_container
 layout view_details
+menu menu_brightness_option
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
@@ -158,7 +175,11 @@ menu navigation_menu
 menu navigation_setting_image
 menu search_type
 menu selection_features_bar
+mipmap ic_16_9
+mipmap ic_3_4
 mipmap ic_add
+mipmap ic_add_album
+mipmap ic_album
 mipmap ic_back
 mipmap ic_back_silver
 mipmap ic_brightness
@@ -173,6 +194,8 @@ mipmap ic_emote
 mipmap ic_export
 mipmap ic_filter
 mipmap ic_flip
+mipmap ic_flip_horizontal
+mipmap ic_flip_vertical
 mipmap ic_heart
 mipmap ic_heart_like
 mipmap ic_image

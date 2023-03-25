@@ -2,20 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/undoViewEdit"
+        android:id="@+id/resetViewEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@drawable/ic_undo"
         app:showAsAction="always"
-        android:title="Undo" />
+        android:title="Reset" />
 
     <item
         android:id="@+id/saveViewEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@drawable/ic_save"
         app:showAsAction="always"
         android:title="Save" />
 

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-bn/values-bn.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-29:/values-bn/values-bn.xml",
             "map": [
                 {
                     "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-3\\dfe455107600617cfcbe36a5c8cee19f\\transformed\\material-1.8.0\\res\\values-bn\\values-bn.xml",

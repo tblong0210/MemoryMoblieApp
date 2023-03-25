@@ -1,10 +1,48 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-28:/values-ja/values-ja.xml",
+            "outputFile": "com.example.memorymoblieapp-mergeDebugResources-29:/values-ja/values-ja.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-3\\dfe455107600617cfcbe36a5c8cee19f\\transformed\\material-1.8.0\\res\\values-ja\\values-ja.xml",
+=======
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/res/values-ja/values-ja.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "96",
+                        "startColumns": "4",
+                        "startOffsets": "7350",
+                        "endColumns": "100",
+                        "endOffsets": "7446"
+                    }
+                },
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/res/values-ja/values-ja.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,97,153,208,257,301",
+                        "endColumns": "41,55,54,48,43,42",
+                        "endOffsets": "92,148,203,252,296,339"
+                    },
+                    "to": {
+                        "startLines": "97,98,99,100,101,102",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "7451,7493,7549,7604,7653,7697",
+                        "endColumns": "41,55,54,48,43,42",
+                        "endOffsets": "7488,7544,7599,7648,7692,7735"
+                    }
+                },
+                {
+                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/dfe455107600617cfcbe36a5c8cee19f/transformed/material-1.8.0/res/values-ja/values-ja.xml",
+>>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

@@ -12,15 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/parentSelection"
-        android:layout_margin="30dp">
+        >
 
         <ImageView
             android:id="@+id/imgViewEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/image1" />
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/image1"/>
+
     </RelativeLayout>
 
 
@@ -69,7 +70,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/brightnessOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,12 +80,51 @@
             android:layout_marginBottom="20dp"
             >
 
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/brightnessRecView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/brightnessRecView"/>
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_brightness_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/round_corner"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/menu_brightness_option"/>
 
-        </LinearLayout>
+            <SeekBar
+                android:id="@+id/seekBarBrightnessLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:max="100"
+                android:progress="100"
+                android:visibility="visible"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/design_default_color_primary"
+                android:layout_below="@+id/nav_brightness_option"
+                android:layout_gravity="bottom" />
+
+            <SeekBar
+                android:id="@+id/seekBarContrast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/design_default_color_primary"
+                android:layout_below="@+id/nav_brightness_option"
+                android:layout_gravity="bottom" />
+
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/emoteOption"
