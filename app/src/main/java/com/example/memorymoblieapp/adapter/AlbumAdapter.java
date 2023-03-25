@@ -79,17 +79,19 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         TextView name;
         TextView quantity;
         ImageView img;
+        ImageView more;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txtAlbumName);
             quantity = (TextView) itemView.findViewById(R.id.txtImgQuantity);
             img = (ImageView) itemView.findViewById(R.id.ivAlbum);
+            more = (ImageView) itemView.findViewById(R.id.ivMore);
 
             ivMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    PopupMenu popupMenu = new PopupMenu(itemView.getContext(), itemView, Gravity.CENTER);
+                    PopupMenu popupMenu = new PopupMenu(itemView.getContext(), more, Gravity.CENTER);
                     popupMenu.inflate(R.menu.album_menu);
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();

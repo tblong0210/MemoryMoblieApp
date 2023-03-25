@@ -49,7 +49,7 @@ import java.util.ArrayList;
 public class ViewEdit extends AppCompatActivity {
 
 
-    private ImageView imgViewEdit, rotatePic, flipPic, resizePic, paintPic, stickerPic, textPic;
+    private ImageView imgViewEdit;
     private LinearLayout  filterOption;
     private RelativeLayout emoteOption, cropOption, brightnessOption;
     private RecyclerView filterRecView, brightnessRecView;
@@ -95,9 +95,11 @@ public class ViewEdit extends AppCompatActivity {
             case R.id.resetViewEdit:
                 Toast.makeText(this, "Undo", Toast.LENGTH_SHORT).show();
                 refreshPicture();
+                break;
             case R.id.saveViewEdit:
                 Toast.makeText(this, "Save Picture", Toast.LENGTH_SHORT).show();
                 savePicture();
+                break;
             default:
                 break;
         }
@@ -157,7 +159,6 @@ public class ViewEdit extends AppCompatActivity {
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
-                        refreshPicture();
                         break;
 
                     case R.id.filterPic:
@@ -171,12 +172,10 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.brightnessPic:
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
-
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
 
-                        refreshPicture();
                         break;
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
@@ -185,7 +184,6 @@ public class ViewEdit extends AppCompatActivity {
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
 
-                        refreshPicture();
                         break;
                     default:
                         break;
