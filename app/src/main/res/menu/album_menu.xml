@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/changeName"
+        android:title="Đổi tên"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/block"
+        android:title="Khóa album"
+        tools:ignore="HardcodedText" />
+    <item android:id="@+id/delete"
+        android:title="Xóa album"
+        tools:ignore="HardcodedText" />
+</menu>

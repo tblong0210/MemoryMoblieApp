@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +60,13 @@ public class ImageFragment2 extends Fragment {
             public void onClick(View view) {
                 MainActivity.detailed = !MainActivity.detailed;
                 ImageFragment2 imageFragment = new ImageFragment2(imageList, title);
-                getParentFragmentManager().beginTransaction().replace(R.id.frame_layout_content, imageFragment).commit();
+
+                @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                fragmentTransaction.addToBackStack("image");
+
+                assert getFragmentManager() != null;
+                getFragmentManager().popBackStack();
             }
         });
 

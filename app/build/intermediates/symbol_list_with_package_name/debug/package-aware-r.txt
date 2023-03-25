@@ -1324,6 +1324,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color bg_nav
 color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
@@ -3196,7 +3197,6 @@ id image_view_state_saturation
 id image_view_state_scale
 id image_view_state_sharpness
 id imgBtnChangeView
-id imgView
 id imgViewEdit
 id immediateStop
 id included
@@ -3213,6 +3213,7 @@ id ivMore
 id jumpToEnd
 id jumpToStart
 id labeled
+id largePictureFull
 id layout
 id layout_aspect_ratio
 id layout_brightness_bar
@@ -3230,6 +3231,7 @@ id linear
 id listMode
 id list_item
 id location
+id locationParent
 id love
 id m3_side_sheet
 id marquee
@@ -3542,6 +3544,7 @@ id up
 id useLogo
 id vertical_only
 id viewDetails
+id viewPaperMain
 id view_offset_helper
 id view_overlay
 id view_transition
@@ -3676,6 +3679,8 @@ layout activity_view_edit
 layout album_fragment
 layout album_item
 layout brightness_list_item
+layout control_image_container
+layout control_image_full
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3706,7 +3711,6 @@ layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
-layout layout_setting_image
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -5288,3 +5292,4 @@ styleable ucrop_AspectRatioTextView ucrop_artv_ratio_title ucrop_artv_ratio_x uc
 styleable ucrop_UCropView ucrop_aspect_ratio_x ucrop_aspect_ratio_y ucrop_circle_dimmed_layer ucrop_dimmed_color ucrop_frame_color ucrop_frame_stroke_size ucrop_grid_color ucrop_grid_column_count ucrop_grid_row_count ucrop_grid_stroke_size ucrop_show_frame ucrop_show_grid ucrop_show_oval_crop_frame
 xml backup_rules
 xml data_extraction_rules
+xml provider_paths

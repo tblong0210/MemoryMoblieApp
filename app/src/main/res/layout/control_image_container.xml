@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.ViewImage">
 
-    <RelativeLayout
+    <com.example.memorymoblieapp.ControlImage.ZoomableViewPager
+        android:id="@+id/viewPaperMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="80dp">
-
-        <ImageView
-            android:id="@+id/imgView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@mipmap/ic_image" />
-    </RelativeLayout>
+        android:contentDescription="View main image" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navSetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-70dp"
-        android:paddingBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_nav"
+        android:backgroundTint="@color/light_blue"
+        android:paddingBottom="10dp"
+        app:itemIconTint="@color/black"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation_setting_image" />
-
-</LinearLayout>
+</RelativeLayout>

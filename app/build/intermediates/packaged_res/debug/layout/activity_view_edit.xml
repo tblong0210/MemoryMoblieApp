@@ -143,10 +143,6 @@
         </RelativeLayout>
     </RelativeLayout>
 
-
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_edit_view"
         android:layout_width="match_parent"

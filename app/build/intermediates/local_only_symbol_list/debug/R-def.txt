@@ -2,6 +2,7 @@ R_DEF: Internal format may change without notice
 local
 anim slide_in
 anim slide_out
+color bg_nav
 color black
 color custom_color_nav
 color light_blue
@@ -76,13 +77,14 @@ id image
 id imageRecView
 id image_view
 id imgBtnChangeView
-id imgView
 id imgViewEdit
 id ivAlbum
 id ivAlbumContainer
 id ivImage
 id ivMore
+id largePictureFull
 id location
+id locationParent
 id love
 id menu_view_edit
 id more
@@ -132,11 +134,14 @@ id txtSize
 id txtTitle
 id typeFilter
 id viewDetails
+id viewPaperMain
 layout activity_main
 layout activity_view_edit
 layout album_fragment
 layout album_item
 layout brightness_list_item
+layout control_image_container
+layout control_image_full
 layout filter_list_item
 layout filter_picture
 layout fragment_album
@@ -151,7 +156,6 @@ layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
-layout layout_setting_image
 layout selection_features_bar
 layout view_details
 menu menu_brightness_option
@@ -239,3 +243,4 @@ style Theme.MemoryMobileApp
 style Theme.MemoryMoblieApp
 xml backup_rules
 xml data_extraction_rules
+xml provider_paths

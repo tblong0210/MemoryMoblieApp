@@ -172,6 +172,10 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.brightnessPic:
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
+<<<<<<< HEAD
+=======
+
+>>>>>>> aaf769ecbcae42b095cab9a4df7626dc2de5c501
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -448,7 +452,7 @@ public class ViewEdit extends AppCompatActivity {
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
-        brightnessRecView= findViewById(R.id.brightnessRecView);
+       // brightnessRecView= findViewById(R.id.brightnessRecView);
         //set adapter to brightnessRecView
         brightnesses = new ArrayList<>();
         brightnesses.add(new Brightness("1",R.mipmap.ic_brightness_level));
