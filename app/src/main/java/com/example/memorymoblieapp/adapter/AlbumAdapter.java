@@ -91,10 +91,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 public void onClick(View view) {
                     PopupMenu popupMenu = new PopupMenu(itemView.getContext(), itemView, Gravity.CENTER);
                     popupMenu.inflate(R.menu.album_menu);
-                    popupMenu.setOnMenuItemClickListener(item -> {
-                        int itemId = item.getItemId();
+                    popupMenu.setOnMenuItemClickListener(menuItem -> {
+                        int itemId = menuItem.getItemId();
                         if (R.id.changeName == itemId) {
-                            Toast.makeText(view.getContext(), "Change name " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                            changeAlbumName(view, getAdapterPosition());
                         } else if (R.id.block == itemId) {
                             Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
                         } else if (R.id.delete == itemId) {
@@ -146,5 +146,34 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 }
             });
         }
+    }
+
+    private static void changeAlbumName(@NonNull View itemView, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+        builder.setTitle("Nhập tên mới");
+
+        final EditText input = new EditText(itemView.getContext());
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newName = input.getText().toString();
+                if (newName.isBlank())
+                    newName = "Không tên";
+                AlbumFragment2.albumList.get(position).setName(newName);
+                AlbumFragment2.updateItem(position);
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 }
