@@ -105,10 +105,11 @@ public class ViewImage extends AppCompatActivity {
                     break;
                 case R.id.edit:
                     Toast.makeText(ViewImage.this, "edit", Toast.LENGTH_SHORT).show();
+
                     break;
                 case R.id.share:
                     Toast.makeText(ViewImage.this, "share", Toast.LENGTH_SHORT).show();
-                    // shareImage(pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
+                    shareImage(pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
                     break;
                 case R.id.trash:
                     Toast.makeText(ViewImage.this, "trah", Toast.LENGTH_SHORT).show();

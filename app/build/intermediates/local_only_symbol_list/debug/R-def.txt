@@ -35,9 +35,11 @@ drawable more
 drawable round_corner
 drawable search_view_bg
 drawable star
+id URL
 id add
 id album
 id albumRecView
+id block
 id bottomNavigationView
 id brightnessItemViewEdit
 id brightnessLevelPic
@@ -46,6 +48,7 @@ id brightnessOption
 id brightnessPic
 id brightnessRecView
 id btnViewEdit
+id changeName
 id container
 id contrastPic
 id cropOption
@@ -101,6 +104,7 @@ id parentSelection
 id parentViewEdit
 id parent_list_brightness
 id parent_list_filter
+id recycleBin
 id recyclerView
 id recyclerview_gallery_images
 id resetViewEdit
@@ -113,6 +117,7 @@ id seekBarBrightnessLevel
 id seekBarContrast
 id setLockscreen
 id setWallpaper
+id settings
 id share
 id stickerPic
 id textPic
@@ -158,11 +163,13 @@ layout layout_grid_image
 layout layout_header
 layout selection_features_bar
 layout view_details
+menu album_menu
 menu menu_brightness_option
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
 menu menu_view_edit
+menu more_menu
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu

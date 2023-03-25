@@ -112,10 +112,10 @@ import com.example.memorymoblieapp.fragment.ImageFragment2;
 import com.example.memorymoblieapp.obj.Album;
 import com.example.memorymoblieapp.obj.Image;
 import com.example.memorymoblieapp.view.ViewEdit;
+import com.example.memorymoblieapp.view.ViewImage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity {
     private Button btnViewEdit;
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
+                Intent intent = new Intent(MainActivity.this, ViewImage.class);
                 startActivity(intent);
             }
         });

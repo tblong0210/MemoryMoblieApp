@@ -2941,6 +2941,7 @@ id SHOW_PROGRESS
 id SYM
 id TOP_END
 id TOP_START
+id URL
 id accelerate
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
@@ -3021,6 +3022,7 @@ id baseline
 id beginOnFirstDraw
 id beginning
 id bestChoice
+id block
 id blocking
 id bottom
 id bottomNavigationView
@@ -3049,6 +3051,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id changeName
 id checkbox
 id checked
 id chronometer
@@ -3354,6 +3357,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id recycleBin
 id recyclerView
 id recyclerview_gallery_images
 id resetViewEdit
@@ -3413,6 +3417,7 @@ id selected
 id selection_type
 id setLockscreen
 id setWallpaper
+id settings
 id share
 id sharedValueSet
 id sharedValueUnset
@@ -3785,11 +3790,13 @@ layout ucrop_layout_scale_wheel
 layout ucrop_layout_sharpness_wheel
 layout ucrop_view
 layout view_details
+menu album_menu
 menu menu_brightness_option
 menu menu_crop
 menu menu_crop_option
 menu menu_emote_option
 menu menu_view_edit
+menu more_menu
 menu more_setting_image
 menu navigation_edit_view
 menu navigation_menu
