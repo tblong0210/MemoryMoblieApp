@@ -1,9 +1,11 @@
 package com.example.memorymoblieapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ public class ViewDetails extends AppCompatActivity {
     private TextView txtImageSize;
     private TextView txtPathImage;
     private TextView txtLocationImage;
+    private LinearLayout locationParent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +40,21 @@ public class ViewDetails extends AppCompatActivity {
         txtImageSize = findViewById(R.id.txtImageSize);
         txtPathImage = findViewById(R.id.txtPathImage);
         txtLocationImage = findViewById(R.id.txtLocationImage);
+        locationParent = findViewById(R.id.locationParent);
     }
 
     private void initActions(){
+        Intent intent = getIntent();
+        txtDateCreated.setText(intent.getStringExtra("date"));
+        txtNameImage.setText(intent.getStringExtra("name"));
+        txtImageCapacity.setText(intent.getStringExtra("capacity"));
+        txtImageSize.setText(intent.getStringExtra("size"));
+        txtPathImage.setText(intent.getStringExtra("path"));
+
+        if(!intent.getStringExtra("location").isEmpty())
+            txtLocationImage.setText(intent.getStringExtra("location"));
+        else
+            locationParent.setVisibility(View.GONE);
 
     }
 

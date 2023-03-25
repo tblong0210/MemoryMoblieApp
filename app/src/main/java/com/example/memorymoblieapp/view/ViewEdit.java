@@ -247,7 +247,7 @@ public class ViewEdit extends AppCompatActivity {
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
-        brightnessRecView= findViewById(R.id.brightnessRecView);
+       // brightnessRecView= findViewById(R.id.brightnessRecView);
         //set adapter to brightnessRecView
         brightnesses = new ArrayList<>();
         brightnesses.add(new Brightness("1",R.mipmap.ic_brightness_level));

@@ -22,17 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-<<<<<<< HEAD
 
     buildFeatures{
         viewBinding true
     }
 
-=======
-    buildFeatures{
-        viewBinding true
-    }
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

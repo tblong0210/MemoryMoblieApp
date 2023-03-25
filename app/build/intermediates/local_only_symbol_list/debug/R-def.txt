@@ -21,11 +21,8 @@ drawable home
 drawable ic_add_background
 drawable ic_launcher_background
 drawable ic_launcher_foreground
-<<<<<<< HEAD
-=======
 drawable ic_save
 drawable ic_undo
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 drawable ic_view_detail
 drawable ic_view_grid
 drawable image
@@ -47,8 +44,6 @@ id brightnessName
 id brightnessOption
 id brightnessPic
 id brightnessRecView
-id btnViewEdit
-id cancelViewEditBtn
 id container
 id cropOption
 id cropPic
@@ -67,19 +62,15 @@ id filterPic
 id filterRecView
 id flipPic
 id frame_layout_navigation
+id gallery_number
 id grid_image
 id iconCalender
 id iconImage
 id iconLocation
-id icon_view
 id image
 id imageRecView
 id image_view
 id imgBtnChangeView
-<<<<<<< HEAD
-=======
-id imgView
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id imgViewEdit
 id ivAlbum
 id ivAlbumContainer
@@ -87,6 +78,7 @@ id ivImage
 id ivMore
 id largePictureFull
 id location
+id locationParent
 id love
 id menu_view_edit
 id more
@@ -103,23 +95,17 @@ id parentViewEdit
 id parent_list_brightness
 id parent_list_filter
 id recyclerView
-<<<<<<< HEAD
-id relativeLayoutButton
-id resizePic
-id rotatePic
-id saveViewEditBtn
-=======
+id recyclerview_gallery_images
 id resizePic
 id rotatePic
 id saveViewEdit
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id searchView
 id setLockscreen
 id setWallpaper
 id share
 id stickerPic
 id textPic
-id textView
+id toggleButton
 id trash
 id txtAlbumName
 id txtCreatedDate
@@ -137,16 +123,20 @@ id txtSize
 id typeFilter
 id undoViewEdit
 id viewDetails
+id viewPaperMain
 layout activity_main
 layout activity_view_edit
 layout album_fragment
 layout album_item
 layout brightness_list_item
+layout control_image_container
+layout control_image_full
 layout filter_list_item
 layout filter_picture
 layout fragment_album
 layout fragment_image
 layout fragment_love
+layout gallery_item
 layout image_detail_fragment
 layout image_detail_item
 layout image_fragment
@@ -155,8 +145,6 @@ layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
-layout layout_image_full
-layout layout_setting_image
 layout selection_features_bar
 layout title_content_container
 layout view_details
@@ -238,3 +226,4 @@ style Theme.MemoryMobileApp
 style Theme.MemoryMoblieApp
 xml backup_rules
 xml data_extraction_rules
+xml provider_paths

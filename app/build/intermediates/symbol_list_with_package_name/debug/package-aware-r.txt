@@ -2742,10 +2742,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_save
 drawable ic_search_black_24
-<<<<<<< HEAD
-=======
 drawable ic_undo
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 drawable ic_view_detail
 drawable ic_view_grid
 drawable image
@@ -2938,11 +2935,9 @@ id brightnessName
 id brightnessOption
 id brightnessPic
 id brightnessRecView
-id btnViewEdit
 id buttonPanel
 id cache_measures
 id callMeasure
-id cancelViewEditBtn
 id cancel_button
 id carryVelocity
 id center
@@ -3056,6 +3051,7 @@ id fragment_container_view_tag
 id frame_layout_navigation
 id frost
 id fullscreen_header
+id gallery_number
 id ghost_view
 id ghost_view_holder
 id glide_custom_view_target_tag
@@ -3077,7 +3073,6 @@ id iconCalender
 id iconImage
 id iconLocation
 id icon_group
-id icon_view
 id ifRoom
 id ignore
 id ignoreRequest
@@ -3085,10 +3080,6 @@ id image
 id imageRecView
 id image_view
 id imgBtnChangeView
-<<<<<<< HEAD
-=======
-id imgView
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id imgViewEdit
 id immediateStop
 id included
@@ -3116,6 +3107,7 @@ id linear
 id listMode
 id list_item
 id location
+id locationParent
 id love
 id m3_side_sheet
 id marquee
@@ -3236,10 +3228,7 @@ id radio
 id ratio
 id rectangles
 id recyclerView
-<<<<<<< HEAD
-id relativeLayoutButton
-=======
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
+id recyclerview_gallery_images
 id resizePic
 id reverseSawtooth
 id right
@@ -3249,11 +3238,7 @@ id right_side
 id rotatePic
 id rounded
 id row_index_key
-<<<<<<< HEAD
-id saveViewEditBtn
-=======
 id saveViewEdit
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3356,7 +3341,6 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3371,6 +3355,7 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
+id toggleButton
 id top
 id topPanel
 id touch_outside
@@ -3405,6 +3390,7 @@ id up
 id useLogo
 id vertical_only
 id viewDetails
+id viewPaperMain
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3533,6 +3519,8 @@ layout activity_view_edit
 layout album_fragment
 layout album_item
 layout brightness_list_item
+layout control_image_container
+layout control_image_full
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3554,6 +3542,7 @@ layout filter_picture
 layout fragment_album
 layout fragment_image
 layout fragment_love
+layout gallery_item
 layout image_detail_fragment
 layout image_detail_item
 layout image_fragment
@@ -3562,8 +3551,6 @@ layout image_select
 layout layout_bottom_navigation
 layout layout_grid_image
 layout layout_header
-layout layout_image_full
-layout layout_setting_image
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -5107,3 +5094,4 @@ styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration
 styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
+xml provider_paths

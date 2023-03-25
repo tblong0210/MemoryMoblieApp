@@ -8,7 +8,12 @@
         android:minSdkVersion="24"
         android:targetSdkVersion="33" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <permission
         android:name="com.example.memorymoblieapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -26,15 +31,26 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.MemoryMobileApp" >
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.memorymoblieapp.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity
             android:name="com.example.memorymoblieapp.view.ViewEdit"
             android:exported="false"
             android:label="@string/activity_edit_view" />
-        <activity
-            android:name="com.example.memorymoblieapp.view.ViewImage"
-            android:exported="false"
-            android:label="@string/activity_image_view" />
+        <!-- <activity -->
+        <!-- android:name=".view.ViewImage" -->
+        <!-- android:exported="false" -->
+        <!-- android:label="@string/activity_image_view"/> -->
         <activity
             android:name="com.example.memorymoblieapp.view.ViewDetails"
             android:exported="false" />
@@ -43,6 +59,9 @@
             android:exported="false" />
         <activity
             android:name="com.example.memorymoblieapp.main.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.example.memorymoblieapp.view.ViewImage"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -7,10 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewEdit">
 
-<<<<<<< HEAD
-=======
 
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_crop_option"
@@ -51,9 +48,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@color/light_blue"
-                app:itemIconTint="@color/black"
-
+                android:background="@drawable/round_corner"
                 app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/menu_crop_option" />
         </RelativeLayout>
@@ -73,38 +68,23 @@
                 android:id="@+id/filterRecView"/>
 
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/brightnessOption"
+
+        <LinearLayout
+            android:id="@+id/brightnessOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                android:layout_marginBottom="20dp"
-                >
+                android:id="@+id/brightnessRecView"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/brightnessRecView"/>
-            </LinearLayout>
-
-<!--            <com.google.android.material.slider.Slider-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/brightnessOption"-->
-<!--                android:contentDescription="test"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:layout_marginEnd="30dp"-->
-<!--                android:valueFrom="-100.0"-->
-<!--                android:valueTo="100.0"-->
-<!--                android:value="0.0"-->
-<!--                android:stepSize="1.0" />-->
-        </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/emoteOption"
@@ -123,45 +103,12 @@
         </RelativeLayout>
     </RelativeLayout>
 
-
-<<<<<<< HEAD
-    <RelativeLayout
-        android:id="@+id/relativeLayoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/cancelViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_toLeftOf="@+id/saveViewEditBtn"
-            android:text="@string/action_back_edit_view" />
-
-        <Button
-            android:id="@+id/saveViewEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:text="@string/action_save_edit_view" />
-    </RelativeLayout>
-=======
-
->>>>>>> a7fc217cc1602bc72b423e8f4b2aefa4ea868a01
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_edit_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
-        android:background="@color/light_blue"
-        app:itemIconTint="@color/black"
         app:menu="@menu/navigation_edit_view" />
 
 
