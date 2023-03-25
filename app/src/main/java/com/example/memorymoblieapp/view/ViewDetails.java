@@ -1,7 +1,10 @@
 package com.example.memorymoblieapp.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +15,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.exifinterface.media.ExifInterface;
 
 import com.example.memorymoblieapp.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ViewDetails extends AppCompatActivity {
     private TextView txtDateCreated;
@@ -45,16 +54,41 @@ public class ViewDetails extends AppCompatActivity {
 
     private void initActions(){
         Intent intent = getIntent();
-        txtDateCreated.setText(intent.getStringExtra("date"));
-        txtNameImage.setText(intent.getStringExtra("name"));
-        txtImageCapacity.setText(intent.getStringExtra("capacity"));
-        txtImageSize.setText(intent.getStringExtra("size"));
-        txtPathImage.setText(intent.getStringExtra("path"));
+        String pathImage = intent.getStringExtra("path");
+        String pathImageShow = pathImage.substring(0,pathImage.lastIndexOf('/'));
 
-        if(!intent.getStringExtra("location").isEmpty())
-            txtLocationImage.setText(intent.getStringExtra("location"));
+        File currentFile = new File(pathImage);
+        Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
+        ExifInterface exif = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.ROOT);
+
+        long fileSizeNumber = Math.round(currentFile.length() * 1.0 / 1000);
+        String fileSizeResult;
+        if (fileSizeNumber > 2000)
+            fileSizeResult = String.format(Locale.ROOT, "%.2f MB", fileSizeNumber * 1.0 / 1000);
         else
+            fileSizeResult = String.format(Locale.ROOT, "%d KB", fileSizeNumber);
+
+        try {
+            exif = new ExifInterface(currentFile.getAbsolutePath());
+        } catch (IOException e) {
+            Log.e("Error get location image: ", e.getMessage());
+        }
+
+        txtDateCreated.setText(sdf.format(currentFile.lastModified()));
+        txtNameImage.setText(currentFile.getName());
+        txtImageCapacity.setText(fileSizeResult);
+        txtImageSize.setText(bitmap.getWidth() + "x" + bitmap.getHeight());
+        txtPathImage.setText(pathImageShow);
+
+        float[] latLong = new float[2];
+        if (exif.getLatLong(latLong)) {
+            double latitude = latLong[0];
+            double longitude = latLong[1];
+            txtLocationImage.setText(latitude + "," + longitude);
+        } else {
             locationParent.setVisibility(View.GONE);
+        }
 
     }
 

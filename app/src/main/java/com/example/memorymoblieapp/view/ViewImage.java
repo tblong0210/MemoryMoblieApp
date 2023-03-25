@@ -170,7 +170,9 @@ public class ViewImage extends AppCompatActivity {
                 if (item == R.id.viewDetails) {
                     Toast.makeText(ViewImage.this, "View details", Toast.LENGTH_SHORT).show();
 
-                    showCurrentPictureInfo();
+                    Intent intent = new Intent(ViewImage.this, ViewDetails.class);
+                    intent.putExtra("path", pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
+                    startActivity(intent);
                 } else if (item == R.id.setWallpaper) {
                     Toast.makeText(ViewImage.this, "Set Wallpaper", Toast.LENGTH_SHORT).show();
 
@@ -199,46 +201,6 @@ public class ViewImage extends AppCompatActivity {
         Canvas canvas = new Canvas(bm);
         view.draw(canvas);
         return bm;
-    }
-
-    private void showCurrentPictureInfo() {
-        File currentFile = new File(pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
-        Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
-        ExifInterface exif = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ROOT);
-
-        long fileSizeNumber = Math.round(currentFile.length() * 1.0 / 1000);
-        String fileSizeResult;
-        if (fileSizeNumber > 2000)
-            fileSizeResult = String.format(Locale.ROOT, "%.2f MB", fileSizeNumber * 1.0 / 1000);
-        else
-            fileSizeResult = String.format(Locale.ROOT, "%d KB", fileSizeNumber);
-
-        try {
-            exif = new ExifInterface(currentFile.getAbsolutePath());
-        } catch (IOException e) {
-            Log.e("Error get location image: ", e.getMessage());
-        }
-
-        Intent intent = new Intent(this, ViewDetails.class);
-        intent.putExtra("date", sdf.format(currentFile.lastModified()));
-        intent.putExtra("name", currentFile.getName());
-        intent.putExtra("capacity", fileSizeResult);
-        intent.putExtra("size", bitmap.getWidth() + "x" + bitmap.getHeight());
-        intent.putExtra("path", currentFile.getAbsolutePath());
-
-        // Lấy thông tin về vị trí ảnh được chụp
-        float[] latLong = new float[2];
-        if (exif.getLatLong(latLong)) {
-            double latitude = latLong[0];
-            double longitude = latLong[1];
-            Toast.makeText(this, "location: " + latitude + ',' + longitude, Toast.LENGTH_SHORT).show();
-            intent.putExtra("location", latitude + ',' + longitude);
-        } else {
-            intent.putExtra("location", "");
-        }
-
-        startActivity(intent);
     }
 
     @Override

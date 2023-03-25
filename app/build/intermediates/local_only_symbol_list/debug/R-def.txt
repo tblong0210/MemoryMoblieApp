@@ -45,6 +45,7 @@ id brightnessName
 id brightnessOption
 id brightnessPic
 id brightnessRecView
+id btnViewEdit
 id container
 id contrastPic
 id cropOption
@@ -65,12 +66,8 @@ id filterRecView
 id firstResizePic
 id flipHorizontalPic
 id flipPic
-<<<<<<< HEAD
-id frame_layout_navigation
-=======
 id flipVerticalPic
 id frame_layout_content
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id gallery_number
 id grid_image
 id iconCalender
@@ -106,10 +103,7 @@ id parent_list_brightness
 id parent_list_filter
 id recyclerView
 id recyclerview_gallery_images
-<<<<<<< HEAD
-=======
 id resetViewEdit
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id resizePic
 id rotatePic
 id saveViewEdit
@@ -122,7 +116,7 @@ id setWallpaper
 id share
 id stickerPic
 id textPic
-id toggleButton
+id textView
 id trash
 id txtAlbumName
 id txtCreatedDate

@@ -12,13 +12,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
-=======
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 
     <permission
         android:name="com.example.memorymoblieapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -52,10 +47,10 @@
             android:name="com.example.memorymoblieapp.view.ViewEdit"
             android:exported="false"
             android:label="@string/activity_edit_view" />
-        <!-- <activity -->
-        <!-- android:name=".view.ViewImage" -->
-        <!-- android:exported="false" -->
-        <!-- android:label="@string/activity_image_view"/> -->
+        <activity
+            android:name="com.example.memorymoblieapp.view.ViewImage"
+            android:exported="false"
+            android:label="@string/activity_image_view" />
         <activity
             android:name="com.example.memorymoblieapp.view.ViewDetails"
             android:exported="false" />
@@ -64,9 +59,6 @@
             android:exported="false" />
         <activity
             android:name="com.example.memorymoblieapp.main.MainActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.example.memorymoblieapp.view.ViewImage"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

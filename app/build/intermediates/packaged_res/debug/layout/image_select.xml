@@ -14,18 +14,6 @@
         android:src="@drawable/image1" />
 
 
-<<<<<<< HEAD
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:text="ToggleButton"
-        android:textOff=""
-        android:textOn=""
-        android:onClick="onClickToggleSelectImage"/>
-=======
 <!--    <ToggleButton-->
 <!--        android:id="@+id/toggleButton"-->
 <!--        android:layout_width="40dp"-->
@@ -37,6 +25,5 @@
 <!--        android:textOff=""-->
 <!--        android:textOn=""-->
 <!--        android:onClick="onClickToggleSelectImage"/>-->
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 
 </FrameLayout>

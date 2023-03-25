@@ -3034,11 +3034,8 @@ id brightnessName
 id brightnessOption
 id brightnessPic
 id brightnessRecView
-<<<<<<< HEAD
-=======
 id brightness_scroll_wheel
 id btnViewEdit
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3359,10 +3356,7 @@ id ratio
 id rectangles
 id recyclerView
 id recyclerview_gallery_images
-<<<<<<< HEAD
-=======
 id resetViewEdit
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id resizePic
 id reverseSawtooth
 id right
@@ -3489,6 +3483,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3510,12 +3505,8 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
-<<<<<<< HEAD
-id toggleButton
-=======
 id toolbar
 id toolbar_title
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
 id top
 id topPanel
 id touch_outside

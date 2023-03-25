@@ -4,28 +4,7 @@
             "outputFile": "com.example.memorymoblieapp-mergeDebugResources-29:/values-ko/values-ko.xml",
             "map": [
                 {
-<<<<<<< HEAD
                     "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-3\\48da4d468f697fb0fb5d56e4c7c822b9\\transformed\\core-1.9.0\\res\\values-ko\\values-ko.xml",
-=======
-                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/7e6f33273b764f2560011dac0bfae58b/transformed/ucropnedit-2.2.6-2/res/values-ko/values-ko.xml",
-                    "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,112,164",
-                        "endColumns": "56,51,46",
-                        "endOffsets": "107,159,206"
-                    },
-                    "to": {
-                        "startLines": "97,98,99",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "7422,7479,7531",
-                        "endColumns": "56,51,46",
-                        "endOffsets": "7474,7526,7573"
-                    }
-                },
-                {
-                    "source": "/Users/trandungtien/.gradle/caches/transforms-3/48da4d468f697fb0fb5d56e4c7c822b9/transformed/core-1.9.0/res/values-ko/values-ko.xml",
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -58,6 +37,23 @@
                         "endLines": "5,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94",
                         "endColumns": "12,64,63,68,73,78,82,105,74,61,80,61,56,86,59,57,57,58,56,53,94,55,56,53,65,103,74,76,120,64,64,78,49,50,65,63,69,76,67,70,66,69,79,76,79,81,71,64,71,47,63,74,76,61,63,62,83,78,79,79,53,54,71",
                         "endOffsets": "294,2939,3003,3072,3146,3225,3308,3414,3489,3551,3632,3694,3751,3838,3898,3956,4014,4073,4130,4184,4279,4335,4392,4446,4512,4616,4691,4768,4889,4954,5019,5098,5148,5199,5265,5329,5399,5476,5544,5615,5682,5752,5832,5909,5989,6071,6143,6208,6280,6328,6392,6467,6544,6606,6670,6733,6817,6896,6976,7056,7110,7165,7237"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-3\\7e6f33273b764f2560011dac0bfae58b\\transformed\\ucropnedit-2.2.6-2\\res\\values-ko\\values-ko.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,112,164",
+                        "endColumns": "56,51,46",
+                        "endOffsets": "107,159,206"
+                    },
+                    "to": {
+                        "startLines": "97,98,99",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "7422,7479,7531",
+                        "endColumns": "56,51,46",
+                        "endOffsets": "7474,7526,7573"
                     }
                 },
                 {

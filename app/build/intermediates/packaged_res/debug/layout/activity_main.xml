@@ -24,8 +24,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<<<<<<< HEAD
-=======
         <Button
             android:id="@+id/btnViewEdit"
             android:layout_width="wrap_content"
@@ -35,7 +33,6 @@
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
->>>>>>> 3464667f73f5e83cfa57340c3181f170f597076b
     <FrameLayout
         android:id="@+id/frame_layout_content"
         android:layout_width="match_parent"
