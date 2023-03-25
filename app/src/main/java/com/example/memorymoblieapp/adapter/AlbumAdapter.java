@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +90,20 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ivMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(), albums.get(getAdapterPosition()).getName() + " more", Toast.LENGTH_LONG).show();
+                    PopupMenu popupMenu = new PopupMenu(itemView.getContext(), itemView, Gravity.CENTER);
+                    popupMenu.inflate(R.menu.album_menu);
+                    popupMenu.setOnMenuItemClickListener(item -> {
+                        int itemId = item.getItemId();
+                        if (R.id.changeName == itemId) {
+                            Toast.makeText(view.getContext(), "Change name " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                        } else if (R.id.block == itemId) {
+                            Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                        } else if (R.id.delete == itemId) {
+                            Toast.makeText(view.getContext(), "Delete " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                        }
+                        return true;
+                    });
+                    popupMenu.show();
                 }
             });
 
