@@ -118,18 +118,32 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    ActivityMainBinding binding;
     private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
     public ArrayList<Album> albumList;
     ArrayList<Image> lovedImageList;
     ArrayList<Image> deletedImageList;
     BottomNavigationView bottomNavigationView;
+    
+    private static final int PERMISSION_REQUEST_CODE = 200;
+//    private ArrayList<String> imagePaths = new ArrayList<String>();
+    private RecyclerView recyclerView;
 
+    List<String> images ;
+    GalleryAdapter galleryAdapter;
+    boolean isPermission =false;
+    private  static  final int MY_READ_PERMISSION_CODE = 101;
+    
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        recyclerView = findViewById(R.id.recyclerview_gallery_images);
+        
         detailed = false;
         albumList = new ArrayList<Album>();
         addAlbumList();
@@ -185,6 +199,18 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 return false;
+
+                if(ContextCompat.checkSelfPermission(MainActivity.this,
+                        READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_READ_PERMISSION_CODE);
+                    Log.d("MyTagGoesHere", "requestPermissions requestPermissions");
+                }
+                else{
+                    Log.d("MyTagGoesHere", "loadImages loadImages");
+                    loadImages();
+                }
             }
         });
 
@@ -199,6 +225,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+      private void loadImages(){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        images = ImagesGallery.listOfImages(this);
+        galleryAdapter = new GalleryAdapter(this, images, new GalleryAdapter.PhotoListener() {
+            @Override
+            public void onPhotoClick(String path) {
+                Toast.makeText(MainActivity.this, ""+path,Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        recyclerView.setAdapter(galleryAdapter);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        // this method is called after permissions has been granted.
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // we are checking the permission code.
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
+                loadImages();
+            } else {
+                Toast.makeText(this, "Permissions denied, Permissions are required to use the app..", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    
+    
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
