@@ -2,6 +2,7 @@ package com.example.memorymoblieapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -38,6 +40,8 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.BrightnessRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,9 +58,11 @@ public class ViewEdit extends AppCompatActivity {
     private RelativeLayout emoteOption, cropOption, brightnessOption;
     private RecyclerView filterRecView, brightnessRecView;
 
+    private TextView viewTxtAdd;
     private SeekBar seekBarBrightnessLevel, seekBarContrast;
 
     private ArrayList<Filter> filters;
+
     private ArrayList<Brightness> brightnesses;
 
     private Bitmap originImage;
@@ -240,6 +246,7 @@ public class ViewEdit extends AppCompatActivity {
                         break;
                     case R.id.textPic:
                         Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
+                        handleAddText("Hello World");
                         break;
 
                     default:
@@ -267,6 +274,9 @@ public class ViewEdit extends AppCompatActivity {
                         handleContrastLevel();
 
                         break;
+
+                    case R.id.shadowPic:
+                        Toast.makeText(ViewEdit.this, "Shadow", Toast.LENGTH_SHORT).show();
 
                     default:
                         break;
@@ -346,6 +356,26 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+    private void handleAddText(String text){
+        viewTxtAdd.setText(text);
+
+        // Set the text color of the TextView object to the desired color
+//        viewTxtAdd.setTextColor(Color.RED);
+        // Create a Bitmap object with the same size as the ImageView object
+        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getWidth(), imgViewEdit.getHeight(), Bitmap.Config.ARGB_8888);
+
+// Create a Canvas object with the Bitmap object as its parameter
+        Canvas canvas = new Canvas(bitmap);
+// Draw the ImageView object onto the Canvas object
+        imgViewEdit.draw(canvas);
+
+// Draw the TextView object onto the Canvas object at the desired location
+        canvas.drawText(text, 100, 100, viewTxtAdd.getPaint());
+
+// Set the ImageView object to the modified Bitmap object
+        imgViewEdit.setImageBitmap(bitmap);
+    }
+
 
 
     private void handleBrightnessLevel(){
@@ -414,6 +444,8 @@ public class ViewEdit extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
+        viewTxtAdd = findViewById(R.id.viewTxtAdd);
+
 
         emoteOption = findViewById(R.id.emoteOption);
         cropOption = findViewById(R.id.cropOption);
@@ -453,6 +485,7 @@ public class ViewEdit extends AppCompatActivity {
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
+
 
     }
 }
