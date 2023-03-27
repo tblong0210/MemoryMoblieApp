@@ -34,10 +34,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 //                LayoutInflater.from(context).inflate(R.layout.gallery_item,parent,false)
 //        );
 
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.gallery_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+
+        return new ViewHolder(
+                LayoutInflater.from(context).inflate(R.layout.gallery_item, parent, false)
+        );
     }
 
     @Override
@@ -66,8 +66,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-
-            image = itemView.findViewById(R.id.image);
+            image = itemView.findViewById(R.id.imageGallery);
         }
     }
 
