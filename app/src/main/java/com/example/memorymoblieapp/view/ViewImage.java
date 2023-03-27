@@ -5,40 +5,36 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-import androidx.exifinterface.media.ExifInterface;
 
-import com.example.memorymoblieapp.ControlImage.ViewPagerAdapter;
-import com.example.memorymoblieapp.ControlImage.ZoomableViewPager;
+import com.example.memorymoblieapp.controlI_mage.ViewPagerAdapter;
+import com.example.memorymoblieapp.controlI_mage.ZoomableViewPager;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.local_data_storage.Album;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -170,13 +166,11 @@ public class ViewImage extends AppCompatActivity {
 
                 if (item == R.id.viewDetails) {
                     Toast.makeText(ViewImage.this, "View details", Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(ViewImage.this, ViewDetails.class);
                     intent.putExtra("path", pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
                     startActivity(intent);
                 } else if (item == R.id.setWallpaper) {
                     Toast.makeText(ViewImage.this, "Set Wallpaper", Toast.LENGTH_SHORT).show();
-
                     try {
                         wallpaperManager.setBitmap(viewToBitmap(largeImage, largeImage.getWidth(), largeImage.getHeight()));
                     } catch (IOException e) {

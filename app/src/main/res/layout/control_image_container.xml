@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewImage">
 
-    <com.example.memorymoblieapp.ControlImage.ZoomableViewPager
+    <com.example.memorymoblieapp.controlI_mage.ZoomableViewPager
         android:id="@+id/viewPaperMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

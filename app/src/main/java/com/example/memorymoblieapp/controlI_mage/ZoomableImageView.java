@@ -1,4 +1,4 @@
-package com.example.memorymoblieapp.ControlImage;
+package com.example.memorymoblieapp.controlI_mage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
