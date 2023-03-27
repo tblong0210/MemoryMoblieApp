@@ -82,7 +82,7 @@ public class ViewEdit extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_view_edit,menu);
+        inflater.inflate(R.menu.menu_view_edit, menu);
         return true;
     }
 
@@ -172,6 +172,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.brightnessPic:
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
+
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -209,11 +210,11 @@ public class ViewEdit extends AppCompatActivity {
                         handleFlipImageVertical();
                         break;
                     case R.id.firstResizePic:
-                        handleResizeImage(16f,9f);
+                        handleCropImage(9f, 16f);
                         break;
 
                     case R.id.secondResizePic:
-                        handleResizeImage(3f,4f);
+                        handleCropImage(3f, 4f);
                         break;
 
 
@@ -308,25 +309,26 @@ public class ViewEdit extends AppCompatActivity {
         Bitmap originalBitmap = drawable.getBitmap();
         Matrix matrix = new Matrix();
         matrix.setScale(1, -1);
-        matrix.postTranslate(0,originalBitmap.getHeight());
+        matrix.postTranslate(0, originalBitmap.getHeight());
         Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(flippedBitmap);
         //originalBitmap.recycle();
 
     }
-    private void handleResizeImage(float firstRatio, float secondRatio){
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
+    private void handleCropImage(float firstRatio, float secondRatio){
+        // Get the original dimensions
+        int width = originImage.getWidth();
+        int height = originImage.getHeight();
 
-        int originalWidth = originalBitmap.getWidth();
-        int originalHeight = originalBitmap.getHeight();
+        // Calculate the new height based on a 16:9 aspect ratio
+        int newHeight = (int)(width * firstRatio / secondRatio);
 
-        int targetWidth, targetHeight;
+        // Calculate the y-coordinate for the top of the new image
+        int y = (height - newHeight) / 2;
 
-        targetWidth = originalWidth;
-        targetHeight = (int) (targetWidth * firstRatio / secondRatio);
-        Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, targetWidth, targetHeight, false);
-        imgViewEdit.setImageBitmap(resizedBitmap);
+        // Create a new bitmap with the desired dimensions
+        Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
+        imgViewEdit.setImageBitmap(croppedBitmap);
         //originalBitmap.recycle();
     }
 
@@ -352,7 +354,7 @@ public class ViewEdit extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // calculate brightness value from progress (0-100)
-                float brightness = (float) progress / 100 ;
+                float brightness = (float) progress / 100;
 
                 // create a color filter with the calculated brightness
                 ColorFilter filter = null;
@@ -365,10 +367,10 @@ public class ViewEdit extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
     }
@@ -377,7 +379,7 @@ public class ViewEdit extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Update the contrast level of the image
-                float contrast = (float) ((progress + 10) / 10.0);
+                float contrast = (float)((progress + 100) / 100.0);
                 ColorMatrix colorMatrix = new ColorMatrix();
                 colorMatrix.set(new float[] {
                         contrast, 0, 0, 0, 0,
@@ -390,12 +392,12 @@ public class ViewEdit extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // Not needed for this example
+                // Not needed
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Not needed for this example
+                // Not needed
             }
         });
 
@@ -413,10 +415,10 @@ public class ViewEdit extends AppCompatActivity {
         originImage = drawable.getBitmap();
 
 
-        emoteOption= findViewById(R.id.emoteOption);
-        cropOption= findViewById(R.id.cropOption);
-        filterOption= findViewById(R.id.filterOption);
-        brightnessOption= findViewById(R.id.brightnessOption);
+        emoteOption = findViewById(R.id.emoteOption);
+        cropOption = findViewById(R.id.cropOption);
+        filterOption = findViewById(R.id.filterOption);
+        brightnessOption = findViewById(R.id.brightnessOption);
 
 
 
@@ -427,47 +429,27 @@ public class ViewEdit extends AppCompatActivity {
 
 
 
-        filterRecView= findViewById(R.id.filterRecView);
+        filterRecView = findViewById(R.id.filterRecView);
         //set adapter to imgRecView
-        filters = new ArrayList<>();
-        filters.add(new Filter("1",R.drawable.image1));
-        filters.add(new Filter("2",R.drawable.image2));
-        filters.add(new Filter("3",R.drawable.image3));
-        filters.add(new Filter("4",R.drawable.image4));
-        filters.add(new Filter("5",R.drawable.image1));
-        filters.add(new Filter("6",R.drawable.image2));
-        filters.add(new Filter("7",R.drawable.image3));
-        filters.add(new Filter("8",R.drawable.image4));
-        filters.add(new Filter("9",R.drawable.image1));
-        filters.add(new Filter("10",R.drawable.image2));
-        filters.add(new Filter("11",R.drawable.image3));
-        filters.add(new Filter("12",R.drawable.image4));
+        filters = new ArrayList <> ();
+        filters.add(new Filter("1", R.drawable.image1));
+        filters.add(new Filter("2", R.drawable.image2));
+        filters.add(new Filter("3", R.drawable.image3));
+        filters.add(new Filter("4", R.drawable.image4));
+        filters.add(new Filter("5", R.drawable.image1));
+        filters.add(new Filter("6", R.drawable.image2));
+        filters.add(new Filter("7", R.drawable.image3));
+        filters.add(new Filter("8", R.drawable.image4));
+        filters.add(new Filter("9", R.drawable.image1));
+        filters.add(new Filter("10", R.drawable.image2));
+        filters.add(new Filter("11", R.drawable.image3));
+        filters.add(new Filter("12", R.drawable.image4));
 
         FilterRecViewAdapter adapterFilter = new FilterRecViewAdapter(this);
         adapterFilter.setFilters(filters);
         filterRecView.setAdapter(adapterFilter);
-        filterRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        brightnessRecView= findViewById(R.id.brightnessRecView);
-        //set adapter to brightnessRecView
-        brightnesses = new ArrayList<>();
-        brightnesses.add(new Brightness("1",R.mipmap.ic_brightness_level));
-        brightnesses.add(new Brightness("2",R.mipmap.ic_brightness_contrast));
-        brightnesses.add(new Brightness("3",R.mipmap.ic_contrast));
-        brightnesses.add(new Brightness("4",R.mipmap.ic_shadow));
-        brightnesses.add(new Brightness("5",R.mipmap.ic_brightness_level));
-        brightnesses.add(new Brightness("6",R.mipmap.ic_brightness_contrast));
-        brightnesses.add(new Brightness("7",R.mipmap.ic_contrast));
-        brightnesses.add(new Brightness("8",R.mipmap.ic_shadow));
-        brightnesses.add(new Brightness("9",R.mipmap.ic_brightness_level));
-        brightnesses.add(new Brightness("10",R.mipmap.ic_brightness_contrast));
-        brightnesses.add(new Brightness("11",R.mipmap.ic_contrast));
-        brightnesses.add(new Brightness("12",R.mipmap.ic_shadow));
-
-        BrightnessRecViewAdapter adapterBrightness = new BrightnessRecViewAdapter(this);
-        adapterBrightness.setBrightnesses(brightnesses);
-        brightnessRecView.setAdapter(adapterBrightness);
-        brightnessRecView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);

@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewImage.class);
+                Intent intent = new Intent(MainActivity.this, ViewEdit.class);
                 startActivity(intent);
             }
         });
