@@ -161,8 +161,9 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA, Manifest.permission.INTERNET}, 1);
-        images = getAllImagePaths(getApplicationContext());
+        images = ImagesGallery.listOfImages(this);
         Log.d("pathImage", images.size() + "//" + images.get(0));
+        //loadImages();
 
         recyclerView = findViewById(R.id.recyclerview_gallery_images);
 
@@ -237,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadImages() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        images = ImagesGallery.listOfImages(this);
         galleryAdapter = new GalleryAdapter(this, images, new GalleryAdapter.PhotoListener() {
             @Override
             public void onPhotoClick(String path) {
@@ -334,19 +336,4 @@ public class MainActivity extends AppCompatActivity {
         deletedImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
         deletedImageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
     }
-
-    public static ArrayList<String> getAllImagePaths(Context context) {
-        ArrayList<String> paths = new ArrayList<>();
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                @SuppressLint("Range") String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                paths.add(path);
-            }
-            cursor.close();
-        }
-        return paths;
-    }
-
 }
