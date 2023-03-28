@@ -103,9 +103,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
 
-    List<String> images;
+    ArrayList<String> images;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
@@ -154,6 +157,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA, Manifest.permission.INTERNET}, 1);
+        images = getAllImagePaths(getApplicationContext());
+        Log.d("pathImage", images.size() + "//" + images.get(0));
 
         recyclerView = findViewById(R.id.recyclerview_gallery_images);
 
@@ -210,16 +219,6 @@ public class MainActivity extends AppCompatActivity {
 
                         return true;
                 }
-
-                if (ContextCompat.checkSelfPermission(MainActivity.this,
-                        READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_READ_PERMISSION_CODE);
-                    Log.d("MyTagGoesHere", "requestPermissions requestPermissions");
-                } else {
-                    Log.d("MyTagGoesHere", "loadImages loadImages");
-                    loadImages();
-                }
                 return false;
             }
         });
@@ -238,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadImages() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        images = ImagesGallery.listOfImages(this);
         galleryAdapter = new GalleryAdapter(this, images, new GalleryAdapter.PhotoListener() {
             @Override
             public void onPhotoClick(String path) {
@@ -336,4 +334,19 @@ public class MainActivity extends AppCompatActivity {
         deletedImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
         deletedImageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
     }
+
+    public static ArrayList<String> getAllImagePaths(Context context) {
+        ArrayList<String> paths = new ArrayList<>();
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                paths.add(path);
+            }
+            cursor.close();
+        }
+        return paths;
+    }
+
 }
