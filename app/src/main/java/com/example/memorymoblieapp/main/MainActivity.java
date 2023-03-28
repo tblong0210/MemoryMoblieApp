@@ -90,14 +90,23 @@
 
 package com.example.memorymoblieapp.main;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -105,8 +114,11 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 
+import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
 import com.example.memorymoblieapp.obj.Album;
@@ -116,6 +128,7 @@ import com.example.memorymoblieapp.view.ViewImage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -125,25 +138,25 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Image> lovedImageList;
     ArrayList<Image> deletedImageList;
     BottomNavigationView bottomNavigationView;
-    
+
     private static final int PERMISSION_REQUEST_CODE = 200;
-//    private ArrayList<String> imagePaths = new ArrayList<String>();
+    //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
 
-    List<String> images ;
+    List<String> images;
     GalleryAdapter galleryAdapter;
-    boolean isPermission =false;
-    private  static  final int MY_READ_PERMISSION_CODE = 101;
-    
+    boolean isPermission = false;
+    private static final int MY_READ_PERMISSION_CODE = 101;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         recyclerView = findViewById(R.id.recyclerview_gallery_images);
-        
+
         detailed = false;
         albumList = new ArrayList<Album>();
         addAlbumList();
@@ -198,19 +211,16 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                 }
 
-                return false;
-
-                if(ContextCompat.checkSelfPermission(MainActivity.this,
-                        READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                {
+                if (ContextCompat.checkSelfPermission(MainActivity.this,
+                        READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(MainActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_READ_PERMISSION_CODE);
                     Log.d("MyTagGoesHere", "requestPermissions requestPermissions");
-                }
-                else{
+                } else {
                     Log.d("MyTagGoesHere", "loadImages loadImages");
                     loadImages();
                 }
+                return false;
             }
         });
 
@@ -225,19 +235,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-      private void loadImages(){
+    private void loadImages() {
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         images = ImagesGallery.listOfImages(this);
         galleryAdapter = new GalleryAdapter(this, images, new GalleryAdapter.PhotoListener() {
             @Override
             public void onPhotoClick(String path) {
-                Toast.makeText(MainActivity.this, ""+path,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
 
             }
         });
         recyclerView.setAdapter(galleryAdapter);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         // this method is called after permissions has been granted.
@@ -256,8 +267,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    
-    
+
+
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
