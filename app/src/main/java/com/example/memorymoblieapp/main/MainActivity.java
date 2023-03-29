@@ -124,6 +124,7 @@ import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.fragment.SettingsFragment;
 import com.example.memorymoblieapp.obj.Album;
 import com.example.memorymoblieapp.obj.Image;
 import com.example.memorymoblieapp.view.ViewEdit;
@@ -163,16 +164,16 @@ public class MainActivity extends AppCompatActivity {
                         Manifest.permission.CAMERA, Manifest.permission.INTERNET}, 1);
         images = ImagesGallery.listOfImages(this);
         Log.d("pathImage", images.size() + "//" + images.get(0));
-        //loadImages();
+//        loadImages();
 
         recyclerView = findViewById(R.id.recyclerview_gallery_images);
 
         detailed = false;
-        albumList = new ArrayList<Album>();
+        albumList = new ArrayList<>();
         addAlbumList();
-        lovedImageList = new ArrayList<Image>();
+        lovedImageList = new ArrayList<>();
         addLovedImageList();
-        deletedImageList = new ArrayList<Image>();
+        deletedImageList = new ArrayList<>();
         addDeletedImageList();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -211,7 +212,8 @@ public class MainActivity extends AppCompatActivity {
                             } else if (R.id.URL == itemId) {
                                 Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
                             } else if (R.id.settings == itemId) {
-                                Toast.makeText(MainActivity.this, "Cài đặt", Toast.LENGTH_LONG).show();
+                                SettingsFragment settingsFragment = new SettingsFragment();
+                                fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
                             }
                             return true;
                         });
