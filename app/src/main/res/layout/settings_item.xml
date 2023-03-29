@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Chế độ tối"
         android:textSize="20sp"
+        android:textColor="@color/black"
         tools:ignore="HardcodedText">
 
     </TextView>

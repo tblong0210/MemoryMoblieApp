@@ -8,9 +8,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.fragment.AlbumBlockFragment;
+import com.example.memorymoblieapp.fragment.ImageFragment2;
 
 import java.util.ArrayList;
 
@@ -49,7 +53,25 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             txtSettingsName = itemView.findViewById(R.id.txtSettingsName);
 
             itemView.setOnClickListener(view -> {
-                Toast.makeText(itemView.getContext(), settings.get(getAdapterPosition()) + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(itemView.getContext(), settings.get(getAdapterPosition()) + "", Toast.LENGTH_SHORT).show();
+
+                switch (getAdapterPosition()) {
+                    case 0:
+                        Toast.makeText(itemView.getContext(), "Ngôn ngữ", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case 1:
+                        Toast.makeText(itemView.getContext(), "Chế độ tối", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case 2:
+                        AlbumBlockFragment albumBlockFragment = new AlbumBlockFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_layout_content, albumBlockFragment).commit();
+                        fragmentTransaction.addToBackStack("more");
+                        break;
+                }
             });
         }
     }
