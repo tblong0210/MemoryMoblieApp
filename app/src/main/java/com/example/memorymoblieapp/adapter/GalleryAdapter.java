@@ -18,13 +18,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     private Context context;
     private List<String> images;
-    protected PhotoListener photoListener;
+//    protected PhotoListener photoListener;
 
-    public GalleryAdapter(Context context, List<String> images, PhotoListener photoListener)
+    public GalleryAdapter(Context context, List<String> images)
     {
         this.context = context;
         this.images = images;
-        this.photoListener = photoListener;
+//        , PhotoListener photoListener
+//        this.photoListener = photoListener;
     }
 
     @NonNull
@@ -34,25 +35,29 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 //                LayoutInflater.from(context).inflate(R.layout.gallery_item,parent,false)
 //        );
 
+        View v =LayoutInflater.from(context).inflate(R.layout.gallery_item, parent, false);
 
-        return new ViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.gallery_item, parent, false)
-        );
+
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
 
         String image = images.get(position);
+        Glide.with(context).load(image)
+                .placeholder(R.drawable.image1)
+                .error(R.drawable.image3).into(holder.image);
 
-        Glide.with(context).load(image).into(holder.image);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                photoListener.onPhotoClick(image);
-            }
-        });
+
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                photoListener.onPhotoClick(image);
+//            }
+//        });
     }
 
     @Override
@@ -70,7 +75,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         }
     }
 
-    public interface  PhotoListener{
-        void onPhotoClick(String path);
-    }
+//    public interface  PhotoListener{
+//        void onPhotoClick(String path);
+//    }
 }
