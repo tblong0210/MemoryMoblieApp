@@ -251,13 +251,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         images = ImagesGallery.listOfImages(this);
-        galleryAdapter = new GalleryAdapter(this, images, new GalleryAdapter.PhotoListener() {
-            @Override
-            public void onPhotoClick(String path) {
-                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
-
-            }
-        });
+       galleryAdapter = new GalleryAdapter(this, images
+//                , new GalleryAdapter.PhotoListener() {
+//            @Override
+//            public void onPhotoClick(String path) {
+//                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }
+        );
         recyclerView.setAdapter(galleryAdapter);
     }
 
