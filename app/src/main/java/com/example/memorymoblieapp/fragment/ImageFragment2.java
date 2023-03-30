@@ -44,30 +44,26 @@ public class ImageFragment2 extends Fragment {
 
         RecyclerView recycler = imagesFragment.findViewById(R.id.imageRecView);
 
-        TextView txtTitle = (TextView) imagesFragment.findViewById(R.id.txtTitle);
+        TextView txtTitle = imagesFragment.findViewById(R.id.txtTitle);
         txtTitle.setText(title);
 
-        ImageButton imgBtnChangeView = (ImageButton) imagesFragment.findViewById(R.id.imgBtnChangeView);
+        ImageButton imgBtnChangeView = imagesFragment.findViewById(R.id.imgBtnChangeView);
 
         if (MainActivity.detailed)
             imgBtnChangeView.setImageDrawable(imagesFragment.getContext().getResources().getDrawable(R.drawable.ic_view_detail));
         else
             imgBtnChangeView.setImageDrawable(imagesFragment.getContext().getResources().getDrawable(R.drawable.ic_view_grid));
 
-        imgBtnChangeView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                MainActivity.detailed = !MainActivity.detailed;
-                ImageFragment2 imageFragment = new ImageFragment2(imageList, title);
+        imgBtnChangeView.setOnClickListener(view -> {
+            MainActivity.detailed = !MainActivity.detailed;
+            ImageFragment2 imageFragment = new ImageFragment2(imageList, title);
 
-                @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                fragmentTransaction.addToBackStack("image");
+            @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+            fragmentTransaction.addToBackStack("image");
 
-                assert getFragmentManager() != null;
-                getFragmentManager().popBackStack();
-            }
+            assert getFragmentManager() != null;
+            getFragmentManager().popBackStack();
         });
 
         if (MainActivity.detailed) {

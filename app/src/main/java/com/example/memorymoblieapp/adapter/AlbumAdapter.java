@@ -3,7 +3,6 @@ package com.example.memorymoblieapp.adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
 import com.example.memorymoblieapp.obj.Album;
-import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
 
@@ -48,9 +46,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.album_item, parent, false);
-        txtImgQuantity = (TextView) itemView.findViewById(R.id.txtImgQuantity);
-        ivMore = (ImageView) itemView.findViewById(R.id.ivMore);
-        ivAlbum = (ImageView) itemView.findViewById(R.id.ivAlbum);
+        txtImgQuantity = itemView.findViewById(R.id.txtImgQuantity);
+        ivMore = itemView.findViewById(R.id.ivMore);
+        ivAlbum = itemView.findViewById(R.id.ivAlbum);
         return new ViewHolder(itemView);
     }
 
@@ -65,7 +63,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ivMore.setVisibility(View.GONE);
         }
 
-        holder.quantity.setText(Integer.toString(albums.get(position).getImgList().size()) + " ảnh");
+        holder.quantity.setText(albums.get(position).getImgList().size() + " ảnh");
 
         holder.img.setImageResource(Integer.parseInt(Integer.toString(albums.get(position).getImg())));
     }
@@ -83,68 +81,54 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.txtAlbumName);
-            quantity = (TextView) itemView.findViewById(R.id.txtImgQuantity);
-            img = (ImageView) itemView.findViewById(R.id.ivAlbum);
-            more = (ImageView) itemView.findViewById(R.id.ivMore);
+            name = itemView.findViewById(R.id.txtAlbumName);
+            quantity = itemView.findViewById(R.id.txtImgQuantity);
+            img = itemView.findViewById(R.id.ivAlbum);
+            more = itemView.findViewById(R.id.ivMore);
 
-            ivMore.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    PopupMenu popupMenu = new PopupMenu(itemView.getContext(), more, Gravity.CENTER);
-                    popupMenu.inflate(R.menu.album_menu);
-                    popupMenu.setOnMenuItemClickListener(menuItem -> {
-                        int itemId = menuItem.getItemId();
-                        if (R.id.changeName == itemId) {
-                            changeAlbumName(view, getAdapterPosition());
-                        } else if (R.id.block == itemId) {
-                            Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
-                        } else if (R.id.delete == itemId) {
-                            Toast.makeText(view.getContext(), "Delete " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
-                        }
-                        return true;
-                    });
-                    popupMenu.show();
-                }
+            ivMore.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(itemView.getContext(), more, Gravity.CENTER);
+                popupMenu.inflate(R.menu.album_menu);
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    int itemId = menuItem.getItemId();
+                    if (R.id.changeName == itemId) {
+                        changeAlbumName(view, getAdapterPosition());
+                    } else if (R.id.block == itemId) {
+                        Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                    } else if (R.id.delete == itemId) {
+                        Toast.makeText(view.getContext(), "Delete " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                    }
+                    return true;
+                });
+                popupMenu.show();
             });
 
-            ivAlbum.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (getAdapterPosition() == 0) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-                        builder.setTitle("Nhập tên album");
+            ivAlbum.setOnClickListener(view -> {
+                if (getAdapterPosition() == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                    builder.setTitle("Nhập tên album");
 
-                        final EditText input = new EditText(itemView.getContext());
+                    final EditText input = new EditText(itemView.getContext());
 
-                        input.setInputType(InputType.TYPE_CLASS_TEXT);
-                        builder.setView(input);
+                    input.setInputType(InputType.TYPE_CLASS_TEXT);
+                    builder.setView(input);
 
-                        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String newAlbumName = input.getText().toString();
-                                if (newAlbumName.isBlank())
-                                    newAlbumName = "Album mới";
-                                AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<Image>(), R.mipmap.ic_album));
-                                AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
-                            }
-                        });
-                        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
+                    builder.setPositiveButton("Đồng ý", (dialog, which) -> {
+                        String newAlbumName = input.getText().toString();
+                        if (newAlbumName.isBlank())
+                            newAlbumName = "Album mới";
+                        AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<>(), R.mipmap.ic_album));
+                        AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
+                    });
+                    builder.setNegativeButton("Hủy", (dialog, which) -> dialog.cancel());
 
-                        builder.show();
-                    } else {
-                        ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getImgList(), albums.get(getAdapterPosition()).getName());
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                        fragmentTransaction.addToBackStack("album");
-                    }
+                    builder.show();
+                } else {
+                    ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getImgList(), albums.get(getAdapterPosition()).getName());
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                    fragmentTransaction.addToBackStack("album");
                 }
             });
         }
@@ -159,22 +143,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String newName = input.getText().toString();
-                if (newName.isBlank())
-                    newName = "Không tên";
-                AlbumFragment2.albumList.get(position).setName(newName);
-                AlbumFragment2.updateItem(position);
-            }
+        builder.setPositiveButton("Đồng ý", (dialog, which) -> {
+            String newName = input.getText().toString();
+            if (newName.isBlank())
+                newName = "Không tên";
+            AlbumFragment2.albumList.get(position).setName(newName);
+            AlbumFragment2.updateItem(position);
         });
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton("Hủy", (dialog, which) -> dialog.cancel());
 
         builder.show();
     }

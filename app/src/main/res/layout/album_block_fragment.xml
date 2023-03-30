@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/blockAlbumSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Khóa album"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/txtSetupPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thiết lập mật khẩu"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/txtChangePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đổi mật khẩu"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/txtDeletePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xóa mật khẩu"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+</ScrollView>

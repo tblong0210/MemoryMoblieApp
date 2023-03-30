@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.AlbumAdapter;
 import com.example.memorymoblieapp.obj.Album;
-import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,7 @@ public class AlbumFragment2 extends Fragment {
         recycler.setLayoutManager(gridLayoutManager);
 
         if (albumList.isEmpty() || !albumList.get(0).getName().isBlank())
-            albumList.add(0, new Album("", new ArrayList<Image>(), R.mipmap.ic_add_album));
+            albumList.add(0, new Album("", new ArrayList<>(), R.mipmap.ic_add_album));
 
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);

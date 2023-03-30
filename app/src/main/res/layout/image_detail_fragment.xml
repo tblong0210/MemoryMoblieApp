@@ -26,7 +26,7 @@
             android:id="@+id/ivAlbumContainer"
             android:layout_width="65dp"
             android:layout_height="35dp"
-            app:cardBackgroundColor="#C2E8FF"
+            app:cardBackgroundColor="@color/light_blue"
             app:cardCornerRadius="20dp">
 
             <ImageButton
