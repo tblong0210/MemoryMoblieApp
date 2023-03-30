@@ -123,6 +123,7 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
+import com.example.memorymoblieapp.fragment.ImageFragment;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
 
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
