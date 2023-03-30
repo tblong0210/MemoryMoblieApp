@@ -116,7 +116,7 @@ public class DataLocalManager {
         return sharedPreferences.getString(key, null);
     }
 
-    public ArrayList<String> getStringList(String key) {
+    public static ArrayList<String> getStringList(String key) {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
         return gson.fromJson(sharedPreferences.getString(key, null), type);

@@ -1,6 +1,5 @@
 package com.example.memorymoblieapp.view;
 
-import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
@@ -20,40 +19,34 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import com.example.memorymoblieapp.controlI_mage.ViewPagerAdapter;
 import com.example.memorymoblieapp.controlI_mage.ZoomableViewPager;
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.local_data_storage.Album;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Objects;
 
 public class ViewImage extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     ZoomableViewPager mViewPaper;
     ViewPagerAdapter mViewPaperAdapter;
-
     private WallpaperManager wallpaperManager;
     private boolean isFavorite = false;
-    File[] pictureFiles;
-    File pictureFile;
+    ArrayList<String> picturePaths;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.control_image_container);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         initViews();
         initActions();
@@ -61,26 +54,14 @@ public class ViewImage extends AppCompatActivity {
 
     private void initViews() {
         Intent intent = getIntent();
-
-        ActivityCompat.requestPermissions(ViewImage.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA, Manifest.permission.INTERNET}, 1);
-
-        pictureFile = new File("/storage/emulated/0/Pictures/Zalo");
-        // Create an array contains all files in the folder above
-        pictureFiles = pictureFile.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File file, String s) {
-                return s.toLowerCase(Locale.ROOT).endsWith("png") || s.toLowerCase(Locale.ROOT).endsWith("jpg");
-            }
-        });
+        picturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 
         wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
         bottomNavigationView = findViewById(R.id.navSetting);
         mViewPaper = findViewById(R.id.viewPaperMain);
-        mViewPaperAdapter = new ViewPagerAdapter(this, pictureFiles);
+        mViewPaperAdapter = new ViewPagerAdapter(this, picturePaths);
         mViewPaper.setAdapter(mViewPaperAdapter);
-        mViewPaper.setCurrentItem(27);
+        mViewPaper.setCurrentItem(200);
     }
 
     private void initActions() {
@@ -105,7 +86,7 @@ public class ViewImage extends AppCompatActivity {
                     break;
                 case R.id.share:
                     Toast.makeText(ViewImage.this, "share", Toast.LENGTH_SHORT).show();
-                    shareImage(pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
+                    shareImage(picturePaths.get(mViewPaper.getCurrentItem()));
                     break;
                 case R.id.trash:
                     Toast.makeText(ViewImage.this, "trah", Toast.LENGTH_SHORT).show();
@@ -167,7 +148,7 @@ public class ViewImage extends AppCompatActivity {
                 if (item == R.id.viewDetails) {
                     Toast.makeText(ViewImage.this, "View details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ViewImage.this, ViewDetails.class);
-                    intent.putExtra("path", pictureFiles[mViewPaper.getCurrentItem()].getAbsolutePath());
+                    intent.putExtra("path", picturePaths.get(mViewPaper.getCurrentItem()));
                     startActivity(intent);
                 } else if (item == R.id.setWallpaper) {
                     Toast.makeText(ViewImage.this, "Set Wallpaper", Toast.LENGTH_SHORT).show();

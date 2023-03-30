@@ -124,10 +124,13 @@ import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.obj.Album;
 import com.example.memorymoblieapp.obj.Image;
 import com.example.memorymoblieapp.view.ViewEdit;
 import com.example.memorymoblieapp.view.ViewImage;
+import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -160,8 +163,10 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA, Manifest.permission.INTERNET}, 1);
+                        Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         images = ImagesGallery.listOfImages(this);
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), images);
         Log.d("pathImage", images.size() + "//" + images.get(0));
         //loadImages();
 
@@ -229,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewImage.class);
+                Intent intent = new Intent(MainActivity.this, ViewSearch.class);
                 startActivity(intent);
             }
         });
@@ -256,10 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
         // we are checking the permission code.
         if (requestCode == PERMISSION_REQUEST_CODE) {
-
-
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
                 loadImages();
             } else {

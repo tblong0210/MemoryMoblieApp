@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentViewSearch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".view.ViewSearch">
 
     <LinearLayout
         android:id="@+id/parentSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
         android:background="@drawable/search_view_bg"
-        android:backgroundTint="@color/silver">
+        android:backgroundTint="@color/silver"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            app:queryHint="Tìm kiếm"
+            app:iconifiedByDefault="false"
             app:queryBackground="@android:color/transparent"
-            app:iconifiedByDefault="false"/>
+            app:queryHint="@string/query_hint_name" />
 
         <ImageView
             android:id="@+id/typeFilter"
@@ -28,14 +31,15 @@
             android:layout_height="50dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:src="@mipmap/ic_type_filter"/>
+            android:src="@mipmap/ic_type_filter"
+            android:contentDescription="Set type" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/parentSearch"/>
+        android:layout_below="@+id/parentSearch" />
 
 </RelativeLayout>

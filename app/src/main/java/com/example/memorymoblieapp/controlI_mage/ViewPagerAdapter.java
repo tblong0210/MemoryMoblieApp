@@ -13,6 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.example.memorymoblieapp.R;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -20,7 +21,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     static final int MAX_CACHE_SIZE = 16;
 
     Context context;
-    File[] pictureFiles;
+    ArrayList<String> pictureFiles;
     LayoutInflater mLayoutInflater;
     ZoomableImageView imageView;
 
@@ -46,7 +47,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public ZoomableImageView getImageView() {return imageView; }
 
     // Viewpager Constructor
-    public ViewPagerAdapter(Context context, File[] pictureFiles) {
+    public ViewPagerAdapter(Context context, ArrayList<String> pictureFiles) {
         this.context = context;
         this.pictureFiles = pictureFiles;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -55,7 +56,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         // return the number of images
-        return pictureFiles.length;
+        return pictureFiles.size();
     }
 
     @Override
@@ -73,7 +74,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         ZoomableImageView view = itemView.findViewById(R.id.largePictureFull);
 
         // Set the image in the imageView
-        view.setImageDrawable(getDrawable(pictureFiles[position].getAbsolutePath()));
+        view.setImageDrawable(getDrawable(pictureFiles.get(position)));
         // Adding the View
         Objects.requireNonNull(container).addView(itemView);
 
@@ -84,7 +85,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public void setPrimaryItem (ViewGroup container, int position, Object object){
         super.setPrimaryItem(container, position, object);
         imageView = ((View)object).findViewById(R.id.largePictureFull);
-        imageView.setImageDrawable(getDrawable(pictureFiles[position].getAbsolutePath()));
+        imageView.setImageDrawable(getDrawable(pictureFiles.get(position)));
     }
 
     @Override

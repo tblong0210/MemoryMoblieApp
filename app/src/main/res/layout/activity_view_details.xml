@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.ViewDetails">
 
     <LinearLayout
@@ -22,14 +22,14 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_calendar"/>
+                android:src="@mipmap/ic_calendar" />
 
             <TextView
                 android:id="@+id/txtDateCreated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="ngay thang nam gio"/>
+                android:text="ngay thang nam gio"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -45,7 +45,7 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_image"/>
+                android:src="@mipmap/ic_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,63 +56,39 @@
                     android:id="@+id/txtNameImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Ten anh"/>
+                    android:text="Ten anh"
+                    android:textColor="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/txtImageCapacity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="1,31 MB"/>
+                        android:text="1,31 MB"
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/txtImageSize"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
-                        android:textSize="13sp"
-                        android:text="3000x4000"/>
+                        android:text="3000x4000"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtPathImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
                     android:layout_marginTop="5dp"
-                    android:text="/Thẻ SD/DCIM/Camera"/>
+                    android:text="/Thẻ SD/DCIM/Camera"
+                    android:textSize="13sp" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/locationParent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iconLocation"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="15dp"
-                android:src="@mipmap/ic_location"/>
-
-                <TextView
-                    android:id="@+id/txtLocationImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/black"
-                    android:text="Vi trí"/>
-
         </LinearLayout>
 
     </LinearLayout>
