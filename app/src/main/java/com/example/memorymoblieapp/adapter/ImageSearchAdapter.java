@@ -2,32 +2,34 @@ package com.example.memorymoblieapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
+import com.example.memorymoblieapp.view.ViewImage;
+import com.example.memorymoblieapp.view.ViewSearch;
 
-import java.io.File;
+import java.security.Key;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ImageSearchAdapter extends RecyclerView.Adapter<ImageSearchAdapter.ViewHolder> {
 
-    static final int MAX_CACHE_SIZE = 16;
-    private List<String> images;
-    private File[] fileImages;
-    static HashMap<String, Drawable> drawableCache = new HashMap<String, Drawable>();
+    private ArrayList<String> images;
+    private Context context;
 
     public ImageSearchAdapter() {
     }
@@ -35,51 +37,62 @@ public class ImageSearchAdapter extends RecyclerView.Adapter<ImageSearchAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_search, parent, false);
+        context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.item_search_image, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-           // Bitmap bitmap = BitmapFactory.decodeFile(images.get(position));
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        if (!images.isEmpty()) {
             String nameImage = images.get(position).substring(images.get(position).lastIndexOf('/') + 1);
             holder.textView.setText(nameImage);
-            holder.imageView.setImageDrawable(getDrawable(images.get(position)));
+            holder.parent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ViewImage.class);
+                    intent.putExtra("path_image", images.get(position));
+                    context.startActivity(intent);
+
+                    Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH.getKey());
+                    if(history == null)
+                        history = new HashSet<>();
+                    history.add(images.get(position));
+                    DataLocalManager.saveSetStringData(KeyData.HISTORY_SEARCH.getKey(), history);
+                }
+            });
+
+            Glide.with(context)
+                    .load(images.get(position))
+                    .override(300, 300) // giảm kích thước ảnh xuống 300x300
+                    .centerCrop() // cắt ảnh với kích thước mới
+                    .into(holder.imageView);
+
+        }
     }
 
     @Override
     public int getItemCount() {
+        if (images == null)
+            return 0;
         return images.size();
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(ArrayList<String> images) {
         this.images = images;
-    }
-
-    private Drawable getDrawable(String key) {
-
-        //Clear data when the memory is too large
-        if (drawableCache.size() >= MAX_CACHE_SIZE) {
-            drawableCache.clear();
-        }
-
-        //If there isn't the drawable exists => store it
-        if (!drawableCache.containsKey(key)) {
-            drawableCache.put(key, Drawable.createFromPath(key));
-        }
-
-        return drawableCache.get(key);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;
         private TextView textView;
+        private LinearLayout parent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imgSearch);
             textView = itemView.findViewById(R.id.nameImg);
+            parent = itemView.findViewById(R.id.parentSearchImage);
         }
     }
 }

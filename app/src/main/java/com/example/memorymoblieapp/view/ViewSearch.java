@@ -1,7 +1,6 @@
 package com.example.memorymoblieapp.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,17 +20,21 @@ import com.example.memorymoblieapp.adapter.ImageSearchAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ViewSearch extends AppCompatActivity {
     private ImageView btnTypeFilter;
     private SearchView searchView;
     private RecyclerView recyclerView;
     ArrayList<String> pathImages;
+    List<String> resultSearch;
     private int typeSearch;
+    ArrayList<String> history = new ArrayList<>();
+    ImageSearchAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,16 +47,14 @@ public class ViewSearch extends AppCompatActivity {
 
     private void initViews() {
         pathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
-        List<String> test = pathImages.subList(0,20);
+        history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH.getKey()));
+
         btnTypeFilter = findViewById(R.id.typeFilter);
         searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.recyclerView);
         typeSearch = R.id.name;
 
-        ImageSearchAdapter adapter = new ImageSearchAdapter();
-        adapter.setImages(test);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        resetHistory(history);
     }
 
     private void initActions() {
@@ -67,10 +68,31 @@ public class ViewSearch extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                if (newText.equals("")){
+                    history.clear();
+                    history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH.getKey()));
+                    resetHistory(history);
+                }
+                else {
+                    String name = newText.toLowerCase();
+                    resultSearch = pathImages.stream()
+                            .filter(str -> str.substring(
+                                            str.lastIndexOf('/') + 1)
+                                    .toLowerCase()
+                                    .contains(name))
+                            .collect(Collectors.toList());
+                    resetHistory((ArrayList<String>) resultSearch);
+                }
                 return false;
             }
         });
+    }
+
+    private void resetHistory(ArrayList<String> paths) {
+        adapter = new ImageSearchAdapter();
+        adapter.setImages(paths);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     private void createMenuPopup(View item, int menuItem) {

@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DataLocalManager {
     private static DataLocalManager instance;
@@ -56,6 +58,13 @@ public class DataLocalManager {
         Gson gson = new Gson();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, gson.toJson(data));
+        editor.apply();
+    }
+
+    public static void saveSetStringData(String key, Set<String> data){
+        Gson gson = new Gson();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet(key, data);
         editor.apply();
     }
 
@@ -120,5 +129,10 @@ public class DataLocalManager {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<String>>(){}.getType();
         return gson.fromJson(sharedPreferences.getString(key, null), type);
+    }
+
+    public static Set<String> getSetList(String key){
+        Set<String> data = new HashSet<>();
+        return sharedPreferences.getStringSet(key, data);
     }
 }

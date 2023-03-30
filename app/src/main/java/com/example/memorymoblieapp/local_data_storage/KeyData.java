@@ -4,7 +4,9 @@ public enum KeyData {
     SHARED_PREFERENCES,
     ALBUM_LIST,
     ALBUM_DATA_LIST,
-    IMAGE_PATH_LIST;
+    IMAGE_PATH_LIST,
+    HISTORY_SEARCH,
+    FAVORITE_LIST;
 
     public String getKey() {
         switch (this) {
@@ -16,6 +18,10 @@ public enum KeyData {
                 return "ALBUM_DATA_LIST";
             case IMAGE_PATH_LIST:
                 return "IMAGE_PATH_LIST";
+            case HISTORY_SEARCH:
+                return "HISTORY_SEARCH";
+            case FAVORITE_LIST:
+                return "FAVORITE_LIST";
             default:
                 return null;
         }

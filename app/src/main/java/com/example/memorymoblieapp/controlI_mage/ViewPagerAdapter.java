@@ -1,6 +1,8 @@
 package com.example.memorymoblieapp.controlI_mage;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
 
 import java.io.File;
@@ -30,21 +33,21 @@ public class ViewPagerAdapter extends PagerAdapter {
     static private Drawable getDrawable(String key) {
 
         //Clear data when the memory is too large
-        if (drawableCache.size() >=  MAX_CACHE_SIZE) {
+        if (drawableCache.size() >= MAX_CACHE_SIZE) {
             drawableCache.clear();
         }
 
         //If there isn't the drawable exists => store it
-        if (!drawableCache.containsKey(key))
-        {
+        if (!drawableCache.containsKey(key)) {
             drawableCache.put(key, Drawable.createFromPath(key));
         }
 
         return drawableCache.get(key);
     }
 
-
-    public ZoomableImageView getImageView() {return imageView; }
+    public ZoomableImageView getImageView() {
+        return imageView;
+    }
 
     // Viewpager Constructor
     public ViewPagerAdapter(Context context, ArrayList<String> pictureFiles) {
@@ -75,6 +78,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         // Set the image in the imageView
         view.setImageDrawable(getDrawable(pictureFiles.get(position)));
+
         // Adding the View
         Objects.requireNonNull(container).addView(itemView);
 
@@ -82,15 +86,14 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public void setPrimaryItem (ViewGroup container, int position, Object object){
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
         super.setPrimaryItem(container, position, object);
-        imageView = ((View)object).findViewById(R.id.largePictureFull);
+        imageView = ((View) object).findViewById(R.id.largePictureFull);
         imageView.setImageDrawable(getDrawable(pictureFiles.get(position)));
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object)
-    {
+    public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((RelativeLayout) object);
     }
 

@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.memorymoblieapp.controlI_mage.ViewPagerAdapter;
 import com.example.memorymoblieapp.controlI_mage.ZoomableViewPager;
@@ -32,15 +33,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ViewImage extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    ZoomableViewPager mViewPaper;
-    ViewPagerAdapter mViewPaperAdapter;
+    private ZoomableViewPager mViewPaper;
+    private ViewPagerAdapter mViewPaperAdapter;
     private WallpaperManager wallpaperManager;
-    private boolean isFavorite = false;
-    ArrayList<String> picturePaths;
+    private int currentPosition;
+    private ArrayList<String> picturePaths;
+    Set<String> favorList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,36 +58,64 @@ public class ViewImage extends AppCompatActivity {
     }
 
     private void initViews() {
-        Intent intent = getIntent();
+        favorList = DataLocalManager.getSetList(KeyData.FAVORITE_LIST.getKey());
         picturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+        Intent intent = getIntent();
+        currentPosition = picturePaths.indexOf(intent.getStringExtra("path_image"));
 
         wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+
         bottomNavigationView = findViewById(R.id.navSetting);
         mViewPaper = findViewById(R.id.viewPaperMain);
+
         mViewPaperAdapter = new ViewPagerAdapter(this, picturePaths);
         mViewPaper.setAdapter(mViewPaperAdapter);
-        mViewPaper.setCurrentItem(200);
+        mViewPaper.setCurrentItem(currentPosition);
+
+        loadFavorite();
     }
 
     private void initActions() {
+
+        mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                loadFavorite();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.favorite:
-                    // Đánh dấu trạng thái yêu thích
-                    isFavorite = !isFavorite;
-                    if (isFavorite) {
-                        Toast.makeText(ViewImage.this, "Add favorite", Toast.LENGTH_SHORT).show();
-                        item.setIcon(R.mipmap.ic_heart_like);
-                        item.setTitle(R.string.action_favorite);
-                    } else {
-                        Toast.makeText(ViewImage.this, "Remove favorite", Toast.LENGTH_SHORT).show();
+                    if (item.getTitle().equals(getResources().getString(R.string.action_favorite))) {
+                        Toast.makeText(this, R.string.action_unfavorite, Toast.LENGTH_SHORT).show();
+
+                        favorList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
+
                         item.setIcon(R.mipmap.ic_heart);
                         item.setTitle(R.string.action_unfavorite);
+                    } else {
+                        Toast.makeText(this, R.string.action_favorite, Toast.LENGTH_SHORT).show();
+
+                        favorList.add(picturePaths.get(mViewPaper.getCurrentItem()));
+
+                        item.setIcon(R.mipmap.ic_heart_like);
+                        item.setTitle(R.string.action_favorite);
                     }
+                    DataLocalManager.saveSetStringData(KeyData.FAVORITE_LIST.getKey(), favorList);
                     break;
                 case R.id.edit:
                     Toast.makeText(ViewImage.this, "edit", Toast.LENGTH_SHORT).show();
-
                     break;
                 case R.id.share:
                     Toast.makeText(ViewImage.this, "share", Toast.LENGTH_SHORT).show();
@@ -98,6 +131,17 @@ public class ViewImage extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    private void loadFavorite() {
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.favorite);
+        if (favorList == null || !favorList.contains(picturePaths.get(mViewPaper.getCurrentItem()))) {
+            item.setIcon(R.mipmap.ic_heart);
+            item.setTitle(R.string.action_unfavorite);
+        } else {
+            item.setIcon(R.mipmap.ic_heart_like);
+            item.setTitle(R.string.action_favorite);
+        }
     }
 
     private void shareImage(String path) {
