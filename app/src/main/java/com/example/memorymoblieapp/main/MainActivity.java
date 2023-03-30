@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
         images = ImagesGallery.listOfImages(this);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), images);
         Log.d("pathImage", images.size() + "//" + images.get(0));

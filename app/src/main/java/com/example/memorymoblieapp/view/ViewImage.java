@@ -116,6 +116,9 @@ public class ViewImage extends AppCompatActivity {
                     break;
                 case R.id.edit:
                     Toast.makeText(ViewImage.this, "edit", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ViewImage.this, ViewEdit.class);
+                    intent.putExtra("path_image", picturePaths.get(mViewPaper.getCurrentItem()));
+                    startActivity(intent);
                     break;
                 case R.id.share:
                     Toast.makeText(ViewImage.this, "share", Toast.LENGTH_SHORT).show();

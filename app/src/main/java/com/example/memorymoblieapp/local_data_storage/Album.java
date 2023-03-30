@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Album {
     private String albumName;
+    private Boolean block;
     private ArrayList<String> pathImages;
 
     public Album(String albumName) {
         this.albumName = albumName;
         pathImages = new ArrayList<>();
+        block = false;
     }
 
     public Album(String albumName, ArrayList<String> pathImage) {
@@ -42,5 +44,13 @@ public class Album {
 
     public boolean deleteImage(String pathImage) {
         return pathImages.remove(pathImage);
+    }
+
+    public Boolean getBlock() {
+        return block;
+    }
+
+    public void setBlock(Boolean block) {
+        this.block = block;
     }
 }

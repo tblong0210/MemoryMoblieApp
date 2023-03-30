@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -39,6 +40,8 @@ import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.BrightnessRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.w3c.dom.Text;
@@ -47,6 +50,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
@@ -441,6 +445,10 @@ public class ViewEdit extends AppCompatActivity {
 
     private void initViews() {
         imgViewEdit = findViewById(R.id.imgViewEdit);
+        Intent intent = getIntent();
+        String path = intent.getStringExtra("path_image");
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        imgViewEdit.setImageBitmap(bitmap);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
