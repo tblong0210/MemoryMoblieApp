@@ -38,8 +38,8 @@ public class AlbumFragment2 extends Fragment {
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recycler.setLayoutManager(gridLayoutManager);
 
-        if (albumList.isEmpty() || !albumList.get(0).getName().isBlank())
-            albumList.add(0, new Album("", new ArrayList<>(), R.mipmap.ic_add_album));
+        if (albumList.isEmpty() || !albumList.get(0).getAlbumName().isBlank())
+            albumList.add(0, new Album("", new ArrayList<>()));
 
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);

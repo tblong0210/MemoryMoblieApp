@@ -2,6 +2,8 @@ package com.example.memorymoblieapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +15,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.obj.Image;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-    static ArrayList<Image> images;
+    static ArrayList<String> images;
     Context context;
     static boolean detailed;
 
-    public ImageAdapter(ArrayList<Image> images, Context context, boolean detailed) {
+    public ImageAdapter(ArrayList<String> images, Context context, boolean detailed) {
         ImageAdapter.images = images;
         this.context = context;
         ImageAdapter.detailed = detailed;
@@ -45,14 +49,29 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder holder, int position) {
-        if (detailed) {
-            holder.name.setText("Tên: " + images.get(position).getName());
-            holder.createdDate.setText("Ngày tạo: " + images.get(position).getCreatedDate());
-            holder.size.setText("Dung lượng: " + images.get(position).getSize());
-            holder.dimensions.setText("Kích thước: " + images.get(position).getDimensions());
-            holder.location.setText("Địa điểm: " + images.get(position).getLocation());
+        File currentFile = new File(images.get(position));
+
+        if (currentFile.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ROOT);
+
+            long fileSizeNumber = Math.round(currentFile.length() * 1.0 / 1000);
+            String fileSizeResult;
+            if (fileSizeNumber > 2000)
+                fileSizeResult = String.format(Locale.ROOT, "%.2f MB", fileSizeNumber * 1.0 / 1000);
+            else
+                fileSizeResult = String.format(Locale.ROOT, "%d KB", fileSizeNumber);
+
+            if (detailed) {
+                holder.name.setText("Tên: " + currentFile.getName());
+                holder.createdDate.setText("Ngày tạo: " + sdf.format(currentFile.lastModified()));
+                holder.size.setText("Dung lượng: " + fileSizeResult);
+                if (bitmap != null)
+                    holder.dimensions.setText("Kích thước: " + bitmap.getWidth() + "x" + bitmap.getHeight());
+                holder.location.setText("Vị trí: " + images.get(position));
+            }
+            holder.img.setImageBitmap(bitmap);
         }
-        holder.img.setImageResource(Integer.parseInt(Integer.toString(images.get(position).getImg())));
     }
 
     @Override
@@ -79,12 +98,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             }
             img = (ImageView) itemView.findViewById(R.id.ivImage);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), images.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
-                }
-            });
+            itemView.setOnClickListener(view -> Toast.makeText(view.getContext(), images.get(getAdapterPosition()) + "", Toast.LENGTH_LONG).show());
         }
     }
 }

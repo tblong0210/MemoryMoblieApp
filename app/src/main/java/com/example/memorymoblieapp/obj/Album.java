@@ -3,37 +3,54 @@ package com.example.memorymoblieapp.obj;
 import java.util.ArrayList;
 
 public class Album {
-    private String name;
-    private ArrayList<Image> imgList;
-    private int img;
+    private String albumName;
+    private Boolean block;
+    private ArrayList<String> pathImages;
 
-    public Album(String name, ArrayList<Image> imgList, int img) {
-        this.name = name;
-        this.imgList = imgList;
-        this.img = img;
+    public Album(String albumName) {
+        this.albumName = albumName;
+        pathImages = new ArrayList<>();
+        block = false;
     }
 
-    public String getName() {
-        return name;
+    public Album(String albumName, ArrayList<String> pathImage) {
+        this.albumName = albumName;
+        this.pathImages = pathImage;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAlbumName() {
+        return albumName;
     }
 
-    public ArrayList<Image> getImgList() {
-        return imgList;
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
     }
 
-    public void setImgList(ArrayList<Image> imgList) {
-        this.imgList = imgList;
+    public ArrayList<String> getPathImages() {
+        return pathImages;
     }
 
-    public int getImg() {
-        return img;
+    public void setPathImages(ArrayList<String> pathImage) {
+        this.pathImages = pathImage;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public boolean insertNewImage(String pathImage) {
+        if (!pathImages.contains(pathImage)) {
+            this.pathImages.add(pathImage);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean deleteImage(String pathImage) {
+        return pathImages.remove(pathImage);
+    }
+
+    public Boolean getBlock() {
+        return block;
+    }
+
+    public void setBlock(Boolean block) {
+        this.block = block;
     }
 }
