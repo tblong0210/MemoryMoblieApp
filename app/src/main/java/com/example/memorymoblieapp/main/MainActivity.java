@@ -191,8 +191,10 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.image:
-                        Toast.makeText(MainActivity.this, "Image", Toast.LENGTH_LONG).show();
+                       Toast.makeText(MainActivity.this, "Image", Toast.LENGTH_LONG).show();
                         // fragmentTransaction.replace(...).commit();
+                        ImageFragment imageFragment = new ImageFragment(images);
+                        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                         fragmentTransaction.addToBackStack("image");
                         return true;
 
