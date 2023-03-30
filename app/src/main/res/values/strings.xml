@@ -27,6 +27,7 @@
     <string name="action_search_by_album">Album</string>
     <string name="query_hint_name">Tìm kiếm theo tên</string>
     <string name="query_hint_album">Tìm kiếm theo album</string>
+    <string name="notif_delete_image">Xóa thành công</string>
     <string name="activity_edit_view"></string>
     <string name="activity_image_view"></string>
     <string name="activity_detail_view"></string>

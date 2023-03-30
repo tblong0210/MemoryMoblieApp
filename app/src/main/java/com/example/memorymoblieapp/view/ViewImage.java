@@ -1,11 +1,13 @@
 package com.example.memorymoblieapp.view;
 
 import android.app.WallpaperManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -125,7 +127,18 @@ public class ViewImage extends AppCompatActivity {
                     shareImage(picturePaths.get(mViewPaper.getCurrentItem()));
                     break;
                 case R.id.trash:
-                    Toast.makeText(ViewImage.this, "trah", Toast.LENGTH_SHORT).show();
+
+
+                    Uri uri = Uri.parse( picturePaths.get(mViewPaper.getCurrentItem())); // Chuyển đổi đường dẫn thành Uri
+
+                    ContentResolver resolver = getContentResolver(); // Lấy ContentResolver
+
+                    int result = resolver.delete(uri, null, null); // Xóa tệp ảnh
+
+                    if (result > 0) {
+                        // Tệp ảnh đã được xóa thành công
+                        Toast.makeText(ViewImage.this, R.string.notif_delete_image, Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.more:
                     Toast.makeText(ViewImage.this, "more", Toast.LENGTH_SHORT).show();
@@ -134,6 +147,11 @@ public class ViewImage extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    public void  callScanIntent(Context context, String path) {
+        MediaScannerConnection.scanFile(context,
+                new String[] { path }, null,null);
     }
 
     private void loadFavorite() {
