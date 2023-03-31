@@ -207,6 +207,7 @@ public class ViewEdit extends AppCompatActivity {
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
+                        handleBlurLevel();
 
                     default:
                         break;
@@ -312,6 +313,27 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+    private void handleBlurLevel(){
+        seekBarBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float limit = 10f;
+                float alpha;
+                if(progress < limit){
+                   alpha = limit /100;
+                }else{
+                    alpha = (float) progress / 100;
+                }
+                imgViewEdit.setAlpha(alpha);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+    }
     private void handleRotateImage(){
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();

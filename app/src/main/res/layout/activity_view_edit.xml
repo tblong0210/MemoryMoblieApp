@@ -165,7 +165,6 @@
                 android:scaleY="2"
                 android:max="100"
                 android:min="0"
-                android:progressDrawable="@drawable/seekbar_circle"
                 android:progress="100"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
