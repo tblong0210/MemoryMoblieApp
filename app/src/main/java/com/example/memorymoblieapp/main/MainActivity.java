@@ -34,6 +34,7 @@ import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
 import com.example.memorymoblieapp.obj.Album;
+import com.example.memorymoblieapp.view.ViewImage;
 import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ViewSearch.class);
+                Intent intent = new Intent(MainActivity.this, ViewImage.class);
                 startActivity(intent);
             }
         });

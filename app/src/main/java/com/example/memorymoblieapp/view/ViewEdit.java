@@ -334,15 +334,27 @@ public class ViewEdit extends AppCompatActivity {
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 
-        // Calculate the new height based on a 16:9 aspect ratio
-        int newHeight = (int)(width * firstRatio / secondRatio);
+        if(firstRatio == 3f && secondRatio == 4f) {
+            int newHeight = (int) (width * firstRatio / secondRatio);
 
-        // Calculate the y-coordinate for the top of the new image
-        int y = (height - newHeight) / 2;
+            // Calculate the y-coordinate for the top of the new image
+            int y = (height - newHeight) / 2;
 
-        // Create a new bitmap with the desired dimensions
-        Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
-        imgViewEdit.setImageBitmap(croppedBitmap);
+            // Create a new bitmap with the desired dimensions
+            Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
+            imgViewEdit.setImageBitmap(croppedBitmap);
+        }
+        else{
+            // Calculate the new height based on a 16:9 aspect ratio
+            int newWidth = (int)(width * firstRatio / secondRatio);
+
+            // Calculate the y-coordinate for the top of the new image
+            int y = (height - newWidth) / 2;
+
+            // Create a new bitmap with the desired dimensions
+            Bitmap croppedBitmap = Bitmap.createBitmap(originImage, y,0 , newWidth, width);
+            imgViewEdit.setImageBitmap(croppedBitmap);
+        }
         //originalBitmap.recycle();
     }
 
