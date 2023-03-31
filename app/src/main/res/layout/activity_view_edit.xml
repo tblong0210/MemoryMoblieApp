@@ -120,7 +120,18 @@
                 android:layout_below="@+id/nav_brightness_option"
                 android:layout_gravity="bottom" />
 
-
+            <SeekBar
+                android:id="@+id/seekBarShadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/design_default_color_primary"
+                android:layout_below="@+id/nav_brightness_option"
+                android:layout_gravity="bottom" />
         </RelativeLayout>
 
         <RelativeLayout

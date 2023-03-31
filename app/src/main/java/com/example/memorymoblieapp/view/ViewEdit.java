@@ -63,7 +63,7 @@ public class ViewEdit extends AppCompatActivity {
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow;
 
     private ArrayList<Filter> filters;
 
@@ -267,6 +267,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.brightnessLevelPic:
                         Toast.makeText(ViewEdit.this, "brightness", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.GONE);
+                        seekBarShadow.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.VISIBLE);
                         handleBrightnessLevel();
                         break;
@@ -274,6 +275,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.contrastPic:
                         Toast.makeText(ViewEdit.this, "contrast", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.VISIBLE);
+                        seekBarShadow.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.GONE);
                         handleContrastLevel();
 
@@ -281,7 +283,10 @@ public class ViewEdit extends AppCompatActivity {
 
                     case R.id.shadowPic:
                         Toast.makeText(ViewEdit.this, "Shadow", Toast.LENGTH_SHORT).show();
-
+                        seekBarContrast.setVisibility(View.GONE);
+                        seekBarShadow.setVisibility(View.VISIBLE);
+                        seekBarBrightnessLevel.setVisibility(View.GONE);
+                        handleShadowLevel();
                     default:
                         break;
                 }
@@ -392,8 +397,6 @@ public class ViewEdit extends AppCompatActivity {
         imgViewEdit.setImageBitmap(bitmap);
     }
 
-
-
     private void handleBrightnessLevel(){
 
         seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -446,6 +449,10 @@ public class ViewEdit extends AppCompatActivity {
                 // Not needed
             }
         });
+
+    }
+
+    private void handleShadowLevel(){
 
     }
     private void handleAddStickerImage(){
@@ -505,7 +512,7 @@ public class ViewEdit extends AppCompatActivity {
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
-
+        seekBarShadow = findViewById(R.id.seekBarShadow);
 
     }
 }
