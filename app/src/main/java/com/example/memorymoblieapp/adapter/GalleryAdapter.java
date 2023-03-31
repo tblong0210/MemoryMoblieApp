@@ -1,6 +1,8 @@
 package com.example.memorymoblieapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.view.ViewImage;
 
 import java.util.List;
 
@@ -41,6 +44,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return new ViewHolder(v);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
 
@@ -50,6 +54,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 .error(R.drawable.image3).into(holder.image);
 
 
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ViewImage.class);
+                intent.putExtra("path_image", images.get(position));
+                context.startActivity(intent);
+            }
+        });
 
 
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
