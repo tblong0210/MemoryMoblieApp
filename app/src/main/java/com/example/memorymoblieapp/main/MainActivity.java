@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.memorymoblieapp.view.ViewImage;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -34,11 +34,14 @@ import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
 import com.example.memorymoblieapp.obj.Album;
-import com.example.memorymoblieapp.view.ViewImage;
 import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
-
+    private  List<String> imageDates = new ArrayList<>();
     ArrayList<String> images;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
@@ -71,7 +74,46 @@ public class MainActivity extends AppCompatActivity {
                         Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
         images = ImagesGallery.listOfImages(this);
-        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), images);
+
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+         int flag =0;
+
+
+        ArrayList<String> flagImages = images;
+        ArrayList<String> newImage = new   ArrayList<String>();
+
+        for (String imagePath : images) {
+            if(imagePath!=null) {
+
+                File imageFile = new File(imagePath);
+                Date imageDate = new Date(imageFile.lastModified());
+                if(imageDates.size()!=0 && dateFormat.format(imageDate).equals(imageDates.get(imageDates.size()-1))==false )
+                {
+
+                   if(flag%3==2)
+                    {
+                        newImage.add(" ");
+                        imageDates.add(" ");
+                    }
+                    if(flag%3==1)
+                    {
+                        newImage.add(" ");
+                        newImage.add(" ");
+                        imageDates.add(" ");
+                        imageDates.add(" ");
+                    }
+                    flag=0;
+                }
+                newImage.add(imagePath);
+                imageDates.add(dateFormat.format(imageDate));
+                flag++;
+//                Log.d("MyTag", dateFormat.format(imageDate) + imagePath);
+            }
+        }
+
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), newImage);
 //        Log.d("pathImage", images.size() + "//" + images.get(0));
 //        loadImages();
 
@@ -85,7 +127,13 @@ public class MainActivity extends AppCompatActivity {
         deletedImageList = new ArrayList<>();
         addDeletedImageList();
 
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
+        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+        fragmentTransaction.addToBackStack("image");
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -97,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 //                        ArrayList<String> pathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 //                        Toast.makeText(MainActivity.this, pathImages.size() + "", Toast.LENGTH_LONG).show();
                         // fragmentTransaction.replace(...).commit();
-                        ImageFragment imageFragment = new ImageFragment(images);
+                        ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
                         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                         fragmentTransaction.addToBackStack("image");
                         return true;
@@ -154,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         images = ImagesGallery.listOfImages(this);
-       galleryAdapter = new GalleryAdapter(this, images
+       galleryAdapter = new GalleryAdapter(this, images, imageDates
 //                , new GalleryAdapter.PhotoListener() {
 //            @Override
 //            public void onPhotoClick(String path) {
