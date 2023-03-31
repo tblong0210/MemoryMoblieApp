@@ -59,11 +59,11 @@ public class ViewEdit extends AppCompatActivity {
 
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
-    private RelativeLayout emoteOption, cropOption, brightnessOption;
+    private RelativeLayout emoteOption, cropOption, brightnessOption, blurOption;
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow, seekBarBlurLevel;
 
     private ArrayList<Filter> filters;
 
@@ -166,6 +166,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.cropPic:
                         cropOption.setVisibility(View.VISIBLE);
 
+                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -174,6 +175,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.filterPic:
                         filterOption.setVisibility(View.VISIBLE);
 
+                        blurOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -183,6 +185,7 @@ public class ViewEdit extends AppCompatActivity {
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
 
+                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -191,11 +194,20 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
 
+                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
 
                         break;
+                    case R.id.blurPic:
+                        blurOption.setVisibility(View.VISIBLE);
+
+                        emoteOption.setVisibility(View.GONE);
+                        filterOption.setVisibility(View.GONE);
+                        brightnessOption.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
+
                     default:
                         break;
                 }
@@ -478,7 +490,7 @@ public class ViewEdit extends AppCompatActivity {
         cropOption = findViewById(R.id.cropOption);
         filterOption = findViewById(R.id.filterOption);
         brightnessOption = findViewById(R.id.brightnessOption);
-
+        blurOption = findViewById(R.id.blurOption);
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
@@ -513,6 +525,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
         seekBarShadow = findViewById(R.id.seekBarShadow);
+        seekBarBlurLevel = findViewById(R.id.seekBarBlurLevel);
 
     }
 }

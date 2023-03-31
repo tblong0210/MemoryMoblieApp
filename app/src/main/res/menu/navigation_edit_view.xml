@@ -16,5 +16,10 @@
         android:icon="@mipmap/ic_emote"
         android:title="@string/action_emote_edit_view"
         />
+    <item
+        android:id="@+id/blurPic"
+        android:icon="@mipmap/ic_blur"
+        android:title="@string/action_blur_edit_view"
+        />
 
 </menu>
