@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-                android:max="100"
+                android:max="255"
                 android:progress="0"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"

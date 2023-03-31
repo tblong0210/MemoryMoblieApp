@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -18,9 +20,12 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -487,11 +492,58 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleShadowLevel(){
+        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+                Bitmap originalBitmap = drawable.getBitmap();
+                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
     }
-    private void handleAddStickerImage(){
+    private Bitmap addShadow(Bitmap bitmap, int shadowValue) {
+        Log.d("Shadow:", String.valueOf(shadowValue));
+        // Tạo một Bitmap mới để chứa ảnh đã đổ bóng
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+
+        // Tạo một Canvas mới để vẽ ảnh đã đổ bóng lên Bitmap mới
+        Canvas canvas = new Canvas(output);
+
+        // Tạo một Paint mới để vẽ đổ bóng
+        Paint shadowPaint = new Paint();
+        shadowPaint.setColor(Color.BLACK);
+        shadowPaint.setAlpha(shadowValue);
+
+        // Tính toán độ mờ dựa trên giá trị từ seekbar
+        int blurRadius = (int) (shadowValue / 2.55);
+
+        // Tạo một đổ bóng bằng cách tạo một mảnh hình chữ nhật bo tròn với một màu đen và độ mờ
+        RectF shadowRect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight() + 20);
+        canvas.drawRoundRect(shadowRect, 20, 20, shadowPaint);
+
+        // Tạo một đối tượng BlurMaskFilter để áp dụng hiệu ứng blur
+        BlurMaskFilter blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL);
+
+        // Áp dụng hiệu ứng blur vào Paint
+        shadowPaint.setMaskFilter(blurMaskFilter);
+
+        // Vẽ ảnh
+
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        // Trả về Bitmap mới chứa ảnh và đổ bóng
+        return output;
 
     }
+
+    private void handleAddStickerImage(){}
     private void handleAddTextImage(){
 
     }
