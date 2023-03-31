@@ -18,6 +18,8 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class ImageFragment extends Fragment {
@@ -32,10 +34,12 @@ public class ImageFragment extends Fragment {
     private String mParam2;
     private RecyclerView recyclerview;
     private ArrayList<String> images;
-    public ImageFragment(ArrayList<String>images) {
+    List<String> imageDates = new ArrayList<>();
+    private  int numberCol = 3;
+    public ImageFragment(ArrayList<String>images, List<String> imageDates ) {
         this.images=images;
         // Required empty public constructor
-
+        this.imageDates = imageDates;
     }
 
 
@@ -46,10 +50,10 @@ public class ImageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_image, container, false);
 
         recyclerview = view.findViewById(R.id.recyclerview_gallery_images);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), numberCol);
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setHasFixedSize(true);
-        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images);
+        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images, imageDates);
         recyclerview.setAdapter(galleryAdapter);
 
         return view;
