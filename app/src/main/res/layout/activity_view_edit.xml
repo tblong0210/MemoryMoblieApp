@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
+
             android:src="@drawable/image1"/>
         <TextView
             android:layout_width="wrap_content"
@@ -126,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-                android:max="100"
+                android:max="255"
                 android:progress="0"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
@@ -148,6 +149,26 @@
                 android:background="@drawable/round_corner"
                 app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/menu_emote_option"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/blurOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+            <SeekBar
+                android:id="@+id/seekBarBlurLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scaleY="2"
+                android:max="100"
+                android:min="0"
+                android:progress="100"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/design_default_color_primary"
+                android:layout_gravity="bottom" />
         </RelativeLayout>
     </RelativeLayout>
 

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -18,9 +20,12 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,11 +64,11 @@ public class ViewEdit extends AppCompatActivity {
 
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
-    private RelativeLayout emoteOption, cropOption, brightnessOption;
+    private RelativeLayout emoteOption, cropOption, brightnessOption, blurOption;
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow, seekBarBlurLevel;
 
     private ArrayList<Filter> filters;
 
@@ -166,6 +171,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.cropPic:
                         cropOption.setVisibility(View.VISIBLE);
 
+                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -174,6 +180,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.filterPic:
                         filterOption.setVisibility(View.VISIBLE);
 
+                        blurOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -183,6 +190,7 @@ public class ViewEdit extends AppCompatActivity {
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
 
+                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -191,11 +199,21 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
 
+                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
 
                         break;
+                    case R.id.blurPic:
+                        blurOption.setVisibility(View.VISIBLE);
+
+                        emoteOption.setVisibility(View.GONE);
+                        filterOption.setVisibility(View.GONE);
+                        brightnessOption.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
+                        handleBlurLevel();
+
                     default:
                         break;
                 }
@@ -300,6 +318,27 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+    private void handleBlurLevel(){
+        seekBarBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float limit = 10f;
+                float alpha;
+                if(progress < limit){
+                   alpha = limit /100;
+                }else{
+                    alpha = (float) progress / 100;
+                }
+                imgViewEdit.setAlpha(alpha);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+    }
     private void handleRotateImage(){
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
@@ -453,11 +492,58 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleShadowLevel(){
+        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+                Bitmap originalBitmap = drawable.getBitmap();
+                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
     }
-    private void handleAddStickerImage(){
+    private Bitmap addShadow(Bitmap bitmap, int shadowValue) {
+        Log.d("Shadow:", String.valueOf(shadowValue));
+        // Tạo một Bitmap mới để chứa ảnh đã đổ bóng
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+
+        // Tạo một Canvas mới để vẽ ảnh đã đổ bóng lên Bitmap mới
+        Canvas canvas = new Canvas(output);
+
+        // Tạo một Paint mới để vẽ đổ bóng
+        Paint shadowPaint = new Paint();
+        shadowPaint.setColor(Color.BLACK);
+        shadowPaint.setAlpha(shadowValue);
+
+        // Tính toán độ mờ dựa trên giá trị từ seekbar
+        int blurRadius = (int) (shadowValue / 2.55);
+
+        // Tạo một đổ bóng bằng cách tạo một mảnh hình chữ nhật bo tròn với một màu đen và độ mờ
+        RectF shadowRect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight() + 20);
+        canvas.drawRoundRect(shadowRect, 20, 20, shadowPaint);
+
+        // Tạo một đối tượng BlurMaskFilter để áp dụng hiệu ứng blur
+        BlurMaskFilter blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL);
+
+        // Áp dụng hiệu ứng blur vào Paint
+        shadowPaint.setMaskFilter(blurMaskFilter);
+
+        // Vẽ ảnh
+
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        // Trả về Bitmap mới chứa ảnh và đổ bóng
+        return output;
 
     }
+
+    private void handleAddStickerImage(){}
     private void handleAddTextImage(){
 
     }
@@ -478,7 +564,7 @@ public class ViewEdit extends AppCompatActivity {
         cropOption = findViewById(R.id.cropOption);
         filterOption = findViewById(R.id.filterOption);
         brightnessOption = findViewById(R.id.brightnessOption);
-
+        blurOption = findViewById(R.id.blurOption);
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
@@ -513,6 +599,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
         seekBarShadow = findViewById(R.id.seekBarShadow);
+        seekBarBlurLevel = findViewById(R.id.seekBarBlurLevel);
 
     }
 }

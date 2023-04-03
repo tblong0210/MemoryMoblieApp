@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Memory</string>
-    <string name="action_unfavorite">Xóa khỏi Yêu thích</string>
     <string name="action_favorite">Thêm vào yêu thích</string>
     <string name="action_edit">Chỉnh sửa</string>
     <string name="action_share">Chia sẻ</string>
@@ -15,6 +14,7 @@
     <string name="action_filter_edit_view">Bộ lọc</string>
     <string name="action_brightness_edit_view">Độ sáng</string>
     <string name="action_emote_edit_view">Emote</string>
+    <string name="action_blur_edit_view">Làm mờ</string>
     <string name="action_back_edit_view">Trờ lại</string>
     <string name="action_save_edit_view">Lưu</string>
     <string name="action_rotate_edit_view">Xoay ảnh</string>

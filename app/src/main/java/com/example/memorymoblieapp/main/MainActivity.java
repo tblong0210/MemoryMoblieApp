@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.memorymoblieapp.view.ViewImage;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -34,15 +34,18 @@ import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
 import com.example.memorymoblieapp.obj.Album;
-
-import com.example.memorymoblieapp.view.ViewImage;
+import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-   // private Button btnViewEdit;
+    private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
     public ArrayList<Album> albumList;
     ArrayList<String> lovedImageList;
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
-
+    private  List<String> imageDates = new ArrayList<>();
     ArrayList<String> images;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
@@ -69,76 +72,50 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-    }
 
-    private void loadImages() {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         images = ImagesGallery.listOfImages(this);
-        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), images);
 
-        Log.d("pathImage", images.size() + "//" + images.get(0));
-       galleryAdapter = new GalleryAdapter(this, images
-//                , new GalleryAdapter.PhotoListener() {
-//            @Override
-//            public void onPhotoClick(String path) {
-//                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-        );
-        recyclerView.setAdapter(galleryAdapter);
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        // this method is called after permissions has been granted.
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // we are checking the permission code.
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
-                initApp();
-                loadImages();
-            } else {
-                Toast.makeText(this, "Permissions denied, Permissions are required to use the app..", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
-    @Override
-    public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        int flag =0;
 
-        if (backStackEntryCount >= 2) {
-            FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
-            String fragmentName = backStackEntry.getName();
-            if (fragmentName != null) {
-                switch (fragmentName) {
-                    case "image":
-                        bottomNavigationView.getMenu().findItem(R.id.image).setChecked(true);
-                        break;
-                    case "album":
-                        bottomNavigationView.getMenu().findItem(R.id.album).setChecked(true);
-                        break;
-                    case "love":
-                        bottomNavigationView.getMenu().findItem(R.id.love).setChecked(true);
-                        break;
-                    case "more":
-                        bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
-                        break;
+
+        ArrayList<String> flagImages = images;
+        ArrayList<String> newImage = new   ArrayList<String>();
+
+        for (String imagePath : images) {
+            if(imagePath!=null) {
+
+                File imageFile = new File(imagePath);
+                Date imageDate = new Date(imageFile.lastModified());
+                if(imageDates.size()!=0 && dateFormat.format(imageDate).equals(imageDates.get(imageDates.size()-1))==false )
+                {
+
+                    if(flag%3==2)
+                    {
+                        newImage.add(" ");
+                        imageDates.add(" ");
+                    }
+                    if(flag%3==1)
+                    {
+                        newImage.add(" ");
+                        newImage.add(" ");
+                        imageDates.add(" ");
+                        imageDates.add(" ");
+                    }
+                    flag=0;
                 }
+                newImage.add(imagePath);
+                imageDates.add(dateFormat.format(imageDate));
+                flag++;
+//                Log.d("MyTag", dateFormat.format(imageDate) + imagePath);
             }
         }
 
-        if (fragmentManager.getBackStackEntryCount() > 0)
-            fragmentManager.popBackStack();
-        else
-            super.onBackPressed();
-    }
-
-    private void initApp(){
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), newImage);
+//        Log.d("pathImage", images.size() + "//" + images.get(0));
+//        loadImages();
 
         recyclerView = findViewById(R.id.recyclerview_gallery_images);
 
@@ -150,7 +127,13 @@ public class MainActivity extends AppCompatActivity {
         deletedImageList = new ArrayList<>();
         addDeletedImageList();
 
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
+        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+        fragmentTransaction.addToBackStack("image");
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -162,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 //                        ArrayList<String> pathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 //                        Toast.makeText(MainActivity.this, pathImages.size() + "", Toast.LENGTH_LONG).show();
                         // fragmentTransaction.replace(...).commit();
-                        ImageFragment imageFragment = new ImageFragment(images);
+                        ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
                         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                         fragmentTransaction.addToBackStack("image");
                         return true;
@@ -204,15 +187,80 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        btnViewEdit = findViewById(R.id.btnViewEdit);
-//
+       // btnViewEdit = findViewById(R.id.btnViewEdit);
+
 //        btnViewEdit.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, ViewSearch.class);
+//                Intent intent = new Intent(MainActivity.this, ViewImage.class);
 //                startActivity(intent);
 //            }
 //        });
+    }
+
+    private void loadImages() {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        images = ImagesGallery.listOfImages(this);
+        galleryAdapter = new GalleryAdapter(this, images, imageDates
+//                , new GalleryAdapter.PhotoListener() {
+//            @Override
+//            public void onPhotoClick(String path) {
+//                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }
+        );
+        recyclerView.setAdapter(galleryAdapter);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        // this method is called after permissions has been granted.
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // we are checking the permission code.
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
+                loadImages();
+            } else {
+                Toast.makeText(this, "Permissions denied, Permissions are required to use the app..", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+
+        if (backStackEntryCount >= 2) {
+            FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
+            String fragmentName = backStackEntry.getName();
+            if (fragmentName != null) {
+                switch (fragmentName) {
+                    case "image":
+                        bottomNavigationView.getMenu().findItem(R.id.image).setChecked(true);
+                        break;
+                    case "album":
+                        bottomNavigationView.getMenu().findItem(R.id.album).setChecked(true);
+                        break;
+                    case "love":
+                        bottomNavigationView.getMenu().findItem(R.id.love).setChecked(true);
+                        break;
+                    case "more":
+                        bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
+                        break;
+                }
+            }
+        }
+
+        if (fragmentManager.getBackStackEntryCount() > 0)
+            fragmentManager.popBackStack();
+        else
+            super.onBackPressed();
     }
 
     private void addAlbumList() {
