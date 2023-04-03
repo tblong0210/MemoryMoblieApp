@@ -19,17 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.ImageAdapter;
 import com.example.memorymoblieapp.main.MainActivity;
-import com.example.memorymoblieapp.obj.Image;
 
 import java.util.ArrayList;
 
 public class ImageFragment2 extends Fragment {
-    ArrayList<Image> imageList;
+    ArrayList<String> imageList;
     ImageAdapter adapter;
     private Context context;
     private final String title;
 
-    public ImageFragment2(ArrayList<Image> imageList, String title) {
+    public ImageFragment2(ArrayList<String> imageList, String title) {
         this.imageList = imageList;
         this.title = title;
     }

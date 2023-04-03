@@ -3,6 +3,8 @@ package com.example.memorymoblieapp.adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
 import com.example.memorymoblieapp.obj.Album;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
@@ -55,17 +58,28 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(albums.get(position).getName());
+        holder.name.setText(albums.get(position).getAlbumName());
 
         if (position == 0) {
             holder.name.setText("Album mới");
             txtImgQuantity.setVisibility(View.GONE);
             ivMore.setVisibility(View.GONE);
+            holder.img.setImageResource(R.mipmap.ic_add_album);
+        } else {
+            holder.quantity.setText(albums.get(position).getPathImages().size() + " ảnh");
+
+            for (int i = 0; i < albums.get(position).getPathImages().size(); i++) {
+                File currentFile = new File(albums.get(position).getPathImages().get(0));
+                Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
+                if (bitmap != null) {
+                    holder.img.setImageBitmap(bitmap);
+                    break;
+                }
+            }
+
+            if (holder.img.getDrawable() == null)
+                holder.img.setImageResource(R.mipmap.ic_album);
         }
-
-        holder.quantity.setText(albums.get(position).getImgList().size() + " ảnh");
-
-        holder.img.setImageResource(Integer.parseInt(Integer.toString(albums.get(position).getImg())));
     }
 
     @Override
@@ -94,9 +108,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     if (R.id.changeName == itemId) {
                         changeAlbumName(view, getAdapterPosition());
                     } else if (R.id.block == itemId) {
-                        Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getAlbumName(), Toast.LENGTH_LONG).show();
                     } else if (R.id.delete == itemId) {
-                        Toast.makeText(view.getContext(), "Delete " + albums.get(getAdapterPosition()).getName(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), "Delete " + albums.get(getAdapterPosition()).getAlbumName(), Toast.LENGTH_LONG).show();
                     }
                     return true;
                 });
@@ -117,14 +131,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         String newAlbumName = input.getText().toString();
                         if (newAlbumName.isBlank())
                             newAlbumName = "Album mới";
-                        AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<>(), R.mipmap.ic_album));
+                        AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<>()));
                         AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
                     });
                     builder.setNegativeButton("Hủy", (dialog, which) -> dialog.cancel());
 
                     builder.show();
                 } else {
-                    ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getImgList(), albums.get(getAdapterPosition()).getName());
+                    ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getPathImages(), albums.get(getAdapterPosition()).getAlbumName());
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -147,7 +161,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             String newName = input.getText().toString();
             if (newName.isBlank())
                 newName = "Không tên";
-            AlbumFragment2.albumList.get(position).setName(newName);
+            AlbumFragment2.albumList.get(position).setAlbumName(newName);
             AlbumFragment2.updateItem(position);
         });
         builder.setNegativeButton("Hủy", (dialog, which) -> dialog.cancel());

@@ -63,7 +63,7 @@ public class ViewEdit extends AppCompatActivity {
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow;
 
     private ArrayList<Filter> filters;
 
@@ -267,6 +267,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.brightnessLevelPic:
                         Toast.makeText(ViewEdit.this, "brightness", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.GONE);
+                        seekBarShadow.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.VISIBLE);
                         handleBrightnessLevel();
                         break;
@@ -274,6 +275,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.contrastPic:
                         Toast.makeText(ViewEdit.this, "contrast", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.VISIBLE);
+                        seekBarShadow.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.GONE);
                         handleContrastLevel();
 
@@ -281,7 +283,10 @@ public class ViewEdit extends AppCompatActivity {
 
                     case R.id.shadowPic:
                         Toast.makeText(ViewEdit.this, "Shadow", Toast.LENGTH_SHORT).show();
-
+                        seekBarContrast.setVisibility(View.GONE);
+                        seekBarShadow.setVisibility(View.VISIBLE);
+                        seekBarBrightnessLevel.setVisibility(View.GONE);
+                        handleShadowLevel();
                     default:
                         break;
                 }
@@ -334,15 +339,27 @@ public class ViewEdit extends AppCompatActivity {
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 
-        // Calculate the new height based on a 16:9 aspect ratio
-        int newHeight = (int)(width * firstRatio / secondRatio);
+        if(firstRatio == 3f && secondRatio == 4f) {
+            int newHeight = (int) (width * firstRatio / secondRatio);
 
-        // Calculate the y-coordinate for the top of the new image
-        int y = (height - newHeight) / 2;
+            // Calculate the y-coordinate for the top of the new image
+            int y = (height - newHeight) / 2;
 
-        // Create a new bitmap with the desired dimensions
-        Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
-        imgViewEdit.setImageBitmap(croppedBitmap);
+            // Create a new bitmap with the desired dimensions
+            Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
+            imgViewEdit.setImageBitmap(croppedBitmap);
+        }
+        else{
+            // Calculate the new height based on a 16:9 aspect ratio
+            int newWidth = (int)(width * firstRatio / secondRatio);
+
+            // Calculate the y-coordinate for the top of the new image
+            int y = (height - newWidth) / 2;
+
+            // Create a new bitmap with the desired dimensions
+            Bitmap croppedBitmap = Bitmap.createBitmap(originImage, y,0 , newWidth, width);
+            imgViewEdit.setImageBitmap(croppedBitmap);
+        }
         //originalBitmap.recycle();
     }
 
@@ -379,8 +396,6 @@ public class ViewEdit extends AppCompatActivity {
 // Set the ImageView object to the modified Bitmap object
         imgViewEdit.setImageBitmap(bitmap);
     }
-
-
 
     private void handleBrightnessLevel(){
 
@@ -434,6 +449,10 @@ public class ViewEdit extends AppCompatActivity {
                 // Not needed
             }
         });
+
+    }
+
+    private void handleShadowLevel(){
 
     }
     private void handleAddStickerImage(){
@@ -493,7 +512,7 @@ public class ViewEdit extends AppCompatActivity {
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
-
+        seekBarShadow = findViewById(R.id.seekBarShadow);
 
     }
 }

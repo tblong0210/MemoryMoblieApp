@@ -1,4 +1,3 @@
-
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
@@ -35,8 +34,8 @@ import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
 import com.example.memorymoblieapp.obj.Album;
-import com.example.memorymoblieapp.obj.Image;
-import com.example.memorymoblieapp.view.ViewSearch;
+
+import com.example.memorymoblieapp.view.ViewImage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -46,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
    // private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
     public ArrayList<Album> albumList;
-    ArrayList<Image> lovedImageList;
-    ArrayList<Image> deletedImageList;
+    ArrayList<String> lovedImageList;
+    ArrayList<String> deletedImageList;
     BottomNavigationView bottomNavigationView;
 
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -70,11 +69,76 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+    }
 
+    private void loadImages() {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         images = ImagesGallery.listOfImages(this);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), images);
+
         Log.d("pathImage", images.size() + "//" + images.get(0));
-        //zloadImages();
+       galleryAdapter = new GalleryAdapter(this, images
+//                , new GalleryAdapter.PhotoListener() {
+//            @Override
+//            public void onPhotoClick(String path) {
+//                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }
+        );
+        recyclerView.setAdapter(galleryAdapter);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        // this method is called after permissions has been granted.
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // we are checking the permission code.
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
+                initApp();
+                loadImages();
+            } else {
+                Toast.makeText(this, "Permissions denied, Permissions are required to use the app..", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+
+        if (backStackEntryCount >= 2) {
+            FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
+            String fragmentName = backStackEntry.getName();
+            if (fragmentName != null) {
+                switch (fragmentName) {
+                    case "image":
+                        bottomNavigationView.getMenu().findItem(R.id.image).setChecked(true);
+                        break;
+                    case "album":
+                        bottomNavigationView.getMenu().findItem(R.id.album).setChecked(true);
+                        break;
+                    case "love":
+                        bottomNavigationView.getMenu().findItem(R.id.love).setChecked(true);
+                        break;
+                    case "more":
+                        bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
+                        break;
+                }
+            }
+        }
+
+        if (fragmentManager.getBackStackEntryCount() > 0)
+            fragmentManager.popBackStack();
+        else
+            super.onBackPressed();
+    }
+
+    private void initApp(){
 
         recyclerView = findViewById(R.id.recyclerview_gallery_images);
 
@@ -94,7 +158,9 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.image:
-                       Toast.makeText(MainActivity.this, "Image", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Image", Toast.LENGTH_LONG).show();
+//                        ArrayList<String> pathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+//                        Toast.makeText(MainActivity.this, pathImages.size() + "", Toast.LENGTH_LONG).show();
                         // fragmentTransaction.replace(...).commit();
                         ImageFragment imageFragment = new ImageFragment(images);
                         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -149,104 +215,18 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
-    private void loadImages() {
-        //recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-       // images = ImagesGallery.listOfImages(this);
-       galleryAdapter = new GalleryAdapter(this, images
-//                , new GalleryAdapter.PhotoListener() {
-//            @Override
-//            public void onPhotoClick(String path) {
-//                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-        );
-        recyclerView.setAdapter(galleryAdapter);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        // this method is called after permissions has been granted.
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // we are checking the permission code.
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
-                loadImages();
-            } else {
-                Toast.makeText(this, "Permissions denied, Permissions are required to use the app..", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
-
-        if (backStackEntryCount >= 2) {
-            FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
-            String fragmentName = backStackEntry.getName();
-            if (fragmentName != null) {
-                switch (fragmentName) {
-                    case "image":
-                        bottomNavigationView.getMenu().findItem(R.id.image).setChecked(true);
-                        break;
-                    case "album":
-                        bottomNavigationView.getMenu().findItem(R.id.album).setChecked(true);
-                        break;
-                    case "love":
-                        bottomNavigationView.getMenu().findItem(R.id.love).setChecked(true);
-                        break;
-                    case "more":
-                        bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
-                        break;
-                }
-            }
-        }
-
-        if (fragmentManager.getBackStackEntryCount() > 0)
-            fragmentManager.popBackStack();
-        else
-            super.onBackPressed();
-    }
-
     private void addAlbumList() {
-        ArrayList<Image> imgList = new ArrayList<Image>();
-        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        imgList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        albumList.add(new Album("Album1", new ArrayList<Image>(), R.drawable.image1));
-        albumList.add(new Album("Album2", imgList, R.drawable.image1));
+        ArrayList<String> imgList = new ArrayList<>();
+        imgList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
+        albumList.add(new Album("Album1", new ArrayList<>()));
+        albumList.add(new Album("Album2", imgList));
     }
 
     private void addLovedImageList() {
-        lovedImageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image7.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image8.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image9.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image10.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image11.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image12.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        lovedImageList.add(new Image("image13.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        lovedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
     }
 
     private void addDeletedImageList() {
-        deletedImageList.add(new Image("image1.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        deletedImageList.add(new Image("image2.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        deletedImageList.add(new Image("image3.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        deletedImageList.add(new Image("image4.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        deletedImageList.add(new Image("image5.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
-        deletedImageList.add(new Image("image6.png", "9.27 KB", "20/1/2023", "512 x 512", "TP.HCM", R.drawable.image1));
+        deletedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
     }
 }
