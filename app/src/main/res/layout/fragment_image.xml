@@ -14,7 +14,5 @@
       android:orientation="horizontal"
 
       android:id="@+id/recyclerview_gallery_images"
-      tools:listitem="@layout/gallery_item">
-
-  </androidx.recyclerview.widget.RecyclerView>
+      tools:listitem="@layout/gallery_item"/>
 </LinearLayout >

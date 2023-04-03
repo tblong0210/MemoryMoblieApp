@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +50,8 @@ public class ImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_image, container, false);
+
+        images = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 
         recyclerview = view.findViewById(R.id.recyclerview_gallery_images);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), numberCol);

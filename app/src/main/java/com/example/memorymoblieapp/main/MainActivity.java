@@ -1,18 +1,25 @@
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.memorymoblieapp.view.ViewImage;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -51,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> lovedImageList;
     ArrayList<String> deletedImageList;
     BottomNavigationView bottomNavigationView;
-
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
-    private  List<String> imageDates = new ArrayList<>();
+    private List<String> imageDates = new ArrayList<>();
     ArrayList<String> images;
+    ArrayList<String> newImage;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
@@ -68,56 +75,35 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
 
-        images = ImagesGallery.listOfImages(this);
+        if (!checkPermissionList(permissionList))
+            ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
+        else initiateApp();
 
+    }
 
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
-        int flag =0;
-
-
-        ArrayList<String> flagImages = images;
-        ArrayList<String> newImage = new   ArrayList<String>();
-
-        for (String imagePath : images) {
-            if(imagePath!=null) {
-
-                File imageFile = new File(imagePath);
-                Date imageDate = new Date(imageFile.lastModified());
-                if(imageDates.size()!=0 && dateFormat.format(imageDate).equals(imageDates.get(imageDates.size()-1))==false )
-                {
-
-                    if(flag%3==2)
-                    {
-                        newImage.add(" ");
-                        imageDates.add(" ");
-                    }
-                    if(flag%3==1)
-                    {
-                        newImage.add(" ");
-                        newImage.add(" ");
-                        imageDates.add(" ");
-                        imageDates.add(" ");
-                    }
-                    flag=0;
-                }
-                newImage.add(imagePath);
-                imageDates.add(dateFormat.format(imageDate));
-                flag++;
-//                Log.d("MyTag", dateFormat.format(imageDate) + imagePath);
-            }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            initiateApp();
         }
+    }
 
+    private boolean checkPermissionList(String[] permissionList) {
+        int permissionCheck;
+        for (String per : permissionList) {
+            permissionCheck = ContextCompat.checkSelfPermission(this, per);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) return false;
+        }
+        return true;
+    }
+
+    private void initiateApp() {
+        images = ImagesGallery.listOfImages(this);
+        newImage = handleSortListImageView();
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), newImage);
-//        Log.d("pathImage", images.size() + "//" + images.get(0));
-//        loadImages();
-
-        recyclerView = findViewById(R.id.recyclerview_gallery_images);
 
         detailed = false;
         albumList = new ArrayList<>();
@@ -126,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         addLovedImageList();
         deletedImageList = new ArrayList<>();
         addDeletedImageList();
-
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -187,49 +172,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       // btnViewEdit = findViewById(R.id.btnViewEdit);
-
-//        btnViewEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, ViewImage.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
-    private void loadImages() {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        images = ImagesGallery.listOfImages(this);
-        galleryAdapter = new GalleryAdapter(this, images, imageDates
-//                , new GalleryAdapter.PhotoListener() {
-//            @Override
-//            public void onPhotoClick(String path) {
-//                Toast.makeText(MainActivity.this, "" + path, Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-        );
-        recyclerView.setAdapter(galleryAdapter);
-    }
+    private ArrayList<String> handleSortListImageView() {
+        ArrayList<String> newImage = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        int flag = 0;
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        // this method is called after permissions has been granted.
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (String imagePath : images) {
+            if (imagePath != null) {
 
-        // we are checking the permission code.
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permissions Granted..", Toast.LENGTH_SHORT).show();
-                loadImages();
-            } else {
-                Toast.makeText(this, "Permissions denied, Permissions are required to use the app..", Toast.LENGTH_SHORT).show();
+                File imageFile = new File(imagePath);
+                Date imageDate = new Date(imageFile.lastModified());
+                if (imageDates.size() != 0 && dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1)) == false) {
+
+                    if (flag % 3 == 2) {
+                        newImage.add(" ");
+                        imageDates.add(" ");
+                    }
+                    if (flag % 3 == 1) {
+                        newImage.add(" ");
+                        newImage.add(" ");
+                        imageDates.add(" ");
+                        imageDates.add(" ");
+                    }
+                    flag = 0;
+                }
+                newImage.add(imagePath);
+                imageDates.add(dateFormat.format(imageDate));
+                flag++;
+//                Log.d("MyTag", dateFormat.format(imageDate) + imagePath);
             }
         }
+        return newImage;
     }
-
 
     @Override
     public void onBackPressed() {
@@ -257,10 +233,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (fragmentManager.getBackStackEntryCount() > 0)
-            fragmentManager.popBackStack();
-        else
-            super.onBackPressed();
+        if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
+        else super.onBackPressed();
     }
 
     private void addAlbumList() {
