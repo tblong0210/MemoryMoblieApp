@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -99,9 +100,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             quantity = itemView.findViewById(R.id.txtImgQuantity);
             img = itemView.findViewById(R.id.ivAlbum);
             more = itemView.findViewById(R.id.ivMore);
+            Context context = itemView.getContext();
 
             ivMore.setOnClickListener(view -> {
-                PopupMenu popupMenu = new PopupMenu(itemView.getContext(), more, Gravity.CENTER);
+                PopupMenu popupMenu = new PopupMenu(context, more, Gravity.CENTER);
                 popupMenu.inflate(R.menu.album_menu);
                 popupMenu.setOnMenuItemClickListener(menuItem -> {
                     int itemId = menuItem.getItemId();
@@ -127,16 +129,28 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
                     builder.setView(input);
 
-                    builder.setPositiveButton("Đồng ý", (dialog, which) -> {
-                        String newAlbumName = input.getText().toString();
-                        if (newAlbumName.isBlank())
-                            newAlbumName = "Album mới";
-                        AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<>()));
-                        AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
-                    });
-                    builder.setNegativeButton("Hủy", (dialog, which) -> dialog.cancel());
+                    builder.setPositiveButton("Đồng ý", null);
+                    builder.setNegativeButton("Hủy", null);
 
-                    builder.show();
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
+                        String newAlbumName = input.getText().toString();
+                        if (newAlbumName.isBlank()) {
+                            Toast.makeText(context, "Vui lòng nhập tên album!", Toast.LENGTH_SHORT).show();
+                            input.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập tên album!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        }
+
+                        else {
+                            Toast.makeText(context, "Tạo album thành công!", Toast.LENGTH_SHORT).show();
+                            AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<>()));
+                            AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+
                 } else {
                     ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getPathImages(), albums.get(getAdapterPosition()).getAlbumName());
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();

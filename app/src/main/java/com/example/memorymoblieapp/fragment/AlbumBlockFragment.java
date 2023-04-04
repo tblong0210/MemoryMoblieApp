@@ -88,6 +88,8 @@ public class AlbumBlockFragment extends Fragment {
                     dialog.dismiss();
                 }
             });
+
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view -> dialog.cancel());
         });
 
         return albumBlockFragment;
