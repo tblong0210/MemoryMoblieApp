@@ -25,6 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
+import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.Album;
 
 import java.io.File;
@@ -145,6 +148,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                             Toast.makeText(context, "Tạo album thành công!", Toast.LENGTH_SHORT).show();
                             AlbumFragment2.albumList.add(new Album(newAlbumName, new ArrayList<>()));
                             AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
+                            DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                             dialog.dismiss();
                         }
                     });

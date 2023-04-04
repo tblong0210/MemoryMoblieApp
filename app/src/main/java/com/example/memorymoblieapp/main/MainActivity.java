@@ -45,6 +45,7 @@ import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
-    public ArrayList<Album> albumList;
+    public static ArrayList<Album> albumList;
     ArrayList<String> lovedImageList;
     ArrayList<String> deletedImageList;
     BottomNavigationView bottomNavigationView;
@@ -106,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), newImage);
 
         detailed = false;
-        albumList = new ArrayList<>();
-        addAlbumList();
+        albumList = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
         lovedImageList = new ArrayList<>();
         addLovedImageList();
         deletedImageList = new ArrayList<>();
@@ -119,53 +119,49 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
         fragmentTransaction.addToBackStack("image");
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                switch (item.getItemId()) {
-                    case R.id.image:
-                        ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
-                        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                        fragmentTransaction.addToBackStack("image");
-                        return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.image:
+                    ImageFragment imageFragment1 = new ImageFragment(newImage, imageDates);
+                    fragmentTransaction1.replace(R.id.frame_layout_content, imageFragment1).commit();
+                    fragmentTransaction1.addToBackStack("image");
+                    return true;
 
-                    case R.id.album:
-                        AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
-                        fragmentTransaction.replace(R.id.frame_layout_content, albumFragment).commit();
-                        fragmentTransaction.addToBackStack("album");
-                        return true;
+                case R.id.album:
+                    AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
+                    fragmentTransaction1.replace(R.id.frame_layout_content, albumFragment).commit();
+                    fragmentTransaction1.addToBackStack("album");
+                    return true;
 
-                    case R.id.love:
-                        ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích");
-                        fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
-                        fragmentTransaction.addToBackStack("love");
-                        return true;
+                case R.id.love:
+                    ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích");
+                    fragmentTransaction1.replace(R.id.frame_layout_content, loveImageFragment).commit();
+                    fragmentTransaction1.addToBackStack("love");
+                    return true;
 
-                    case R.id.more:
-                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
-                        popupMenu.inflate(R.menu.more_menu);
-                        popupMenu.setOnMenuItemClickListener(menuItem -> {
-                            int itemId = menuItem.getItemId();
-                            if (R.id.recycleBin == itemId) {
-                                ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác");
-                                fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
-                            } else if (R.id.URL == itemId) {
-                                Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
-                            } else if (R.id.settings == itemId) {
-                                SettingsFragment settingsFragment = new SettingsFragment();
-                                fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
-                            }
-                            return true;
-                        });
-                        popupMenu.show();
-                        fragmentTransaction.addToBackStack("more");
-
+                case R.id.more:
+                    PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
+                    popupMenu.inflate(R.menu.more_menu);
+                    popupMenu.setOnMenuItemClickListener(menuItem -> {
+                        int itemId = menuItem.getItemId();
+                        if (R.id.recycleBin == itemId) {
+                            ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác");
+                            fragmentTransaction1.replace(R.id.frame_layout_content, deletedImageFragment).commit();
+                        } else if (R.id.URL == itemId) {
+                            Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
+                        } else if (R.id.settings == itemId) {
+                            SettingsFragment settingsFragment = new SettingsFragment();
+                            fragmentTransaction1.replace(R.id.frame_layout_content, settingsFragment).commit();
+                        }
                         return true;
-                }
-                return false;
+                    });
+                    popupMenu.show();
+                    fragmentTransaction1.addToBackStack("more");
+
+                    return true;
             }
+            return false;
         });
 
     }
@@ -231,13 +227,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
-    }
-
-    private void addAlbumList() {
-        ArrayList<String> imgList = new ArrayList<>();
-        imgList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
-        albumList.add(new Album("Album1", new ArrayList<>()));
-        albumList.add(new Album("Album2", imgList));
     }
 
     private void addLovedImageList() {
