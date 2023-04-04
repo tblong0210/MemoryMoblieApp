@@ -61,6 +61,17 @@ public class DataLocalManager {
         editor.apply();
     }
 
+    /***
+     * Remove a key from SharedPreferences
+     * @param key   is param key to get value (Ex: KeyData.SHARED_PREFERENCES.getKey())
+     */
+    public static <E> void remove(String key) {
+        Gson gson = new Gson();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(key);
+        editor.apply();
+    }
+
     public static void saveSetStringData(String key, Set<String> data){
         Gson gson = new Gson();
         SharedPreferences.Editor editor = sharedPreferences.edit();

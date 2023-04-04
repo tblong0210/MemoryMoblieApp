@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
+    public static boolean isVerify = false; // Status of album blocking
 
     @SuppressLint("MissingInflatedId")
     @Override

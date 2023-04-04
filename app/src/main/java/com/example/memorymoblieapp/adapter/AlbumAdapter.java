@@ -175,7 +175,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     }
 
     private static void changeAlbumName(@NonNull View itemView, int position) {
-        context = itemView.getContext();
+        Context context = itemView.getContext();
         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
         builder.setTitle("Nhập tên mới");
 
