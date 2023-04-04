@@ -59,6 +59,8 @@ public class AlbumBlockFragment extends Fragment {
 
             layout.addView(rePasswordInput);
             builder.setView(layout);
+            passwordInput.requestFocus();
+
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 
@@ -71,16 +73,19 @@ public class AlbumBlockFragment extends Fragment {
                 if (password.isEmpty()) {
                     Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
                     passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    passwordInput.requestFocus();
                 }
 
                 else if (rePassword.isEmpty()) {
                     Toast.makeText(context, "Vui lòng xác nhận mật khẩu!", Toast.LENGTH_SHORT).show();
                     rePasswordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng xác nhận mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    rePasswordInput.requestFocus();
                 }
 
                 else if (!password.equals(rePassword)) {
                     Toast.makeText(context, "Mật khẩu xác nhận không trùng khớp!", Toast.LENGTH_SHORT).show();
                     rePasswordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu xác nhận không trùng khớp!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    rePasswordInput.requestFocus();
                 }
 
                 else {

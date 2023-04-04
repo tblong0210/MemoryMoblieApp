@@ -45,7 +45,6 @@
         android:layout_below="@+id/ivAlbumContainer"
         android:text="Tên album"
         android:textSize="20sp"
-        android:textColor="@color/black"
         android:layout_marginStart="10dp"
         tools:ignore="HardcodedText">
     </TextView>
@@ -57,7 +56,6 @@
         android:layout_below="@+id/txtAlbumName"
         android:text="0 ảnh"
         android:textSize="20sp"
-        android:textColor="#525252"
         android:layout_marginStart="10dp"
         tools:ignore="HardcodedText">
     </TextView>

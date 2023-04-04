@@ -3,6 +3,7 @@ package com.example.memorymoblieapp.adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.InputType;
@@ -115,7 +116,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     } else if (R.id.block == itemId) {
                         Toast.makeText(view.getContext(), "Block " + albums.get(getAdapterPosition()).getAlbumName(), Toast.LENGTH_LONG).show();
                     } else if (R.id.delete == itemId) {
-                        Toast.makeText(view.getContext(), "Delete " + albums.get(getAdapterPosition()).getAlbumName(), Toast.LENGTH_LONG).show();
+                        deleteAlbum(view, getAdapterPosition());
+                        Toast.makeText(view.getContext(), "Đã xóa album '" + albums.get(getAdapterPosition()).getAlbumName() + "'", Toast.LENGTH_LONG).show();
                     }
                     return true;
                 });
@@ -131,6 +133,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
                     builder.setView(input);
+                    input.requestFocus();
 
                     builder.setPositiveButton("Đồng ý", null);
                     builder.setNegativeButton("Hủy", null);
@@ -142,6 +145,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         if (newAlbumName.isBlank()) {
                             Toast.makeText(context, "Vui lòng nhập tên album!", Toast.LENGTH_SHORT).show();
                             input.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập tên album!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        }
+
+                        else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newAlbumName)) {
+                            Toast.makeText(context, "Tên album đã tồn tại, vui lòng chọn tên khác!", Toast.LENGTH_SHORT).show();
+                            input.setError(HtmlCompat.fromHtml("<font>Tên album đã tồn tại, vui lòng chọn tên khác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         }
 
                         else {
@@ -167,6 +175,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     }
 
     private static void changeAlbumName(@NonNull View itemView, int position) {
+        context = itemView.getContext();
         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
         builder.setTitle("Nhập tên mới");
 
@@ -174,16 +183,59 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
+        input.requestFocus();
 
-        builder.setPositiveButton("Đồng ý", (dialog, which) -> {
+        builder.setPositiveButton("Đồng ý", null);
+        builder.setNegativeButton("Hủy", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
             String newName = input.getText().toString();
-            if (newName.isBlank())
-                newName = "Không tên";
-            AlbumFragment2.albumList.get(position).setAlbumName(newName);
-            AlbumFragment2.updateItem(position);
-        });
-        builder.setNegativeButton("Hủy", (dialog, which) -> dialog.cancel());
+            if (newName.isBlank()) {
+                Toast.makeText(context, "Vui lòng nhập tên album!", Toast.LENGTH_SHORT).show();
+                input.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập tên album!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+            }
 
-        builder.show();
+            else if (newName.equals(AlbumFragment2.albumList.get(position).getAlbumName())) {
+                Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+
+            else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newName)) {
+                Toast.makeText(context, "Tên album đã tồn tại, vui lòng chọn tên khác!", Toast.LENGTH_SHORT).show();
+                input.setError(HtmlCompat.fromHtml("<font>Tên album đã tồn tại, vui lòng chọn tên khác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+            }
+
+            else {
+                AlbumFragment2.albumList.get(position).setAlbumName(newName);
+                AlbumFragment2.updateItem(position);
+                DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+    }
+
+    private static void deleteAlbum(@NonNull View itemView, int position) {
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    AlbumFragment2.albumList.remove(position);
+                    AlbumFragment2.updateItem(position);
+                    DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    dialog.cancel();
+                    break;
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+        builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment2.albumList.get(position).getAlbumName() + "' không?").setPositiveButton("Đồng ý", dialogClickListener)
+                .setNegativeButton("Hủy", dialogClickListener).show();
     }
 }

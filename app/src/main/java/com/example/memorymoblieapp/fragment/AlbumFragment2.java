@@ -27,9 +27,7 @@ public class AlbumFragment2 extends Fragment {
     private Context context;
 
     public AlbumFragment2(ArrayList<Album> albumList) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            AlbumFragment2.albumList = Objects.requireNonNullElseGet(albumList, ArrayList::new);
-        }
+        AlbumFragment2.albumList = albumList == null ? new ArrayList<>() : albumList;
     }
 
     @Override

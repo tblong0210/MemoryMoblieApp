@@ -1,6 +1,9 @@
 package com.example.memorymoblieapp.obj;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Album {
     private String albumName;
@@ -52,5 +55,11 @@ public class Album {
 
     public void setBlock(Boolean block) {
         this.block = block;
+    }
+
+    public static ArrayList<String> getAlbumNameArrayList(@NonNull ArrayList<Album> albums) {
+        return albums.stream()
+                .map(Album::getAlbumName)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

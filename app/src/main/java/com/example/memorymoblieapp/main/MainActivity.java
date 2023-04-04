@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
         images = ImagesGallery.listOfImages(this);
         newImage = handleSortListImageView();
@@ -108,10 +109,11 @@ public class MainActivity extends AppCompatActivity {
 
         detailed = false;
         albumList = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
-        lovedImageList = new ArrayList<>();
-        addLovedImageList();
-        deletedImageList = new ArrayList<>();
-        addDeletedImageList();
+        albumList = albumList == null ? new ArrayList<>() : albumList;
+        lovedImageList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
+        lovedImageList = lovedImageList == null ? new ArrayList<>() : lovedImageList;
+        deletedImageList = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
+        deletedImageList = deletedImageList == null ? new ArrayList<>() : deletedImageList;
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
