@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
 
     private Context context;
@@ -32,9 +31,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 //    protected PhotoListener photoListener;
     List<String> imageDates;
     protected PhotoListener photoListener;
-    List<String> imageDates;
+
     private  boolean isLongClick =false;
     private Vector<String> listSelect = new Vector<String>();
+
     public GalleryAdapter(Context context, List<String> images, List<String> imageDates,  PhotoListener photoListener)
     {
         this.context = context;
@@ -58,7 +58,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return new ViewHolder(v);
     }
 
-    @SuppressLint("RecyclerView")
+
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
 
@@ -147,26 +147,26 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return images.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView image ;
+        ImageView image;
         TextView textDate;
         ToggleButton iconLongSelect;
         Button buttonCancelSelect;
-        public ViewHolder(@NonNull View itemView)
-        {
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imageGallery);
             textDate = itemView.findViewById(R.id.headDate);
             iconLongSelect = itemView.findViewById(R.id.toggleButton);
-            buttonCancelSelect = itemView.findViewById(R.id.button_cancel_select);
-            image.setOnClickListener(new View.OnClickListener() {
-           
-            
+
         }
     }
-   public interface  PhotoListener{
-        void onPhotoClick(String path);
-        void onPhotoLongClick(String path);
-    }
+
+        public interface PhotoListener {
+            void onPhotoClick(String path);
+
+            void onPhotoLongClick(String path);
+        }
+
 }
