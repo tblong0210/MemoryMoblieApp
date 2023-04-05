@@ -19,6 +19,7 @@ public class Album {
     public Album(String albumName, ArrayList<String> pathImage) {
         this.albumName = albumName;
         this.pathImages = pathImage;
+        block = false;
     }
 
     public String getAlbumName() {
