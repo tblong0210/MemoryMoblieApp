@@ -57,7 +57,16 @@ public class ImageFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), numberCol);
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setHasFixedSize(true);
-        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images, imageDates);
+        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images, imageDates, new GalleryAdapter.PhotoListener() {
+            @Override
+            public void onPhotoClick(String path) {
+                Log.d("tag",path);
+            }
+            @Override
+            public  void onPhotoLongClick(String path) {
+                Log.d("tag","Long" +path);
+            }
+        });
         recyclerview.setAdapter(galleryAdapter);
 
         return view;
