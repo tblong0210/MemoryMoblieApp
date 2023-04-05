@@ -60,11 +60,12 @@ public class ImageFragment extends Fragment {
         GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images, imageDates, new GalleryAdapter.PhotoListener() {
             @Override
             public void onPhotoClick(String path) {
-                Log.d("tag",path);
+
             }
+
             @Override
-            public  void onPhotoLongClick(String path) {
-                Log.d("tag","Long" +path);
+            public void onPhotoLongClick(String path) {
+
             }
         });
         recyclerview.setAdapter(galleryAdapter);
