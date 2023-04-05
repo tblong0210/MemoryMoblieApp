@@ -2,6 +2,7 @@ package com.example.memorymoblieapp.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.memorymoblieapp.adapter.AlbumAdapter;
 import com.example.memorymoblieapp.obj.Album;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AlbumFragment2 extends Fragment {
     public static ArrayList<Album> albumList;
@@ -25,7 +27,7 @@ public class AlbumFragment2 extends Fragment {
     private Context context;
 
     public AlbumFragment2(ArrayList<Album> albumList) {
-        AlbumFragment2.albumList = albumList;
+        AlbumFragment2.albumList = albumList == null ? new ArrayList<>() : albumList;
     }
 
     @Override

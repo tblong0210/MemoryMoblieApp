@@ -67,9 +67,18 @@ public class DataLocalManager {
         editor.apply();
     }
 
-    public static void saveFloatData(String key, float data){
+    public static void saveFloatData(String key, float data) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(key, data);
+    }
+    /***
+     * Remove a key from SharedPreferences
+     * @param key   is param key to get value (Ex: KeyData.SHARED_PREFERENCES.getKey())
+     */
+    public static <E> void remove(String key) {
+        Gson gson = new Gson();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(key);
         editor.apply();
     }
 
@@ -97,19 +106,22 @@ public class DataLocalManager {
         ArrayList<E> listData = new ArrayList<>();
         String strJsonArray = sharedPreferences.getString(key, null);
 
-        try {
-            JSONArray jsonArray = new JSONArray(strJsonArray);
-            JSONObject jsonObject;
-            E data;
-            for (int i = 0; i < jsonArray.length(); i++) {
-                jsonObject = jsonArray.getJSONObject(i);
-                data = gson.fromJson(jsonObject.toString(), cls);
-                listData.add(data);
-            }
+        if (strJsonArray != null) {
+            try {
+                JSONArray jsonArray = new JSONArray(strJsonArray);
+                JSONObject jsonObject;
+                E data;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonObject = jsonArray.getJSONObject(i);
+                    data = gson.fromJson(jsonObject.toString(), cls);
+                    listData.add(data);
+                }
 
-        } catch (JSONException e) {
-            Log.e("Error as get array data", e.getMessage());
+            } catch (JSONException e) {
+                Log.e("Error as get array data", e.getMessage());
+            }
         }
+
         return listData;
     }
 
