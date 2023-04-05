@@ -1,8 +1,9 @@
-package com.example.memorymoblieapp.controlI_mage;
+package com.example.memorymoblieapp.controI_image;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,10 +26,10 @@ public class ZoomableViewPager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         ZoomableImageView view = ((ViewPagerAdapter) getAdapter()).getImageView();
+
         if (null != view){
             return (!view.isZooming() && super.onTouchEvent(event));
         }
-
         return super.onTouchEvent(event);
     }
 

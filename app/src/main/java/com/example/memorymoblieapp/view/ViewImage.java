@@ -1,22 +1,26 @@
 package com.example.memorymoblieapp.view;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.WallpaperManager;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaScannerConnection;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,34 +29,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.memorymoblieapp.controlI_mage.ViewPagerAdapter;
-import com.example.memorymoblieapp.controlI_mage.ZoomableViewPager;
+import com.example.memorymoblieapp.controI_image.ViewPagerAdapter;
+import com.example.memorymoblieapp.controI_image.ZoomableViewPager;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Key;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ViewImage extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
+    private final int REQUEST_CODE_SHARE = 1111;
+    private static BottomNavigationView bottomNavigationView;
     private ZoomableViewPager mViewPaper;
     private ViewPagerAdapter mViewPaperAdapter;
     private WallpaperManager wallpaperManager;
-    private int currentPosition;
+    private static RelativeLayout parentHeader;
+    private ImageView imgBack;
     private ArrayList<String> picturePaths;
     Set<String> favorList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         setContentView(R.layout.control_image_container);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -63,8 +70,11 @@ public class ViewImage extends AppCompatActivity {
     private void initViews() {
         favorList = DataLocalManager.getSetList(KeyData.FAVORITE_LIST.getKey());
         picturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+        parentHeader = findViewById(R.id.parentHeader);
+        imgBack = findViewById(R.id.imgBack);
+
         Intent intent = getIntent();
-        currentPosition = picturePaths.indexOf(intent.getStringExtra("path_image"));
+        int currentPosition = picturePaths.indexOf(intent.getStringExtra("path_image"));
 
         wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
@@ -78,8 +88,25 @@ public class ViewImage extends AppCompatActivity {
         loadFavorite();
     }
 
+    public static void setBottomNavigationViewHide(Boolean check) {
+        if (check) {
+            parentHeader.setVisibility(View.GONE);
+            bottomNavigationView.setVisibility(View.GONE);
+        } else {
+            parentHeader.setVisibility(View.VISIBLE);
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        }
+
+    }
+
     private void initActions() {
 
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -125,14 +152,12 @@ public class ViewImage extends AppCompatActivity {
                     break;
                 case R.id.share:
                     Toast.makeText(ViewImage.this, "share", Toast.LENGTH_SHORT).show();
-                    shareImage(picturePaths.get(mViewPaper.getCurrentItem()));
+                    sharePicture(picturePaths.get(mViewPaper.getCurrentItem()));
+
                     break;
                 case R.id.trash:
-//                    File file = new File(picturePaths.get(mViewPaper.getCurrentItem()));
-//                    if(file.exists()){
-//                        file.delete();
-//                        Toast.makeText(ViewImage.this, R.string.notif_delete_image, Toast.LENGTH_SHORT).show();
-//                    }
+                    Toast.makeText(ViewImage.this, "trash", Toast.LENGTH_SHORT).show();
+                    moveTrash();
                     break;
                 case R.id.more:
                     Toast.makeText(ViewImage.this, "more", Toast.LENGTH_SHORT).show();
@@ -141,6 +166,62 @@ public class ViewImage extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    private void moveTrash(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dialog_yes_no);
+
+        Window window = dialog.getWindow();
+        if(window == null) return;
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAtrr = window.getAttributes();
+        windowAtrr.gravity = Gravity.CENTER;
+        window.setAttributes(windowAtrr);
+
+        dialog.setCancelable(true);
+        Button btnBack = dialog.findViewById(R.id.btnBack);
+        Button btnMove = dialog.findViewById(R.id.btnMove);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnMove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                int currPos = mViewPaper.getCurrentItem();
+
+                ArrayList<String> trashList = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
+                if(trashList == null){
+                    trashList = new ArrayList<>();
+                }
+                trashList.add(picturePaths.get(currPos));
+
+                ArrayList<String> viewListImage = DataLocalManager.getStringList(KeyData.IMAGE_PATH_VIEW_LIST.getKey());
+                viewListImage.remove(picturePaths.get(currPos));
+
+                picturePaths.remove(picturePaths.get(currPos));
+
+                mViewPaperAdapter = new ViewPagerAdapter(ViewImage.this, picturePaths);
+                mViewPaper.setAdapter(mViewPaperAdapter);
+                mViewPaper.setCurrentItem(currPos);
+
+                DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePaths);
+                DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), viewListImage);
+                DataLocalManager.saveData(KeyData.TRASH_LIST.getKey(), trashList);
+            }
+        });
+
+        dialog.show();
     }
 
     private void loadFavorite() {
@@ -154,39 +235,27 @@ public class ViewImage extends AppCompatActivity {
         }
     }
 
-    private void shareImage(String path) {
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) mViewPaperAdapter.getImageView().getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
+    private void deleteFileImage() {
 
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/jpeg");
-
-        Uri bmpUri;
-        String textToShare = "Share image";
-        bmpUri = saveImage(bitmap, getApplicationContext(), path);
-        share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        share.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        share.putExtra(Intent.EXTRA_SUBJECT, "Memory");
-        share.putExtra(Intent.EXTRA_TEXT, textToShare);
-        startActivity(Intent.createChooser(share, "Share Content"));
     }
 
-    private static Uri saveImage(Bitmap image, Context context, String path) {
-        File file = new File(path);
-        Uri uri = null;
+    @SuppressLint("QueryPermissionsNeeded")
+    private void sharePicture(String path) {
+        File fileImage = new File(path);
+        // Khởi tạo đường dẫn ảnh và nội dung chia sẻ
 
-        try {
-            FileOutputStream stream = new FileOutputStream(file);
-            image.compress(Bitmap.CompressFormat.JPEG, 90, stream);
-            stream.flush();
-            stream.close();
+        Uri mImageUri = FileProvider.getUriForFile(this, "com.example.memorymoblieapp.fileprovider", fileImage);
+        String mShareContent = "";
 
-            uri = FileProvider.getUriForFile(Objects.requireNonNull(context.getApplicationContext()),
-                    "com.example.memorymoblieapp", file);
-        } catch (IOException e) {
-            Log.d("TAG", "Exception " + e.getMessage());
-        }
-        return uri;
+        // Tạo Intent để chia sẻ nội dung
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, mImageUri);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mShareContent);
+
+        // Tạo Intent chooser để hiển thị danh sách các ứng dụng cho phép chia sẻ nội dung
+        Intent chooserIntent = Intent.createChooser(shareIntent, "Chọn ứng dụng");
+        startActivityForResult(chooserIntent, REQUEST_CODE_SHARE);
     }
 
     private void createMenuPopup(View item, int menuItem) {
@@ -231,17 +300,5 @@ public class ViewImage extends AppCompatActivity {
         Canvas canvas = new Canvas(bm);
         view.draw(canvas);
         return bm;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

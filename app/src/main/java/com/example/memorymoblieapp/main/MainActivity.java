@@ -1,30 +1,19 @@
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.memorymoblieapp.view.ViewImage;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -47,12 +36,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    private Button btnViewEdit;
     public static boolean detailed; // view option of image fragment
     public ArrayList<Album> albumList;
     ArrayList<String> lovedImageList;
@@ -64,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> imageDates = new ArrayList<>();
     ArrayList<String> images;
     ArrayList<String> newImage;
+    ArrayList<String> trashListImage;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
@@ -101,9 +94,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initiateApp() {
+        trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
+
         images = ImagesGallery.listOfImages(this);
         newImage = handleSortListImageView();
-        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), newImage);
+        ArrayList<String> picturePath = new ArrayList<>(newImage);
+
+        picturePath.removeAll(Collections.singleton(" "));
+
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
+        Toast.makeText(this, newImage.size() + " "+ picturePath.size(), Toast.LENGTH_SHORT).show();
 
         detailed = false;
         albumList = new ArrayList<>();

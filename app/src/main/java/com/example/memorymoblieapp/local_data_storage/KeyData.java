@@ -5,6 +5,7 @@ public enum KeyData {
     ALBUM_LIST,
     ALBUM_DATA_LIST,
     IMAGE_PATH_LIST,
+    IMAGE_PATH_VIEW_LIST,
     HISTORY_SEARCH,
     FAVORITE_LIST,
     TRASH_LIST;
@@ -19,6 +20,8 @@ public enum KeyData {
                 return "ALBUM_DATA_LIST";
             case IMAGE_PATH_LIST:
                 return "IMAGE_PATH_LIST";
+            case IMAGE_PATH_VIEW_LIST:
+                return "IMAGE_PATH_VIEW_LIST";
             case HISTORY_SEARCH:
                 return "HISTORY_SEARCH";
             case FAVORITE_LIST:

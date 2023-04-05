@@ -1,4 +1,4 @@
-package com.example.memorymoblieapp.controlI_mage;
+package com.example.memorymoblieapp.controI_image;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.memorymoblieapp.view.ViewImage;
 
 @SuppressLint("AppCompatCustomView")
 public class ZoomableImageView extends ImageView {
@@ -30,15 +32,16 @@ public class ZoomableImageView extends ImageView {
     float maxScale = 3f;
     float[] m;
 
-    int viewWidth, viewHeight;
+    float viewWidth, viewHeight;
     static final int CLICK = 3;
     static float saveScale = 1f;
     protected float origWidth, origHeight;
-    int oldMeasuredWidth, oldMeasuredHeight;
+    float oldMeasuredWidth, oldMeasuredHeight;
 
     ScaleGestureDetector mScaleDetector;
 
     Context context;
+    static Boolean flagNav = false;
 
     public boolean isZooming() {
         return (!(Math.abs(saveScale - 1) <= EPSILON));
@@ -65,6 +68,13 @@ public class ZoomableImageView extends ImageView {
         setImageMatrix(matrix);
         setScaleType(ScaleType.MATRIX);
 
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flagNav = !flagNav;
+                ViewImage.setBottomNavigationViewHide(flagNav);
+            }
+        });
         setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -108,8 +118,9 @@ public class ZoomableImageView extends ImageView {
 
                 setImageMatrix(matrix);
                 invalidate();
-                return true; // indicate event was handled
+                return true;
             }
+
 
         });
     }
@@ -199,7 +210,6 @@ public class ZoomableImageView extends ImageView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         viewWidth = MeasureSpec.getSize(widthMeasureSpec);
         viewHeight = MeasureSpec.getSize(heightMeasureSpec);
-
         //
         // Rescales image on rotation
         //

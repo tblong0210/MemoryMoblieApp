@@ -1,32 +1,30 @@
-package com.example.memorymoblieapp.controlI_mage;
+package com.example.memorymoblieapp.controI_image;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class ViewPagerAdapter extends PagerAdapter {
-    static final int MAX_CACHE_SIZE = 16;
+    private static final int MAX_CACHE_SIZE = 16;
 
-    Context context;
-    ArrayList<String> pictureFiles;
-    LayoutInflater mLayoutInflater;
-    ZoomableImageView imageView;
+    private Context context;
+    private ArrayList<String> pictureFiles;
+    private LayoutInflater mLayoutInflater;
+    private ZoomableImageView imageView;
+
 
     static HashMap<String, Drawable> drawableCache = new HashMap<String, Drawable>();
 
@@ -67,9 +65,16 @@ public class ViewPagerAdapter extends PagerAdapter {
         return view == ((RelativeLayout) object);
     }
 
+    public boolean checkItem(int position){
+        return pictureFiles.get(position).equals(" ");
+    }
+
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+//        while(pictureFiles.get(position).equals(" "))
+//            position++;
+
         // Inflating the item.xml
         View itemView = mLayoutInflater.inflate(R.layout.control_image_full, container, false);
 
@@ -88,6 +93,8 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         super.setPrimaryItem(container, position, object);
+//        while(pictureFiles.get(position).equals(" "))
+//            position++;
         imageView = ((View) object).findViewById(R.id.largePictureFull);
         imageView.setImageDrawable(getDrawable(pictureFiles.get(position)));
     }

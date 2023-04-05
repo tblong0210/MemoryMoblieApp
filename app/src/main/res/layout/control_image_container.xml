@@ -6,7 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".view.ViewImage">
 
-    <com.example.memorymoblieapp.controlI_mage.ZoomableViewPager
+    <RelativeLayout
+        android:id="@+id/parentHeader"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/light_blue"
+        android:elevation="10dp">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:contentDescription="@string/action_back"
+            android:paddingTop="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:src="@mipmap/ic_back" />
+    </RelativeLayout>
+
+    <com.example.memorymoblieapp.controI_image.ZoomableViewPager
         android:id="@+id/viewPaperMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

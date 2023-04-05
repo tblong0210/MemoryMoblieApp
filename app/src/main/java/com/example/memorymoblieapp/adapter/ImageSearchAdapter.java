@@ -55,7 +55,7 @@ public class ImageSearchAdapter extends RecyclerView.Adapter<ImageSearchAdapter.
                     context.startActivity(intent);
 
                     Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH.getKey());
-                    if(history == null)
+                    if (history == null)
                         history = new HashSet<>();
                     history.add(images.get(position));
                     DataLocalManager.saveSetStringData(KeyData.HISTORY_SEARCH.getKey(), history);
@@ -67,7 +67,6 @@ public class ImageSearchAdapter extends RecyclerView.Adapter<ImageSearchAdapter.
                     .override(300, 300) // giảm kích thước ảnh xuống 300x300
                     .centerCrop() // cắt ảnh với kích thước mới
                     .into(holder.imageView);
-
         }
     }
 

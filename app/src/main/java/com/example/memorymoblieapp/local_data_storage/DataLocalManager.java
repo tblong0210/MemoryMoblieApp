@@ -61,15 +61,25 @@ public class DataLocalManager {
         editor.apply();
     }
 
+    public static void saveIntegerData(String key, int data){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, data);
+        editor.apply();
+    }
+
+    public static void saveFloatData(String key, float data){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(key, data);
+        editor.apply();
+    }
+
     public static void saveSetStringData(String key, Set<String> data){
-        Gson gson = new Gson();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet(key, data);
         editor.apply();
     }
 
     public static void saveBooleanData(String key, boolean data){
-        Gson gson = new Gson();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(key, data);
         editor.apply();
@@ -121,7 +131,6 @@ public class DataLocalManager {
     }
 
     public static String getStringData(String key) {
-        Gson gson = new Gson();
         return sharedPreferences.getString(key, null);
     }
 
@@ -134,5 +143,13 @@ public class DataLocalManager {
     public static Set<String> getSetList(String key){
         Set<String> data = new HashSet<>();
         return sharedPreferences.getStringSet(key, data);
+    }
+
+    public static int getIntegerData(String key){
+        return sharedPreferences.getInt(key, -1);
+    }
+
+    public static float getFloatData(String key){
+        return sharedPreferences.getFloat(key, -1);
     }
 }
