@@ -53,13 +53,13 @@ public class ImageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_image, container, false);
 
-        searchBtn = view.findViewById(R.id.search_image_button);
+     /*   searchBtn = view.findViewById(R.id.search_image_button);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("tag","Clicked search button");
             }
-        });
+        });*/
 
         sortBtn = view.findViewById(R.id.sort_image_button);
 
