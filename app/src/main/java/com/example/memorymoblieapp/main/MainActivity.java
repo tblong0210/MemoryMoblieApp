@@ -253,12 +253,4 @@ public class MainActivity extends AppCompatActivity {
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
     }
-
-    private void addLovedImageList() {
-        lovedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
-    }
-
-    private void addDeletedImageList() {
-        deletedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
-    }
 }

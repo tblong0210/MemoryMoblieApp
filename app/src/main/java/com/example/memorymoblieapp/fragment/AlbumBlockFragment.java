@@ -187,7 +187,7 @@ public class AlbumBlockFragment extends Fragment {
             builder.setTitle("Xác nhận xóa mật khẩu");
 
             final EditText passwordInput = new EditText(itemView.getContext());
-            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu");
             builder.setView(passwordInput);
             passwordInput.requestFocus();

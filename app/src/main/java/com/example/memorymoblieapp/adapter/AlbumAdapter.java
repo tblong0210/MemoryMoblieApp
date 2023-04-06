@@ -35,7 +35,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
     static ArrayList<Album> albums;
@@ -180,7 +179,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         builder.setTitle("Album bị khóa. Hãy nhập mật khẩu");
 
                         final EditText passwordInput = new EditText(itemView.getContext());
-                        passwordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+                        passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         builder.setView(passwordInput);
                         passwordInput.requestFocus();
 
@@ -231,7 +230,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             builder.setTitle("Album bị khóa. Hãy nhập mật khẩu");
 
             final EditText passwordInput = new EditText(context);
-            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             builder.setView(passwordInput);
             passwordInput.requestFocus();
 
@@ -337,7 +336,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             builder.setTitle("Album bị khóa. Hãy nhập mật khẩu");
 
             final EditText passwordInput = new EditText(context);
-            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             builder.setView(passwordInput);
             passwordInput.requestFocus();
 
@@ -409,7 +408,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             builder.setTitle("Khóa album");
 
             final EditText passwordInput = new EditText(context);
-            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu xác thực");
             builder.setView(passwordInput);
             passwordInput.requestFocus();
@@ -450,7 +449,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             builder.setTitle("Xóa khóa album");
 
             final EditText passwordInput = new EditText(itemView.getContext());
-            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu xác thực");
             builder.setView(passwordInput);
             passwordInput.requestFocus();
