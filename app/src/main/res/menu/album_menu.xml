@@ -7,6 +7,9 @@
     <item android:id="@+id/block"
         android:title="Khóa album"
         tools:ignore="HardcodedText" />
+    <item android:id="@+id/removeBlock"
+        android:title="Xóa khóa album"
+        tools:ignore="HardcodedText" />
     <item android:id="@+id/delete"
         android:title="Xóa album"
         tools:ignore="HardcodedText" />

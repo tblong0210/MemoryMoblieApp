@@ -41,7 +41,7 @@ public class AlbumFragment2 extends Fragment {
         recycler.setLayoutManager(gridLayoutManager);
 
         if (albumList.isEmpty() || !albumList.get(0).getAlbumName().isBlank())
-            albumList.add(0, new Album("", new ArrayList<>()));
+            albumList.add(0, new Album(""));
 
         adapter = new AlbumAdapter(albumList, context);
         recycler.setAdapter(adapter);
