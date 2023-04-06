@@ -578,17 +578,17 @@ public class ViewEdit extends AppCompatActivity {
         //set adapter to imgRecView
         filters = new ArrayList <> ();
         filters.add(new Filter("1", R.drawable.image1));
-        filters.add(new Filter("2", R.drawable.image2));
-        filters.add(new Filter("3", R.drawable.image3));
-        filters.add(new Filter("4", R.drawable.image4));
+        filters.add(new Filter("2", R.drawable.image1));
+        filters.add(new Filter("3", R.drawable.image1));
+        filters.add(new Filter("4", R.drawable.image1));
         filters.add(new Filter("5", R.drawable.image1));
-        filters.add(new Filter("6", R.drawable.image2));
-        filters.add(new Filter("7", R.drawable.image3));
-        filters.add(new Filter("8", R.drawable.image4));
+        filters.add(new Filter("6", R.drawable.image1));
+        filters.add(new Filter("7", R.drawable.image1));
+        filters.add(new Filter("8", R.drawable.image1));
         filters.add(new Filter("9", R.drawable.image1));
-        filters.add(new Filter("10", R.drawable.image2));
-        filters.add(new Filter("11", R.drawable.image3));
-        filters.add(new Filter("12", R.drawable.image4));
+        filters.add(new Filter("10", R.drawable.image1));
+        filters.add(new Filter("11", R.drawable.image1));
+        filters.add(new Filter("12", R.drawable.image1));
 
         FilterRecViewAdapter adapterFilter = new FilterRecViewAdapter(this);
         adapterFilter.setFilters(filters);

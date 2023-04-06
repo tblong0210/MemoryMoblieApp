@@ -7,7 +7,6 @@
     <string name="action_trash">Thùng rác</string>
     <string name="action_more">Khác</string>
     <string name="action_back">Trở lại</string>
-    <string name="action_view_details">Chi tiết</string>
     <string name="action_wallpaper">Đặt làm hình chờ</string>
     <string name="action_lockscreen">Đặt làm hình khóa</string>
     <string name="view_details">Chi tiết</string>
@@ -30,8 +29,7 @@
     <string name="query_hint_album">Tìm kiếm theo album</string>
     <string name="notif_delete_image">Xóa thành công</string>
     <string name="activity_edit_view"></string>
-    <string name="activity_image_view"></string>
-    <string name="activity_detail_view"></string>
-
-
+    <string name="activity_image_view">Xem ảnh</string>
+    <string name="activity_detail_view">Chi tiết</string>
+    <string name="activity_view_search">Tìm kiếm</string>
 </resources>

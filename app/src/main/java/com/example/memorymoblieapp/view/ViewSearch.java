@@ -16,25 +16,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.adapter.ImageSearchAdapter;
+import com.example.memorymoblieapp.adapter.SearchItemAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ViewSearch extends AppCompatActivity {
     private ImageView btnTypeFilter;
     private SearchView searchView;
     private RecyclerView recyclerView;
-    ArrayList<String> pathImages;
-    List<String> resultSearch;
+    private ArrayList<String> pathImages;
+    private ArrayList<String> pathAlbums;
+    private List<String> resultSearch;
     private int typeSearch;
-    ArrayList<String> history = new ArrayList<>();
-    ImageSearchAdapter adapter;
+    private ArrayList<String> historyImage;
+    private ArrayList<String> historyAlbum;
+
+    public ViewSearch() {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,15 +49,27 @@ public class ViewSearch extends AppCompatActivity {
     }
 
     private void initViews() {
-        pathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
-        history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH.getKey()));
+        pathImages = new ArrayList<>();
+        pathAlbums = new ArrayList<>();
+        historyImage = new ArrayList<>();
+
+        ArrayList<String> getPathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+        ArrayList<String> getPathAlbums = DataLocalManager.getStringList(KeyData.ALBUM_PATH_LIST.getKey());
+        ArrayList<String> getPathHistoryImage = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+
+        if (getPathImages != null)
+            pathImages.addAll(DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey()));
+        if (getPathAlbums != null)
+            pathAlbums.addAll(DataLocalManager.getStringList(KeyData.ALBUM_PATH_LIST.getKey()));
+        if (getPathHistoryImage != null)
+            historyImage.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey()));
 
         btnTypeFilter = findViewById(R.id.typeFilter);
         searchView = findViewById(R.id.searchView);
         recyclerView = findViewById(R.id.recyclerView);
         typeSearch = R.id.name;
 
-        resetHistory(history);
+        resetHistory(historyImage);
     }
 
     private void initActions() {
@@ -68,20 +83,30 @@ public class ViewSearch extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.equals("")){
-                    history.clear();
-                    history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH.getKey()));
-                    resetHistory(history);
+                ArrayList<String> history = new ArrayList<>();
+                ArrayList<String> paths = new ArrayList<>();
+
+                if (typeSearch == R.id.name) {
+                    history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey()));
+                    paths.addAll(pathImages);
+                } else {
+                    history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey()));
+                    paths.addAll(pathAlbums);
+                    paths.add("aaaaa");
                 }
-                else {
-                    String name = newText.toLowerCase();
-                    resultSearch = pathImages.stream()
-                            .filter(str -> str.substring(
-                                            str.lastIndexOf('/') + 1)
-                                    .toLowerCase()
-                                    .contains(name))
-                            .collect(Collectors.toList());
-                    resetHistory((ArrayList<String>) resultSearch);
+                if (!paths.isEmpty()) {
+                    if (newText.equals("")) {
+                        resetHistory(history);
+                    } else {
+                        String name = newText.toLowerCase();
+                        resultSearch = paths.stream()
+                                .filter(str -> str.substring(
+                                                str.lastIndexOf('/') + 1)
+                                        .toLowerCase()
+                                        .contains(name))
+                                .collect(Collectors.toList());
+                        resetHistory((ArrayList<String>) resultSearch);
+                    }
                 }
                 return false;
             }
@@ -89,8 +114,8 @@ public class ViewSearch extends AppCompatActivity {
     }
 
     private void resetHistory(ArrayList<String> paths) {
-        adapter = new ImageSearchAdapter();
-        adapter.setImages(paths);
+        SearchItemAdapter adapter = new SearchItemAdapter(typeSearch);
+        adapter.setElement(paths);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
@@ -103,13 +128,17 @@ public class ViewSearch extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 typeSearch = menuItem.getItemId();
+                ArrayList<String> history = new ArrayList<>();
                 if (typeSearch == R.id.name) {
                     Toast.makeText(ViewSearch.this, "Find by name", Toast.LENGTH_SHORT).show();
+                    history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey()));
                     searchView.setQueryHint(getString(R.string.query_hint_name));
                 } else if (typeSearch == R.id.album) {
                     Toast.makeText(ViewSearch.this, "Find by album", Toast.LENGTH_SHORT).show();
+                    history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey()));
                     searchView.setQueryHint(getString(R.string.query_hint_album));
                 }
+                resetHistory(history);
                 return true;
             }
         });

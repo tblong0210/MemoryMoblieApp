@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/delete"
-        android:icon="@mipmap/ic_trash"
+        android:icon="@drawable/ic_trash"
         android:title="Xóa"
         tools:ignore="HardcodedText" />
 

@@ -9,8 +9,8 @@
     <RelativeLayout
         android:id="@+id/parentHeader"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/light_blue"
+        android:layout_height="60dp"
+        android:background="@color/blue_800"
         android:elevation="10dp">
 
         <ImageView
@@ -24,7 +24,17 @@
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
-            android:src="@mipmap/ic_back" />
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imgBack"
+            android:text="@string/activity_image_view"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <com.example.memorymoblieapp.controI_image.ZoomableViewPager
@@ -41,7 +51,6 @@
         android:background="@color/bg_nav"
         android:backgroundTint="@color/light_blue"
         android:paddingBottom="10dp"
-        app:itemIconTint="@color/black"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation_setting_image" />
 </RelativeLayout>

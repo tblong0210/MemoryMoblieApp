@@ -1,6 +1,7 @@
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
-        Toast.makeText(this, newImage.size() + " "+ picturePath.size(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, newImage.size() + " "+ picturePath.size(), Toast.LENGTH_SHORT).show();
 
         detailed = false;
         albumList = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
@@ -170,9 +173,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     private ArrayList<String> handleSortListImageView() {
         ArrayList<String> newImage = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
         int flag = 0;
 
         for (String imagePath : images) {
@@ -180,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
-                if (imageDates.size() != 0 && dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1)) == false) {
+                if (imageDates.size() != 0 && !dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1))) {
 
                     if (flag % 3 == 2) {
                         newImage.add(" ");
@@ -201,6 +205,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return newImage;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.item_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.actionSearch) {
+            Intent intent = new Intent(this , ViewSearch.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

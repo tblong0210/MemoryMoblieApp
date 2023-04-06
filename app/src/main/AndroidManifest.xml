@@ -30,10 +30,12 @@
             android:label="@string/activity_image_view" />
         <activity
             android:name=".view.ViewDetails"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_detail_view"/>
         <activity
             android:name=".view.ViewSearch"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_view_search"/>
         <activity
             android:name=".main.MainActivity"
             android:exported="true" >

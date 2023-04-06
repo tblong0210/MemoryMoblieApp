@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/viewDetails"
-        android:title="@string/action_view_details" />
+        android:title="@string/activity_detail_view" />
 
     <item
         android:id="@+id/setWallpaper"

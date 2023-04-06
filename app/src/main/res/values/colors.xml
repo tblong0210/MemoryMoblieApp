@@ -10,6 +10,8 @@
     <color name="silver">#EEEEEE</color>
     <color name="red_200">#EE6C4D</color>
     <color name="blue_800">#3D5A80</color>
+    <color name="blue_600">#98c1d9</color>
     <color name="light_blue">#E0FBFC</color>
+    <color name="black_500">#293241</color>
     <color name="bg_nav">#F5F5FD</color>
 </resources>

@@ -52,7 +52,7 @@ public class ViewImage extends AppCompatActivity {
     private static RelativeLayout parentHeader;
     private ImageView imgBack;
     private ArrayList<String> picturePaths;
-    Set<String> favorList;
+    private ArrayList<String> favorList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,8 +68,19 @@ public class ViewImage extends AppCompatActivity {
     }
 
     private void initViews() {
-        favorList = DataLocalManager.getSetList(KeyData.FAVORITE_LIST.getKey());
-        picturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+        ArrayList<String> getPicturePaths = new ArrayList<>();
+        ArrayList<String> getFavorList = new ArrayList<>();
+        picturePaths = new ArrayList<>();
+        favorList = new ArrayList<>();
+
+        getPicturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+        getFavorList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
+        if (getFavorList != null)
+            favorList.addAll(getFavorList);
+
+        if (getPicturePaths != null)
+            picturePaths.addAll(getPicturePaths);
+
         parentHeader = findViewById(R.id.parentHeader);
         imgBack = findViewById(R.id.imgBack);
 
@@ -132,17 +143,17 @@ public class ViewImage extends AppCompatActivity {
 
                         favorList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
 
-                        item.setIcon(R.mipmap.ic_heart);
+                        item.setIcon(R.drawable.ic_unfavorite);
                         item.setTitle(R.string.action_unfavorite);
                     } else {
                         Toast.makeText(this, R.string.action_favorite, Toast.LENGTH_SHORT).show();
 
                         favorList.add(picturePaths.get(mViewPaper.getCurrentItem()));
 
-                        item.setIcon(R.mipmap.ic_heart_like);
+                        item.setIcon(R.drawable.ic_favorite);
                         item.setTitle(R.string.action_favorite);
                     }
-                    DataLocalManager.saveSetStringData(KeyData.FAVORITE_LIST.getKey(), favorList);
+                    DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), favorList);
                     break;
                 case R.id.edit:
                     Toast.makeText(ViewImage.this, "edit", Toast.LENGTH_SHORT).show();
@@ -168,13 +179,13 @@ public class ViewImage extends AppCompatActivity {
         });
     }
 
-    private void moveTrash(){
+    private void moveTrash() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dialog_yes_no);
 
         Window window = dialog.getWindow();
-        if(window == null) return;
+        if (window == null) return;
 
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -201,7 +212,7 @@ public class ViewImage extends AppCompatActivity {
                 int currPos = mViewPaper.getCurrentItem();
 
                 ArrayList<String> trashList = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
-                if(trashList == null){
+                if (trashList == null) {
                     trashList = new ArrayList<>();
                 }
                 trashList.add(picturePaths.get(currPos));
@@ -274,19 +285,22 @@ public class ViewImage extends AppCompatActivity {
                     intent.putExtra("path", picturePaths.get(mViewPaper.getCurrentItem()));
                     startActivity(intent);
                 } else if (item == R.id.setWallpaper) {
-                    Toast.makeText(ViewImage.this, "Set Wallpaper", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewImage.this, "Set wallpaper complete!", Toast.LENGTH_SHORT).show();
                     try {
                         wallpaperManager.setBitmap(viewToBitmap(largeImage, largeImage.getWidth(), largeImage.getHeight()));
                     } catch (IOException e) {
                         Log.e("Error set as wallpaper: ", e.getMessage());
+                        Toast.makeText(ViewImage.this, "Set wallpaper error!", Toast.LENGTH_SHORT).show();
+
                     }
                 } else if (item == R.id.setLockscreen) {
-                    Toast.makeText(ViewImage.this, "Set Lockscreen", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewImage.this, "Set lockscreen complete!", Toast.LENGTH_SHORT).show();
 
                     try {
                         wallpaperManager.setBitmap(viewToBitmap(largeImage, largeImage.getWidth(), largeImage.getHeight()), null, true, WallpaperManager.FLAG_LOCK);
                     } catch (IOException e) {
                         Log.e("Error set as lockscreen: ", e.getMessage());
+                        Toast.makeText(ViewImage.this, "Set lockscreen error!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 return true;
