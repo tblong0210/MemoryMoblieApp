@@ -34,6 +34,7 @@ import com.example.memorymoblieapp.controI_image.ZoomableViewPager;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
+import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
@@ -142,6 +143,7 @@ public class ViewImage extends AppCompatActivity {
                         Toast.makeText(this, R.string.action_unfavorite, Toast.LENGTH_SHORT).show();
 
                         favorList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
+                        MainActivity.lovedImageList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
 
                         item.setIcon(R.drawable.ic_unfavorite);
                         item.setTitle(R.string.action_unfavorite);
@@ -149,6 +151,7 @@ public class ViewImage extends AppCompatActivity {
                         Toast.makeText(this, R.string.action_favorite, Toast.LENGTH_SHORT).show();
 
                         favorList.add(picturePaths.get(mViewPaper.getCurrentItem()));
+                        MainActivity.lovedImageList.add(picturePaths.get(mViewPaper.getCurrentItem()));
 
                         item.setIcon(R.drawable.ic_favorite);
                         item.setTitle(R.string.action_favorite);
@@ -216,6 +219,9 @@ public class ViewImage extends AppCompatActivity {
                     trashList = new ArrayList<>();
                 }
                 trashList.add(picturePaths.get(currPos));
+                MainActivity.deletedImageList.add(picturePaths.get(currPos));
+                MainActivity.lovedImageList.remove(picturePaths.get(currPos));
+                favorList.remove(picturePaths.get(currPos));
 
                 ArrayList<String> viewListImage = DataLocalManager.getStringList(KeyData.IMAGE_PATH_VIEW_LIST.getKey());
                 viewListImage.remove(picturePaths.get(currPos));
@@ -229,6 +235,7 @@ public class ViewImage extends AppCompatActivity {
                 DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePaths);
                 DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), viewListImage);
                 DataLocalManager.saveData(KeyData.TRASH_LIST.getKey(), trashList);
+                DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), favorList);
             }
         });
 
@@ -244,10 +251,6 @@ public class ViewImage extends AppCompatActivity {
             item.setIcon(R.mipmap.ic_heart_like);
             item.setTitle(R.string.action_favorite);
         }
-    }
-
-    private void deleteFileImage() {
-
     }
 
     @SuppressLint("QueryPermissionsNeeded")

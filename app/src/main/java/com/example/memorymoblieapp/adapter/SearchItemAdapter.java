@@ -28,6 +28,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     private ArrayList<String> element;
     private Context context;
+    private Context mainContext;
     private int type;
 
     public SearchItemAdapter(int type) {
@@ -73,15 +74,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                 holder.parent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        Intent intent = new Intent(context, MainActivity.class);
-//                        intent.putExtra("path_image", element.get(position));
-//                        context.startActivity(intent);
-//
-//                        Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey());
-//                        if (history == null)
-//                            history = new HashSet<>();
-//                        history.add(element.get(position));
-//                        DataLocalManager.saveSetStringData(KeyData.HISTORY_SEARCH_IMAGE.getKey(), history);
+                        Intent intent = new Intent(view.getContext(), MainActivity.class);
+                        intent.putExtra("request", "VIEW_ALBUM_IMAGE");
+                        intent.putExtra("album_name", element.get(position));
+                        view.getContext().startActivity(intent);
                     }
                 });
 

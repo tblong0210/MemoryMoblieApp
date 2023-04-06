@@ -35,7 +35,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
     static ArrayList<Album> albums;

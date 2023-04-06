@@ -1,6 +1,8 @@
 package com.example.memorymoblieapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.TypedValue;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.view.ViewImage;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -67,7 +70,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder( ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         String image = images.get(position);
         Glide.with(context).load(image)
@@ -143,6 +146,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     }
                 }
                 else {
+                    Intent intent = new Intent(context, ViewImage.class);
+                    intent.putExtra("path_image", images.get(position));
+                    context.startActivity(intent);
                     photoListener.onPhotoClick(image);
                 }
             }
