@@ -3,6 +3,7 @@ package com.example.memorymoblieapp.obj;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Album {
@@ -62,5 +63,11 @@ public class Album {
         return albums.stream()
                 .map(Album::getAlbumName)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static Set<String> getAlbumNameSet(@NonNull ArrayList<Album> albums) {
+        return albums.stream()
+                .map(Album::getAlbumName)
+                .collect(Collectors.toSet());
     }
 }

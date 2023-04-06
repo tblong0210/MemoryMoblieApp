@@ -2,7 +2,7 @@ package com.example.memorymoblieapp.local_data_storage;
 
 public enum KeyData {
     SHARED_PREFERENCES,
-    ALBUM_PATH_LIST,
+    ALBUM_NAME_LIST,
     ALBUM_DATA_LIST,
     ALBUM_PASSWORD,
     IMAGE_PATH_LIST,
@@ -16,8 +16,8 @@ public enum KeyData {
         switch (this) {
             case SHARED_PREFERENCES:
                 return "SHARED_PREFERENCES";
-            case ALBUM_PATH_LIST:
-                return "ALBUM_PATH_LIST";
+            case ALBUM_NAME_LIST:
+                return "ALBUM_NAME_LIST";
             case ALBUM_DATA_LIST:
                 return "ALBUM_DATA_LIST";
             case ALBUM_PASSWORD:

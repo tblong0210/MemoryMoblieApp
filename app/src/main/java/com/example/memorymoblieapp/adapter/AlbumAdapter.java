@@ -167,6 +167,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                             AlbumFragment2.albumList.add(new Album(newAlbumName));
                             AlbumFragment2.updateItem(AlbumFragment2.albumList.size() - 1);
                             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                            DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                             dialog.dismiss();
                         }
                     });
@@ -278,6 +279,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                             AlbumFragment2.albumList.get(position).setAlbumName(newName);
                             AlbumFragment2.updateItem(position);
                             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                            DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                             Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
                             dialog1.dismiss();
                         }
@@ -319,6 +321,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     AlbumFragment2.albumList.get(position).setAlbumName(newName);
                     AlbumFragment2.updateItem(position);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                    DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                     Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
@@ -362,6 +365,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                 AlbumFragment2.albumList.remove(position);
                                 AlbumFragment2.updateItem(position);
                                 DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                                DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -385,6 +389,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         AlbumFragment2.albumList.remove(position);
                         AlbumFragment2.updateItem(position);
                         DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                        DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -429,6 +434,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 } else {
                     albums.get(position).setBlock(true);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                    DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                     Toast.makeText(context, "Khóa album thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
@@ -443,6 +449,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         if (albumPassword == null) {
             albums.get(position).setBlock(false);
             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+            DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
             Toast.makeText(context, "Xóa khóa album thành công!", Toast.LENGTH_SHORT).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -470,6 +477,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 } else {
                     albums.get(position).setBlock(false);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                    DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
                     Toast.makeText(context, "Xóa khóa album thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
