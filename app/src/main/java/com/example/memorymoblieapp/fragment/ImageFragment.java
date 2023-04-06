@@ -13,12 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
-import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
-import com.example.memorymoblieapp.local_data_storage.KeyData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +37,8 @@ public class ImageFragment extends Fragment {
     private RecyclerView recyclerview;
     private ArrayList<String> images;
     List<String> imageDates = new ArrayList<>();
+    private Button searchBtn ;
+    private Button sortBtn;
     private  int numberCol = 3;
     public ImageFragment(ArrayList<String>images, List<String> imageDates ) {
         this.images=images;
@@ -51,7 +53,15 @@ public class ImageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_image, container, false);
 
-        images = DataLocalManager.getStringList(KeyData.IMAGE_PATH_VIEW_LIST.getKey());
+        searchBtn = view.findViewById(R.id.search_image_button);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("tag","Clicked search button");
+            }
+        });
+
+        sortBtn = view.findViewById(R.id.sort_image_button);
 
         recyclerview = view.findViewById(R.id.recyclerview_gallery_images);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), numberCol);
@@ -60,15 +70,85 @@ public class ImageFragment extends Fragment {
         GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images, imageDates, new GalleryAdapter.PhotoListener() {
             @Override
             public void onPhotoClick(String path) {
-
+                Log.d("tag",path);
             }
-
             @Override
-            public void onPhotoLongClick(String path) {
-
+            public  void onPhotoLongClick(String path) {
+                Log.d("tag","Long" +path);
             }
         });
         recyclerview.setAdapter(galleryAdapter);
+        sortBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("tag","Clicked sort button");
+
+                ArrayList<String> newImageDateFlag = new ArrayList<>();;
+                ArrayList<String> newImagesFlag = new   ArrayList<String>();
+                ArrayList<String> newImageDate = new ArrayList<>();;
+                ArrayList<String> newImages = new   ArrayList<String>();
+                int flag =0;
+
+                for (int i=0;i<images.size();i++) {
+                    if(images.get(i)!=" ") {
+                        newImageDateFlag.add( imageDates.get(i));
+                        newImagesFlag.add(images.get(i));
+             /*           newImageDateFlag.add( Integer.toString(i));
+                        newImagesFlag.add(Integer.toString(i));*/
+
+                    }
+                }
+                String  temp;
+                int n = newImagesFlag.size() ;
+                for (int i = 0; i < n/ 2; i++) {
+                    temp = newImagesFlag.get(i);
+                    newImagesFlag.set(i, newImagesFlag.get(n - 1 - i));
+                    newImagesFlag.set(n - 1 - i,temp)  ;
+
+                    temp = newImageDateFlag.get(i);
+                    newImageDateFlag.set(i, newImageDateFlag.get(n - 1 - i));
+                    newImageDateFlag.set(n - 1 - i,temp)  ;
+                }
+
+                for(int i=0; i<newImagesFlag.size();i++)
+                {
+                    Log.d("Imagess",newImagesFlag.get(i) + " - " + newImageDateFlag.get(i));
+                }
+
+                    Log.d("Tagggg",newImageDateFlag.size()+ "  -  "+newImageDateFlag.size());
+
+                for (int i=0;i<newImagesFlag.size();i++) {
+                    if(newImagesFlag.get(i)!=" ") {
+                        if(i!=0 && newImageDateFlag.get(i).equals(newImageDateFlag.get(i-1))==false )
+                        {
+
+                            if(flag%3==2)
+                            {
+                                newImages.add(" ");
+                                newImageDate.add(" ");
+                            }
+                            if(flag%3==1)
+                            {
+                                newImages.add(" ");
+                                newImages.add(" ");
+                                newImageDate.add(" ");
+                                newImageDate.add(" ");
+                            }
+                            flag=0;
+                        }
+                        newImages.add(newImagesFlag.get(i));
+                        newImageDate.add(newImageDateFlag.get(i));
+                        flag++;
+
+                    }
+                }
+        images = newImages;
+                imageDates = newImageDate;
+                galleryAdapter.setImages(newImages);
+                galleryAdapter.setImageDates(newImageDate);
+                galleryAdapter.notifyDataSetChanged();
+            }
+        });
 
         return view;
     }
@@ -83,8 +163,6 @@ public class ImageFragment extends Fragment {
 //        recyclerview.setHasFixedSize(true);
 //        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images);
 //        recyclerview.setAdapter(galleryAdapter);
-
-
     }
 
 
