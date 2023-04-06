@@ -23,6 +23,8 @@ import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.Album;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class AlbumBlockFragment extends Fragment {
     TextView txtSetupPassword;
     TextView txtChangePassword;
@@ -94,8 +96,9 @@ public class AlbumBlockFragment extends Fragment {
                 } else {
                     Toast.makeText(context, "Khởi tạo mật khẩu thành công!", Toast.LENGTH_SHORT).show();
                     MainActivity.isVerify = false;
-                    DataLocalManager.saveData(KeyData.ALBUM_PASSWORD.getKey(), password);
-                    albumPassword = password;
+                    String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+                    DataLocalManager.saveData(KeyData.ALBUM_PASSWORD.getKey(), hashedPassword);
+                    albumPassword = hashedPassword;
                     txtSetupPassword.setVisibility(View.GONE);
                     dividerSetupPassword.setVisibility(View.GONE);
                     txtChangePassword.setVisibility(View.VISIBLE);
@@ -111,7 +114,7 @@ public class AlbumBlockFragment extends Fragment {
         txtChangePassword.setOnClickListener(itemView -> {
             Context context = itemView.getContext();
             AlertDialog.Builder builder = new AlertDialog.Builder(albumBlockFragment.getContext());
-            builder.setTitle("Khởi tạo mật khẩu");
+            builder.setTitle("Đổi mật khẩu");
             builder.setView(albumBlockFragment);
 
             LinearLayout layout = new LinearLayout(context);
@@ -161,15 +164,16 @@ public class AlbumBlockFragment extends Fragment {
                     Toast.makeText(context, "Mật khẩu xác nhận không trùng khớp!", Toast.LENGTH_SHORT).show();
                     reNewPasswordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu xác nhận không trùng khớp!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                     reNewPasswordInput.requestFocus();
-                } else if (!oldPassword.equals(albumPassword)) {
+                } else if (!BCrypt.checkpw(oldPassword, albumPassword)) {
                     Toast.makeText(context, "Mật khẩu cũ không chính xác!", Toast.LENGTH_SHORT).show();
                     oldPasswordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu cũ không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                     oldPasswordInput.requestFocus();
                 } else {
                     Toast.makeText(context, "Đổi mật khẩu thành công!", Toast.LENGTH_SHORT).show();
                     MainActivity.isVerify = false;
-                    DataLocalManager.saveData(KeyData.ALBUM_PASSWORD.getKey(), newPassword);
-                    albumPassword = newPassword;
+                    String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+                    DataLocalManager.saveData(KeyData.ALBUM_PASSWORD.getKey(), hashedPassword);
+                    albumPassword = hashedPassword;
                     dialog.dismiss();
                 }
             });
@@ -200,7 +204,7 @@ public class AlbumBlockFragment extends Fragment {
                     passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 }
 
-                else if (!password.equals(albumPassword)) {
+                else if (!BCrypt.checkpw(password, albumPassword)) {
                     Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
                     passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 }
