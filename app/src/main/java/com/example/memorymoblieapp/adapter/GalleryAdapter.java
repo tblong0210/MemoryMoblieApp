@@ -1,7 +1,9 @@
 package com.example.memorymoblieapp.adapter;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,25 +26,31 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
 
     private Context context;
     private List<String> images;
-//    protected PhotoListener photoListener;
-    List<String> imageDates;
     protected PhotoListener photoListener;
-
+    List<String> imageDates;
     private  boolean isLongClick =false;
     private Vector<String> listSelect = new Vector<String>();
-
-    public GalleryAdapter(Context context, List<String> images, List<String> imageDates,  PhotoListener photoListener)
+    public GalleryAdapter(Context context, List<String> images, List<String> imageDates, PhotoListener photoListener)
     {
         this.context = context;
         this.images = images;
         this.imageDates = imageDates;
+
 //        , PhotoListener photoListener
-//        this.photoListener = photoListener;
-          this.photoListener = photoListener;
+        this.photoListener = photoListener;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    public void setImageDates(List<String> imageDates) {
+        this.imageDates = imageDates;
     }
 
     @NonNull
@@ -58,29 +66,43 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return new ViewHolder(v);
     }
 
-
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
 
         String image = images.get(position);
-
         Glide.with(context).load(image)
 //                .placeholder(R.drawable.image1)
 //                .error(R.drawable.image3)
                 .into(holder.image);
 
         holder.textDate.setVisibility(View.VISIBLE);
-        if(position==0 || imageDates.get(position-1).equals(" ")==true)
+        if(position==0 || imageDates.get(position-1).equals(" ")==true || (position >0 &&imageDates.get(position-1).equals(imageDates.get(position))==false) )
+        {
             holder.textDate.setText(imageDates.get(position));
+        }
         else
+        {
             holder.textDate.setText(" ");
+        }
+
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, // width
                 LinearLayout.LayoutParams.WRAP_CONTENT // height
         );
         holder.textDate.setLayoutParams(layoutParams);
+        if (position==0
+                || position==1 || position==2 ||  (position >0 &&imageDates.get(position-1).equals(imageDates.get(position))==false)
+                || (position >1 &&imageDates.get(position-2).equals(imageDates.get(position))==false)
+                || (position >2 &&imageDates.get(position-3).equals(imageDates.get(position))==false))
+        {
+            ViewGroup.MarginLayoutParams layoutParamss =
+                    (ViewGroup.MarginLayoutParams) holder.textDate.getLayoutParams();
+            layoutParamss.setMargins(30, 50, 16, 10);
+            holder.textDate.setLayoutParams(layoutParamss);
+        }
 
-              if( imageDates.get(position).equals(" ")==false) {
+//        formatter.format(imageDates.get(position))
+        if(image.equals(" ")==false) {
 
             if (isLongClick) {
                 
@@ -88,9 +110,20 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     Drawable drawable = context.getDrawable(R.drawable.circle_shape);
                     holder.iconLongSelect.setBackground(drawable);
                 }
+                int sizeInDp = 25;
+                int sizeInPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sizeInDp,context.getResources().getDisplayMetrics());
+                LinearLayout.LayoutParams layoutParamSelect = new LinearLayout.LayoutParams(sizeInPixels, sizeInPixels);
+                holder.iconLongSelect.setLayoutParams(layoutParamSelect);
+
                 holder.iconLongSelect.setVisibility(View.VISIBLE);
             }
         }
+        else
+        {
+            holder.iconLongSelect.setVisibility(View.INVISIBLE);
+        }
+
+
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,14 +165,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             }
         });
 
-//        formatter.format(imageDates.get(position))
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                photoListener.onPhotoClick(image);
-//            }
-//        });
     }
 
     @Override
@@ -147,26 +172,25 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return images.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        ImageView image ;
         TextView textDate;
         ToggleButton iconLongSelect;
         Button buttonCancelSelect;
-
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView)
+        {
             super(itemView);
             image = itemView.findViewById(R.id.imageGallery);
             textDate = itemView.findViewById(R.id.headDate);
             iconLongSelect = itemView.findViewById(R.id.toggleButton);
-
+            buttonCancelSelect = itemView.findViewById(R.id.button_cancel_select);
+            
         }
     }
 
-        public interface PhotoListener {
-            void onPhotoClick(String path);
-
-            void onPhotoLongClick(String path);
-        }
-
+    public interface  PhotoListener{
+        void onPhotoClick(String path);
+        void onPhotoLongClick(String path);
+    }
 }
