@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     public static boolean detailed; // view option of image fragment
     public static ArrayList<Album> albumList;
-    ArrayList<String> lovedImageList;
-    ArrayList<String> deletedImageList;
+    public static ArrayList<String> lovedImageList;
+    public static ArrayList<String> deletedImageList;
     BottomNavigationView bottomNavigationView;
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
@@ -100,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
+//        ArrayList<String> arr = new ArrayList<>();
+//        arr.addAll(DataLocalManager.getSetList(KeyData.UN_AVAILABLE_IMAGE.getKey()));
+
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
 
         images = ImagesGallery.listOfImages(this);
@@ -125,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
         ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
         fragmentTransaction.addToBackStack("image");
+
+        Intent intent = getIntent();
+        String request = intent.getStringExtra("request");
+        String albumName = intent.getStringExtra("album_name");
+        if (request != null && albumName != null) {
+            onMsgToMain(albumName, request);
+        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
@@ -170,13 +181,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-
     }
 
     @SuppressLint("SimpleDateFormat")
     private ArrayList<String> handleSortListImageView() {
         ArrayList<String> newImage = new ArrayList<>();
-         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
         int flag = 0;
 
         for (String imagePath : images) {
@@ -217,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.actionSearch) {
-            Intent intent = new Intent(this , ViewSearch.class);
+            Intent intent = new Intent(this, ViewSearch.class);
             startActivity(intent);
             return true;
         }
@@ -252,5 +262,29 @@ public class MainActivity extends AppCompatActivity {
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
+    }
+
+    private void addLovedImageList() {
+        lovedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
+    }
+
+    private void addDeletedImageList() {
+        deletedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
+    }
+
+    public void onMsgToMain(String data, String request) {
+        if (request.equals("VIEW_ALBUM_IMAGE")) {
+            int pos = 0;
+            for (Album a : albumList) {
+                if (!a.getAlbumName().equals(data))
+                    pos++;
+                else break;
+            }
+
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName());
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+            fragmentTransaction.addToBackStack("album");
+        }
     }
 }

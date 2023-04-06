@@ -54,13 +54,13 @@ public class ViewSearch extends AppCompatActivity {
         historyImage = new ArrayList<>();
 
         ArrayList<String> getPathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
-        ArrayList<String> getPathAlbums = DataLocalManager.getStringList(KeyData.ALBUM_PATH_LIST.getKey());
+        ArrayList<String> getPathAlbums = DataLocalManager.getStringList(KeyData.ALBUM_NAME_LIST.getKey());
         ArrayList<String> getPathHistoryImage = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 
         if (getPathImages != null)
             pathImages.addAll(DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey()));
         if (getPathAlbums != null)
-            pathAlbums.addAll(DataLocalManager.getStringList(KeyData.ALBUM_PATH_LIST.getKey()));
+            pathAlbums.addAll(DataLocalManager.getStringList(KeyData.ALBUM_NAME_LIST.getKey()));
         if (getPathHistoryImage != null)
             historyImage.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey()));
 
@@ -92,7 +92,7 @@ public class ViewSearch extends AppCompatActivity {
                 } else {
                     history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey()));
                     paths.addAll(pathAlbums);
-                    paths.add("aaaaa");
+                    paths.add("al");
                 }
                 if (!paths.isEmpty()) {
                     if (newText.equals("")) {
