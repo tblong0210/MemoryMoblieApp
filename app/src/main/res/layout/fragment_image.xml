@@ -24,12 +24,12 @@
         android:layout_height="wrap_content"
         android:background="@drawable/baseline_sort" />
 
-    <Button
-        android:layout_width="55dp"
-        android:id="@+id/search_image_button"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/baseline_search" />
+<!--&lt;!&ndash;    <Button-->
+<!--        android:layout_width="55dp"-->
+<!--        android:id="@+id/search_image_button"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:background="@drawable/baseline_search" />&ndash;&gt;-->
 
   </RelativeLayout>
 
