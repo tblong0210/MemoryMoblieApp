@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
         if (request.equals("VIEW_ALBUM_IMAGE")) {
             int pos = 0;
             for (Album a : albumList) {
-                if(!a.getAlbumName().equals(data))
+                if (!a.getAlbumName().equals(data))
                     pos++;
                 else break;
             }
