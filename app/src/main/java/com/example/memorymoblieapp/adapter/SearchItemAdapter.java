@@ -78,6 +78,12 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                         intent.putExtra("request", "VIEW_ALBUM_IMAGE");
                         intent.putExtra("album_name", element.get(position));
                         view.getContext().startActivity(intent);
+
+                        Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey());
+                        if (history == null)
+                            history = new HashSet<>();
+                        history.add(element.get(position));
+                        DataLocalManager.saveSetStringData(KeyData.HISTORY_SEARCH_ALBUM.getKey(), history);
                     }
                 });
 

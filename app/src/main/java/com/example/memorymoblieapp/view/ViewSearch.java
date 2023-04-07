@@ -23,6 +23,7 @@ import com.example.memorymoblieapp.local_data_storage.KeyData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ViewSearch extends AppCompatActivity {
@@ -54,15 +55,15 @@ public class ViewSearch extends AppCompatActivity {
         historyImage = new ArrayList<>();
 
         ArrayList<String> getPathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
-        ArrayList<String> getPathAlbums = DataLocalManager.getStringList(KeyData.ALBUM_NAME_LIST.getKey());
-        ArrayList<String> getPathHistoryImage = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+        Set<String> getPathAlbums = DataLocalManager.getSetList(KeyData.ALBUM_NAME_LIST.getKey());
+        ArrayList<String> getPathHistoryImage = DataLocalManager.getStringList(KeyData.HISTORY_SEARCH_IMAGE.getKey());
 
         if (getPathImages != null)
-            pathImages.addAll(DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey()));
+            pathImages.addAll(getPathImages);
         if (getPathAlbums != null)
-            pathAlbums.addAll(DataLocalManager.getStringList(KeyData.ALBUM_NAME_LIST.getKey()));
+            pathAlbums.addAll(getPathAlbums);
         if (getPathHistoryImage != null)
-            historyImage.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey()));
+            historyImage.addAll(getPathHistoryImage);
 
         btnTypeFilter = findViewById(R.id.typeFilter);
         searchView = findViewById(R.id.searchView);
@@ -92,7 +93,6 @@ public class ViewSearch extends AppCompatActivity {
                 } else {
                     history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey()));
                     paths.addAll(pathAlbums);
-                    paths.add("al");
                 }
                 if (!paths.isEmpty()) {
                     if (newText.equals("")) {
