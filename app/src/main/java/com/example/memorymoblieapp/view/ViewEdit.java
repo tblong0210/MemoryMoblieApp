@@ -50,6 +50,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
 
@@ -60,6 +61,7 @@ public class ViewEdit extends AppCompatActivity {
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
+    private String path_image;
     private SeekBar seekBarBrightnessLevel, seekBarContrast,  seekBarBlur;
 
     private ArrayList<Filter> filters;
@@ -178,19 +180,35 @@ public class ViewEdit extends AppCompatActivity {
 //            e.printStackTrace();
 //            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
 //        }
-
+        String new_path= path_image;
+        ArrayList<Integer> numberSlag = new ArrayList<>();
+        for (int i=0; i< new_path.length();i++){
+            if(new_path.charAt(i)=='/'){
+                numberSlag.add(i);
+            }
+        }
+        new_path=new_path.substring(0,numberSlag.get(numberSlag.size()-1));
+        UUID uuid = UUID.randomUUID(); // Tạo một đối tượng UUID ngẫu nhiên
+        String uniqueString = uuid.toString(); // Chuyển UUID thành chuỗi
+        new_path = new_path + "/" + uniqueString + ".jpeg";
+        Log.d("Index",String.valueOf(numberSlag.get(numberSlag.size()-1)));
+        Log.d("PATH", path_image);
+        Log.d("NEW PATH", new_path);
         // Chuyển đổi ImageView thành Bitmap
-        imgViewEdit.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getDrawingCache());
-        imgViewEdit.setDrawingCacheEnabled(false);
+//        imgViewEdit.setDrawingCacheEnabled(true);
+//        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getDrawingCache());
+//        imgViewEdit.setDrawingCacheEnabled(false);
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
 
 // Lưu ảnh vào thư mục trong bộ nhớ trong
-        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyBitmap.png";
-        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+        FileOutputStream fileOutputStream = new FileOutputStream(new_path);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
         fileOutputStream.flush();
         fileOutputStream.close();
     }
+
+
 
     private void initOptionActions() {
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -453,21 +471,51 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleBrightnessLevel(){
-
+        Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // calculate brightness value from progress (0-100)
-                float brightness = (float) progress / 100;
 
-                // create a color filter with the calculated brightness
-                ColorFilter filter = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    filter = new LightingColorFilter(Color.rgb(brightness, brightness, brightness), 0);
+//                // calculate brightness value from progress (0-100)
+//                float brightness = (float) progress / 100;
+//
+//                // create a color filter with the calculated brightness
+//                ColorFilter filter = null;
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//                    filter = new LightingColorFilter(Color.rgb(brightness, brightness, brightness), 0);
+//                }
+//
+//                // apply the color filter to the ImageView
+//                imgViewEdit.setColorFilter(filter);
+
+                // Lấy ảnh từ file hoặc từ ImageView đã hiển thị
+                Bitmap originalBitmap = tempBitmap;
+
+                // Tạo một Bitmap mới từ ảnh gốc
+                Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), originalBitmap.getConfig());
+
+                // Thay đổi độ sáng của từng pixel trong ảnh
+                for (int i = 0; i < originalBitmap.getWidth(); i++) {
+                    for (int j = 0; j < originalBitmap.getHeight(); j++) {
+                        int pixel = originalBitmap.getPixel(i, j);
+                        int alpha = Color.alpha(pixel);
+                        int red = Color.red(pixel) + progress;
+                        int green = Color.green(pixel) + progress;
+                        int blue = Color.blue(pixel) + progress;
+
+                        // Giới hạn giá trị của red, green và blue trong khoảng từ 0 đến 255
+                        red = Math.min(255, Math.max(0, red));
+                        green = Math.min(255, Math.max(0, green));
+                        blue = Math.min(255, Math.max(0, blue));
+
+                        int newPixel = Color.argb(alpha, red, green, blue);
+                        newBitmap.setPixel(i, j, newPixel);
+                    }
                 }
 
-                // apply the color filter to the ImageView
-                imgViewEdit.setColorFilter(filter);
+                // Hiển thị ảnh mới trên ImageView
+                imgViewEdit.setImageBitmap(newBitmap);
+
             }
 
             @Override
@@ -567,11 +615,14 @@ public class ViewEdit extends AppCompatActivity {
     private void initViews() {
         imgViewEdit = findViewById(R.id.imgViewEdit);
         Intent intent = getIntent();
-        String path = intent.getStringExtra("path_image");
-        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        path_image = intent.getStringExtra("path_image");
+        Toast.makeText(this, path_image, Toast.LENGTH_LONG).show();
+        Log.d(path_image, "PATH ");
+        Bitmap bitmap = BitmapFactory.decodeFile(path_image);
         imgViewEdit.setImageBitmap(bitmap);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
+
 
         viewTxtAdd = findViewById(R.id.viewTxtAdd);
 
