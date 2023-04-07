@@ -2,14 +2,12 @@ package com.example.memorymoblieapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,19 +17,14 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -43,20 +36,12 @@ import android.widget.Toast;
 import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.adapter.BrightnessRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
-import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
-import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class ViewEdit extends AppCompatActivity {
@@ -64,11 +49,11 @@ public class ViewEdit extends AppCompatActivity {
 
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
-    private RelativeLayout emoteOption, cropOption, brightnessOption, blurOption;
+    private RelativeLayout emoteOption, cropOption, brightnessOption;
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarShadow, seekBarBlurLevel;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast,  seekBarBlur;
 
     private ArrayList<Filter> filters;
 
@@ -171,7 +156,6 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.cropPic:
                         cropOption.setVisibility(View.VISIBLE);
 
-                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -180,7 +164,6 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.filterPic:
                         filterOption.setVisibility(View.VISIBLE);
 
-                        blurOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -190,7 +173,6 @@ public class ViewEdit extends AppCompatActivity {
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
 
-                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -199,20 +181,11 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
 
-                        blurOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
 
                         break;
-                    case R.id.blurPic:
-                        blurOption.setVisibility(View.VISIBLE);
-
-                        emoteOption.setVisibility(View.GONE);
-                        filterOption.setVisibility(View.GONE);
-                        brightnessOption.setVisibility(View.GONE);
-                        cropOption.setVisibility(View.GONE);
-                        handleBlurLevel();
 
                     default:
                         break;
@@ -285,7 +258,8 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.brightnessLevelPic:
                         Toast.makeText(ViewEdit.this, "brightness", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.GONE);
-                        seekBarShadow.setVisibility(View.GONE);
+//                        seekBarShadow.setVisibility(View.GONE);
+                        seekBarBlur.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.VISIBLE);
                         handleBrightnessLevel();
                         break;
@@ -293,18 +267,19 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.contrastPic:
                         Toast.makeText(ViewEdit.this, "contrast", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.VISIBLE);
-                        seekBarShadow.setVisibility(View.GONE);
+//                        seekBarShadow.setVisibility(View.GONE);
+                        seekBarBlur.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.GONE);
                         handleContrastLevel();
 
                         break;
 
-                    case R.id.shadowPic:
-                        Toast.makeText(ViewEdit.this, "Shadow", Toast.LENGTH_SHORT).show();
+                    case R.id.blurPic:
+                        Toast.makeText(ViewEdit.this, "Blur", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.GONE);
-                        seekBarShadow.setVisibility(View.VISIBLE);
+                        seekBarBlur.setVisibility(View.VISIBLE);
                         seekBarBrightnessLevel.setVisibility(View.GONE);
-                        handleShadowLevel();
+                        handleBlurLevel();
                     default:
                         break;
                 }
@@ -319,16 +294,11 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleBlurLevel(){
-        seekBarBlurLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBarBlur.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float limit = 10f;
-                float alpha;
-                if(progress < limit){
-                   alpha = limit /100;
-                }else{
-                    alpha = (float) progress / 100;
-                }
+                float alpha = (float) progress / 100;
+
                 imgViewEdit.setAlpha(alpha);
             }
 
@@ -491,23 +461,23 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void handleShadowLevel(){
-        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-                Bitmap originalBitmap = drawable.getBitmap();
-                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-    }
+//    private void handleShadowLevel(){
+//        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+//                Bitmap originalBitmap = drawable.getBitmap();
+//                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {}
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {}
+//        });
+//
+//    }
     private Bitmap addShadow(Bitmap bitmap, int shadowValue) {
         Log.d("Shadow:", String.valueOf(shadowValue));
         // Tạo một Bitmap mới để chứa ảnh đã đổ bóng
@@ -564,7 +534,6 @@ public class ViewEdit extends AppCompatActivity {
         cropOption = findViewById(R.id.cropOption);
         filterOption = findViewById(R.id.filterOption);
         brightnessOption = findViewById(R.id.brightnessOption);
-        blurOption = findViewById(R.id.blurOption);
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
@@ -598,8 +567,6 @@ public class ViewEdit extends AppCompatActivity {
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
-        seekBarShadow = findViewById(R.id.seekBarShadow);
-        seekBarBlurLevel = findViewById(R.id.seekBarBlurLevel);
-
+        seekBarBlur = findViewById(R.id.seekBarBlur);
     }
 }

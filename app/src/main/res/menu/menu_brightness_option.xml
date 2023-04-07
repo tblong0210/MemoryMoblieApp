@@ -15,15 +15,15 @@
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
         android:icon="@mipmap/ic_contrast" />
-
+    
 
     <item
-        android:id="@+id/shadowPic"
+        android:id="@+id/blurPic"
         android:title="Shadow"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
-        android:icon="@mipmap/ic_shadow" />
+        android:icon="@mipmap/ic_blur" />
 
 
 </menu>
