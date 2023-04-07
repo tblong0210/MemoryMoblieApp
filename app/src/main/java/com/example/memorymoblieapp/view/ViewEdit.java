@@ -440,8 +440,6 @@ public class ViewEdit extends AppCompatActivity {
 
     }
     private void handleCropImage(float firstRatio, float secondRatio){
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
 
         int width = originImage.getWidth();
         int height = originImage.getHeight();
@@ -457,15 +455,20 @@ public class ViewEdit extends AppCompatActivity {
             imgViewEdit.setImageBitmap(croppedBitmap);
         }
         else{
-            // Calculate the new height based on a 16:9 aspect ratio
-            int newWidth = (int)(width * firstRatio / secondRatio);
+            int originalWidth = originImage.getWidth();
+            int originalHeight = originImage.getHeight();
+            int newWidth = originalWidth;
+            int newHeight = originalWidth * 16 / 9;
+            if (newHeight > originalHeight) {
+                newHeight = originalHeight;
+                newWidth = originalHeight * 9 / 16;
+            }
+            int left = (originalWidth - newWidth) / 2;
+            int top = (originalHeight - newHeight) / 2;
 
-            // Calculate the y-coordinate for the top of the new image
-            int y = (height - newWidth) / 2;
+            Bitmap croppedImage = Bitmap.createBitmap(originImage, left, top, newWidth, newHeight);
+            imgViewEdit.setImageBitmap(croppedImage);
 
-            // Create a new bitmap with the desired dimensions
-            Bitmap croppedBitmap = Bitmap.createBitmap(originImage, y,0 , newWidth, width);
-            imgViewEdit.setImageBitmap(croppedBitmap);
         }
         //originalBitmap.recycle();
     }
