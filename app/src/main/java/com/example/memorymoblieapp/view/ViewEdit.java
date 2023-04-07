@@ -2,10 +2,14 @@ package com.example.memorymoblieapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
@@ -20,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,9 +42,11 @@ import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
+import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,11 +79,32 @@ public class ViewEdit extends AppCompatActivity {
         setContentView(R.layout.activity_view_edit);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
 
+        if (!checkPermissionList(permissionList))
+            ActivityCompat.requestPermissions(ViewEdit.this, permissionList, 1);
 
-        initViews();
-        initOptionActions();
+        else {
+            initViews();
+            initOptionActions();
+        }
 
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            initViews();
+            initOptionActions();
+        }
+    }
+    private boolean checkPermissionList(String[] permissionList) {
+        int permissionCheck;
+        for (String per : permissionList) {
+            permissionCheck = ContextCompat.checkSelfPermission(this, per);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) return false;
+        }
+        return true;
     }
 
     @Override
@@ -98,7 +126,11 @@ public class ViewEdit extends AppCompatActivity {
                 break;
             case R.id.saveViewEdit:
                 Toast.makeText(this, "Save Picture", Toast.LENGTH_SHORT).show();
-                savePicture();
+                try {
+                    savePicture();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 break;
@@ -120,7 +152,7 @@ public class ViewEdit extends AppCompatActivity {
         });
         imgViewEdit.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
     }
-    private void savePicture() {
+    private void savePicture() throws IOException {
 //        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
 //        Bitmap createdImage = drawable.getBitmap();
 //        File pictureFile = new File("/user/abc", createdImage.toString() + ".jpg");
@@ -129,23 +161,35 @@ public class ViewEdit extends AppCompatActivity {
 //        out.flush();
 //        out.close();
 
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
+//        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+//        Bitmap bitmap = drawable.getBitmap();
+//
+//        String filename = "modified_image.jpg";
+//        File file = new File(getExternalFilesDir(null), filename);
+//
+//        try {
+//            FileOutputStream fos = new FileOutputStream(file);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            fos.flush();
+//            fos.close();
+//            System.out.println("Image saved to " + file.getAbsolutePath());
+//            Toast.makeText(ViewEdit.this, "Image saved to " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
+//        }
 
-        String filename = "modified_image.jpg";
-        File file = new File(getExternalFilesDir(null), filename);
+        // Chuyển đổi ImageView thành Bitmap
+        imgViewEdit.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getDrawingCache());
+        imgViewEdit.setDrawingCacheEnabled(false);
 
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            System.out.println("Image saved to " + file.getAbsolutePath());
-            Toast.makeText(ViewEdit.this, "Image saved to " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
-        }
+// Lưu ảnh vào thư mục trong bộ nhớ trong
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyBitmap.png";
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+        fileOutputStream.flush();
+        fileOutputStream.close();
     }
 
     private void initOptionActions() {
@@ -344,7 +388,9 @@ public class ViewEdit extends AppCompatActivity {
 
     }
     private void handleCropImage(float firstRatio, float secondRatio){
-        // Get the original dimensions
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap originalBitmap = drawable.getBitmap();
+
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 

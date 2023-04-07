@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/firstResizePic"
+        android:title="16:9"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@mipmap/ic_16_9" />
+
+    <item
+        android:id="@+id/secondResizePic"
+        android:title="4:3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@mipmap/ic_3_4"/>
+    <item
         android:id="@+id/rotatePic"
         android:title="rotate"
         android:layout_width="30dp"
@@ -24,20 +39,5 @@
         android:layout_marginRight="30dp"
         android:icon="@mipmap/ic_flip_vertical" />
 
-    <item
-        android:id="@+id/firstResizePic"
-        android:title="16:9"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="30dp"
-        android:icon="@mipmap/ic_16_9" />
-
-    <item
-        android:id="@+id/secondResizePic"
-        android:title="4:3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="30dp"
-        android:icon="@mipmap/ic_3_4"/>
 
 </menu>
