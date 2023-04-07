@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
-    private List<String> imageDates = new ArrayList<>();
+    private List<String> imageDates;
     ArrayList<String> images;
     ArrayList<String> newImage;
     ArrayList<String> trashListImage;
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void initiateApp() {
 //        ArrayList<String> arr = new ArrayList<>();
 //        arr.addAll(DataLocalManager.getSetList(KeyData.UN_AVAILABLE_IMAGE.getKey()));
+        imageDates = new ArrayList<>();
 
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
 
@@ -262,14 +263,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
-    }
-
-    private void addLovedImageList() {
-        lovedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
-    }
-
-    private void addDeletedImageList() {
-        deletedImageList.add("/storage/emulated/0/Download/iPhone-14-Purple-wallpaper.png");
     }
 
     public void onMsgToMain(String data, String request) {
