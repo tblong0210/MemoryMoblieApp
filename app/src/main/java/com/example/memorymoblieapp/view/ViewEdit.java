@@ -476,17 +476,6 @@ public class ViewEdit extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-//                // calculate brightness value from progress (0-100)
-//                float brightness = (float) progress / 100;
-//
-//                // create a color filter with the calculated brightness
-//                ColorFilter filter = null;
-//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//                    filter = new LightingColorFilter(Color.rgb(brightness, brightness, brightness), 0);
-//                }
-//
-//                // apply the color filter to the ImageView
-//                imgViewEdit.setColorFilter(filter);
 
                 // Lấy ảnh từ file hoặc từ ImageView đã hiển thị
                 Bitmap originalBitmap = tempBitmap;
@@ -527,19 +516,46 @@ public class ViewEdit extends AppCompatActivity {
 
     }
     private void handleContrastLevel(){
+        Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         seekBarContrast.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Update the contrast level of the image
-                float contrast = (float)((progress + 100) / 100.0);
-                ColorMatrix colorMatrix = new ColorMatrix();
-                colorMatrix.set(new float[] {
-                        contrast, 0, 0, 0, 0,
-                        0, contrast, 0, 0, 0,
-                        0, 0, contrast, 0, 0,
-                        0, 0, 0, 1, 0
-                });
-                imgViewEdit.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+                // Lấy ảnh từ file hoặc từ ImageView đã hiển thị
+                Bitmap originalBitmap = tempBitmap;
+
+                // Tạo một Bitmap mới từ ảnh gốc
+                Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), originalBitmap.getConfig());
+
+                // Thay đổi độ tương phản của từng pixel trong ảnh
+                float contrast = (float) progress / 100.0f;
+                contrast = contrast * contrast;
+                for (int i = 0; i < originalBitmap.getWidth(); i++) {
+                    for (int j = 0; j < originalBitmap.getHeight(); j++) {
+                        int pixel = originalBitmap.getPixel(i, j);
+                        int alpha = Color.alpha(pixel);
+                        int red = Color.red(pixel);
+                        int green = Color.green(pixel);
+                        int blue = Color.blue(pixel);
+
+                        // Thực hiện tính toán độ tương phản mới cho red, green và blue
+                        red = (int) ((((red / 255.0f) - 0.5f) * contrast + 0.5f) * 255.0f);
+                        green = (int) ((((green / 255.0f) - 0.5f) * contrast + 0.5f) * 255.0f);
+                        blue = (int) ((((blue / 255.0f) - 0.5f) * contrast + 0.5f) * 255.0f);
+
+                        // Giới hạn giá trị của red, green và blue trong khoảng từ 0 đến 255
+                        red = Math.min(255, Math.max(0, red));
+                        green = Math.min(255, Math.max(0, green));
+                        blue = Math.min(255, Math.max(0, blue));
+                        // Tạo một pixel mới từ các giá trị màu sắc đã được thay đổi
+                        int newPixel = Color.argb(alpha, red, green, blue);
+
+                        // Đặt pixel mới vào Bitmap mới
+                        newBitmap.setPixel(i, j, newPixel);
+                    }
+                }
+
+                // Hiển thị Bitmap mới lên ImageView hoặc lưu Bitmap mới vào file
+                imgViewEdit.setImageBitmap(newBitmap);
             }
 
             @Override
