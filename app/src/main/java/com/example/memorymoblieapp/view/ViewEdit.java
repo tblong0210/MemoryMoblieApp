@@ -47,6 +47,8 @@ import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -60,6 +62,7 @@ import java.util.UUID;
 public class ViewEdit extends AppCompatActivity {
 
 
+    private ArrayList<String> picturePaths;
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
     private RelativeLayout emoteOption, cropOption, brightnessOption;
@@ -147,17 +150,9 @@ public class ViewEdit extends AppCompatActivity {
 
     private void refreshPicture() {
         imgViewEdit.setImageBitmap(originImage);
-        seekBarBrightnessLevel.setProgress(100);
-        seekBarContrast.setProgress(0);
-        imgViewEdit.setAlpha(1.0f);
-        ColorMatrix colorMatrix = new ColorMatrix();
-        colorMatrix.set(new float[] {
-                1, 0, 0, 0, 0,
-                0, 1, 0, 0, 0,
-                0, 0, 1, 0, 0,
-                0, 0, 0, 1, 0
-        });
-        imgViewEdit.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+        seekBarBrightnessLevel.setProgress(0);
+        seekBarContrast.setProgress(100);
+        seekBarBlur.setProgress(10);
     }
     private void savePicture() throws IOException {
 //        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
@@ -185,6 +180,11 @@ public class ViewEdit extends AppCompatActivity {
 //            e.printStackTrace();
 //            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
 //        }
+        ArrayList<String> getPicturePaths = new ArrayList<>();
+        ArrayList<String> getFavorList = new ArrayList<>();
+        picturePaths = new ArrayList<>();
+        getPicturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+
         String new_path= path_image;
         ArrayList<Integer> numberSlag = new ArrayList<>();
         for (int i=0; i< new_path.length();i++){
@@ -197,6 +197,11 @@ public class ViewEdit extends AppCompatActivity {
         String uniqueString = uuid.toString(); // Chuyển UUID thành chuỗi
         new_path = new_path + "/" + uniqueString + ".jpeg";
 
+        if (getPicturePaths != null) {
+            getPicturePaths.add(new_path);
+            picturePaths.addAll(getPicturePaths);
+        }
+
         // Chuyển đổi ImageView thành Bitmap
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
@@ -206,6 +211,10 @@ public class ViewEdit extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
         fileOutputStream.flush();
         fileOutputStream.close();
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePaths);
+        Intent intent = new Intent(ViewEdit.this, ViewImage.class);
+        intent.putExtra("path_image", new_path);
+        startActivity(intent);
     }
 
 
@@ -364,6 +373,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBlur.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
                 float blurRadius = (float) progress / 100.0f * 25.0f;
                 if (blurredBitmap != null) {
                     blurBitmap(originalBitmap, blurredBitmap, blurRadius);
