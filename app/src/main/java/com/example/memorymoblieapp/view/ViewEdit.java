@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,6 +26,10 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -191,13 +196,8 @@ public class ViewEdit extends AppCompatActivity {
         UUID uuid = UUID.randomUUID(); // Tạo một đối tượng UUID ngẫu nhiên
         String uniqueString = uuid.toString(); // Chuyển UUID thành chuỗi
         new_path = new_path + "/" + uniqueString + ".jpeg";
-        Log.d("Index",String.valueOf(numberSlag.get(numberSlag.size()-1)));
-        Log.d("PATH", path_image);
-        Log.d("NEW PATH", new_path);
+
         // Chuyển đổi ImageView thành Bitmap
-//        imgViewEdit.setDrawingCacheEnabled(true);
-//        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getDrawingCache());
-//        imgViewEdit.setDrawingCacheEnabled(false);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
@@ -356,21 +356,45 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleBlurLevel(){
+        Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        Bitmap blurredBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
+        imgViewEdit.setImageBitmap(blurredBitmap);
+
+
         seekBarBlur.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float alpha = (float) progress / 100;
-
-                imgViewEdit.setAlpha(alpha);
+                float blurRadius = (float) progress / 100.0f * 25.0f;
+                if (blurredBitmap != null) {
+                    blurBitmap(originalBitmap, blurredBitmap, blurRadius);
+                    imgViewEdit.setImageBitmap(blurredBitmap);
+                }
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
+
     }
+
+    private void blurBitmap(Bitmap originalBitmap, Bitmap blurredBitmap, float blurRadius) {
+        RenderScript rs = RenderScript.create(this);
+        ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        Allocation input = Allocation.createFromBitmap(rs, originalBitmap);
+        Allocation output = Allocation.createFromBitmap(rs, blurredBitmap);
+        script.setRadius(blurRadius);
+        script.setInput(input);
+        script.forEach(output);
+        output.copyTo(blurredBitmap);
+    }
+
     private void handleRotateImage(){
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
@@ -633,7 +657,6 @@ public class ViewEdit extends AppCompatActivity {
         Intent intent = getIntent();
         path_image = intent.getStringExtra("path_image");
         Toast.makeText(this, path_image, Toast.LENGTH_LONG).show();
-        Log.d(path_image, "PATH ");
         Bitmap bitmap = BitmapFactory.decodeFile(path_image);
         imgViewEdit.setImageBitmap(bitmap);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
