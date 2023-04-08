@@ -1,5 +1,6 @@
 package com.example.memorymoblieapp.adapter;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapter.ViewHolder> {
     private ArrayList<ColorClass> colors = new ArrayList<>();
     private Context context;
-    private int ColorChosen = Color.RED;
+    private int ColorChosen;
     public ColorRecViewAdapter(Context context) {
         this.context= context;
     }
@@ -54,16 +55,7 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
                 Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         });
-//
-//        Glide.with(context)
-//                .asBitmap()
-//                .load(images.get(position).getImageUrl())
-//                .into(holder.imgItemViewEdit);
 
-//        Glide.with(context)
-//                .asBitmap()
-//                .load(R.drawable.image1)
-//                .into(holder.imgItemViewEdit);
     }
 
     @Override

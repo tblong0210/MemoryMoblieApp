@@ -31,8 +31,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/navigation_edit_view"
-        >
+        android:layout_above="@+id/navigation_edit_view">
 
 
         <RelativeLayout
@@ -40,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_crop_option"
@@ -60,14 +59,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:visibility="gone"
             android:layout_marginBottom="20dp"
-            >
+            android:orientation="horizontal"
+            android:visibility="gone">
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filterRecView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/filterRecView"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -76,10 +75,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:visibility="gone"
             android:layout_marginBottom="20dp"
-            >
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_brightness_option"
@@ -97,36 +95,36 @@
                 android:id="@+id/seekBarBrightnessLevel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:max="255"
                 android:min="-255"
                 android:progress="0"
-                android:visibility="visible"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
-                android:layout_gravity="bottom" />
+                android:visibility="visible" />
 
             <SeekBar
                 android:id="@+id/seekBarContrast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:layout_gravity="bottom"
                 android:max="200"
                 android:progress="100"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
-                android:layout_gravity="bottom" />
+                android:visibility="gone" />
 
             <SeekBar
                 android:id="@+id/seekBarBlur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:layout_gravity="bottom"
                 android:max="100"
-                android:progress="10"
                 android:min="10"
+                android:progress="10"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
-                android:layout_gravity="bottom" />
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -135,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginTop="15dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_emote_option"
@@ -149,8 +147,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/colorRecView"
                 android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true" />
+
+
+
+
         </RelativeLayout>
     </RelativeLayout>
 

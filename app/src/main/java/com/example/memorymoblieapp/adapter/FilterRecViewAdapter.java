@@ -45,16 +45,7 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
                 Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         });
-//
-//        Glide.with(context)
-//                .asBitmap()
-//                .load(images.get(position).getImageUrl())
-//                .into(holder.imgItemViewEdit);
 
-//        Glide.with(context)
-//                .asBitmap()
-//                .load(R.drawable.image1)
-//                .into(holder.imgItemViewEdit);
     }
 
     @Override

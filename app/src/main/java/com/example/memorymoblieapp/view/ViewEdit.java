@@ -2,6 +2,7 @@ package com.example.memorymoblieapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -66,9 +67,10 @@ public class ViewEdit extends AppCompatActivity {
 
     private Canvas mCanvas;
     private Paint mPaint;
+    private CardView parent_list_color;
 
     private ArrayList<String> picturePaths;
-    private ImageView imgViewEdit;
+    private ImageView imgViewEdit, colorItemChosen;
     private LinearLayout  filterOption;
     private RelativeLayout emoteOption, cropOption, brightnessOption;
     private RecyclerView filterRecView, colorRecView;
@@ -202,6 +204,7 @@ public class ViewEdit extends AppCompatActivity {
 
 
     private void initOptionActions() {
+
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -285,16 +288,18 @@ public class ViewEdit extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.paintPic:
                         Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
+                        colorRecView.setVisibility(View.VISIBLE);
                         handleAddPaintImage();
                         break;
 
                     case R.id.stickerPic:
                         Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
-
+                        colorRecView.setVisibility(View.GONE);
                         break;
                     case R.id.textPic:
+                        colorRecView.setVisibility(View.GONE);
                         Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
-                        handleAddText("Hello World");
+
                         break;
 
                     default:
@@ -339,6 +344,7 @@ public class ViewEdit extends AppCompatActivity {
                 return true;
             }
         });
+
 
 
 //        imgViewEdit.setImageResource(R.drawable.image1);
@@ -609,6 +615,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void initViews() {
+        parent_list_color= findViewById(R.id.parent_list_color);
         imgViewEdit = findViewById(R.id.imgViewEdit);
         Intent intent = getIntent();
         path_image = intent.getStringExtra("path_image");
