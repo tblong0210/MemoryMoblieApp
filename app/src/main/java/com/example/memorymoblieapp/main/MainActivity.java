@@ -121,8 +121,7 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, newImage.size() + " "+ picturePath.size(), Toast.LENGTH_SHORT).show();
 
         detailed = false;
-        albumList = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
-        albumList = albumList == null ? new ArrayList<>() : albumList;
+        albumList = new ArrayList<>(DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class));
         lovedImageList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
         lovedImageList = lovedImageList == null ? new ArrayList<>() : lovedImageList;
         deletedImageList = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());

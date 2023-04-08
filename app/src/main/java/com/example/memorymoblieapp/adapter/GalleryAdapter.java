@@ -1,9 +1,12 @@
 package com.example.memorymoblieapp.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -31,6 +34,7 @@ import com.example.memorymoblieapp.view.ViewImage;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -42,7 +46,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     protected PhotoListener photoListener;
     List<String> imageDates;
     private  boolean isLongClick =false;
-    private Vector<String> listSelect = new Vector<String>();
+    private static Vector<String> listSelect = new Vector<String>();
     public GalleryAdapter(Context context, List<String> images, List<String> imageDates, PhotoListener photoListener)
     {
         this.context = context;
@@ -172,7 +176,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     notifyDataSetChanged();
 
                     // Display selection features bar, hide bottom navigation bar
-                    SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment();
+                    SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment("Home");
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
@@ -211,5 +215,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     public interface  PhotoListener{
         void onPhotoClick(String path);
         void onPhotoLongClick(String path);
+    }
+
+    public static Vector<String> getListSelect() {
+        return listSelect;
     }
 }
