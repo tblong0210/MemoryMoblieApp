@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Album> albumList;
     public static ArrayList<String> lovedImageList;
     public static ArrayList<String> deletedImageList;
-    BottomNavigationView bottomNavigationView;
+    static BottomNavigationView bottomNavigationView;
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
     public static boolean isVerify = false; // Status of album blocking
+    FrameLayout frame_layout_selection_features_bar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -124,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         lovedImageList = lovedImageList == null ? new ArrayList<>() : lovedImageList;
         deletedImageList = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
         deletedImageList = deletedImageList == null ? new ArrayList<>() : deletedImageList;
+
+        frame_layout_selection_features_bar = findViewById(R.id.frame_layout_selection_features_bar);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -257,12 +262,16 @@ public class MainActivity extends AppCompatActivity {
                     case "more":
                         bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
                         break;
+                    case "selectImage":
+                        frame_layout_selection_features_bar.removeAllViews();
                 }
             }
         }
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
+
+        bottomNavigationView.setVisibility(View.VISIBLE);
     }
 
     public void onMsgToMain(String data, String request) {
@@ -279,5 +288,9 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("album");
         }
+    }
+
+    public static BottomNavigationView getBottomNavigationView() {
+        return bottomNavigationView;
     }
 }

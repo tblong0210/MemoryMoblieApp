@@ -17,11 +17,16 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.fragment.SelectionFeaturesBarFragment;
+import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
 import java.io.File;
@@ -165,6 +170,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     listSelect.add(image);
                     isLongClick=true;
                     notifyDataSetChanged();
+
+                    // Display selection features bar, hide bottom navigation bar
+                    SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
+                    fragmentTransaction.addToBackStack("selectImage");
+                    MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                 }
 
                 return false;

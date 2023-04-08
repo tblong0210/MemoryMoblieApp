@@ -2,6 +2,7 @@ package com.example.memorymoblieapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,10 +43,13 @@ import android.widget.Toast;
 import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.FilterItem;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.adapter.ColorRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
+
 import com.example.memorymoblieapp.obj.FilterImageKey;
+import com.example.memorymoblieapp.obj.ColorClass;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileOutputStream;
@@ -54,19 +59,27 @@ import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
 
+    private Canvas mCanvas;
+    private Paint mPaint;
+    private CardView parent_list_color;
 
     private ArrayList<String> picturePaths;
-    private ImageView imgViewEdit;
+
     private LinearLayout filterOption;
+    private ImageView imgViewEdit, colorItemChosen;
     private RelativeLayout emoteOption, cropOption, brightnessOption;
-    private RecyclerView filterRecView, brightnessRecView;
+    private RecyclerView filterRecView, colorRecView;
 
     private TextView viewTxtAdd;
     private String path_image;
     private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur;
-    private ArrayList<FilterItem> filterItems;
 
     private ArrayList<Brightness> brightnesses;
+    private ArrayList<FilterItem> filterItems;
+    private ArrayList<ColorClass> colors;
+
+    private ColorRecViewAdapter adapterColor;
+    private FilterRecViewAdapter adapterFilter;
     private Bitmap originImage;
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
@@ -138,40 +151,15 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void refreshPicture() {
-        imgViewEdit.setImageBitmap(originImage);
+        colorRecView.setVisibility(View.GONE);
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
+        imgViewEdit.setImageBitmap(originImage);
     }
 
     private void savePicture() throws IOException {
-//        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//        Bitmap createdImage = drawable.getBitmap();
-//        File pictureFile = new File("/user/abc", createdImage.toString() + ".jpg");
-//        FileOutputStream out = new FileOutputStream(pictureFile);
-//        createdImage.compress(Bitmap.CompressFormat.PNG, 100, out);
-//        out.flush();
-//        out.close();
-
-//        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//        Bitmap bitmap = drawable.getBitmap();
-//
-//        String filename = "modified_image.jpg";
-//        File file = new File(getExternalFilesDir(null), filename);
-//
-//        try {
-//            FileOutputStream fos = new FileOutputStream(file);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//            fos.flush();
-//            fos.close();
-//            System.out.println("Image saved to " + file.getAbsolutePath());
-//            Toast.makeText(ViewEdit.this, "Image saved to " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
-//        }
         ArrayList<String> getPicturePaths = new ArrayList<>();
-        ArrayList<String> getFavorList = new ArrayList<>();
         picturePaths = new ArrayList<>();
         getPicturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 
@@ -209,6 +197,7 @@ public class ViewEdit extends AppCompatActivity {
 
 
     private void initOptionActions() {
+
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -292,16 +281,18 @@ public class ViewEdit extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.paintPic:
                         Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
+                        colorRecView.setVisibility(View.VISIBLE);
                         handleAddPaintImage();
                         break;
 
                     case R.id.stickerPic:
                         Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
-
+                        colorRecView.setVisibility(View.GONE);
                         break;
                     case R.id.textPic:
+                        colorRecView.setVisibility(View.GONE);
                         Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
-                        handleAddText("Hello World");
+//                        handleAddText();
                         break;
 
                     default:
@@ -346,6 +337,7 @@ public class ViewEdit extends AppCompatActivity {
                 return true;
             }
         });
+
 
 
 //        imgViewEdit.setImageResource(R.drawable.image1);
@@ -465,16 +457,28 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleAddPaintImage() {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
-        Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(newBitmap);
-        canvas.drawBitmap(originalBitmap, 0, 0, null);
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStrokeWidth(10);
-        canvas.drawLine(100, 100, 500, 500, paint);
-        imgViewEdit.setImageBitmap(newBitmap);
+        Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+        imgViewEdit.setImageBitmap(bitmap);
 
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        Canvas canvas = new Canvas(bitmap);
+                        Paint paint = new Paint();
+                        paint.setColor(adapterColor.getColorChosen());
+                        canvas.drawCircle(x, y, 10, paint);
+                        imgViewEdit.invalidate();
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     private void handleAddText(String text) {
@@ -600,7 +604,6 @@ public class ViewEdit extends AppCompatActivity {
         });
 
     }
-
     //    private void handleShadowLevel(){
 //        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 //            @Override
@@ -661,16 +664,17 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void initViews() {
+        parent_list_color= findViewById(R.id.parent_list_color);
         imgViewEdit = findViewById(R.id.imgViewEdit);
         Intent intent = getIntent();
         path_image = intent.getStringExtra("path_image");
-        Toast.makeText(this, path_image, Toast.LENGTH_LONG).show();
         Bitmap bitmap = BitmapFactory.decodeFile(path_image);
         imgViewEdit.setImageBitmap(bitmap);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
 //        viewTxtAdd = findViewById(R.id.viewTxtAdd);
+
 
         emoteOption = findViewById(R.id.emoteOption);
         cropOption = findViewById(R.id.cropOption);
@@ -696,6 +700,21 @@ public class ViewEdit extends AppCompatActivity {
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        colorRecView = findViewById(R.id.colorRecView);
+        //set adapter to imgRecView
+        colors = new ArrayList <> ();
+        colors.add(new ColorClass("RED", Color.RED));
+        colors.add(new ColorClass("GREEN",Color.GREEN ));
+        colors.add(new ColorClass("BLUE", Color.BLUE));
+        colors.add(new ColorClass("YELLOW", Color.YELLOW));
+        colors.add(new ColorClass("GRAY", Color.GRAY));
+        colors.add(new ColorClass("BLACK",Color.BLACK));
+        colors.add(new ColorClass("WHITE", Color.WHITE));
+
+        adapterColor = new ColorRecViewAdapter(this);
+        adapterColor.setColors(colors);
+        colorRecView.setAdapter(adapterColor);
+        colorRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
