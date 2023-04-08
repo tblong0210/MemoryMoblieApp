@@ -47,10 +47,12 @@ import android.widget.Toast;
 import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.adapter.ColorRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
+import com.example.memorymoblieapp.obj.ColorClass;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
@@ -68,15 +70,15 @@ public class ViewEdit extends AppCompatActivity {
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
     private RelativeLayout emoteOption, cropOption, brightnessOption;
-    private RecyclerView filterRecView, brightnessRecView;
+    private RecyclerView filterRecView, colorRecView;
 
     private TextView viewTxtAdd;
     private String path_image;
     private SeekBar seekBarBrightnessLevel, seekBarContrast,  seekBarBlur;
 
     private ArrayList<Filter> filters;
+    private ArrayList<ColorClass> colors;
 
-    private ArrayList<Brightness> brightnesses;
 
     private Bitmap originImage;
 
@@ -622,57 +624,6 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-//    private void handleShadowLevel(){
-//        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//                Bitmap originalBitmap = drawable.getBitmap();
-//                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {}
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {}
-//        });
-//
-//    }
-    private Bitmap addShadow(Bitmap bitmap, int shadowValue) {
-        Log.d("Shadow:", String.valueOf(shadowValue));
-        // Tạo một Bitmap mới để chứa ảnh đã đổ bóng
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-
-        // Tạo một Canvas mới để vẽ ảnh đã đổ bóng lên Bitmap mới
-        Canvas canvas = new Canvas(output);
-
-        // Tạo một Paint mới để vẽ đổ bóng
-        Paint shadowPaint = new Paint();
-        shadowPaint.setColor(Color.BLACK);
-        shadowPaint.setAlpha(shadowValue);
-
-        // Tính toán độ mờ dựa trên giá trị từ seekbar
-        int blurRadius = (int) (shadowValue / 2.55);
-
-        // Tạo một đổ bóng bằng cách tạo một mảnh hình chữ nhật bo tròn với một màu đen và độ mờ
-        RectF shadowRect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight() + 20);
-        canvas.drawRoundRect(shadowRect, 20, 20, shadowPaint);
-
-        // Tạo một đối tượng BlurMaskFilter để áp dụng hiệu ứng blur
-        BlurMaskFilter blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL);
-
-        // Áp dụng hiệu ứng blur vào Paint
-        shadowPaint.setMaskFilter(blurMaskFilter);
-
-        // Vẽ ảnh
-
-        canvas.drawBitmap(bitmap, 0, 0, null);
-
-        // Trả về Bitmap mới chứa ảnh và đổ bóng
-        return output;
-
-    }
 
     private void handleAddStickerImage(){}
     private void handleAddTextImage(){
@@ -683,14 +634,12 @@ public class ViewEdit extends AppCompatActivity {
         imgViewEdit = findViewById(R.id.imgViewEdit);
         Intent intent = getIntent();
         path_image = intent.getStringExtra("path_image");
-        Toast.makeText(this, path_image, Toast.LENGTH_LONG).show();
         Bitmap bitmap = BitmapFactory.decodeFile(path_image);
         imgViewEdit.setImageBitmap(bitmap);
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
 
-        viewTxtAdd = findViewById(R.id.viewTxtAdd);
 
 
         emoteOption = findViewById(R.id.emoteOption);
@@ -727,6 +676,21 @@ public class ViewEdit extends AppCompatActivity {
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        colorRecView = findViewById(R.id.colorRecView);
+        //set adapter to imgRecView
+        colors = new ArrayList <> ();
+        colors.add(new ColorClass("RED", Color.RED));
+        colors.add(new ColorClass("GREEN",Color.GREEN ));
+        colors.add(new ColorClass("BLUE", Color.BLUE));
+        colors.add(new ColorClass("YELLOW", Color.YELLOW));
+        colors.add(new ColorClass("GRAY", Color.GRAY));
+        colors.add(new ColorClass("BLACK",Color.BLACK));
+        colors.add(new ColorClass("WHITE", Color.WHITE));
+
+        ColorRecViewAdapter adapterColor = new ColorRecViewAdapter(this);
+        adapterColor.setFilters(colors);
+        colorRecView.setAdapter(adapterColor);
+        colorRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
