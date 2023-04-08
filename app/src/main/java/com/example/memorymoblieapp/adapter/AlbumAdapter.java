@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -148,9 +149,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     final EditText input = new EditText(context);
 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
-                    builder.setView(input);
                     input.requestFocus();
 
+                    final LinearLayout ll = new LinearLayout(context);
+                    ll.removeAllViews();
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(55,10,55,10);
+                    input.setLayoutParams(params);
+                    ll.addView(input);
+
+                    builder.setView(ll);
                     builder.setPositiveButton("Đồng ý", null);
                     builder.setNegativeButton("Hủy", null);
 
@@ -184,9 +192,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                         final EditText passwordInput = new EditText(itemView.getContext());
                         passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        builder.setView(passwordInput);
                         passwordInput.requestFocus();
 
+                        final LinearLayout ll = new LinearLayout(context);
+                        ll.removeAllViews();
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(55,10,55,10);
+                        passwordInput.setLayoutParams(params);
+                        ll.addView(passwordInput);
+
+                        builder.setView(ll);
                         builder.setPositiveButton("Đồng ý", null);
                         builder.setNegativeButton("Hủy", null);
 
@@ -235,9 +250,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            builder.setView(passwordInput);
             passwordInput.requestFocus();
 
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
+            passwordInput.setLayoutParams(params);
+            ll.addView(passwordInput);
+
+            builder.setView(ll);
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 
@@ -302,9 +324,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final EditText input = new EditText(context);
 
             input.setInputType(InputType.TYPE_CLASS_TEXT);
-            builder.setView(input);
             input.requestFocus();
 
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
+            input.setLayoutParams(params);
+            ll.addView(input);
+
+            builder.setView(ll);
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 
@@ -345,9 +374,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            builder.setView(passwordInput);
             passwordInput.requestFocus();
 
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
+            passwordInput.setLayoutParams(params);
+            ll.addView(passwordInput);
+
+            builder.setView(ll);
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 
@@ -422,9 +458,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu xác thực");
-            builder.setView(passwordInput);
             passwordInput.requestFocus();
 
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
+            passwordInput.setLayoutParams(params);
+            ll.addView(passwordInput);
+
+            builder.setView(ll);
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 
@@ -467,9 +510,16 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final EditText passwordInput = new EditText(itemView.getContext());
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu xác thực");
-            builder.setView(passwordInput);
             passwordInput.requestFocus();
 
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
+            passwordInput.setLayoutParams(params);
+            ll.addView(passwordInput);
+
+            builder.setView(ll);
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 

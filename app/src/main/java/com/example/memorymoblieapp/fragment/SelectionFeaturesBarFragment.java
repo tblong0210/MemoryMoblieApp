@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,7 +26,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class SelectionFeaturesBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
@@ -70,6 +70,13 @@ public class SelectionFeaturesBarFragment extends Fragment {
                     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(arrayAdapter);
 
+                    final LinearLayout ll = new LinearLayout(getContext());
+                    ll.removeAllViews();
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(50,30,50,30);
+                    spinner.setLayoutParams(params);
+                    ll.addView(spinner);
+
                     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -82,7 +89,7 @@ public class SelectionFeaturesBarFragment extends Fragment {
                         }
                     });
 
-                    builder.setView(spinner);
+                    builder.setView(ll);
                     builder.setPositiveButton("Đồng ý", null);
                     builder.setNegativeButton("Hủy", null);
 
