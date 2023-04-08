@@ -9,29 +9,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,19 +36,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.ColorRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
-import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.ColorClass;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -159,10 +146,11 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void refreshPicture() {
-        imgViewEdit.setImageBitmap(originImage);
+        colorRecView.setVisibility(View.GONE);
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
+        imgViewEdit.setImageBitmap(originImage);
     }
     private void savePicture() throws IOException {
         ArrayList<String> getPicturePaths = new ArrayList<>();
@@ -299,7 +287,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.textPic:
                         colorRecView.setVisibility(View.GONE);
                         Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
-
+                        handleAddText();
                         break;
 
                     default:
@@ -487,24 +475,8 @@ public class ViewEdit extends AppCompatActivity {
         });
     }
 
-    private void handleAddText(String text){
-        viewTxtAdd.setText(text);
+    private void handleAddText(){
 
-        // Set the text color of the TextView object to the desired color
-//        viewTxtAdd.setTextColor(Color.RED);
-        // Create a Bitmap object with the same size as the ImageView object
-        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getWidth(), imgViewEdit.getHeight(), Bitmap.Config.ARGB_8888);
-
-// Create a Canvas object with the Bitmap object as its parameter
-        Canvas canvas = new Canvas(bitmap);
-// Draw the ImageView object onto the Canvas object
-        imgViewEdit.draw(canvas);
-
-// Draw the TextView object onto the Canvas object at the desired location
-        canvas.drawText(text, 100, 100, viewTxtAdd.getPaint());
-
-// Set the ImageView object to the modified Bitmap object
-        imgViewEdit.setImageBitmap(bitmap);
     }
 
     private void handleBrightnessLevel(){
