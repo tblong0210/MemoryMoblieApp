@@ -73,7 +73,7 @@ public class SelectionFeaturesBarFragment extends Fragment {
                     final LinearLayout ll = new LinearLayout(getContext());
                     ll.removeAllViews();
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(50,30,50,30);
+                    params.setMargins(50, 30, 50, 30);
                     spinner.setLayoutParams(params);
                     ll.addView(spinner);
 
@@ -96,8 +96,9 @@ public class SelectionFeaturesBarFragment extends Fragment {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
-                        for (String imageSelected : GalleryAdapter.getListSelect())
-                            MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
+                        if (albumChosenPos[0] >= 0)
+                            for (String imageSelected : GalleryAdapter.getListSelect())
+                                MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
                         DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                         Toast.makeText(context, "Đã thêm ảnh vào album '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
