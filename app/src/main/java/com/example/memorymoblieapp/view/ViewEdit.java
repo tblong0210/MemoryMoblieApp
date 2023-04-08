@@ -34,6 +34,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -61,7 +62,8 @@ import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
 
-
+    private Canvas mCanvas;
+    private Paint mPaint;
     private ArrayList<String> picturePaths;
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
@@ -475,16 +477,28 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleAddPaintImage(){
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
-        Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(newBitmap);
-        canvas.drawBitmap(originalBitmap, 0, 0, null);
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStrokeWidth(10);
-        canvas.drawLine(100, 100, 500, 500, paint);
-        imgViewEdit.setImageBitmap(newBitmap);
+        Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+        imgViewEdit.setImageBitmap(bitmap);
 
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        Canvas canvas = new Canvas(bitmap);
+                        Paint paint = new Paint();
+                        paint.setColor(Color.RED);
+                        canvas.drawCircle(x, y, 10, paint);
+                        imgViewEdit.invalidate();
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     private void handleAddText(String text){
