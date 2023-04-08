@@ -18,19 +18,20 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:clickable="true"
             android:contentDescription="@string/action_back"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/imgBack"
+            android:layout_toEndOf="@id/imgBack"
             android:text="@string/activity_image_view"
             android:textColor="@color/white"
             android:textSize="20sp"

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,16 +15,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
@@ -44,16 +39,14 @@ import android.widget.Toast;
 
 
 import com.example.memorymoblieapp.Brightness;
-import com.example.memorymoblieapp.Filter;
+import com.example.memorymoblieapp.FilterItem;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
-import com.example.memorymoblieapp.main.MainActivity;
+import com.example.memorymoblieapp.obj.FilterImageKey;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,23 +57,18 @@ public class ViewEdit extends AppCompatActivity {
 
     private ArrayList<String> picturePaths;
     private ImageView imgViewEdit;
-    private LinearLayout  filterOption;
+    private LinearLayout filterOption;
     private RelativeLayout emoteOption, cropOption, brightnessOption;
     private RecyclerView filterRecView, brightnessRecView;
 
     private TextView viewTxtAdd;
     private String path_image;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast,  seekBarBlur;
-
-    private ArrayList<Filter> filters;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur;
+    private ArrayList<FilterItem> filterItems;
 
     private ArrayList<Brightness> brightnesses;
-
     private Bitmap originImage;
-
-
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
-
 
 
     @Override
@@ -108,6 +96,7 @@ public class ViewEdit extends AppCompatActivity {
             initOptionActions();
         }
     }
+
     private boolean checkPermissionList(String[] permissionList) {
         int permissionCheck;
         for (String per : permissionList) {
@@ -154,6 +143,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
     }
+
     private void savePicture() throws IOException {
 //        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
 //        Bitmap createdImage = drawable.getBitmap();
@@ -185,14 +175,14 @@ public class ViewEdit extends AppCompatActivity {
         picturePaths = new ArrayList<>();
         getPicturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 
-        String new_path= path_image;
+        String new_path = path_image;
         ArrayList<Integer> numberSlag = new ArrayList<>();
-        for (int i=0; i< new_path.length();i++){
-            if(new_path.charAt(i)=='/'){
+        for (int i = 0; i < new_path.length(); i++) {
+            if (new_path.charAt(i) == '/') {
                 numberSlag.add(i);
             }
         }
-        new_path=new_path.substring(0,numberSlag.get(numberSlag.size()-1));
+        new_path = new_path.substring(0, numberSlag.get(numberSlag.size() - 1));
         UUID uuid = UUID.randomUUID(); // Tạo một đối tượng UUID ngẫu nhiên
         String uniqueString = uuid.toString(); // Chuyển UUID thành chuỗi
         new_path = new_path + "/" + uniqueString + ".jpeg";
@@ -216,7 +206,6 @@ public class ViewEdit extends AppCompatActivity {
         intent.putExtra("path_image", new_path);
         startActivity(intent);
     }
-
 
 
     private void initOptionActions() {
@@ -364,7 +353,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void handleBlurLevel(){
+    private void handleBlurLevel() {
         Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         Bitmap blurredBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
         imgViewEdit.setImageBitmap(blurredBitmap);
@@ -405,7 +394,7 @@ public class ViewEdit extends AppCompatActivity {
         output.copyTo(blurredBitmap);
     }
 
-    private void handleRotateImage(){
+    private void handleRotateImage() {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
         Matrix matrix = new Matrix();
@@ -415,7 +404,8 @@ public class ViewEdit extends AppCompatActivity {
         //originalBitmap.recycle();
 
     }
-    private void handleFlipImageHorizontal(){
+
+    private void handleFlipImageHorizontal() {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
         Matrix matrix = new Matrix();
@@ -428,7 +418,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void handleFlipImageVertical(){
+    private void handleFlipImageVertical() {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
         Matrix matrix = new Matrix();
@@ -439,12 +429,13 @@ public class ViewEdit extends AppCompatActivity {
         //originalBitmap.recycle();
 
     }
-    private void handleCropImage(float firstRatio, float secondRatio){
+
+    private void handleCropImage(float firstRatio, float secondRatio) {
 
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 
-        if(firstRatio == 3f && secondRatio == 4f) {
+        if (firstRatio == 3f && secondRatio == 4f) {
             int newHeight = (int) (width * firstRatio / secondRatio);
 
             // Calculate the y-coordinate for the top of the new image
@@ -453,8 +444,7 @@ public class ViewEdit extends AppCompatActivity {
             // Create a new bitmap with the desired dimensions
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
             imgViewEdit.setImageBitmap(croppedBitmap);
-        }
-        else{
+        } else {
             int originalWidth = originImage.getWidth();
             int originalHeight = originImage.getHeight();
             int newWidth = originalWidth;
@@ -473,7 +463,7 @@ public class ViewEdit extends AppCompatActivity {
         //originalBitmap.recycle();
     }
 
-    private void handleAddPaintImage(){
+    private void handleAddPaintImage() {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap originalBitmap = drawable.getBitmap();
         Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
@@ -487,8 +477,8 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void handleAddText(String text){
-        viewTxtAdd.setText(text);
+    private void handleAddText(String text) {
+        //viewTxtAdd.setText(text);
 
         // Set the text color of the TextView object to the desired color
 //        viewTxtAdd.setTextColor(Color.RED);
@@ -501,13 +491,13 @@ public class ViewEdit extends AppCompatActivity {
         imgViewEdit.draw(canvas);
 
 // Draw the TextView object onto the Canvas object at the desired location
-        canvas.drawText(text, 100, 100, viewTxtAdd.getPaint());
+        // canvas.drawText(text, 100, 100, viewTxtAdd.getPaint());
 
 // Set the ImageView object to the modified Bitmap object
         imgViewEdit.setImageBitmap(bitmap);
     }
 
-    private void handleBrightnessLevel(){
+    private void handleBrightnessLevel() {
         Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -545,14 +535,17 @@ public class ViewEdit extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
 
     }
-    private void handleContrastLevel(){
+
+    private void handleContrastLevel() {
         Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         seekBarContrast.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -608,7 +601,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-//    private void handleShadowLevel(){
+    //    private void handleShadowLevel(){
 //        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 //            @Override
 //            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -660,8 +653,10 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void handleAddStickerImage(){}
-    private void handleAddTextImage(){
+    private void handleAddStickerImage() {
+    }
+
+    private void handleAddTextImage() {
 
     }
 
@@ -675,9 +670,7 @@ public class ViewEdit extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
-
-        viewTxtAdd = findViewById(R.id.viewTxtAdd);
-
+//        viewTxtAdd = findViewById(R.id.viewTxtAdd);
 
         emoteOption = findViewById(R.id.emoteOption);
         cropOption = findViewById(R.id.cropOption);
@@ -691,25 +684,15 @@ public class ViewEdit extends AppCompatActivity {
         nav_brightness_option = findViewById(R.id.nav_brightness_option);
 
 
-
         filterRecView = findViewById(R.id.filterRecView);
-        //set adapter to imgRecView
-        filters = new ArrayList <> ();
-        filters.add(new Filter("1", R.drawable.image1));
-        filters.add(new Filter("2", R.drawable.image1));
-        filters.add(new Filter("3", R.drawable.image1));
-        filters.add(new Filter("4", R.drawable.image1));
-        filters.add(new Filter("5", R.drawable.image1));
-        filters.add(new Filter("6", R.drawable.image1));
-        filters.add(new Filter("7", R.drawable.image1));
-        filters.add(new Filter("8", R.drawable.image1));
-        filters.add(new Filter("9", R.drawable.image1));
-        filters.add(new Filter("10", R.drawable.image1));
-        filters.add(new Filter("11", R.drawable.image1));
-        filters.add(new Filter("12", R.drawable.image1));
+        setFilter(FilterImageKey.warm);
 
-        FilterRecViewAdapter adapterFilter = new FilterRecViewAdapter(this);
-        adapterFilter.setFilters(filters);
+        //set adapter to imgRecView
+        filterItems = new ArrayList<>();
+        setAllFilters();
+
+        FilterRecViewAdapter adapterFilter = new FilterRecViewAdapter(this, originImage);
+        adapterFilter.setFilters(filterItems);
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -718,4 +701,111 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
         seekBarBlur = findViewById(R.id.seekBarBlur);
     }
+
+    private void setAllFilters() {
+        filterItems.add(setFilter(""));
+        filterItems.add(setFilter(FilterImageKey.warm));
+        filterItems.add(setFilter(FilterImageKey.cool));
+        filterItems.add(setFilter(FilterImageKey.fade));
+        filterItems.add(setFilter(FilterImageKey.nacreous));
+        filterItems.add(setFilter(FilterImageKey.soft));
+        filterItems.add(setFilter(FilterImageKey.flower));
+        filterItems.add(setFilter(FilterImageKey.faded));
+        filterItems.add(setFilter(FilterImageKey.gray));
+    }
+
+    private FilterItem setFilter(String filter) {
+        FilterItem filterItem = new FilterItem();
+
+        if (filter.equals(FilterImageKey.warm)) {
+            float[] colorMatrixWarm = {
+                    1.2f, 0.0f, 0.0f, 0.0f, 0.0f,
+                    0.0f, 1.1f, 0.0f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixWarm);
+            filterItem.setName(getResources().getString(R.string.filter_warm));
+        } else if (filter.equals(FilterImageKey.cool)) {
+            float[] colorMatrixCool = {
+                    0.8f, 0.0f, 0.0f, 0.0f, 0.0f,
+                    0.0f, 1.1f, 0.0f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 1.2f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixCool);
+            filterItem.setName(getResources().getString(R.string.filter_cool));
+        } else if (filter.equals(FilterImageKey.soft)) {
+            float[] colorMatrixSoft = {
+                    1.1f, 0.0f, 0.0f, 0.0f, -20f,
+                    0.0f, 1.1f, 0.0f, 0.0f, -20f,
+                    0.0f, 0.0f, 1.1f, 0.0f, -20f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixSoft);
+            filterItem.setName(getResources().getString(R.string.filter_soft));
+        } else if (filter.equals(FilterImageKey.flower)) {
+            float[] colorMatrixFlower = {
+                    2.0f, 0.0f, 0.0f, 0.0f, -25f,
+                    0.0f, 1.8f, 0.0f, 0.0f, -25f,
+                    0.0f, 0.0f, 1.5f, 0.0f, -25f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixFlower);
+            filterItem.setName(getResources().getString(R.string.filter_flower));
+        } else if (filter.equals(FilterImageKey.gray)) {
+            float[] colorMatrixGray = {
+                    0.33f, 0.33f, 0.33f, 0.0f, 0.0f,
+                    0.33f, 0.33f, 0.33f, 0.0f, 0.0f,
+                    0.33f, 0.33f, 0.33f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixGray);
+            filterItem.setName(getResources().getString(R.string.filter_gray));
+        } else if (filter.equals(FilterImageKey.fade)) {
+            float[] colorMatrixFade = {
+                    0.5f, 0.5f, 0.5f, 0.0f, 30.0f,
+                    0.5f, 0.5f, 0.5f, 0.0f, 30.0f,
+                    0.5f, 0.5f, 0.5f, 0.0f, 30.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixFade);
+            filterItem.setName(getResources().getString(R.string.filter_fade));
+        } else if (filter.equals(FilterImageKey.nacreous)) {
+
+            float[] colorMatrixNacreous = {
+                    0.5f, 0.5f, 0.5f, 0.0f, 40.0f,
+                    0.5f, 0.5f, 0.5f, 0.0f, 40.0f,
+                    0.5f, 0.5f, 0.5f, 0.0f, 40.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixNacreous);
+            filterItem.setName(getResources().getString(R.string.filter_nacreous));
+        } else if (filter.equals(FilterImageKey.faded)) {
+            float[] colorMatrixFade = {
+                    0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+                    0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+                    0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            filterItem.setColorMatrix(colorMatrixFade);
+            filterItem.setName(getResources().getString(R.string.filter_faded));
+        } else {
+            float[] colorMatrixWarm = {
+                    1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+            };
+            return new FilterItem(getResources().getString(R.string.filter_default), colorMatrixWarm, true);
+        }
+
+
+        return filterItem;
+    }
+
+    public void setImageViewEdit(Drawable drawable) {
+        imgViewEdit.setImageDrawable(drawable);
+    }
+
 }

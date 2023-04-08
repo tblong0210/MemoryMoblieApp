@@ -56,4 +56,5 @@ dependencies {
     implementation 'com.facebook.android:facebook-share:latest.release'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'org.mindrot:jbcrypt:0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

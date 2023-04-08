@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent_list_filter"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables">
 
-    app:cardCornerRadius="5dp"
-    app:cardElevation="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp">
+    <TextView
+        android:id="@+id/filterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:text="@string/filter_default"
+        tools:ignore="SmallSp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/filterName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="1"
-            android:textStyle="bold"
-            />
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/filterItemViewEdit"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_shape_conner_5"
+        android:outlineProvider="background"
+        android:clipToOutline="true"
+        android:src="@drawable/ic_launcher_background"
+        tools:ignore="HardcodedText,UnusedAttribute"
+        android:contentDescription="Image filter" />
 
-        <ImageView
-            android:id="@+id/filterItemViewEdit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/filterName"
-            android:layout_centerHorizontal="true"
-
-            android:src="@drawable/ic_launcher_background" />
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

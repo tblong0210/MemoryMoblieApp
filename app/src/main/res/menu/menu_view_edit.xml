@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/resetViewEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
+        android:icon="@drawable/ic_reset"
+        android:iconTint="@color/white"
+        android:title="@string/action_reset_edit"
         app:showAsAction="always"
-        android:title="Reset" />
+        tools:ignore="AlwaysShowAction,HardcodedText,UnusedAttribute" />
 
     <item
         android:id="@+id/saveViewEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="30dp"
+        android:icon="@drawable/ic_save_image"
+        android:iconTint="@color/white"
+        android:title="@string/action_save_image"
         app:showAsAction="always"
-        android:title="Save" />
+        tools:ignore="UnusedAttribute" />
 
 </menu>

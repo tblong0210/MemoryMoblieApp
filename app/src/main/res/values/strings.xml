@@ -32,4 +32,15 @@
     <string name="activity_image_view">Xem ảnh</string>
     <string name="activity_detail_view">Chi tiết</string>
     <string name="activity_view_search">Tìm kiếm</string>
+    <string name="filter_default">Ảnh gốc</string>
+    <string name="filter_warm">Ấm</string>
+    <string name="filter_cool">Mát lạnh</string>
+    <string name="filter_fade">Nhạt</string>
+    <string name="filter_gray">Trắng đen</string>
+    <string name="filter_flower">Hoa</string>
+    <string name="filter_soft">Êm dịu</string>
+    <string name="filter_nacreous">Trắng ngà</string>
+    <string name="filter_faded">Nhạt dần</string>
+    <string name="action_save_image">Lưu ảnh</string>
+    <string name="action_reset_edit">Quay lại</string>
 </resources>

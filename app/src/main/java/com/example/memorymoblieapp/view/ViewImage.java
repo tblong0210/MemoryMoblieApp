@@ -116,7 +116,8 @@ public class ViewImage extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ViewImage.this, MainActivity.class);
+                startActivity(intent);
             }
         });
         mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
