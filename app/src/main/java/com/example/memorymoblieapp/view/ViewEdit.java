@@ -66,6 +66,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private Canvas mCanvas;
     private Paint mPaint;
+
     private ArrayList<String> picturePaths;
     private ImageView imgViewEdit;
     private LinearLayout  filterOption;
@@ -78,6 +79,9 @@ public class ViewEdit extends AppCompatActivity {
 
     private ArrayList<Filter> filters;
     private ArrayList<ColorClass> colors;
+
+    private ColorRecViewAdapter adapterColor;
+    private FilterRecViewAdapter adapterFilter;
 
 
     private Bitmap originImage;
@@ -159,33 +163,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBlur.setProgress(10);
     }
     private void savePicture() throws IOException {
-//        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//        Bitmap createdImage = drawable.getBitmap();
-//        File pictureFile = new File("/user/abc", createdImage.toString() + ".jpg");
-//        FileOutputStream out = new FileOutputStream(pictureFile);
-//        createdImage.compress(Bitmap.CompressFormat.PNG, 100, out);
-//        out.flush();
-//        out.close();
-
-//        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//        Bitmap bitmap = drawable.getBitmap();
-//
-//        String filename = "modified_image.jpg";
-//        File file = new File(getExternalFilesDir(null), filename);
-//
-//        try {
-//            FileOutputStream fos = new FileOutputStream(file);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//            fos.flush();
-//            fos.close();
-//            System.out.println("Image saved to " + file.getAbsolutePath());
-//            Toast.makeText(ViewEdit.this, "Image saved to " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(ViewEdit.this, "Failed to save image", Toast.LENGTH_SHORT).show();
-//        }
         ArrayList<String> getPicturePaths = new ArrayList<>();
-        ArrayList<String> getFavorList = new ArrayList<>();
         picturePaths = new ArrayList<>();
         getPicturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
 
@@ -493,7 +471,7 @@ public class ViewEdit extends AppCompatActivity {
                         int y = (int) event.getY();
                         Canvas canvas = new Canvas(bitmap);
                         Paint paint = new Paint();
-                        paint.setColor(Color.RED);
+                        paint.setColor(adapterColor.getColorChosen());
                         canvas.drawCircle(x, y, 10, paint);
                         imgViewEdit.invalidate();
                         break;
@@ -640,8 +618,6 @@ public class ViewEdit extends AppCompatActivity {
         originImage = drawable.getBitmap();
 
 
-
-
         emoteOption = findViewById(R.id.emoteOption);
         cropOption = findViewById(R.id.cropOption);
         filterOption = findViewById(R.id.filterOption);
@@ -671,7 +647,7 @@ public class ViewEdit extends AppCompatActivity {
         filters.add(new Filter("11", R.drawable.image1));
         filters.add(new Filter("12", R.drawable.image1));
 
-        FilterRecViewAdapter adapterFilter = new FilterRecViewAdapter(this);
+        adapterFilter = new FilterRecViewAdapter(this);
         adapterFilter.setFilters(filters);
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -687,8 +663,8 @@ public class ViewEdit extends AppCompatActivity {
         colors.add(new ColorClass("BLACK",Color.BLACK));
         colors.add(new ColorClass("WHITE", Color.WHITE));
 
-        ColorRecViewAdapter adapterColor = new ColorRecViewAdapter(this);
-        adapterColor.setFilters(colors);
+        adapterColor = new ColorRecViewAdapter(this);
+        adapterColor.setColors(colors);
         colorRecView.setAdapter(adapterColor);
         colorRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 

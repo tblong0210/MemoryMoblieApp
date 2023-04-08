@@ -1,6 +1,7 @@
 package com.example.memorymoblieapp.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.Filter;
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.obj.Color;
 import com.example.memorymoblieapp.obj.ColorClass;
 
 import java.util.ArrayList;
@@ -22,12 +22,17 @@ import java.util.ArrayList;
 public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapter.ViewHolder> {
     private ArrayList<ColorClass> colors = new ArrayList<>();
     private Context context;
+    private int ColorChosen = Color.RED;
     public ColorRecViewAdapter(Context context) {
         this.context= context;
     }
 
 
 
+
+    public int getColorChosen(){
+        return ColorChosen;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,9 +46,11 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
 
         holder.colorItemViewEdit.setBackgroundColor(colors.get(position).getColorType());
         String name = colors.get(position).getName();
+        int colorChoose = colors.get(position).getColorType();
         holder.parent_list_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ColorChosen= colorChoose;
                 Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         });
@@ -64,7 +71,7 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
         return colors.size();
     }
 
-    public void setFilters(ArrayList<ColorClass> colors) {
+    public void setColors(ArrayList<ColorClass> colors) {
         this.colors = colors;
         notifyDataSetChanged();
     }
