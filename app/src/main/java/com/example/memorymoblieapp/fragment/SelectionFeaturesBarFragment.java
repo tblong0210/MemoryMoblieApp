@@ -61,49 +61,54 @@ public class SelectionFeaturesBarFragment extends Fragment {
 
             switch (item.getItemId()) {
                 case R.id.add2album:
-                    final int[] albumChosenPos = new int[1];
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Chọn album cần thêm");
+                    if (albumsName.isEmpty()) {
+                        Toast.makeText(context, "Không có album nào trong danh sách. Vui lòng tạo ít nhất một album!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        final int[] albumChosenPos = new int[1];
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Chọn album cần thêm");
 
-                    Spinner spinner = new Spinner(context);
-                    ArrayAdapter arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, albumsName);
-                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(arrayAdapter);
+                        Spinner spinner = new Spinner(context);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, albumsName);
+                        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(arrayAdapter);
 
-                    final LinearLayout ll = new LinearLayout(getContext());
-                    ll.removeAllViews();
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(50, 30, 50, 30);
-                    spinner.setLayoutParams(params);
-                    ll.addView(spinner);
+                        final LinearLayout ll = new LinearLayout(getContext());
+                        ll.removeAllViews();
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(50, 30, 50, 30);
+                        spinner.setLayoutParams(params);
+                        ll.addView(spinner);
 
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            albumChosenPos[0] = i;
-                        }
+                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                                albumChosenPos[0] = pos;
+                            }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-                            albumChosenPos[0] = -1;
-                        }
-                    });
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                albumChosenPos[0] = -1;
+                            }
+                        });
 
-                    builder.setView(ll);
-                    builder.setPositiveButton("Đồng ý", null);
-                    builder.setNegativeButton("Hủy", null);
+                        builder.setView(ll);
+                        builder.setPositiveButton("Đồng ý", null);
+                        builder.setNegativeButton("Hủy", null);
 
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
-                        if (albumChosenPos[0] >= 0)
-                            for (String imageSelected : GalleryAdapter.getListSelect())
-                                MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
-                        DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
-                        Toast.makeText(context, "Đã thêm ảnh vào album '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    });
-                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
+                            if (albumChosenPos[0] >= 0 && !albumsName.isEmpty()) {
+                                for (String imageSelected : GalleryAdapter.getListSelect())
+                                    MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
+                                DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                                Toast.makeText(context, "Đã thêm ảnh vào album '" + albumChosenPos[0] + "'", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+                    }
 
                     return true;
 
