@@ -193,6 +193,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                         final EditText passwordInput = new EditText(itemView.getContext());
                         passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        passwordInput.setHint("Nhập mật khẩu");
                         passwordInput.requestFocus();
 
                         final LinearLayout ll = new LinearLayout(context);
@@ -247,11 +248,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         if (albums.get(position).getBlock() && albumPassword != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Album bị khóa. Hãy nhập mật khẩu");
+            builder.setTitle("Đổi tên album");
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            passwordInput.setHint("Nhập mật khẩu");
+            passwordInput.setHint("Nhập mật khẩu xác thực");
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -286,7 +287,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     input.setHint("Nhập tên mới");
                     input.requestFocus();
 
-                    builder1.setView(input);
+                    final LinearLayout ll1 = new LinearLayout(context);
+                    ll1.removeAllViews();
+                    input.setLayoutParams(params);
+                    ll1.addView(input);
+
+                    builder1.setView(ll1);
                     builder1.setPositiveButton("Đồng ý", null);
                     builder1.setNegativeButton("Hủy", null);
 
@@ -374,11 +380,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         if (albums.get(position).getBlock() && albumPassword != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Album bị khóa. Hãy nhập mật khẩu");
+            builder.setTitle("Xóa album");
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            passwordInput.setHint("Nhập mật khẩu");
+            passwordInput.setHint("Nhập mật khẩu xác thực");
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
