@@ -3,7 +3,10 @@ package com.example.memorymoblieapp.fragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +25,16 @@ import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
+import com.example.memorymoblieapp.obj.Album;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class SelectionFeaturesBarFragment extends Fragment {
@@ -113,7 +123,23 @@ public class SelectionFeaturesBarFragment extends Fragment {
                     return true;
 
                 case R.id.duplicate:
-                    Toast.makeText(selectionFeaturesBarFragment.getContext(), "Tạo bản sao", Toast.LENGTH_LONG).show();
+
+                    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                duplicate(listSelect);
+                                Toast.makeText(context, "Tạo bản sao thành công", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                dialog.cancel();
+                                break;
+                        }
+                    };
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Bạn có chắc muốn tạo bản sao các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener)
+                            .setNegativeButton("Hủy", dialogClickListener).show();
+
                     return true;
 
                 case R.id.delete:
@@ -128,5 +154,30 @@ public class SelectionFeaturesBarFragment extends Fragment {
         });
 
         return selectionFeaturesBarFragment;
+    }
+
+    public void duplicate(@NonNull ArrayList<String> filePaths) {
+        for (String filePath : filePaths) {
+            File sourceFile = new File(filePath);
+            String fileName = sourceFile.getName();
+            String fileExtension = "";
+            int dotIndex = fileName.lastIndexOf('.');
+            if (dotIndex > 0) {
+                fileExtension = fileName.substring(dotIndex);
+                fileName = fileName.substring(0, dotIndex);
+            }
+            int count = 1;
+            String newFilePath = sourceFile.getParent() + File.separator + fileName + " (" + count + ")" + fileExtension;
+            while (new File(newFilePath).exists()) {
+                count++;
+                newFilePath = sourceFile.getParent() + File.separator + fileName + " (" + count + ")" + fileExtension;
+            }
+            try {
+                Files.copy(sourceFile.toPath(), new File(newFilePath).toPath());
+                System.out.println("File duplicated: " + newFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
