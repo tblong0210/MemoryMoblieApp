@@ -18,8 +18,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
@@ -113,7 +116,7 @@ public class SelectionFeaturesBarFragment extends Fragment {
                                 for (String imageSelected : GalleryAdapter.getListSelect())
                                     MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
                                 DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
-                                Toast.makeText(context, "Đã thêm ảnh vào album '" + albumChosenPos[0] + "'", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Đã thêm ảnh vào album '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                         });
@@ -128,7 +131,18 @@ public class SelectionFeaturesBarFragment extends Fragment {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 duplicate(listSelect);
+                                MainActivity.updateData(context);
+                                ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
+                                AppCompatActivity activity = (AppCompatActivity) context;
+                                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+
+                                MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
+                                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
+                                GalleryAdapter.clearListSelect();
+
                                 Toast.makeText(context, "Tạo bản sao thành công", Toast.LENGTH_SHORT).show();
+
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:

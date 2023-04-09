@@ -220,4 +220,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     public static Vector<String> getListSelect() {
         return listSelect;
     }
+
+    public static void clearListSelect() {
+        listSelect.clear();
+    }
 }

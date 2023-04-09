@@ -144,11 +144,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ivAlbum.setOnClickListener(view -> {
                 if (getAdapterPosition() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Nhập tên album");
+                    builder.setTitle("Tạo album");
 
                     final EditText input = new EditText(context);
 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
+                    input.setHint("Nhập tên album");
                     input.requestFocus();
 
                     final LinearLayout ll = new LinearLayout(context);
@@ -250,6 +251,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordInput.setHint("Nhập mật khẩu");
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -276,14 +278,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 } else {
                     dialog.dismiss();
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setTitle("Nhập tên mới");
+                    builder1.setTitle("Đổi tên album");
 
                     final EditText input = new EditText(context);
 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
-                    builder1.setView(input);
+                    input.setHint("Nhập tên mới");
                     input.requestFocus();
 
+                    builder1.setView(input);
                     builder1.setPositiveButton("Đồng ý", null);
                     builder1.setNegativeButton("Hủy", null);
 
@@ -319,11 +322,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         if (!albums.get(position).getBlock() || albumPassword == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Nhập tên mới");
+            builder.setTitle("Đổi tên album");
 
             final EditText input = new EditText(context);
 
             input.setInputType(InputType.TYPE_CLASS_TEXT);
+            input.setHint("Nhập tên mới");
             input.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -374,6 +378,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordInput.setHint("Nhập mật khẩu");
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
