@@ -117,6 +117,16 @@ public class SelectionFeaturesBarFragment extends Fragment {
                                     MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
                                 DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                                 Toast.makeText(context, "Đã thêm ảnh vào album '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
+
+                                // Refresh and exit choose image mode
+                                ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
+                                AppCompatActivity activity = (AppCompatActivity) context;
+                                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                                MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
+                                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
+                                GalleryAdapter.clearListSelect();
+
                                 dialog.dismiss();
                             }
                         });
@@ -132,11 +142,12 @@ public class SelectionFeaturesBarFragment extends Fragment {
                             case DialogInterface.BUTTON_POSITIVE:
                                 duplicate(listSelect);
                                 MainActivity.updateData(context);
+
+                                // Refresh and exit choose image mode
                                 ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
                                 AppCompatActivity activity = (AppCompatActivity) context;
                                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-
                                 MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
                                 MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
                                 GalleryAdapter.clearListSelect();

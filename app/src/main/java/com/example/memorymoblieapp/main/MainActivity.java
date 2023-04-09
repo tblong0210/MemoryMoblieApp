@@ -108,11 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
 
-        Toast.makeText(context, "Before: " + images.size(), Toast.LENGTH_SHORT).show();
         images = ImagesGallery.listOfImages(context);
         newImage = handleSortListImageView();
         ArrayList<String> picturePath = new ArrayList<>(newImage);
-        Toast.makeText(context, "After: " + images.size(), Toast.LENGTH_SHORT).show();
 
         picturePath.removeAll(Collections.singleton(" "));
 
