@@ -27,9 +27,6 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
         this.context= context;
     }
 
-
-
-
     public int getColorChosen(){
         return ColorChosen;
     }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdapter.ViewHolder> {
     private ArrayList<FilterItem> filters = new ArrayList<>();
     private final Context context;
-    private final Bitmap imageFilterView;
+    private Bitmap imageFilterView;
 
     public FilterRecViewAdapter(Context context, Bitmap bitmap) {
         this.imageFilterView = bitmap;
@@ -40,10 +41,16 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
         return holder;
     }
 
+    public void setImageFilterView(Bitmap bitmap){
+        this.imageFilterView = bitmap;
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.filterName.setText(filters.get(position).getName());
+        Log.d("ten filter", "onBindViewHolder: " + imageFilterView.toString());
 
         holder.filterItemViewEdit.setImageBitmap(imageFilterView);
         holder.filterItemViewEdit.setLayoutParams(new LinearLayout.LayoutParams(100, 100));

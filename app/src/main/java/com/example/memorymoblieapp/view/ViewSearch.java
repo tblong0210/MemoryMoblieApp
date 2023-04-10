@@ -35,7 +35,6 @@ public class ViewSearch extends AppCompatActivity {
     private List<String> resultSearch;
     private int typeSearch;
     private ArrayList<String> historyImage;
-    private ArrayList<String> historyAlbum;
 
     public ViewSearch() {
     }
@@ -56,7 +55,7 @@ public class ViewSearch extends AppCompatActivity {
 
         ArrayList<String> getPathImages = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
         Set<String> getPathAlbums = DataLocalManager.getSetList(KeyData.ALBUM_NAME_LIST.getKey());
-        ArrayList<String> getPathHistoryImage = DataLocalManager.getStringList(KeyData.HISTORY_SEARCH_IMAGE.getKey());
+        Set<String> getPathHistoryImage = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey());
 
         if (getPathImages != null)
             pathImages.addAll(getPathImages);

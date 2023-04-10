@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -212,11 +213,16 @@ public class ViewEdit extends AppCompatActivity {
 
                     case R.id.filterPic:
                         filterOption.setVisibility(View.VISIBLE);
-
                         cropOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
 
+                        Drawable drawable = imgViewEdit.getDrawable();
+                        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(bitmap);
+                        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        drawable.draw(canvas);
+                        adapterFilter.setImageFilterView(bitmap);
                         break;
                     case R.id.brightnessPic:
                         brightnessOption.setVisibility(View.VISIBLE);
@@ -339,7 +345,6 @@ public class ViewEdit extends AppCompatActivity {
         });
 
 
-
 //        imgViewEdit.setImageResource(R.drawable.image1);
 
 
@@ -432,7 +437,6 @@ public class ViewEdit extends AppCompatActivity {
 
             // Calculate the y-coordinate for the top of the new image
             int y = (height - newHeight) / 2;
-
             // Create a new bitmap with the desired dimensions
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
             imgViewEdit.setImageBitmap(croppedBitmap);
@@ -461,6 +465,7 @@ public class ViewEdit extends AppCompatActivity {
         imgViewEdit.setImageBitmap(bitmap);
 
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getActionMasked();
@@ -604,6 +609,7 @@ public class ViewEdit extends AppCompatActivity {
         });
 
     }
+
     //    private void handleShadowLevel(){
 //        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 //            @Override
@@ -664,7 +670,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void initViews() {
-        parent_list_color= findViewById(R.id.parent_list_color);
+        parent_list_color = findViewById(R.id.parent_list_color);
         imgViewEdit = findViewById(R.id.imgViewEdit);
         Intent intent = getIntent();
         path_image = intent.getStringExtra("path_image");
@@ -695,20 +701,20 @@ public class ViewEdit extends AppCompatActivity {
         filterItems = new ArrayList<>();
         setAllFilters();
 
-        FilterRecViewAdapter adapterFilter = new FilterRecViewAdapter(this, originImage);
+        adapterFilter = new FilterRecViewAdapter(this, originImage);
         adapterFilter.setFilters(filterItems);
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         colorRecView = findViewById(R.id.colorRecView);
         //set adapter to imgRecView
-        colors = new ArrayList <> ();
+        colors = new ArrayList<>();
         colors.add(new ColorClass("RED", Color.RED));
-        colors.add(new ColorClass("GREEN",Color.GREEN ));
+        colors.add(new ColorClass("GREEN", Color.GREEN));
         colors.add(new ColorClass("BLUE", Color.BLUE));
         colors.add(new ColorClass("YELLOW", Color.YELLOW));
         colors.add(new ColorClass("GRAY", Color.GRAY));
-        colors.add(new ColorClass("BLACK",Color.BLACK));
+        colors.add(new ColorClass("BLACK", Color.BLACK));
         colors.add(new ColorClass("WHITE", Color.WHITE));
 
         adapterColor = new ColorRecViewAdapter(this);
@@ -823,8 +829,16 @@ public class ViewEdit extends AppCompatActivity {
         return filterItem;
     }
 
+    public void setOriginImage(Bitmap bitmap) {
+        originImage = bitmap;
+    }
+
     public void setImageViewEdit(Drawable drawable) {
-        imgViewEdit.setImageDrawable(drawable);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        imgViewEdit.setImageBitmap(bitmap);
     }
 
 }
