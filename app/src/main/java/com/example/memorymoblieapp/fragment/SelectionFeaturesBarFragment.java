@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
@@ -33,10 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
@@ -136,7 +130,6 @@ public class SelectionFeaturesBarFragment extends Fragment {
                     return true;
 
                 case R.id.duplicate:
-
                     DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
@@ -168,7 +161,32 @@ public class SelectionFeaturesBarFragment extends Fragment {
                     return true;
 
                 case R.id.delete:
-                    Toast.makeText(selectionFeaturesBarFragment.getContext(), "Xóa", Toast.LENGTH_LONG).show();
+                    DialogInterface.OnClickListener dialogClickListener1 = (dialog, which) -> {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                move2TrashBin(listSelect);
+                                MainActivity.updateData(context);
+
+                                // Refresh and exit choose image mode
+                                ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
+                                AppCompatActivity activity = (AppCompatActivity) context;
+                                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                                MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
+                                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
+                                GalleryAdapter.clearListSelect();
+
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                dialog.cancel();
+                                break;
+                        }
+                    };
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                    builder1.setMessage("Bạn có chắc muốn xóa các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener1)
+                            .setNegativeButton("Hủy", dialogClickListener1).show();
+
                     return true;
 
                 case R.id.share:
@@ -181,7 +199,7 @@ public class SelectionFeaturesBarFragment extends Fragment {
         return selectionFeaturesBarFragment;
     }
 
-    public void duplicate(@NonNull ArrayList<String> filePaths) {
+    void duplicate(@NonNull ArrayList<String> filePaths) {
         for (String filePath : filePaths) {
             File sourceFile = new File(filePath);
             String fileName = sourceFile.getName();
@@ -205,4 +223,26 @@ public class SelectionFeaturesBarFragment extends Fragment {
             }
         }
     }
+
+    void move2TrashBin(@NonNull ArrayList<String> filePaths) {
+        MainActivity.deletedImageList.addAll(filePaths);
+        DataLocalManager.saveData(KeyData.TRASH_LIST.getKey(), MainActivity.deletedImageList);
+
+        for (Album album : MainActivity.albumList)
+            for (String filePath : filePaths)
+                album.deleteImage(filePath);
+
+        DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+    }
+
+//    void delete(@NonNull ArrayList<String> filePaths, Context context) {
+//        for (String filePath : filePaths) {
+//            File sourceFile = new File(filePath);
+//            if (sourceFile.delete()) {
+//                Toast.makeText(context, "Đã xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
+//            } else {
+//                Toast.makeText(context, "Không thể xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
+//            }
+//        }
+//    }
 }
