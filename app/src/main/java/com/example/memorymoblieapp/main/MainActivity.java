@@ -27,6 +27,7 @@ import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.adapter.ImageAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment;
@@ -288,6 +289,8 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setVisibility(View.VISIBLE);
         GalleryAdapter.clearListSelect();
+
+        ImageAdapter.ViewHolder.turnOffSelectMode();
     }
 
     public void onMsgToMain(String data, String request) {

@@ -81,7 +81,7 @@ public class ImageFragment2 extends Fragment {
             recycler.setLayoutManager(gridLayoutManager);
         }
 
-        adapter = new ImageAdapter(imageList, context, MainActivity.detailed);
+        adapter = new ImageAdapter(imageList, context, MainActivity.detailed, title);
         recycler.setAdapter(adapter);
 
         return imagesFragment;
