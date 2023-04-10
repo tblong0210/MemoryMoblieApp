@@ -29,10 +29,14 @@ import com.example.memorymoblieapp.obj.Album;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+import org.jetbrains.annotations.Contract;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class SelectionFeaturesBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
@@ -226,7 +230,11 @@ public class SelectionFeaturesBarFragment extends Fragment {
 
     void move2TrashBin(@NonNull ArrayList<String> filePaths) {
         MainActivity.deletedImageList.addAll(filePaths);
+        MainActivity.deletedImageList = removeDuplicates(MainActivity.deletedImageList);
         DataLocalManager.saveData(KeyData.TRASH_LIST.getKey(), MainActivity.deletedImageList);
+
+        MainActivity.lovedImageList.removeAll(filePaths);
+        DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
 
         for (Album album : MainActivity.albumList)
             for (String filePath : filePaths)
@@ -245,4 +253,13 @@ public class SelectionFeaturesBarFragment extends Fragment {
 //            }
 //        }
 //    }
+
+    @NonNull
+    @Contract("_ -> param1")
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+        Set<T> set = new LinkedHashSet<>(list);
+        list.clear();
+        list.addAll(set);
+        return list;
+    }
 }
