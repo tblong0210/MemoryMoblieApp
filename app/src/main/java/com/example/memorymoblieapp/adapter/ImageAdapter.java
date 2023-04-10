@@ -2,6 +2,7 @@ package com.example.memorymoblieapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.view.ViewImage;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -68,7 +70,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 holder.size.setText("Dung lượng: " + fileSizeResult);
                 if (bitmap != null)
                     holder.dimensions.setText("Kích thước: " + bitmap.getWidth() + "x" + bitmap.getHeight());
-                holder.location.setText("Vị trí: " + images.get(position));
+                holder.location.setText("Vị trí: " + currentFile.getParent());
             }
             holder.img.setImageBitmap(bitmap);
         }
@@ -98,7 +100,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             }
             img = (ImageView) itemView.findViewById(R.id.ivImage);
 
-            itemView.setOnClickListener(view -> Toast.makeText(view.getContext(), images.get(getAdapterPosition()) + "", Toast.LENGTH_LONG).show());
+            itemView.setOnClickListener(view -> {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, ViewImage.class);
+                intent.putExtra("path_image", images.get(getAdapterPosition()));
+                context.startActivity(intent);
+            });
         }
     }
 }

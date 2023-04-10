@@ -60,15 +60,16 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     //    private ArrayList<String> imagePaths = new ArrayList<String>();
     private RecyclerView recyclerView;
-    private List<String> imageDates;
-    ArrayList<String> images;
-    ArrayList<String> newImage;
-    ArrayList<String> trashListImage;
+    private static List<String> imageDates;
+    static ArrayList<String> images;
+    static ArrayList<String> newImage;
+    static ArrayList<String> trashListImage;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
     public static boolean isVerify = false; // Status of album blocking
-    FrameLayout frame_layout_selection_features_bar;
+    @SuppressLint("StaticFieldLeak")
+    static FrameLayout frame_layout_selection_features_bar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -102,6 +103,21 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public static void updateData(Context context) {
+        imageDates = new ArrayList<>();
+
+        trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
+
+        images = ImagesGallery.listOfImages(context);
+        newImage = handleSortListImageView();
+        ArrayList<String> picturePath = new ArrayList<>(newImage);
+
+        picturePath.removeAll(Collections.singleton(" "));
+
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
+        DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
+    }
+
     @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
 //        ArrayList<String> arr = new ArrayList<>();
@@ -121,8 +137,7 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, newImage.size() + " "+ picturePath.size(), Toast.LENGTH_SHORT).show();
 
         detailed = false;
-        albumList = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
-        albumList = albumList == null ? new ArrayList<>() : albumList;
+        albumList = new ArrayList<>(DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class));
         lovedImageList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
         lovedImageList = lovedImageList == null ? new ArrayList<>() : lovedImageList;
         deletedImageList = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
@@ -190,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private ArrayList<String> handleSortListImageView() {
+    public static ArrayList<String> handleSortListImageView() {
         ArrayList<String> newImage = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
         int flag = 0;
@@ -272,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         else super.onBackPressed();
 
         bottomNavigationView.setVisibility(View.VISIBLE);
+        GalleryAdapter.clearListSelect();
     }
 
     public void onMsgToMain(String data, String request) {
@@ -293,4 +309,16 @@ public class MainActivity extends AppCompatActivity {
     public static BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
+
+    public static FrameLayout getFrameLayoutSelectionFeaturesBar() { return frame_layout_selection_features_bar; }
+
+    public static ArrayList<String> getNewImage() {
+        return newImage;
+    }
+
+    public static List<String> getImageDates() {
+        return imageDates;
+    }
+
+    public static ArrayList<String> getImages() { return images; }
 }

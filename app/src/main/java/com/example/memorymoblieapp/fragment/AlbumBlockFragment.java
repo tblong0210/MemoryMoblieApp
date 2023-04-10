@@ -58,15 +58,19 @@ public class AlbumBlockFragment extends Fragment {
 
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu");
+            passwordInput.setLayoutParams(params);
             layout.addView(passwordInput);
 
             final EditText rePasswordInput = new EditText(context);
             rePasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             rePasswordInput.setHint("Xác nhận mật khẩu");
+            rePasswordInput.setLayoutParams(params);
             layout.addView(rePasswordInput);
 
             builder.setView(layout);
@@ -119,20 +123,25 @@ public class AlbumBlockFragment extends Fragment {
 
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
 
             final EditText oldPasswordInput = new EditText(context);
             oldPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             oldPasswordInput.setHint("Nhập mật khẩu cũ");
+            oldPasswordInput.setLayoutParams(params);
             layout.addView(oldPasswordInput);
 
             final EditText newPasswordInput = new EditText(context);
             newPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             newPasswordInput.setHint("Nhập mật khẩu mới");
+            newPasswordInput.setLayoutParams(params);
             layout.addView(newPasswordInput);
 
             final EditText reNewPasswordInput = new EditText(context);
             reNewPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             reNewPasswordInput.setHint("Xác nhận mật khẩu mới");
+            reNewPasswordInput.setLayoutParams(params);
             layout.addView(reNewPasswordInput);
 
             builder.setView(layout);
@@ -189,9 +198,16 @@ public class AlbumBlockFragment extends Fragment {
             final EditText passwordInput = new EditText(itemView.getContext());
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             passwordInput.setHint("Nhập mật khẩu");
-            builder.setView(passwordInput);
             passwordInput.requestFocus();
 
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(55,10,55,10);
+            passwordInput.setLayoutParams(params);
+            ll.addView(passwordInput);
+
+            builder.setView(ll);
             builder.setPositiveButton("Đồng ý", null);
             builder.setNegativeButton("Hủy", null);
 

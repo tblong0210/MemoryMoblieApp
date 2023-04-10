@@ -25,7 +25,7 @@ public class AlbumFragment2 extends Fragment {
     private Context context;
 
     public AlbumFragment2(ArrayList<Album> albumList) {
-        AlbumFragment2.albumList = albumList == null ? new ArrayList<>() : albumList;
+        AlbumFragment2.albumList = new ArrayList<>(albumList);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class AlbumFragment2 extends Fragment {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    static public void updateItem(int position) {
-        adapter.notifyItemChanged(position);
+    static public void updateItem() {
+        adapter.notifyDataSetChanged();
     }
 }
