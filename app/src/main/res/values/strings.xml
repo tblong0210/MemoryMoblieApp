@@ -22,7 +22,7 @@
     <string name="action_flip_edit_view">Lật ảnh</string>
     <string name="action_resize_edit_view">Chỉnh ảnh</string>
     <string name="action_draw_edit_view">Vẽ</string>
-    <string name="action_sticker_edit_view">Sticker</string>
+    <string name="action_sticker_edit_view">Nhãn dán</string>
     <string name="action_search_by_name">Tên</string>
     <string name="action_search_by_album">Album</string>
     <string name="query_hint_name">Tìm kiếm theo tên</string>

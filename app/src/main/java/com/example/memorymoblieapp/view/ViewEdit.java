@@ -47,11 +47,13 @@ import com.example.memorymoblieapp.FilterItem;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.ColorRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
+import com.example.memorymoblieapp.adapter.StickerRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 import com.example.memorymoblieapp.obj.FilterImageKey;
 import com.example.memorymoblieapp.obj.ColorClass;
+import com.example.memorymoblieapp.obj.Sticker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileOutputStream;
@@ -70,18 +72,22 @@ public class ViewEdit extends AppCompatActivity {
     private LinearLayout filterOption;
     private ImageView imgViewEdit;
     private RelativeLayout emoteOption, cropOption, brightnessOption,textOption;
-    private RecyclerView filterRecView, colorRecView, colorTxtRecView;
+    private RecyclerView filterRecView, colorRecView, colorTxtRecView, stickerRecView;
 
     private EditText edtTxtInput;
 
     private String path_image;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize, seekBarSticker;
 
     private ArrayList<FilterItem> filterItems;
     private ArrayList<ColorClass> colors, text_colors;
 
+    private ArrayList<Sticker> stickers;
+
     private ColorRecViewAdapter adapterColor,adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
+
+    private StickerRecViewAdapter adapterSticker;
     private Bitmap originImage;
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
@@ -302,12 +308,19 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.paintPic:
                         Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.VISIBLE);
+
+                        stickerRecView.setVisibility(View.GONE);
+                        seekBarSticker.setVisibility(View.GONE);
                         handleAddPaintImage();
                         break;
 
                     case R.id.stickerPic:
                         Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.GONE);
+
+                        stickerRecView.setVisibility(View.VISIBLE);
+                        seekBarSticker.setVisibility(View.VISIBLE);
+                        handleAddStickerImage();
                         break;
 
                     default:
@@ -598,8 +611,6 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
     }
-    private void handleAddStickerImage() {
-    }
 
     private void handleAddTextImage() {
         Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
@@ -628,6 +639,41 @@ public class ViewEdit extends AppCompatActivity {
                         }
                         else{
                             Toast.makeText(ViewEdit.this, "Please provide text you want to add", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+
+    }
+
+    private void handleAddStickerImage() {
+        Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        int Size = seekBarSticker.getProgress();
+
+                        Bitmap originalSticker = adapterSticker.getStickerChosen() ;
+                        if(originalSticker != null) {
+                            Bitmap scaledSticker = Bitmap.createScaledBitmap(originalSticker, Size, Size, false);
+
+                            Canvas canvas = new Canvas(mutableBitmap);
+                            canvas.drawBitmap(mutableBitmap, 0, 0, null);
+                            canvas.drawBitmap(scaledSticker, x, y, null);
+
+                            imgViewEdit.setImageBitmap(mutableBitmap);
+                        }
+                        else{
+                            Toast.makeText(ViewEdit.this, "Please choose your sticker", Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
@@ -710,10 +756,30 @@ public class ViewEdit extends AppCompatActivity {
         colorTxtRecView.setAdapter(adapterTxtColor);
         colorTxtRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        stickerRecView = findViewById(R.id.stickerRecView);
+        //set adapter to imgRecView
+        stickers = new ArrayList<>();
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Birthday Cake", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+
+        adapterSticker = new StickerRecViewAdapter(this);
+        adapterSticker.setStickers(stickers);
+        stickerRecView.setAdapter(adapterSticker);
+        stickerRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
         seekBarBlur = findViewById(R.id.seekBarBlur);
         seekBarSize = findViewById(R.id.seekBarSize);
+        seekBarSticker = findViewById(R.id.seekBarSticker);
 
     }
 
