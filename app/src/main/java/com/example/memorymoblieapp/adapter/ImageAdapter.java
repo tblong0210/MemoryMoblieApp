@@ -22,6 +22,7 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.AlbumSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.LoveSelectionBarFragment;
+import com.example.memorymoblieapp.fragment.TrashBinSelectionBarFragment;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
@@ -170,7 +171,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 if (type.equals("Love"))
                     selectionFragment = new LoveSelectionBarFragment();
                 else if (type.equals("TrashBin"))
-                    selectionFragment = new HomeSelectionBarFragment();
+                    selectionFragment = new TrashBinSelectionBarFragment();
                 else
                     selectionFragment = new AlbumSelectionBarFragment(albumPos);
 

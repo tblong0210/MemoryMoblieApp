@@ -39,7 +39,6 @@ import java.util.Set;
 public class AlbumSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ArrayList<String> listSelect;
-    ArrayList<String> albumsName;
     int albumPos;
 
     public AlbumSelectionBarFragment(int albumPos) {
@@ -53,7 +52,6 @@ public class AlbumSelectionBarFragment extends Fragment {
         View selectionFeaturesBarFragment = inflater.inflate(R.layout.album_selection_bar, container, false);
         bottomNavigationView = selectionFeaturesBarFragment.findViewById(R.id.navigation_view);
         Context context = selectionFeaturesBarFragment.getContext();
-        albumsName = new ArrayList<>(DataLocalManager.getSetList(KeyData.ALBUM_NAME_LIST.getKey()));
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             listSelect = new ArrayList<>(ImageAdapter.getListSelect());
@@ -134,7 +132,7 @@ public class AlbumSelectionBarFragment extends Fragment {
 
                 case R.id.more:
                     PopupMenu popupMenu = new PopupMenu(context, bottomNavigationView, Gravity.END);
-                    popupMenu.inflate(R.menu.love_selection_bar_more_menu);
+                    popupMenu.inflate(R.menu.album_selection_bar_more_menu);
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();
 

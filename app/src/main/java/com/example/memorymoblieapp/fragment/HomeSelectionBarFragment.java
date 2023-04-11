@@ -255,17 +255,6 @@ public class HomeSelectionBarFragment extends Fragment {
         GalleryAdapter.clearListSelect();
     }
 
-//    void delete(@NonNull ArrayList<String> filePaths, Context context) {
-//        for (String filePath : filePaths) {
-//            File sourceFile = new File(filePath);
-//            if (sourceFile.delete()) {
-//                Toast.makeText(context, "Đã xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
-//            } else {
-//                Toast.makeText(context, "Không thể xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
-
     @NonNull
     @Contract("_ -> param1")
     <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
