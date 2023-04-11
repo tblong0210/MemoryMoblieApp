@@ -68,7 +68,6 @@ public class ViewEdit extends AppCompatActivity {
 
     private ArrayList<String> picturePaths;
 
-    private Bitmap mutableBitmap;
     private LinearLayout filterOption;
     private ImageView imgViewEdit;
     private RelativeLayout emoteOption, cropOption, brightnessOption,textOption;
@@ -88,7 +87,8 @@ public class ViewEdit extends AppCompatActivity {
     private FilterRecViewAdapter adapterFilter;
 
     private StickerRecViewAdapter adapterSticker;
-    private Bitmap originImage;
+    private Bitmap originImage, mutableBitmap;
+    private ArrayList<Bitmap> previousBitmaps = new ArrayList<>();
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
 
@@ -141,7 +141,7 @@ public class ViewEdit extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.resetViewEdit:
-                Toast.makeText(this, "Undo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
                 refreshPicture();
                 break;
             case R.id.saveViewEdit:
@@ -152,6 +152,9 @@ public class ViewEdit extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 break;
+            case R.id.backViewEdit:
+                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
+//                backPreviousPicture();
             default:
                 break;
         }
@@ -164,7 +167,32 @@ public class ViewEdit extends AppCompatActivity {
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
         mutableBitmap= originImage.copy(Bitmap.Config.ARGB_8888, true);
+        previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
+    }
+    private void backPreviousPicture(){
+//        int sizeBitmaps = previousBitmaps.size();
+//        if (sizeBitmaps >= 2) {
+//            System.out.println(previousBitmaps.get(sizeBitmaps - 1));
+//            imgViewEdit.setImageBitmap(previousBitmaps.get(sizeBitmaps - 2));
+//            previousBitmaps.remove(sizeBitmaps - 1);
+//        }
+//        else if (sizeBitmaps <2 && sizeBitmaps >0){
+//            imgViewEdit.setImageBitmap(originImage);
+//            previousBitmaps.remove(0);
+//        }
+//        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
+
+        // Kiểm tra nếu danh sách có ít nhất 2 bitmap thì ta có thể khôi phục lại trạng thái trước đó
+        if (previousBitmaps.size() >= 2) {
+            // Lấy bitmap trước đó và set vào ImageView
+            Bitmap previousBitmap = previousBitmaps.get(previousBitmaps.size() - 2);
+            imgViewEdit.setImageBitmap(previousBitmap.copy(previousBitmap.getConfig(), true));
+            Log.d("Previous Bitmap", previousBitmap.toString());
+            // Xóa bitmap hiện tại khỏi danh sách
+            previousBitmaps.remove(previousBitmaps.size() - 1);
+        }
+
     }
 
     private void savePicture() throws IOException {
@@ -652,13 +680,18 @@ public class ViewEdit extends AppCompatActivity {
     private void handleAddStickerImage() {
         Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
+
+                        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
+                        System.out.println(mutableBitmap);
                         int x = (int) event.getX();
                         int y = (int) event.getY();
                         int Size = seekBarSticker.getProgress();
@@ -670,18 +703,52 @@ public class ViewEdit extends AppCompatActivity {
                             Canvas canvas = new Canvas(mutableBitmap);
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
-
                             imgViewEdit.setImageBitmap(mutableBitmap);
+
+
                         }
                         else{
-                            Toast.makeText(ViewEdit.this, "Please choose your sticker", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewEdit.this, "Plea§se choose your sticker", Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
                 return true;
             }
         });
+    }
 
+    private void addNewBitmap(Bitmap originalBitmap, Bitmap newBitmap){
+        // Khởi tạo một mảng để lưu trữ các Bitmap
+        ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
+
+
+
+// Thêm bản sao của bitmap ban đầu vào mảng
+        Bitmap copyBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
+        bitmapList.add(copyBitmap);
+
+//// Thực hiện thay đổi bitmap
+//        Bitmap newBitmap = copyBitmap.copy(copyBitmap.getConfig(), true);
+//        Canvas canvas = new Canvas(newBitmap);
+//        Paint paint = new Paint();
+//        paint.setColor(Color.RED);
+//        canvas.drawCircle(50, 50, 50, paint);
+//        imageView.setImageBitmap(newBitmap);
+
+// Thêm bản sao của bitmap mới vào mảng
+        Bitmap newCopyBitmap = newBitmap.copy(newBitmap.getConfig(), true);
+        bitmapList.add(newCopyBitmap);
+
+// Xoá các phần tử trong ArrayList trước đó
+        bitmapList.clear();
+
+// Thực hiện thay đổi mới và thêm vào mảng
+        Bitmap newestBitmap = newCopyBitmap.copy(newCopyBitmap.getConfig(), true);
+
+// Thêm bản sao của bitmap mới vào mảng
+        Bitmap newestCopyBitmap = newestBitmap.copy(newestBitmap.getConfig(), true);
+        bitmapList.add(newestCopyBitmap);
+        previousBitmaps.addAll((bitmapList));
     }
 
     private void initViews() {

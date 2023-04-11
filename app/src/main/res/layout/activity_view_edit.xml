@@ -169,7 +169,7 @@
                 android:max="350"
                 android:min="100"
                 android:progress="100"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="45dp"
                 android:progressTint="@color/black"
                 android:thumbTint="@color/design_default_color_primary"
                 android:visibility="gone" />

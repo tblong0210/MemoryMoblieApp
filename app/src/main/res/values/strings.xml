@@ -42,5 +42,6 @@
     <string name="filter_nacreous">Trắng ngà</string>
     <string name="filter_faded">Nhạt dần</string>
     <string name="action_save_image">Lưu ảnh</string>
+    <string name="action_back_image">Hoàn tác</string>
     <string name="action_reset_edit">Quay lại</string>
 </resources>
