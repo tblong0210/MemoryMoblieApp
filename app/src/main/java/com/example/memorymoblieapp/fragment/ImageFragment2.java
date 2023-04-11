@@ -29,10 +29,12 @@ public class ImageFragment2 extends Fragment {
     ImageAdapter adapter;
     private Context context;
     private final String title;
+    String type;
 
-    public ImageFragment2(ArrayList<String> imageList, String title) {
+    public ImageFragment2(ArrayList<String> imageList, String title, String type) {
         this.imageList = imageList;
         this.title = title;
+        this.type = type;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -63,7 +65,7 @@ public class ImageFragment2 extends Fragment {
 
         imgBtnChangeView.setOnClickListener(view -> {
             MainActivity.detailed = !MainActivity.detailed;
-            ImageFragment2 imageFragment = new ImageFragment2(imageList, title);
+            ImageFragment2 imageFragment = new ImageFragment2(imageList, title, type);
 
             @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -89,7 +91,7 @@ public class ImageFragment2 extends Fragment {
             recycler.setLayoutManager(gridLayoutManager);
         }
 
-        adapter = new ImageAdapter(imageList, context, MainActivity.detailed, title);
+        adapter = new ImageAdapter(imageList, context, MainActivity.detailed, type);
         recycler.setAdapter(adapter);
 
         return imagesFragment;

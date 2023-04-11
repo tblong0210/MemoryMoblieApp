@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích");
+                    ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích", "Love");
                     fragmentTransaction1.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction1.addToBackStack("love");
                     return true;
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();
                         if (R.id.recycleBin == itemId) {
-                            ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác");
+                            ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác", "TrashBin");
                             fragmentTransaction1.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName());
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("album");

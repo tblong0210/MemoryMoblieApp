@@ -221,7 +221,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                 MainActivity.isVerify = true;
                                 Toast.makeText(context, "Mở khóa thành công!", Toast.LENGTH_SHORT).show();
 
-                                ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getPathImages(), albums.get(getAdapterPosition()).getAlbumName());
+                                ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getPathImages(), albums.get(getAdapterPosition()).getAlbumName(), "Album");
                                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -232,7 +232,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         });
                         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
                     } else {
-                        ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getPathImages(), albums.get(getAdapterPosition()).getAlbumName());
+                        ImageFragment2 imageFragment = new ImageFragment2(albums.get(getAdapterPosition()).getPathImages(), albums.get(getAdapterPosition()).getAlbumName(), "Album");
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();

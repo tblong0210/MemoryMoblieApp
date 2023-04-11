@@ -24,12 +24,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.adapter.ImageAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.Album;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 
 import org.jetbrains.annotations.Contract;
 
@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class HomeSelectionBarFragment extends Fragment {
+public class LoveSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ArrayList<String> listSelect;
     ArrayList<String> albumsName;
@@ -49,13 +49,13 @@ public class HomeSelectionBarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View selectionFeaturesBarFragment = inflater.inflate(R.layout.home_selection_bar, container, false);
+        View selectionFeaturesBarFragment = inflater.inflate(R.layout.love_selection_bar, container, false);
         bottomNavigationView = selectionFeaturesBarFragment.findViewById(R.id.navigation_view);
         Context context = selectionFeaturesBarFragment.getContext();
         albumsName = new ArrayList<>(DataLocalManager.getSetList(KeyData.ALBUM_NAME_LIST.getKey()));
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            listSelect = new ArrayList<>(GalleryAdapter.getListSelect());
+            listSelect = new ArrayList<>(ImageAdapter.getListSelect());
 
             switch (item.getItemId()) {
                 case R.id.add2album:
@@ -113,16 +113,15 @@ public class HomeSelectionBarFragment extends Fragment {
 
                     return true;
 
-                case R.id.love:
+                case R.id.unlove:
                     DialogInterface.OnClickListener dialogClickListener2 = (dialog, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                MainActivity.lovedImageList.addAll(listSelect);
-                                MainActivity.lovedImageList = removeDuplicates(MainActivity.lovedImageList);
+                                MainActivity.lovedImageList.removeAll(listSelect);
                                 DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
 
                                 refresh(context);
-                                Toast.makeText(context, "Đã thêm các ảnh được chọn vào mục yêu thích", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Đã gỡ các ảnh được chọn khỏi mục yêu thích" + listSelect.size(), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -132,7 +131,7 @@ public class HomeSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-                    builder2.setMessage("Bạn có chắc muốn đưa các ảnh vừa chọn vào mục yêu thích không?").setPositiveButton("Đồng ý", dialogClickListener2)
+                    builder2.setMessage("Bạn có chắc muốn gỡ các ảnh được chọn khỏi mục yêu thích không?").setPositiveButton("Đồng ý", dialogClickListener2)
                             .setNegativeButton("Hủy", dialogClickListener2).show();
 
                     return true;
@@ -162,7 +161,7 @@ public class HomeSelectionBarFragment extends Fragment {
 
                 case R.id.more:
                     PopupMenu popupMenu = new PopupMenu(context, bottomNavigationView, Gravity.END);
-                    popupMenu.inflate(R.menu.home_selection_bar_more_menu);
+                    popupMenu.inflate(R.menu.love_selection_bar_more_menu);
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();
 
@@ -223,10 +222,12 @@ public class HomeSelectionBarFragment extends Fragment {
             }
             try {
                 Files.copy(sourceFile.toPath(), new File(newFilePath).toPath());
+                MainActivity.lovedImageList.add(newFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
     }
 
     void move2TrashBin(@NonNull ArrayList<String> filePaths) {
@@ -246,7 +247,7 @@ public class HomeSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
+        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.lovedImageList, "Yêu thích", "Love");
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -254,17 +255,6 @@ public class HomeSelectionBarFragment extends Fragment {
         MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
         GalleryAdapter.clearListSelect();
     }
-
-//    void delete(@NonNull ArrayList<String> filePaths, Context context) {
-//        for (String filePath : filePaths) {
-//            File sourceFile = new File(filePath);
-//            if (sourceFile.delete()) {
-//                Toast.makeText(context, "Đã xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
-//            } else {
-//                Toast.makeText(context, "Không thể xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
 
     @NonNull
     @Contract("_ -> param1")

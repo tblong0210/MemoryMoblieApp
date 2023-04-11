@@ -10,14 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
+import com.example.memorymoblieapp.fragment.LoveSelectionBarFragment;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
@@ -33,15 +36,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     static boolean detailed;
     static Vector<String> listSelect;
     public static boolean selectMode;
-    String title;
+    static String type;
     static ArrayList<ViewHolder> holders;
 
-    public ImageAdapter(ArrayList<String> images, Context context, boolean detailed, String title) {
+    public ImageAdapter(ArrayList<String> images, Context context, boolean detailed, String type) {
         ImageAdapter.images = images;
         this.context = context;
         ImageAdapter.detailed = detailed;
         holders = new ArrayList<>();
-        this.title = title;
+        ImageAdapter.type = type;
     }
 
     @NonNull
@@ -152,11 +155,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 }
 
                 // Display selection features bar, hide bottom navigation bar
-                HomeSelectionBarFragment homeSelectionBarFragment = new HomeSelectionBarFragment();
+                Fragment selectionFragment;
+                if (type.equals("Love"))
+                    selectionFragment = new LoveSelectionBarFragment();
+                else if (type.equals("TrashBin"))
+                    selectionFragment = new HomeSelectionBarFragment();
+                else
+                    selectionFragment = new HomeSelectionBarFragment();
+
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, homeSelectionBarFragment).commit();
+                fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFragment).commit();
                 fragmentTransaction.addToBackStack("");
+
                 MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                 MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
             }
@@ -175,5 +186,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    public static Vector<String> getListSelect() {
+        return listSelect;
     }
 }
