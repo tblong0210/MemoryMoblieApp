@@ -29,7 +29,7 @@ public class Sticker {
 
     @Override
     public String toString() {
-        return "Image{" +
+        return "Sticker{" +
                 "name='" + name + '\'' +
                 ", imageResource=" + imageResource +
                 '}';
