@@ -11,7 +11,7 @@
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash"
-        android:title="Xóa"
+        android:title="Xóa vĩnh viễn"
         tools:ignore="HardcodedText" />
 
 </menu>
