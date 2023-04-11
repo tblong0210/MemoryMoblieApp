@@ -819,6 +819,8 @@ public class ViewEdit extends AppCompatActivity {
         return filterItem;
     }
 
+
+
     public void setImageViewEdit(Drawable drawable) {
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
