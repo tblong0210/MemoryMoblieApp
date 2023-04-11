@@ -1,7 +1,6 @@
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -41,15 +40,11 @@ import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
-import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -182,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.more:
                     PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
-                    popupMenu.inflate(R.menu.more_menu);
+                    popupMenu.inflate(R.menu.bottom_navigation_more_menu);
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();
                         if (R.id.recycleBin == itemId) {

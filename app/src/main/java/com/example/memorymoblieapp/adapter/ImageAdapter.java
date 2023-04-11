@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.fragment.SelectionFeaturesBarFragment;
+import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
@@ -152,10 +152,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 }
 
                 // Display selection features bar, hide bottom navigation bar
-                SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment("Home");
+                HomeSelectionBarFragment homeSelectionBarFragment = new HomeSelectionBarFragment();
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
+                fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, homeSelectionBarFragment).commit();
                 fragmentTransaction.addToBackStack("");
                 MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                 MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);

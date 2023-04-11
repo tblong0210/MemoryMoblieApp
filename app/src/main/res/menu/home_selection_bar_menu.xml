@@ -9,9 +9,9 @@
         tools:ignore="HardcodedText" />
 
     <item
-        android:id="@+id/duplicate"
-        android:icon="@mipmap/ic_duplicate"
-        android:title="Tạo bản sao"
+        android:id="@+id/love"
+        android:icon="@mipmap/ic_heart_like"
+        android:title="Yêu thích"
         tools:ignore="HardcodedText" />
 
     <item
@@ -21,9 +21,9 @@
         tools:ignore="HardcodedText" />
 
     <item
-        android:id="@+id/share"
-        android:icon="@drawable/ic_share"
-        android:title="Chia sẻ"
+        android:id="@+id/more"
+        android:icon="@drawable/ic_more"
+        android:title="Khác"
         tools:ignore="HardcodedText" />
 
 </menu>

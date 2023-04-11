@@ -1,13 +1,9 @@
 package com.example.memorymoblieapp.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,26 +12,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.fragment.ImageFragment2;
-import com.example.memorymoblieapp.fragment.SelectionFeaturesBarFragment;
+import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -176,10 +165,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     notifyDataSetChanged();
 
                     // Display selection features bar, hide bottom navigation bar
-                    SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment("Home");
+                    HomeSelectionBarFragment homeSelectionBarFragment = new HomeSelectionBarFragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
+                    fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, homeSelectionBarFragment).commit();
                     fragmentTransaction.addToBackStack("selectImage");
                     MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                     MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
