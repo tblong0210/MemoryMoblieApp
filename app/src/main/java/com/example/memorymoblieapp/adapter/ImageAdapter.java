@@ -32,7 +32,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     Context context;
     static boolean detailed;
     static Vector<String> listSelect;
-    static boolean selectMode;
+    public static boolean selectMode;
     String title;
     static ArrayList<ViewHolder> holders;
 
@@ -152,12 +152,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 }
 
                 // Display selection features bar, hide bottom navigation bar
-                MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                 SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment("Home");
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
-                fragmentTransaction.addToBackStack("selectImage");
+                fragmentTransaction.addToBackStack("");
+                MainActivity.getBottomNavigationView().setVisibility(View.GONE);
+                MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
             }
         }
 
@@ -169,8 +170,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                     holder.ivSelect.setVisibility(View.GONE);
 
                 // Display bottom navigation bar, hide selection features bar
-                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
                 MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
+                MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.GONE);
+                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
             }
         }
     }

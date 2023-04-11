@@ -182,6 +182,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
                     fragmentTransaction.addToBackStack("selectImage");
                     MainActivity.getBottomNavigationView().setVisibility(View.GONE);
+                    MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
                 }
 
                 return false;
