@@ -298,7 +298,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.textPic:
                         colorRecView.setVisibility(View.GONE);
                         Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
-//                        handleAddText();
+                        handleAddTextImage();
                         break;
 
                     default:
@@ -459,53 +459,6 @@ public class ViewEdit extends AppCompatActivity {
         //originalBitmap.recycle();
     }
 
-    private void handleAddPaintImage() {
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-        imgViewEdit.setImageBitmap(bitmap);
-
-        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getActionMasked();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                        int x = (int) event.getX();
-                        int y = (int) event.getY();
-                        Canvas canvas = new Canvas(bitmap);
-                        Paint paint = new Paint();
-                        paint.setColor(adapterColor.getColorChosen());
-                        canvas.drawCircle(x, y, 10, paint);
-                        imgViewEdit.invalidate();
-                        break;
-                }
-                return true;
-            }
-        });
-    }
-
-    private void handleAddText(String text) {
-        //viewTxtAdd.setText(text);
-
-        // Set the text color of the TextView object to the desired color
-//        viewTxtAdd.setTextColor(Color.RED);
-        // Create a Bitmap object with the same size as the ImageView object
-        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getWidth(), imgViewEdit.getHeight(), Bitmap.Config.ARGB_8888);
-
-// Create a Canvas object with the Bitmap object as its parameter
-        Canvas canvas = new Canvas(bitmap);
-// Draw the ImageView object onto the Canvas object
-        imgViewEdit.draw(canvas);
-
-// Draw the TextView object onto the Canvas object at the desired location
-        // canvas.drawText(text, 100, 100, viewTxtAdd.getPaint());
-
-// Set the ImageView object to the modified Bitmap object
-        imgViewEdit.setImageBitmap(bitmap);
-    }
-
     private void handleBrightnessLevel() {
         Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
         seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -610,62 +563,60 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    //    private void handleShadowLevel(){
-//        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//                Bitmap originalBitmap = drawable.getBitmap();
-//                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {}
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {}
-//        });
-//
-//    }
-    private Bitmap addShadow(Bitmap bitmap, int shadowValue) {
-        Log.d("Shadow:", String.valueOf(shadowValue));
-        // Tạo một Bitmap mới để chứa ảnh đã đổ bóng
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+    private void handleAddPaintImage() {
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+        imgViewEdit.setImageBitmap(bitmap);
 
-        // Tạo một Canvas mới để vẽ ảnh đã đổ bóng lên Bitmap mới
-        Canvas canvas = new Canvas(output);
-
-        // Tạo một Paint mới để vẽ đổ bóng
-        Paint shadowPaint = new Paint();
-        shadowPaint.setColor(Color.BLACK);
-        shadowPaint.setAlpha(shadowValue);
-
-        // Tính toán độ mờ dựa trên giá trị từ seekbar
-        int blurRadius = (int) (shadowValue / 2.55);
-
-        // Tạo một đổ bóng bằng cách tạo một mảnh hình chữ nhật bo tròn với một màu đen và độ mờ
-        RectF shadowRect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight() + 20);
-        canvas.drawRoundRect(shadowRect, 20, 20, shadowPaint);
-
-        // Tạo một đối tượng BlurMaskFilter để áp dụng hiệu ứng blur
-        BlurMaskFilter blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL);
-
-        // Áp dụng hiệu ứng blur vào Paint
-        shadowPaint.setMaskFilter(blurMaskFilter);
-
-        // Vẽ ảnh
-
-        canvas.drawBitmap(bitmap, 0, 0, null);
-
-        // Trả về Bitmap mới chứa ảnh và đổ bóng
-        return output;
-
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        Canvas canvas = new Canvas(bitmap);
+                        Paint paint = new Paint();
+                        paint.setColor(adapterColor.getColorChosen());
+                        canvas.drawCircle(x, y, 10, paint);
+                        imgViewEdit.invalidate();
+                        break;
+                }
+                return true;
+            }
+        });
     }
-
     private void handleAddStickerImage() {
     }
 
     private void handleAddTextImage() {
+        Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        Paint paint = new Paint();
+                        paint.setColor(Color.WHITE);
+                        paint.setTextSize(30);
+                        Canvas canvas = new Canvas(mutableBitmap);
+                        String text = "Hello, world!";
+                        canvas.drawText(text, x, y, paint);
+                        imgViewEdit.setImageBitmap(mutableBitmap);
+                        break;
+                }
+                return true;
+            }
+        });
 
     }
 
