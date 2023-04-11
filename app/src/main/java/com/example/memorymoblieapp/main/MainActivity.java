@@ -280,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "selectImage":
                         frame_layout_selection_features_bar.removeAllViews();
+                        break;
                 }
             }
         }
