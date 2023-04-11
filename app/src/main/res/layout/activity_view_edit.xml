@@ -21,11 +21,6 @@
             android:layout_centerVertical="true"
             android:scaleType="fitCenter"
             android:src="@drawable/image1" />
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:id="@+id/viewTxtAdd"-->
-        <!--            />-->
 
     </RelativeLayout>
 
@@ -41,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_crop_option"
@@ -159,6 +154,48 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/textOption"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/colorTextRecView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/colorTextRecView"
+                >
+                <SeekBar
+                    android:id="@+id/seekBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:max="200"
+                    android:layout_below="@+id/edtTxtInput"
+                    android:min="30"
+                    android:progress="30"
+                    android:progressTint="@color/black"
+                    android:thumbTint="@color/design_default_color_primary"
+                    android:visibility="visible" />
+                <EditText
+                    android:id="@+id/edtTxtInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:inputType="textPersonName"
+                    android:hint="Enter text"/>
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 

@@ -33,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -60,26 +61,26 @@ import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
 
-    private Canvas mCanvas;
-    private Paint mPaint;
+
     private CardView parent_list_color;
 
     private ArrayList<String> picturePaths;
 
+    private Bitmap mutableBitmap;
     private LinearLayout filterOption;
-    private ImageView imgViewEdit, colorItemChosen;
-    private RelativeLayout emoteOption, cropOption, brightnessOption;
-    private RecyclerView filterRecView, colorRecView;
+    private ImageView imgViewEdit;
+    private RelativeLayout emoteOption, cropOption, brightnessOption,textOption;
+    private RecyclerView filterRecView, colorRecView, colorTxtRecView;
 
-    private TextView viewTxtAdd;
+    private EditText edtTxtInput;
+
     private String path_image;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize;
 
-    private ArrayList<Brightness> brightnesses;
     private ArrayList<FilterItem> filterItems;
-    private ArrayList<ColorClass> colors;
+    private ArrayList<ColorClass> colors, text_colors;
 
-    private ColorRecViewAdapter adapterColor;
+    private ColorRecViewAdapter adapterColor,adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
     private Bitmap originImage;
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
@@ -156,6 +157,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
+        mutableBitmap= originImage.copy(Bitmap.Config.ARGB_8888, true);
         imgViewEdit.setImageBitmap(originImage);
     }
 
@@ -206,6 +208,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.cropPic:
                         cropOption.setVisibility(View.VISIBLE);
 
+                        textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -216,6 +219,7 @@ public class ViewEdit extends AppCompatActivity {
                         cropOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
+                        textOption.setVisibility(View.GONE);
 
                         Drawable drawable = imgViewEdit.getDrawable();
                         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -228,6 +232,7 @@ public class ViewEdit extends AppCompatActivity {
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
 
+                        textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -236,12 +241,21 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
 
+                        textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
 
                         break;
+                    case R.id.textPic:
+                        textOption.setVisibility(View.VISIBLE);
 
+                        emoteOption.setVisibility(View.GONE);
+                        filterOption.setVisibility(View.GONE);
+                        brightnessOption.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
+
+                        handleAddTextImage();
                     default:
                         break;
                 }
@@ -294,11 +308,6 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.stickerPic:
                         Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.GONE);
-                        break;
-                    case R.id.textPic:
-                        colorRecView.setVisibility(View.GONE);
-                        Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
-                        handleAddTextImage();
                         break;
 
                     default:
@@ -594,7 +603,8 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleAddTextImage() {
         Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
-        Bitmap mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -602,16 +612,23 @@ public class ViewEdit extends AppCompatActivity {
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
                         int x = (int) event.getX();
                         int y = (int) event.getY();
                         Paint paint = new Paint();
-                        paint.setColor(Color.WHITE);
-                        paint.setTextSize(30);
+                        int Size = seekBarSize.getProgress();
+                        int colorText = Color.WHITE;
+                        colorText = adapterTxtColor.getColorChosen();
+                        paint.setColor(colorText);
+                        paint.setTextSize(Size);
                         Canvas canvas = new Canvas(mutableBitmap);
-                        String text = "Hello, world!";
-                        canvas.drawText(text, x, y, paint);
-                        imgViewEdit.setImageBitmap(mutableBitmap);
+                        if(edtTxtInput.getText().length() >0) {
+                            String text = edtTxtInput.getText().toString();
+                            canvas.drawText(text, x, y, paint);
+                            imgViewEdit.setImageBitmap(mutableBitmap);
+                        }
+                        else{
+                            Toast.makeText(ViewEdit.this, "Please provide text you want to add", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
                 return true;
@@ -630,6 +647,8 @@ public class ViewEdit extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
+        edtTxtInput = findViewById(R.id.edtTxtInput);
+
 //        viewTxtAdd = findViewById(R.id.viewTxtAdd);
 
 
@@ -637,6 +656,7 @@ public class ViewEdit extends AppCompatActivity {
         cropOption = findViewById(R.id.cropOption);
         filterOption = findViewById(R.id.filterOption);
         brightnessOption = findViewById(R.id.brightnessOption);
+        textOption = findViewById(R.id.textOption);
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
@@ -673,9 +693,28 @@ public class ViewEdit extends AppCompatActivity {
         colorRecView.setAdapter(adapterColor);
         colorRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        colorTxtRecView = findViewById(R.id.colorTextRecView);
+        //set adapter to imgRecView
+        text_colors = new ArrayList<>();
+        text_colors.add(new ColorClass("BLACK", Color.BLACK));
+        text_colors.add(new ColorClass("WHITE", Color.WHITE));
+        text_colors.add(new ColorClass("RED", Color.RED));
+        text_colors.add(new ColorClass("GREEN", Color.GREEN));
+        text_colors.add(new ColorClass("BLUE", Color.BLUE));
+        text_colors.add(new ColorClass("YELLOW", Color.YELLOW));
+        text_colors.add(new ColorClass("GRAY", Color.GRAY));
+
+
+        adapterTxtColor = new ColorRecViewAdapter(this);
+        adapterTxtColor.setColors(text_colors);
+        colorTxtRecView.setAdapter(adapterTxtColor);
+        colorTxtRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         seekBarContrast = findViewById(R.id.seekBarContrast);
         seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
         seekBarBlur = findViewById(R.id.seekBarBlur);
+        seekBarSize = findViewById(R.id.seekBarSize);
+
     }
 
     private void setAllFilters() {
@@ -778,10 +817,6 @@ public class ViewEdit extends AppCompatActivity {
 
 
         return filterItem;
-    }
-
-    public void setOriginImage(Bitmap bitmap) {
-        originImage = bitmap;
     }
 
     public void setImageViewEdit(Drawable drawable) {

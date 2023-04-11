@@ -17,4 +17,10 @@
         android:title="@string/action_emote_edit_view"
         />
 
+    <item
+        android:id="@+id/textPic"
+        android:icon="@mipmap/ic_text"
+        android:title="@string/action_text_edit_view"
+        />
+
 </menu>
