@@ -239,7 +239,7 @@ public class HomeSelectionBarFragment extends Fragment {
 
         for (Album album : MainActivity.albumList)
             for (String filePath : filePaths)
-                album.deleteImage(filePath);
+                album.removeImage(filePath);
 
         DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
     }

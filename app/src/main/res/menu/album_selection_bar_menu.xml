@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_view_edit">
+    <item
+        android:id="@+id/removeFromAlbum"
+        android:icon="@mipmap/ic_remove"
+        android:title="Gỡ khỏi album"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/love"
+        android:icon="@mipmap/ic_heart_like"
+        android:title="Yêu thích"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/ic_trash"
+        android:title="Xóa"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/ic_more"
+        android:title="Khác"
+        tools:ignore="HardcodedText" />
+
+</menu>

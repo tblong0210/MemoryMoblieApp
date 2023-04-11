@@ -55,8 +55,12 @@ public class Album {
         this.pathImages = removeDuplicates(this.pathImages);
     }
 
-    public boolean deleteImage(String pathImage) {
-        return pathImages.remove(pathImage);
+    public void removeImage(String pathImage) {
+        this.pathImages.remove(pathImage);
+    }
+
+    public void removeImageArray(ArrayList<String> pathImages) {
+        this.pathImages.removeAll(pathImages);
     }
 
     public Boolean getBlock() {

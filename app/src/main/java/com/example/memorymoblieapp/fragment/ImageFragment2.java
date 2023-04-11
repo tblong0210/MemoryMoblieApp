@@ -30,11 +30,20 @@ public class ImageFragment2 extends Fragment {
     private Context context;
     private final String title;
     String type;
+    int albumPos;
 
     public ImageFragment2(ArrayList<String> imageList, String title, String type) {
         this.imageList = imageList;
         this.title = title;
         this.type = type;
+        this.albumPos = -1;
+    }
+
+    public ImageFragment2(ArrayList<String> imageList, String title, String type, int albumPos) {
+        this.imageList = imageList;
+        this.title = title;
+        this.type = type;
+        this.albumPos = albumPos;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -91,7 +100,7 @@ public class ImageFragment2 extends Fragment {
             recycler.setLayoutManager(gridLayoutManager);
         }
 
-        adapter = new ImageAdapter(imageList, context, MainActivity.detailed, type);
+        adapter = new ImageAdapter(imageList, context, MainActivity.detailed, type, albumPos);
         recycler.setAdapter(adapter);
 
         return imagesFragment;

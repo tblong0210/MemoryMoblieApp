@@ -9,11 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,16 +36,21 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class LoveSelectionBarFragment extends Fragment {
+public class AlbumSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ArrayList<String> listSelect;
     ArrayList<String> albumsName;
+    int albumPos;
+
+    public AlbumSelectionBarFragment(int albumPos) {
+        this.albumPos = albumPos;
+    }
 
     @SuppressLint("NonConstantResourceId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View selectionFeaturesBarFragment = inflater.inflate(R.layout.love_selection_bar, container, false);
+        View selectionFeaturesBarFragment = inflater.inflate(R.layout.album_selection_bar, container, false);
         bottomNavigationView = selectionFeaturesBarFragment.findViewById(R.id.navigation_view);
         Context context = selectionFeaturesBarFragment.getContext();
         albumsName = new ArrayList<>(DataLocalManager.getSetList(KeyData.ALBUM_NAME_LIST.getKey()));
@@ -58,70 +59,42 @@ public class LoveSelectionBarFragment extends Fragment {
             listSelect = new ArrayList<>(ImageAdapter.getListSelect());
 
             switch (item.getItemId()) {
-                case R.id.add2album:
-                    if (albumsName.isEmpty()) {
-                        Toast.makeText(context, "Không có album nào trong danh sách. Vui lòng tạo ít nhất một album!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        final int[] albumChosenPos = new int[1];
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("Chọn album cần thêm");
-
-                        Spinner spinner = new Spinner(context);
-                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, albumsName);
-                        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner.setAdapter(arrayAdapter);
-
-                        final LinearLayout ll = new LinearLayout(getContext());
-                        ll.removeAllViews();
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        params.setMargins(50, 30, 50, 30);
-                        spinner.setLayoutParams(params);
-                        ll.addView(spinner);
-
-                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                                albumChosenPos[0] = pos;
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-                                albumChosenPos[0] = -1;
-                            }
-                        });
-
-                        builder.setView(ll);
-                        builder.setPositiveButton("Đồng ý", null);
-                        builder.setNegativeButton("Hủy", null);
-
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
-                            if (albumChosenPos[0] >= 0 && !albumsName.isEmpty()) {
-                                MainActivity.albumList.get(albumChosenPos[0]).insertNewImageArray(listSelect);
+                case R.id.removeFromAlbum:
+                    DialogInterface.OnClickListener dialogClickListener4 = (dialog, which) -> {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                MainActivity.albumList.get(albumPos).removeImageArray(listSelect);
                                 DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
-                                Toast.makeText(context, "Đã thêm ảnh vào album '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
 
                                 // Refresh and exit choose image mode
                                 refresh(context);
 
-                                dialog.dismiss();
-                            }
-                        });
-                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
-                    }
+                                Toast.makeText(context, "Đã gỡ các ảnh được chọn khỏi album", Toast.LENGTH_SHORT).show();
+
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                dialog.cancel();
+                                break;
+                        }
+                    };
+                    AlertDialog.Builder builder4 = new AlertDialog.Builder(context);
+                    builder4.setMessage("Bạn có chắc muốn gỡ các ảnh được chọn khỏi album không?").setPositiveButton("Đồng ý", dialogClickListener4)
+                            .setNegativeButton("Hủy", dialogClickListener4).show();
+
 
                     return true;
 
-                case R.id.unlove:
+                case R.id.love:
                     DialogInterface.OnClickListener dialogClickListener2 = (dialog, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                MainActivity.lovedImageList.removeAll(listSelect);
+                                MainActivity.lovedImageList.addAll(listSelect);
+                                MainActivity.lovedImageList = removeDuplicates(MainActivity.lovedImageList);
                                 DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
 
                                 refresh(context);
-                                Toast.makeText(context, "Đã gỡ các ảnh được chọn khỏi mục yêu thích" + listSelect.size(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Đã thêm các ảnh được chọn vào mục yêu thích", Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -131,7 +104,7 @@ public class LoveSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-                    builder2.setMessage("Bạn có chắc muốn gỡ các ảnh được chọn khỏi mục yêu thích không?").setPositiveButton("Đồng ý", dialogClickListener2)
+                    builder2.setMessage("Bạn có chắc muốn đưa các ảnh vừa chọn vào mục yêu thích không?").setPositiveButton("Đồng ý", dialogClickListener2)
                             .setNegativeButton("Hủy", dialogClickListener2).show();
 
                     return true;
@@ -222,12 +195,12 @@ public class LoveSelectionBarFragment extends Fragment {
             }
             try {
                 Files.copy(sourceFile.toPath(), new File(newFilePath).toPath());
-                MainActivity.lovedImageList.add(newFilePath);
+                MainActivity.albumList.get(albumPos).insertNewImage(newFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
+        DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
     }
 
     void move2TrashBin(@NonNull ArrayList<String> filePaths) {
@@ -247,10 +220,11 @@ public class LoveSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.lovedImageList, "Yêu thích", "Love");
+        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.albumList.get(albumPos).getPathImages(), MainActivity.albumList.get(albumPos).getAlbumName(), "Album", albumPos);
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+
         MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
         MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
         GalleryAdapter.clearListSelect();

@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.fragment.AlbumSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.LoveSelectionBarFragment;
 import com.example.memorymoblieapp.main.MainActivity;
@@ -38,6 +39,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public static boolean selectMode;
     static String type;
     static ArrayList<ViewHolder> holders;
+    static int albumPos;
 
     public ImageAdapter(ArrayList<String> images, Context context, boolean detailed, String type) {
         ImageAdapter.images = images;
@@ -45,6 +47,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         ImageAdapter.detailed = detailed;
         holders = new ArrayList<>();
         ImageAdapter.type = type;
+    }
+
+    public ImageAdapter(ArrayList<String> images, Context context, boolean detailed, String type, int albumPos) {
+        ImageAdapter.images = images;
+        this.context = context;
+        ImageAdapter.detailed = detailed;
+        holders = new ArrayList<>();
+        ImageAdapter.type = type;
+        this.albumPos = albumPos;
     }
 
     @NonNull
@@ -161,7 +172,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 else if (type.equals("TrashBin"))
                     selectionFragment = new HomeSelectionBarFragment();
                 else
-                    selectionFragment = new HomeSelectionBarFragment();
+                    selectionFragment = new AlbumSelectionBarFragment(albumPos);
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
