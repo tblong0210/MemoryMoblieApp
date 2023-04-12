@@ -140,7 +140,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                         ivSelect.setImageResource(R.drawable.circle_unfill);
                     } else {
                         listSelect.add(imagePath);
-                        ivSelect.setImageResource(R.drawable.circle_shape);
+                        ivSelect.setImageResource(R.drawable.checked);
                     }
                     if (listSelect.isEmpty())
                         turnOffSelectMode();

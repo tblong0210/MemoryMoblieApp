@@ -57,4 +57,22 @@
     <string name="language_vietnamese">Tiếng Việt (Việt Nam)</string>
     <string name="language_united_states">Tiếng Anh (Mỹ)</string>
     <string name="edit_enter_text">Nhập kí tự</string>
+    <string name="bottom_navigation_image">Ảnh</string>
+    <string name="bottom_navigation_album">Album</string>
+    <string name="bottom_navigation_love">Yêu thích</string>
+    <string name="bottom_navigation_more">Khác</string>
+    <string name="bottom_navigation_recycle_bin">Thùng rác</string>
+    <string name="bottom_navigation_download_from_url">Tải ảnh bằng URL</string>
+    <string name="bottom_navigation_settings">Cài đặt</string>
+    <string name="selection_add_to_album">Thêm vào album</string>
+    <string name="selection_remove_from_album">Gỡ khỏi album</string>
+    <string name="selection_love">Yêu thích</string>
+    <string name="selection_unlove">Bỏ yêu thích</string>
+    <string name="selection_delete">Xóa</string>
+    <string name="selection_more">Khác</string>
+    <string name="selection_duplicate">Tạo bản sao</string>
+    <string name="selection_share">Chia sẻ</string>
+    <string name="selection_restore">Khôi phục</string>
+    <string name="selection_permanently_delete">Xóa vĩnh viễn</string>
+    <string name="alert_dialog_create_password">Khởi tạo mật khẩu</string>
 </resources>

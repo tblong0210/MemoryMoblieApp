@@ -58,4 +58,22 @@
     <string name="language_vietnamese">Vietnamese (Viet Nam)</string>
     <string name="language_united_states">English (United States)</string>
     <string name="edit_enter_text">Enter text</string>
+    <string name="bottom_navigation_image">Images</string>
+    <string name="bottom_navigation_album">Albums</string>
+    <string name="bottom_navigation_love">Loves</string>
+    <string name="bottom_navigation_more">More</string>
+    <string name="bottom_navigation_recycle_bin">Recycle bin</string>
+    <string name="bottom_navigation_download_from_url">Download image from URL</string>
+    <string name="bottom_navigation_settings">Settings</string>
+    <string name="selection_add_to_album">Add to album</string>
+    <string name="selection_remove_from_album">Remove from album</string>
+    <string name="selection_love">Love</string>
+    <string name="selection_unlove">Unlove</string>
+    <string name="selection_delete">Delete</string>
+    <string name="selection_more">More</string>
+    <string name="selection_duplicate">Duplicate</string>
+    <string name="selection_share">Share</string>
+    <string name="selection_restore">Restore</string>
+    <string name="selection_permanently_delete">Permanently delete</string>
+    <string name="alert_dialog_create_password">Create password</string>
 </resources>

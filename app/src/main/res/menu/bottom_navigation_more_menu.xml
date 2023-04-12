@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/recycleBin"
-        android:title="Thùng rác"
-        tools:ignore="HardcodedText" />
+        android:title="@string/bottom_navigation_recycle_bin" />
     <item android:id="@+id/URL"
-        android:title="Tải ảnh bằng URL"
-        tools:ignore="HardcodedText" />
+        android:title="@string/bottom_navigation_download_from_url" />
     <item android:id="@+id/settings"
-        android:title="Cài đặt"
-        tools:ignore="HardcodedText" />
+        android:title="@string/bottom_navigation_settings" />
 </menu>

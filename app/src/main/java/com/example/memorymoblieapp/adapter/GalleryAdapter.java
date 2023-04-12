@@ -215,6 +215,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, homeSelectionBarFragment).commit();
                     fragmentTransaction.addToBackStack("selectImage");
+
                     MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                     MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
                 }
@@ -223,6 +224,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             }
         });
 
+    }
+
+    public static void hideSelectionBar() {
+        MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.GONE);
+        MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
+        clearListSelect();
     }
 
     @Override
