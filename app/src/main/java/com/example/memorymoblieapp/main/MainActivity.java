@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
         int flag = 0;
 
         for (String imagePath : images) {
-            if (imagePath != null && trashListImage.contains(imagePath)==false) {
+            if (imagePath != null ) {
 
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());

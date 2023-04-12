@@ -87,6 +87,8 @@ public class ViewEdit extends AppCompatActivity {
     private ColorRecViewAdapter adapterColor,adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
 
+    private Boolean CROPPED_3_4 = false, CROPPED_16_9 = false;
+
     private StickerRecViewAdapter adapterSticker;
     private Bitmap originImage, mutableBitmap;
     private ArrayList<Bitmap> previousBitmaps = new ArrayList<>();
@@ -171,7 +173,20 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
-        mutableBitmap= originImage.copy(Bitmap.Config.ARGB_8888, true);
+        seekBarSticker.setProgress(100);
+        seekBarSize.setProgress(30);
+        edtTxtInput.setText("");
+        if (mutableBitmap !=null ) {
+            mutableBitmap.recycle();
+            mutableBitmap = originImage.copy(Bitmap.Config.ARGB_8888, true);
+        }
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
+
         previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
     }
@@ -480,7 +495,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleCropImage(float firstRatio, float secondRatio) {
-
+        refreshPicture();
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 
@@ -488,10 +503,12 @@ public class ViewEdit extends AppCompatActivity {
             int newHeight = (int) (width * firstRatio / secondRatio);
 
             // Calculate the y-coordinate for the top of the new image
+
             int y = (height - newHeight) / 2;
             // Create a new bitmap with the desired dimensions
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
             imgViewEdit.setImageBitmap(croppedBitmap);
+
         } else {
             int originalWidth = originImage.getWidth();
             int originalHeight = originImage.getHeight();
@@ -643,13 +660,13 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleAddTextImage() {
-        Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
-        mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+                mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
@@ -683,20 +700,17 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleAddStickerImage() {
-        Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
-        mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
 
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
+                Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+                mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-
-                        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
-                        System.out.println(mutableBitmap);
                         int x = (int) event.getX();
                         int y = (int) event.getY();
                         int Size = seekBarSticker.getProgress();
@@ -713,7 +727,7 @@ public class ViewEdit extends AppCompatActivity {
 
                         }
                         else{
-                            Toast.makeText(ViewEdit.this, "Plea§se choose your sticker", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewEdit.this, "Please choose your sticker", Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
