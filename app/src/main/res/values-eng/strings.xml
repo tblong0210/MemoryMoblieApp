@@ -57,4 +57,5 @@
     <string name="settings_back">Back to settings</string>
     <string name="language_vietnamese">Vietnamese (Viet Nam)</string>
     <string name="language_united_states">English (United States)</string>
+    <string name="edit_enter_text">Enter text</string>
 </resources>

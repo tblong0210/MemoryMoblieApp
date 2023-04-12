@@ -13,10 +13,11 @@
         android:id="@+id/filterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="5dp"
         android:text="@string/filter_default"
+        android:textColor="?attr/colorSurface"
+        android:textSize="10sp"
         tools:ignore="SmallSp" />
 
 
@@ -26,10 +27,10 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bg_shape_conner_10_nocolor"
-        android:outlineProvider="background"
         android:clipToOutline="true"
+        android:contentDescription="Image filter"
+        android:outlineProvider="background"
         android:src="@drawable/ic_launcher_background"
-        tools:ignore="HardcodedText,UnusedAttribute"
-        android:contentDescription="Image filter" />
+        tools:ignore="HardcodedText,UnusedAttribute" />
 
 </LinearLayout>

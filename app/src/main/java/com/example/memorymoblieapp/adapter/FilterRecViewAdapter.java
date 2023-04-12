@@ -50,7 +50,6 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.filterName.setText(filters.get(position).getName());
-        Log.d("ten filter", "onBindViewHolder: " + imageFilterView.toString());
 
         holder.filterItemViewEdit.setImageBitmap(imageFilterView);
         holder.filterItemViewEdit.setLayoutParams(new LinearLayout.LayoutParams(100, 100));

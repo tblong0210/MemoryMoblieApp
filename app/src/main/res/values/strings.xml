@@ -56,4 +56,5 @@
     <string name="settings_back">Quay lại cài đặt</string>
     <string name="language_vietnamese">Tiếng Việt (Việt Nam)</string>
     <string name="language_united_states">Tiếng Anh (Mỹ)</string>
+    <string name="edit_enter_text">Nhập kí tự</string>
 </resources>

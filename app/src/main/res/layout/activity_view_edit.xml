@@ -62,6 +62,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/filterRecView"
+                android:padding="5dp"
+                android:background="@drawable/round_corner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -83,8 +85,8 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 android:background="@drawable/round_corner"
+                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 app:menu="@menu/menu_brightness_option" />
 
             <RelativeLayout
@@ -144,33 +146,38 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 android:background="@drawable/round_corner"
+                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 app:menu="@menu/menu_emote_option" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/colorRecView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/round_corner"
+                android:padding="5dp"
                 android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/stickerRecView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/round_corner"
+                android:padding="5dp"
+                android:visibility="gone" />
+
             <SeekBar
                 android:id="@+id/seekBarSticker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginTop="45dp"
                 android:max="350"
                 android:min="100"
                 android:progress="100"
-                android:layout_marginTop="45dp"
                 android:progressTint="?attr/colorSurface"
                 android:thumbTint="@color/design_default_color_primary"
                 android:visibility="gone" />
@@ -178,45 +185,54 @@
 
         <RelativeLayout
             android:id="@+id/textOption"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:visibility="gone">
+
+            <SeekBar
+                android:id="@+id/seekBarSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:max="200"
+                android:min="30"
+                android:progress="30"
+                android:progressTint="?attr/colorSurface"
+                android:thumbTint="@color/design_default_color_primary"
+                android:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/colorTextRecView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
-            <RelativeLayout
+                android:layout_below="@+id/seekBarSize"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/round_corner"
+                android:padding="5dp" />
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/colorTextRecView"
-                >
-                <SeekBar
-                    android:id="@+id/seekBarSize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:max="200"
-                    android:layout_below="@+id/edtTxtInput"
-                    android:min="30"
-                    android:progress="30"
-                    android:progressTint="?attr/colorSurface"
-                    android:thumbTint="@color/design_default_color_primary"
-                    android:visibility="visible" />
+                android:layout_marginTop="10dp">
+
                 <EditText
                     android:id="@+id/edtTxtInput"
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:background="@drawable/edit_text_border"
-                    android:backgroundTint="?attr/colorSurface"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/round_corner"
+                    android:ems="10"
+                    android:hint="@string/edit_enter_text"
                     android:inputType="textPersonName"
-                    android:hint="Enter text you want to add into image"/>
+                    android:padding="10dp"
+                    android:textColor="?attr/colorSurface"
+                    android:textColorHint="?attr/colorSurface"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
