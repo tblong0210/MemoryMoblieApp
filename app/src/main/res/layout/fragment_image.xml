@@ -6,19 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.ImageFragment">
-   >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <Button
-        android:id="@+id/button_cancel_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hủy"
-        android:layout_alignParentEnd="true"
-        android:visibility="invisible" />
 
         <Button
             android:id="@+id/sort_image_button"
@@ -26,26 +18,25 @@
             android:layout_height="wrap_content"
             android:background="@drawable/baseline_sort" />
 
-        <!--&lt;!&ndash;    <Button-->
-        <!--        android:layout_width="55dp"-->
-        <!--        android:id="@+id/search_image_button"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_alignParentRight="true"-->
-        <!--        android:background="@drawable/baseline_search" />&ndash;&gt;-->
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_gallery_images"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button_cancel_select"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Hủy"
+            android:visibility="invisible" />
 
-            android:orientation="horizontal"
-            tools:listitem="@layout/gallery_item" />
     </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_gallery_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        tools:listitem="@layout/gallery_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 
 </LinearLayout>

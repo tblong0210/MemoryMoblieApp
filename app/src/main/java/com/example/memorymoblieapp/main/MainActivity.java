@@ -90,15 +90,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
-        isThemeDark = isThemeDark == null ? false : isThemeDark;
+        isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
-        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
+//        binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
 
-        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
+        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -131,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         images = ImagesGallery.listOfImages(context);
         newImage = handleSortListImageView();
         ArrayList<String> picturePath = new ArrayList<>(newImage);
-
         picturePath.removeAll(Collections.singleton(" "));
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
-
+        Log.d("size", "initiateApp: " + newImage.size());
         detailed = false;
         albumList = new ArrayList<>(DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class));
         lovedImageList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
@@ -214,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
+//                            DataLocalManager.saveBooleanData(KeyData.DARK_MODE.getKey(), true);
+//                            recreate();
                         }
                         return true;
                     });
@@ -235,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         int flag = 0;
 
         for (String imagePath : images) {
-            if (imagePath != null && trashListImage.contains(imagePath)==false) {
+            if (imagePath != null && (trashListImage == null || !trashListImage.contains(imagePath))) {
 
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
@@ -301,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Network is OK!", Toast.LENGTH_SHORT).show();
         return true;
     }
+
     public void onMsgFromFragToMain(String request) {
         boolean network = checkInternetConnection();
         if (!network)
@@ -345,11 +348,10 @@ public class MainActivity extends AppCompatActivity {
                     Date imageDate = new Date(imageFile.lastModified());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
 
-                    Log.d("Taggg",path + dateFormat.format(imageDate));
+                    Log.d("Taggg", path + dateFormat.format(imageDate));
                 }
             });
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
         }
     }
@@ -401,7 +403,8 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("album");
         }
@@ -411,7 +414,9 @@ public class MainActivity extends AppCompatActivity {
         return bottomNavigationView;
     }
 
-    public static FrameLayout getFrameLayoutSelectionFeaturesBar() { return frame_layout_selection_features_bar; }
+    public static FrameLayout getFrameLayoutSelectionFeaturesBar() {
+        return frame_layout_selection_features_bar;
+    }
 
     public static ArrayList<String> getNewImage() {
         return newImage;
@@ -421,5 +426,7 @@ public class MainActivity extends AppCompatActivity {
         return imageDates;
     }
 
-    public static ArrayList<String> getImages() { return images; }
+    public static ArrayList<String> getImages() {
+        return images;
+    }
 }

@@ -71,7 +71,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private LinearLayout filterOption;
     private ImageView imgViewEdit;
-    private RelativeLayout emoteOption, cropOption, brightnessOption,textOption;
+    private RelativeLayout emoteOption, cropOption, brightnessOption, textOption;
     private RecyclerView filterRecView, colorRecView, colorTxtRecView, stickerRecView;
 
     private EditText edtTxtInput;
@@ -84,7 +84,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private ArrayList<Sticker> stickers;
 
-    private ColorRecViewAdapter adapterColor,adapterTxtColor;
+    private ColorRecViewAdapter adapterColor, adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
 
     private StickerRecViewAdapter adapterSticker;
@@ -171,11 +171,12 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
-        mutableBitmap= originImage.copy(Bitmap.Config.ARGB_8888, true);
+        mutableBitmap = originImage.copy(Bitmap.Config.ARGB_8888, true);
         previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
     }
-    private void backPreviousPicture(){
+
+    private void backPreviousPicture() {
 //        int sizeBitmaps = previousBitmaps.size();
 //        if (sizeBitmaps >= 2) {
 //            System.out.println(previousBitmaps.get(sizeBitmaps - 1));
@@ -489,6 +490,7 @@ public class ViewEdit extends AppCompatActivity {
 
             // Calculate the y-coordinate for the top of the new image
             int y = (height - newHeight) / 2;
+//            y = y < 0 ? -y : y;
             // Create a new bitmap with the desired dimensions
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
             imgViewEdit.setImageBitmap(croppedBitmap);
@@ -670,8 +672,7 @@ public class ViewEdit extends AppCompatActivity {
                             } else {
                                 Toast.makeText(ViewEdit.this, "Please provide text you want to add", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        else{
+                        } else {
                             Toast.makeText(ViewEdit.this, "Please choose your text's color", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -695,14 +696,14 @@ public class ViewEdit extends AppCompatActivity {
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
 
-                        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
+                        Log.d("Bitmap num", String.valueOf(previousBitmaps.size()));
                         System.out.println(mutableBitmap);
                         int x = (int) event.getX();
                         int y = (int) event.getY();
                         int Size = seekBarSticker.getProgress();
 
-                        Bitmap originalSticker = adapterSticker.getStickerChosen() ;
-                        if(originalSticker != null) {
+                        Bitmap originalSticker = adapterSticker.getStickerChosen();
+                        if (originalSticker != null) {
                             Bitmap scaledSticker = Bitmap.createScaledBitmap(originalSticker, Size, Size, false);
 
                             Canvas canvas = new Canvas(mutableBitmap);
@@ -711,8 +712,7 @@ public class ViewEdit extends AppCompatActivity {
                             imgViewEdit.setImageBitmap(mutableBitmap);
 
 
-                        }
-                        else{
+                        } else {
                             Toast.makeText(ViewEdit.this, "Plea§se choose your sticker", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -722,10 +722,9 @@ public class ViewEdit extends AppCompatActivity {
         });
     }
 
-    private void addNewBitmap(Bitmap originalBitmap, Bitmap newBitmap){
+    private void addNewBitmap(Bitmap originalBitmap, Bitmap newBitmap) {
         // Khởi tạo một mảng để lưu trữ các Bitmap
         ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
-
 
 
 // Thêm bản sao của bitmap ban đầu vào mảng
@@ -804,7 +803,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void setFilterRecView(){
+    private void setFilterRecView() {
         setFilter(FilterImageKey.warm);
 
         //set adapter to filterRecView
@@ -818,7 +817,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void setTextColorRecView(){
+    private void setTextColorRecView() {
         //set adapter to textRecView
         text_colors = new ArrayList<>();
         text_colors.add(new ColorClass("BLACK", Color.BLACK));
@@ -836,7 +835,8 @@ public class ViewEdit extends AppCompatActivity {
         colorTxtRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
     }
-    private void setColorRecView(){
+
+    private void setColorRecView() {
         //set adapter to colorRecView
         colors = new ArrayList<>();
         colors.add(new ColorClass("RED", Color.RED));
@@ -854,7 +854,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    private void setStickerRecView(){
+    private void setStickerRecView() {
         //set adapter to stickerRecView
         stickers = new ArrayList<>();
         stickers.add(new Sticker("Birthday Cake Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
@@ -881,6 +881,7 @@ public class ViewEdit extends AppCompatActivity {
         stickerRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
     }
+
     private void setAllFilters() {
         filterItems.add(setFilter(""));
         filterItems.add(setFilter(FilterImageKey.warm));
@@ -893,7 +894,7 @@ public class ViewEdit extends AppCompatActivity {
         filterItems.add(setFilter(FilterImageKey.gray));
     }
 
-    private Bitmap getOriginalBitmap(ImageView img){
+    private Bitmap getOriginalBitmap(ImageView img) {
         return ((BitmapDrawable) img.getDrawable()).getBitmap();
     }
 
@@ -986,8 +987,6 @@ public class ViewEdit extends AppCompatActivity {
 
         return filterItem;
     }
-
-
 
     public void setImageViewEdit(Drawable drawable) {
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
