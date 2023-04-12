@@ -18,7 +18,7 @@ public class ImagesGallery {
 
         String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
 
-        String orderBy = MediaStore.Images.Media.DATE_TAKEN + " DESC";
+        String orderBy = MediaStore.Images.Media.DATE_ADDED + " DESC";
 
         cursor = context.getContentResolver().query(uri, projection, null, null, orderBy);
 

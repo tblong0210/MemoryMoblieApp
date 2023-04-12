@@ -4,25 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/resetViewEdit"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="30dp"
         android:icon="@drawable/ic_reset"
-        android:iconTint="@color/white"
-        android:title="@string/action_reset_edit"
-        app:showAsAction="always"
-        tools:ignore="AlwaysShowAction,HardcodedText,UnusedAttribute" />
+        android:title="@string/action_save_image"
+        app:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/saveViewEdit"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="30dp"
         android:icon="@drawable/ic_save_image"
-        android:iconTint="@color/white"
         android:title="@string/action_save_image"
-        app:showAsAction="always"
-        tools:ignore="UnusedAttribute" />
+        app:showAsAction="ifRoom|collapseActionView" />
 
 <!--    <item-->
 <!--        android:id="@+id/backViewEdit"-->

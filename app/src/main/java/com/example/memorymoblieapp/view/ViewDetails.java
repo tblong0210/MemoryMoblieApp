@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -28,6 +30,10 @@ public class ViewDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
+        isThemeDark = isThemeDark == null ? false : isThemeDark;
+
+        setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_details);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

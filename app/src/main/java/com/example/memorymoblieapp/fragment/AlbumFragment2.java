@@ -24,6 +24,9 @@ public class AlbumFragment2 extends Fragment {
     static AlbumAdapter adapter;
     private Context context;
 
+    public AlbumFragment2(){
+        AlbumFragment2.albumList = new ArrayList<>();
+    }
     public AlbumFragment2(ArrayList<Album> albumList) {
         AlbumFragment2.albumList = new ArrayList<>(albumList);
     }

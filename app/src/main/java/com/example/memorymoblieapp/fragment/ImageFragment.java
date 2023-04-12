@@ -1,5 +1,6 @@
 package com.example.memorymoblieapp.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
@@ -39,35 +41,42 @@ public class ImageFragment extends Fragment {
     List<String> imageDates = new ArrayList<>();
     private Button searchBtn ;
     private Button sortBtn;
+    private   Button cancelLongClick;
     private  int numberCol = 3;
+    private GalleryAdapter galleryAdapter;
+
+    public ImageFragment(){
+        images = new ArrayList<>();
+        imageDates = new ArrayList<>();
+    }
+
     public ImageFragment(ArrayList<String>images, List<String> imageDates ) {
         this.images=images;
         // Required empty public constructor
         this.imageDates = imageDates;
     }
 
+    public void setListImagesAndDates(  ArrayList<String>images, List<String> imageDates){
 
+        this.images=images;
+        // Required empty public constructor
+        this.imageDates = imageDates;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_image, container, false);
 
-     /*   searchBtn = view.findViewById(R.id.search_image_button);
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("tag","Clicked search button");
-            }
-        });*/
 
         sortBtn = view.findViewById(R.id.sort_image_button);
-
+        cancelLongClick = view.findViewById(R.id.button_cancel_select);
         recyclerview = view.findViewById(R.id.recyclerview_gallery_images);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), numberCol);
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setHasFixedSize(true);
-        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images, imageDates, new GalleryAdapter.PhotoListener() {
+
+        galleryAdapter = new GalleryAdapter(getContext(), images, imageDates, new GalleryAdapter.PhotoListener() {
             @Override
             public void onPhotoClick(String path) {
                 Log.d("tag",path);
@@ -75,6 +84,19 @@ public class ImageFragment extends Fragment {
             @Override
             public  void onPhotoLongClick(String path) {
                 Log.d("tag","Long" +path);
+                cancelLongClick.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        cancelLongClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelLongClick.setVisibility(View.INVISIBLE);
+
+                galleryAdapter.setIsLongClick(false);
+                galleryAdapter.setListSelect();
+                galleryAdapter.notifyDataSetChanged();
             }
         });
         recyclerview.setAdapter(galleryAdapter);
@@ -115,7 +137,7 @@ public class ImageFragment extends Fragment {
                     Log.d("Imagess",newImagesFlag.get(i) + " - " + newImageDateFlag.get(i));
                 }
 
-                    Log.d("Tagggg",newImageDateFlag.size()+ "  -  "+newImageDateFlag.size());
+                Log.d("Tagggg",newImageDateFlag.size()+ "  -  "+newImageDateFlag.size());
 
                 for (int i=0;i<newImagesFlag.size();i++) {
                     if(newImagesFlag.get(i)!=" ") {
@@ -142,7 +164,7 @@ public class ImageFragment extends Fragment {
 
                     }
                 }
-        images = newImages;
+                images = newImages;
                 imageDates = newImageDate;
                 galleryAdapter.setImages(newImages);
                 galleryAdapter.setImageDates(newImageDate);

@@ -1,13 +1,11 @@
 package com.example.memorymoblieapp.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
+
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,26 +14,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.fragment.ImageFragment2;
-import com.example.memorymoblieapp.fragment.SelectionFeaturesBarFragment;
+import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
+
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -46,6 +40,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     protected PhotoListener photoListener;
     List<String> imageDates;
     private  boolean isLongClick =false;
+    Button cancelLongClickButton;
     private static Vector<String> listSelect = new Vector<String>();
     public GalleryAdapter(Context context, List<String> images, List<String> imageDates, PhotoListener photoListener)
     {
@@ -60,10 +55,29 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     public void setImages(List<String> images) {
         this.images = images;
     }
+    public boolean getisLongClick()
+    {
+        return isLongClick;
+    }
+    public void setIsLongClick(boolean isLongClick)
+    {
+        this.isLongClick = isLongClick;
 
+
+    }
+    public  void setListSelect()
+    {
+        listSelect.clear();
+        listSelect.clear();
+    }
     public void setImageDates(List<String> imageDates) {
         this.imageDates = imageDates;
     }
+
+
+
+    //add
+
 
     @NonNull
     @Override
@@ -78,6 +92,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         return new ViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
@@ -87,6 +102,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 //                .error(R.drawable.image3)
                 .into(holder.image);
 
+        // set text ngày tạo ảnh
         holder.textDate.setVisibility(View.VISIBLE);
         if(position==0 || imageDates.get(position-1).equals(" ")==true || (position >0 &&imageDates.get(position-1).equals(imageDates.get(position))==false) )
         {
@@ -97,29 +113,38 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             holder.textDate.setText(" ");
         }
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, // width
-                LinearLayout.LayoutParams.WRAP_CONTENT // height
-        );
-        holder.textDate.setLayoutParams(layoutParams);
+
         if (position==0
                 || position==1 || position==2 ||  (position >0 &&imageDates.get(position-1).equals(imageDates.get(position))==false)
-                || (position >1 &&imageDates.get(position-2).equals(imageDates.get(position))==false)
-                || (position >2 &&imageDates.get(position-3).equals(imageDates.get(position))==false))
+                || (imageDates.get(position-2).equals(imageDates.get(position))==false)
+                || (imageDates.get(position-3).equals(imageDates.get(position))==false))
         {
+            //set size text date
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, // width
+                    LinearLayout.LayoutParams.WRAP_CONTENT // height
+            );
+            holder.textDate.setLayoutParams(layoutParams);
             ViewGroup.MarginLayoutParams layoutParamss =
                     (ViewGroup.MarginLayoutParams) holder.textDate.getLayoutParams();
             layoutParamss.setMargins(30, 50, 16, 10);
             holder.textDate.setLayoutParams(layoutParamss);
         }
+        else {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    0, // width
+                    0
+            );
+            holder.textDate.setLayoutParams(layoutParams);
+        }
 
-//        formatter.format(imageDates.get(position))
+
         if(image.equals(" ")==false) {
 
             if (isLongClick) {
-                
+
                 if (listSelect.contains(image)) {
-                    Drawable drawable = context.getDrawable(R.drawable.circle_shape);
+                    Drawable drawable = context.getDrawable(R.drawable.checked);
                     holder.iconLongSelect.setBackground(drawable);
                 }
                 int sizeInDp = 25;
@@ -128,10 +153,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 holder.iconLongSelect.setLayoutParams(layoutParamSelect);
 
                 holder.iconLongSelect.setVisibility(View.VISIBLE);
+
+            }
+            else
+            {
+                LinearLayout.LayoutParams layoutParamSelect = new LinearLayout.LayoutParams(0, 0);
+                holder.iconLongSelect.setLayoutParams(layoutParamSelect);
+                holder.iconLongSelect.setVisibility(View.INVISIBLE);
             }
         }
         else
         {
+            LinearLayout.LayoutParams layoutParamSelect = new LinearLayout.LayoutParams(0, 0);
+            holder.iconLongSelect.setLayoutParams(layoutParamSelect);
             holder.iconLongSelect.setVisibility(View.INVISIBLE);
         }
 
@@ -149,7 +183,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                         listSelect.remove(image);
                     }
                     else {
-                        Drawable drawable = context.getDrawable(R.drawable.circle_shape);
+                        Drawable drawable = context.getDrawable(R.drawable.checked);
                         holder.iconLongSelect.setBackground(drawable);
                         listSelect.add(image);
                     }
@@ -176,10 +210,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     notifyDataSetChanged();
 
                     // Display selection features bar, hide bottom navigation bar
-                    SelectionFeaturesBarFragment selectionFeaturesBarFragment = new SelectionFeaturesBarFragment("Home");
+                    HomeSelectionBarFragment homeSelectionBarFragment = new HomeSelectionBarFragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFeaturesBarFragment).commit();
+                    fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, homeSelectionBarFragment).commit();
                     fragmentTransaction.addToBackStack("selectImage");
                     MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                     MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
@@ -201,15 +235,15 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         ImageView image ;
         TextView textDate;
         ToggleButton iconLongSelect;
-        Button buttonCancelSelect;
+//        Button buttonCancelSelect;
+
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
             image = itemView.findViewById(R.id.imageGallery);
             textDate = itemView.findViewById(R.id.headDate);
             iconLongSelect = itemView.findViewById(R.id.toggleButton);
-            buttonCancelSelect = itemView.findViewById(R.id.button_cancel_select);
-            
+//            buttonCancelSelect = itemView.findViewById(R.id.cancel_long_click_button);
         }
     }
 

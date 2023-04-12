@@ -15,7 +15,7 @@
         android:title="Yêu thích"/>
     <item
         android:id="@+id/more"
-        android:icon="@drawable/more"
+        android:icon="@drawable/ic_more"
         android:title="Khác"
         />
 </menu>

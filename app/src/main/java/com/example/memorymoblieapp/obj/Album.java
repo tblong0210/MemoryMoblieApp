@@ -2,7 +2,10 @@ package com.example.memorymoblieapp.obj;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -47,8 +50,17 @@ public class Album {
         return false;
     }
 
-    public boolean deleteImage(String pathImage) {
-        return pathImages.remove(pathImage);
+    public void insertNewImageArray(ArrayList<String> pathImages) {
+        this.pathImages.addAll(pathImages);
+        this.pathImages = removeDuplicates(this.pathImages);
+    }
+
+    public void removeImage(String pathImage) {
+        this.pathImages.remove(pathImage);
+    }
+
+    public void removeImageArray(ArrayList<String> pathImages) {
+        this.pathImages.removeAll(pathImages);
     }
 
     public Boolean getBlock() {
@@ -69,5 +81,14 @@ public class Album {
         return albums.stream()
                 .map(Album::getAlbumName)
                 .collect(Collectors.toSet());
+    }
+
+    @NonNull
+    @Contract("_ -> param1")
+    <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+        Set<T> set = new LinkedHashSet<>(list);
+        list.clear();
+        list.addAll(set);
+        return list;
     }
 }

@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="5dp">
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         tools:ignore="UselessParent">
 
         <ImageView
@@ -30,11 +29,10 @@
             tools:ignore="ContentDescription,RtlHardcoded" />
 
     </FrameLayout>
-
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtImageName"
@@ -42,9 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Tên: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtCreatedDate"
@@ -52,9 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Ngày tạo: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtSize"
@@ -62,9 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Dung lượng: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtDimensions"
@@ -72,9 +70,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Kích thước: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtLocation"
@@ -82,9 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Vị trí: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

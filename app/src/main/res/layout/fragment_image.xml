@@ -7,13 +7,7 @@
     tools:context=".fragment.ImageFragment"
     android:orientation="vertical"
    >
-  <Button
-      android:id="@+id/button_cancel_select"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hủy"
-      android:visibility="invisible"
-    />
+
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -24,12 +18,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/baseline_sort" />
 
-<!--&lt;!&ndash;    <Button-->
-<!--        android:layout_width="55dp"-->
-<!--        android:id="@+id/search_image_button"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:background="@drawable/baseline_search" />&ndash;&gt;-->
+    <Button
+        android:id="@+id/button_cancel_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hủy"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
 
   </RelativeLayout>
 
