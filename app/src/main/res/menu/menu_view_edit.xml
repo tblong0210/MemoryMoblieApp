@@ -24,15 +24,15 @@
         app:showAsAction="always"
         tools:ignore="UnusedAttribute" />
 
-    <item
-        android:id="@+id/backViewEdit"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="30dp"
-        android:icon="@drawable/ic_back"
-        android:iconTint="@color/white"
-        android:title="@string/action_back_image"
-        app:showAsAction="always"
-        tools:ignore="UnusedAttribute" />
+<!--    <item-->
+<!--        android:id="@+id/backViewEdit"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:icon="@drawable/ic_back"-->
+<!--        android:iconTint="@color/white"-->
+<!--        android:title="@string/action_back_image"-->
+<!--        app:showAsAction="always"-->
+<!--        tools:ignore="UnusedAttribute" />-->
 
 </menu>
