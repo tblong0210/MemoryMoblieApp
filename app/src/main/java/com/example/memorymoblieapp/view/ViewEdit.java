@@ -87,6 +87,8 @@ public class ViewEdit extends AppCompatActivity {
     private ColorRecViewAdapter adapterColor, adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
 
+    private Boolean CROPPED_3_4 = false, CROPPED_16_9 = false;
+
     private StickerRecViewAdapter adapterSticker;
     private Bitmap originImage, mutableBitmap;
     private ArrayList<Bitmap> previousBitmaps = new ArrayList<>();
@@ -172,6 +174,20 @@ public class ViewEdit extends AppCompatActivity {
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
         mutableBitmap = originImage.copy(Bitmap.Config.ARGB_8888, true);
+
+        seekBarSticker.setProgress(100);
+        seekBarSize.setProgress(30);
+        edtTxtInput.setText("");
+        if (mutableBitmap != null) {
+            mutableBitmap.recycle();
+            mutableBitmap = originImage.copy(Bitmap.Config.ARGB_8888, true);
+        }
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
         previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
     }
@@ -280,6 +296,13 @@ public class ViewEdit extends AppCompatActivity {
                         break;
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
+
+                        if (nav_emote_option.getSelectedItemId() == R.id.paintPic) {
+                            colorRecView.setVisibility(View.VISIBLE);
+                            handleAddPaintImage();
+                        } else if (nav_emote_option.getSelectedItemId() == R.id.stickerPic) {
+                            handleAddStickerImage();
+                        }
 
                         textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
@@ -481,7 +504,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleCropImage(float firstRatio, float secondRatio) {
-
+        refreshPicture();
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 
@@ -489,11 +512,13 @@ public class ViewEdit extends AppCompatActivity {
             int newHeight = (int) (width * firstRatio / secondRatio);
 
             // Calculate the y-coordinate for the top of the new image
+
             int y = (height - newHeight) / 2;
 //            y = y < 0 ? -y : y;
             // Create a new bitmap with the desired dimensions
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
             imgViewEdit.setImageBitmap(croppedBitmap);
+
         } else {
             int originalWidth = originImage.getWidth();
             int originalHeight = originImage.getHeight();
@@ -634,9 +659,13 @@ public class ViewEdit extends AppCompatActivity {
                         int y = (int) event.getY();
                         Canvas canvas = new Canvas(bitmap);
                         Paint paint = new Paint();
-                        paint.setColor(adapterColor.getColorChosen());
-                        canvas.drawCircle(x, y, 10, paint);
-                        imgViewEdit.invalidate();
+                        if (adapterColor.getColorChosen() != 0) {
+                            paint.setColor(adapterColor.getColorChosen());
+                            canvas.drawCircle(x, y, 10, paint);
+                            imgViewEdit.invalidate();
+                        } else {
+                            Toast.makeText(ViewEdit.this, "Please choose your draw's color", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
                 return true;
@@ -645,13 +674,13 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleAddTextImage() {
-        Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
-        mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+                mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
@@ -684,18 +713,17 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleAddStickerImage() {
-        Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
-        mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
 
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
+                Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+                mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-
                         Log.d("Bitmap num", String.valueOf(previousBitmaps.size()));
                         System.out.println(mutableBitmap);
                         int x = (int) event.getX();
@@ -710,10 +738,8 @@ public class ViewEdit extends AppCompatActivity {
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
                             imgViewEdit.setImageBitmap(mutableBitmap);
-
-
                         } else {
-                            Toast.makeText(ViewEdit.this, "Plea§se choose your sticker", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewEdit.this, "Please choose your sticker", Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }

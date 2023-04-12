@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/settingsRecView"
+    <TextView
+        android:id="@+id/txtAlbumBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Khóa album"
+        android:textSize="20sp"/>
+
+    <View style="@style/Divider" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ngôn ngữ"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"/>
+
+    <Spinner
+        android:id="@+id/spinnerLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <View style="@style/Divider" />
+
+    <Switch
+        android:id="@+id/switchDarkMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chế độ tối"
+        android:textSize="20sp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </LinearLayout>

@@ -238,7 +238,6 @@ public class MainActivity extends AppCompatActivity {
 
         for (String imagePath : images) {
             if (imagePath != null && (trashListImage == null || !trashListImage.contains(imagePath))) {
-
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
                 if (imageDates.size() != 0 && !dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1))) {
