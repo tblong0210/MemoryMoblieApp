@@ -295,6 +295,14 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
 
+                        if (nav_emote_option.getSelectedItemId() == R.id.paintPic){
+                            colorRecView.setVisibility(View.VISIBLE);
+                            handleAddPaintImage();
+                        }
+                        else if (nav_emote_option.getSelectedItemId() == R.id.stickerPic){
+                            handleAddStickerImage();
+                        }
+
                         textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
@@ -649,9 +657,14 @@ public class ViewEdit extends AppCompatActivity {
                         int y = (int) event.getY();
                         Canvas canvas = new Canvas(bitmap);
                         Paint paint = new Paint();
-                        paint.setColor(adapterColor.getColorChosen());
-                        canvas.drawCircle(x, y, 10, paint);
-                        imgViewEdit.invalidate();
+                        if (adapterColor.getColorChosen() != 0) {
+                            paint.setColor(adapterColor.getColorChosen());
+                            canvas.drawCircle(x, y, 10, paint);
+                            imgViewEdit.invalidate();
+                        }
+                        else{
+                            Toast.makeText(ViewEdit.this, "Please choose your draw's color", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
                 return true;
@@ -723,8 +736,7 @@ public class ViewEdit extends AppCompatActivity {
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
                             imgViewEdit.setImageBitmap(mutableBitmap);
-
-
+                            //imgViewEdit.invalidate();
                         }
                         else{
                             Toast.makeText(ViewEdit.this, "Please choose your sticker", Toast.LENGTH_SHORT).show();
