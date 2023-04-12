@@ -74,5 +74,26 @@
     <string name="selection_share">Chia sẻ</string>
     <string name="selection_restore">Khôi phục</string>
     <string name="selection_permanently_delete">Xóa vĩnh viễn</string>
+
     <string name="alert_dialog_create_password">Khởi tạo mật khẩu</string>
+    <string name="alert_dialog_enter_password_hint">Nhập mật khẩu</string>
+    <string name="alert_dialog_confirm_password_hint">Xác nhận mật khẩu</string>
+    <string name="alert_dialog_confirm">Đồng ý</string>
+    <string name="alert_dialog_cancel">Hủy</string>
+    <string name="alert_dialog_blank_password_notification">Vui lòng nhập mật khẩu</string>
+    <string name="alert_dialog_blank_confirm_password_notification">Vui lòng xác nhận mật khẩu</string>
+    <string name="alert_dialog_not_match_confirm_password_notification">Mật khẩu xác nhận không trùng khớp</string>
+    <string name="alert_dialog_create_password_successfully_notification">Khởi tạo mật khẩu thành công</string>
+    <string name="alert_dialog_change_password">Đổi mật khẩu</string>
+    <string name="alert_dialog_enter_old_password_hint">Nhập mật khẩu cũ</string>
+    <string name="alert_dialog_enter_new_password_hint">Nhập mật khẩu mới</string>
+    <string name="alert_dialog_confirm_new_password_hint">Xác nhận mật khẩu mới</string>
+    <string name="alert_dialog_blank_old_password_notification">Vui lòng nhập mật khẩu cũ</string>
+    <string name="alert_dialog_blank_new_password_notification">Vui lòng nhập mật khẩu mới</string>
+    <string name="alert_dialog_blank_confirm_new_password_notification">Vui lòng xác nhận mật khẩu mới</string>
+    <string name="alert_dialog_wrong_old_password_notification">Mật khẩu cũ không chính xác</string>
+    <string name="alert_dialog_change_password_successfully_notification">Đổi mật khẩu thành công</string>
+    <string name="alert_dialog_delete_password">Xóa mật khẩu</string>
+    <string name="alert_dialog_wrong_password_notification">Mật khẩu không chính xác</string>
+    <string name="alert_dialog_delete_password_successfully_notification">Xóa mật khẩu thành công</string>
 </resources>

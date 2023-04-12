@@ -75,5 +75,26 @@
     <string name="selection_share">Share</string>
     <string name="selection_restore">Restore</string>
     <string name="selection_permanently_delete">Permanently delete</string>
+
     <string name="alert_dialog_create_password">Create password</string>
+    <string name="alert_dialog_enter_password_hint">Enter password</string>
+    <string name="alert_dialog_confirm_password_hint">Confirm password</string>
+    <string name="alert_dialog_confirm">Confirm</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_blank_password_notification">Please enter password</string>
+    <string name="alert_dialog_blank_confirm_password_notification">Please confirm password</string>
+    <string name="alert_dialog_not_match_confirm_password_notification">Password confirm does not match</string>
+    <string name="alert_dialog_create_password_successfully_notification">Create password successfully</string>
+    <string name="alert_dialog_change_password">Change password</string>
+    <string name="alert_dialog_enter_old_password_hint">Enter old password</string>
+    <string name="alert_dialog_enter_new_password_hint">Enter new password</string>
+    <string name="alert_dialog_confirm_new_password_hint">Confirm new password</string>
+    <string name="alert_dialog_blank_old_password_notification">Please enter old password</string>
+    <string name="alert_dialog_blank_new_password_notification">Please enter new password</string>
+    <string name="alert_dialog_blank_confirm_new_password_notification">Please confirm new password</string>
+    <string name="alert_dialog_wrong_old_password_notification">Old password does not right</string>
+    <string name="alert_dialog_change_password_successfully_notification">Change password successfully</string>
+    <string name="alert_dialog_delete_password">Delete password</string>
+    <string name="alert_dialog_wrong_password_notification">Password does not right</string>
+    <string name="alert_dialog_delete_password_successfully_notification">Delete password successfully</string>
 </resources>
