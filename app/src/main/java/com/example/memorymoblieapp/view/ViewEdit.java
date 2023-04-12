@@ -157,9 +157,9 @@ public class ViewEdit extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 break;
-            case R.id.backViewEdit:
-                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
-//                backPreviousPicture();
+//            case R.id.backViewEdit:
+//                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
+////                backPreviousPicture();
             default:
                 break;
         }
