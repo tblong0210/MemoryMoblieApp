@@ -6,9 +6,10 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorOnSurface"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/txtTitle"
@@ -17,6 +18,7 @@
             android:text="Title"
             android:textSize="20sp"
             android:layout_weight="1"
+            android:textColor="?attr/colorSurface"
             android:layout_gravity="center_vertical"
             tools:ignore="HardcodedText">
         </TextView>
@@ -25,7 +27,6 @@
             android:id="@+id/ivAlbumContainer"
             android:layout_width="65dp"
             android:layout_height="35dp"
-            app:cardBackgroundColor="@color/light_blue"
             app:cardCornerRadius="20dp">
 
             <ImageButton
@@ -33,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_view_grid"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_gravity="center"
-                tools:ignore="ContentDescription" />
+                android:tint="?attr/colorOnPrimary"
+                android:background="@drawable/bg_shape_conner_5"                android:layout_gravity="center"
+                tools:ignore="ContentDescription,UseAppTint" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
