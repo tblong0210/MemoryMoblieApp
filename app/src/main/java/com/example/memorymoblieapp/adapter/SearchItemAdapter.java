@@ -20,7 +20,6 @@ import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -76,8 +75,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(view.getContext(), MainActivity.class);
-                        intent.putExtra("request", "VIEW_ALBUM_IMAGE");
-                        intent.putExtra("album_name", element.get(position));
+                        intent.putExtra(KeyData.CURRENT_FRAGMENT.getKey(), R.string.view_album);
+                        intent.putExtra("data", element.get(position));
                         view.getContext().startActivity(intent);
 
                         Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey());

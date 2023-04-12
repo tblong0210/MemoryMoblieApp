@@ -58,7 +58,7 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
         if (filters.get(position).getActived())
             holder.filterItemViewEdit.setBackground(context.getDrawable(R.drawable.bg_solid_seleted));
         else
-            holder.filterItemViewEdit.setBackground(context.getDrawable(R.drawable.bg_shape_conner_5));
+            holder.filterItemViewEdit.setBackground(context.getDrawable(R.drawable.bg_shape_conner_10_nocolor));
 
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.set(filters.get(position).getColorMatrix());

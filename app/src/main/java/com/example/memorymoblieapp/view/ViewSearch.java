@@ -42,7 +42,7 @@ public class ViewSearch extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
-        isThemeDark = isThemeDark == null ? false : isThemeDark;
+        isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
         super.onCreate(savedInstanceState);
@@ -134,12 +134,16 @@ public class ViewSearch extends AppCompatActivity {
                 ArrayList<String> history = new ArrayList<>();
                 if (typeSearch == R.id.name) {
                     Toast.makeText(ViewSearch.this, "Find by name", Toast.LENGTH_SHORT).show();
+
                     history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey()));
                     searchView.setQueryHint(getString(R.string.query_hint_name));
+
                 } else if (typeSearch == R.id.album) {
                     Toast.makeText(ViewSearch.this, "Find by album", Toast.LENGTH_SHORT).show();
+
                     history.addAll(DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey()));
                     searchView.setQueryHint(getString(R.string.query_hint_album));
+
                 }
                 resetHistory(history);
                 return true;

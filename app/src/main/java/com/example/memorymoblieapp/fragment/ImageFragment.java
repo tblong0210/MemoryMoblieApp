@@ -1,6 +1,7 @@
 package com.example.memorymoblieapp.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.view.ViewSearch;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,9 +42,9 @@ public class ImageFragment extends Fragment {
     private RecyclerView recyclerview;
     private ArrayList<String> images;
     List<String> imageDates = new ArrayList<>();
-    private Button searchBtn ;
-    private Button sortBtn;
-    private   Button cancelLongClick;
+    private ImageView searchBtn ;
+    private ImageView sortBtn;
+    private TextView cancelLongClick;
     private  int numberCol = 3;
     private GalleryAdapter galleryAdapter;
 
@@ -68,7 +71,7 @@ public class ImageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_image, container, false);
 
-
+        searchBtn = view.findViewById(R.id.imgBtnSearch);
         sortBtn = view.findViewById(R.id.sort_image_button);
         cancelLongClick = view.findViewById(R.id.button_cancel_select);
         recyclerview = view.findViewById(R.id.recyclerview_gallery_images);
@@ -89,6 +92,13 @@ public class ImageFragment extends Fragment {
             }
         });
 
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ViewSearch.class);
+                startActivity(intent);
+            }
+        });
         cancelLongClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

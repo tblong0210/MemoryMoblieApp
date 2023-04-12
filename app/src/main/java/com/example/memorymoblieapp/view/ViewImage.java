@@ -54,7 +54,7 @@ public class ViewImage extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
-        isThemeDark = isThemeDark == null ? false : isThemeDark;
+        isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
         super.onCreate(savedInstanceState);
@@ -69,25 +69,21 @@ public class ViewImage extends AppCompatActivity {
     }
 
     private void initViews() {
-        ArrayList<String> getPicturePaths = new ArrayList<>();
         ArrayList<String> getFavorList = new ArrayList<>();
-        picturePaths = new ArrayList<>();
+        Intent intent = getIntent();
+
+        picturePaths = setPicturePaths(intent);
         favorList = new ArrayList<>();
 
-        getPicturePaths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
         getFavorList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
         if (getFavorList != null)
             favorList.addAll(getFavorList);
 
-        if (getPicturePaths != null)
-            picturePaths.addAll(getPicturePaths);
+
+        int currentPosition = picturePaths.indexOf(intent.getStringExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey()));
 
         parentHeader = findViewById(R.id.parentHeader);
         imgBack = findViewById(R.id.imgBack);
-
-        Intent intent = getIntent();
-        int currentPosition = picturePaths.indexOf(intent.getStringExtra("path_image"));
-
         wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
         bottomNavigationView = findViewById(R.id.navSetting);
@@ -98,6 +94,19 @@ public class ViewImage extends AppCompatActivity {
         mViewPaper.setCurrentItem(currentPosition);
 
         loadFavorite();
+    }
+
+    private ArrayList<String> setPicturePaths(Intent intent) {
+        ArrayList<String> paths = intent.getStringArrayListExtra(KeyData.LIST_IMAGE_VIEW.getKey());
+
+        if (paths == null) {
+            paths = DataLocalManager.getStringList(KeyData.IMAGE_PATH_LIST.getKey());
+
+            if (paths == null) return new ArrayList<>();
+            return paths;
+        }
+
+        return paths;
     }
 
     public static void setBottomNavigationViewHide(Boolean check) {

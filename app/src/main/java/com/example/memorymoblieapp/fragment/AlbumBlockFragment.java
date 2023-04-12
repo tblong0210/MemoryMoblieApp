@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
@@ -29,6 +31,7 @@ public class AlbumBlockFragment extends Fragment {
     TextView txtSetupPassword;
     TextView txtChangePassword;
     TextView txtDeletePassword;
+    TextView txtBack2Settings;
     String albumPassword;
     View dividerSetupPassword;
     View dividerDeletePassword;
@@ -39,9 +42,11 @@ public class AlbumBlockFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View albumBlockFragment = inflater.inflate(R.layout.album_block_fragment, container, false);
         super.onViewCreated(albumBlockFragment, savedInstanceState);
+
         txtSetupPassword = albumBlockFragment.findViewById(R.id.txtSetupPassword);
         txtChangePassword = albumBlockFragment.findViewById(R.id.txtChangePassword);
         txtDeletePassword = albumBlockFragment.findViewById(R.id.txtDeletePassword);
+        txtBack2Settings = albumBlockFragment.findViewById(R.id.txtBack2Settings);
 
         dividerSetupPassword = albumBlockFragment.findViewById(R.id.dividerSetupPassword);
         dividerDeletePassword = albumBlockFragment.findViewById(R.id.dividerDeletePassword);
@@ -59,7 +64,7 @@ public class AlbumBlockFragment extends Fragment {
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(55, 10, 55, 10);
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -124,7 +129,7 @@ public class AlbumBlockFragment extends Fragment {
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(55, 10, 55, 10);
 
             final EditText oldPasswordInput = new EditText(context);
             oldPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -203,7 +208,7 @@ public class AlbumBlockFragment extends Fragment {
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(55, 10, 55, 10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -218,14 +223,10 @@ public class AlbumBlockFragment extends Fragment {
                 if (password.isBlank()) {
                     Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
                     passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                }
-
-                else if (!BCrypt.checkpw(password, albumPassword)) {
+                } else if (!BCrypt.checkpw(password, albumPassword)) {
                     Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
                     passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                }
-
-                else {
+                } else {
                     Toast.makeText(context, "Xóa mật khẩu thành công!", Toast.LENGTH_SHORT).show();
                     DataLocalManager.remove(KeyData.ALBUM_PASSWORD.getKey());
                     albumPassword = null;
@@ -240,11 +241,22 @@ public class AlbumBlockFragment extends Fragment {
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
         });
 
+        txtBack2Settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                SettingsFragment settingsFragment = new SettingsFragment();
+                fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
+            }
+        });
+
         if (albumPassword == null) {
             txtSetupPassword.setVisibility(View.VISIBLE);
             txtChangePassword.setVisibility(View.GONE);
             txtDeletePassword.setVisibility(View.GONE);
             dividerDeletePassword.setVisibility(View.GONE);
+            dividerSetupPassword.setVisibility(View.GONE);
         } else {
             txtSetupPassword.setVisibility(View.GONE);
             dividerSetupPassword.setVisibility(View.GONE);

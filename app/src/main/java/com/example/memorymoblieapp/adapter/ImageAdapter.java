@@ -23,6 +23,7 @@ import com.example.memorymoblieapp.fragment.AlbumSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.LoveSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.TrashBinSelectionBarFragment;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
@@ -146,7 +147,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, ViewImage.class);
-                    intent.putExtra("path_image", images.get(getAdapterPosition()));
+                    intent.putStringArrayListExtra(KeyData.LIST_IMAGE_VIEW.getKey(), images);
+                    intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), images.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });

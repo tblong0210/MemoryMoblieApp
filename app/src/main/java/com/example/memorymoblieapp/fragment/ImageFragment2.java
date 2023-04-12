@@ -32,6 +32,13 @@ public class ImageFragment2 extends Fragment {
     String type;
     int albumPos;
 
+    public ImageFragment2(){
+        imageList = new ArrayList<>();
+        title = "";
+        type = "";
+        albumPos = -1;
+    }
+
     public ImageFragment2(ArrayList<String> imageList, String title, String type) {
         this.imageList = imageList;
         this.title = title;

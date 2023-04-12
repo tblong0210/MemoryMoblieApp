@@ -4,44 +4,80 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtSetupPassword"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thiết lập mật khẩu"
-            android:textSize="20sp"
-            tools:ignore="HardcodedText" />
+            android:layout_marginBottom="10dp"
+            android:text="@string/settings_security_album"
+            android:textColor="?attr/colorSurface"
+            android:textSize="24sp" />
 
-        <View
-            android:id="@+id/dividerSetupPassword"
-            style="@style/Divider" />
-
-        <TextView
-            android:id="@+id/txtDeletePassword"
-            android:layout_width="wrap_content"
+        <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Xóa mật khẩu"
-            android:textSize="20sp"
-            tools:ignore="HardcodedText" />
+            android:background="@drawable/bg_shape_conner_10"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
-        <View
-            android:id="@+id/dividerDeletePassword"
-            style="@style/Divider" />
+            <TextView
+                android:id="@+id/txtSetupPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/settings_password"
+                android:textColor="?attr/colorSurface"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
-        <TextView
-            android:id="@+id/txtChangePassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đổi mật khẩu"
-            android:textSize="20sp"
-            tools:ignore="HardcodedText" />
+            <View
+                android:id="@+id/dividerSetupPassword"
+                style="@style/Divider" />
 
+            <TextView
+                android:id="@+id/txtDeletePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/settings_delete_password"
+                android:textColor="?attr/colorSurface"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:id="@+id/dividerDeletePassword"
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/txtChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/settings_change_password"
+                android:textColor="?attr/colorSurface"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                style="@style/Divider" />
+
+            <TextView
+                android:id="@+id/txtBack2Settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/settings_back"
+                android:textColor="?attr/colorSurface"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

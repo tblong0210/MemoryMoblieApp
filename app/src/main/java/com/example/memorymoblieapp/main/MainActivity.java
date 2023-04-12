@@ -1,7 +1,8 @@
 package com.example.memorymoblieapp.main;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getArguments;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -52,15 +53,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -152,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
-        Log.d("size", "initiateApp: " + newImage.size());
+
         detailed = false;
         albumList = new ArrayList<>(DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class));
         lovedImageList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
@@ -165,14 +162,10 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         imageFragment = new ImageFragment(newImage, imageDates);
-        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-        fragmentTransaction.addToBackStack("image");
 
-        Intent intent = getIntent();
-        String request = intent.getStringExtra("request");
-        String albumName = intent.getStringExtra("album_name");
-        if (request != null && albumName != null) {
-            onMsgToMain(albumName, request);
+        if(!set2FragmentLayout()) {
+            fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+            fragmentTransaction.addToBackStack("image");
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -210,12 +203,9 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
-                            Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
-//                            DataLocalManager.saveBooleanData(KeyData.DARK_MODE.getKey(), true);
-//                            recreate();
                         }
                         return true;
                     });
@@ -261,23 +251,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return newImage;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.item_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.actionSearch) {
-            Intent intent = new Intent(this, ViewSearch.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public boolean checkInternetConnection() {
@@ -393,8 +366,16 @@ public class MainActivity extends AppCompatActivity {
         ImageAdapter.ViewHolder.turnOffSelectMode();
     }
 
-    public void onMsgToMain(String data, String request) {
-        if (request.equals("VIEW_ALBUM_IMAGE")) {
+    public Boolean set2FragmentLayout() {
+        Intent intent = getIntent();
+        int idFragment = intent.getIntExtra(KeyData.CURRENT_FRAGMENT.getKey(), -1);
+        String data = intent.getStringExtra("data");
+        data = data == null ? "" : data;
+
+        if (idFragment == R.string.view_album) {
+            if(data.equals(""))
+                return false;
+
             int pos = 0;
             for (Album a : albumList) {
                 if (!a.getAlbumName().equals(data))
@@ -403,10 +384,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
             ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-            fragmentTransaction.addToBackStack("album");
+            bottomNavigationView.setSelectedItemId(R.id.album);
+
+            return true;
         }
+        else if(idFragment == R.string.settings){
+            SettingsFragment settingsFragment = new SettingsFragment();
+            fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
+            bottomNavigationView.setSelectedItemId(R.id.more);
+
+            return true;
+        }
+        return false;
     }
 
     public static BottomNavigationView getBottomNavigationView() {

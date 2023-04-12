@@ -25,7 +25,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/bg_shape_conner_5"
+        android:background="@drawable/bg_shape_conner_10_nocolor"
         android:outlineProvider="background"
         android:clipToOutline="true"
         android:src="@drawable/ic_launcher_background"
