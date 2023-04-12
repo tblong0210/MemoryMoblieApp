@@ -396,8 +396,7 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName());
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("album");
         }
