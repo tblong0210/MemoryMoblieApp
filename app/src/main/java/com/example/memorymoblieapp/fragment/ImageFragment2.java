@@ -3,10 +3,12 @@ package com.example.memorymoblieapp.fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,21 +29,38 @@ public class ImageFragment2 extends Fragment {
     ImageAdapter adapter;
     private Context context;
     private final String title;
+    String type;
+    int albumPos;
 
-    public ImageFragment2(ArrayList<String> imageList, String title) {
+    public ImageFragment2(ArrayList<String> imageList, String title, String type) {
         this.imageList = imageList;
         this.title = title;
+        this.type = type;
+        this.albumPos = -1;
+    }
+
+    public ImageFragment2(ArrayList<String> imageList, String title, String type, int albumPos) {
+        this.imageList = imageList;
+        this.title = title;
+        this.type = type;
+        this.albumPos = albumPos;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View imagesFragment;
-        if (MainActivity.detailed)
-            imagesFragment = inflater.inflate(R.layout.image_detail_fragment, container, false);
-        else
-            imagesFragment = inflater.inflate(R.layout.image_fragment, container, false);
+        imagesFragment = inflater.inflate(R.layout.image_fragment, container, false);
 
         RecyclerView recycler = imagesFragment.findViewById(R.id.imageRecView);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        if(MainActivity.detailed)
+            params.gravity = Gravity.START;
+        else
+            params.gravity = Gravity.CENTER_HORIZONTAL;
+        recycler.setLayoutParams(params);
 
         TextView txtTitle = imagesFragment.findViewById(R.id.txtTitle);
         txtTitle.setText(title);
@@ -55,7 +74,7 @@ public class ImageFragment2 extends Fragment {
 
         imgBtnChangeView.setOnClickListener(view -> {
             MainActivity.detailed = !MainActivity.detailed;
-            ImageFragment2 imageFragment = new ImageFragment2(imageList, title);
+            ImageFragment2 imageFragment = new ImageFragment2(imageList, title, type);
 
             @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -81,7 +100,7 @@ public class ImageFragment2 extends Fragment {
             recycler.setLayoutManager(gridLayoutManager);
         }
 
-        adapter = new ImageAdapter(imageList, context, MainActivity.detailed);
+        adapter = new ImageAdapter(imageList, context, MainActivity.detailed, type, albumPos);
         recycler.setAdapter(adapter);
 
         return imagesFragment;

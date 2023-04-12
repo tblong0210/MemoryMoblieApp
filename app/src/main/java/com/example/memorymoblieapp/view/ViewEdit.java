@@ -34,6 +34,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -47,11 +48,13 @@ import com.example.memorymoblieapp.FilterItem;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.ColorRecViewAdapter;
 import com.example.memorymoblieapp.adapter.FilterRecViewAdapter;
+import com.example.memorymoblieapp.adapter.StickerRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 import com.example.memorymoblieapp.obj.FilterImageKey;
 import com.example.memorymoblieapp.obj.ColorClass;
+import com.example.memorymoblieapp.obj.Sticker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.FileOutputStream;
@@ -61,28 +64,32 @@ import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
 
-    private Canvas mCanvas;
-    private Paint mPaint;
+
     private CardView parent_list_color;
 
     private ArrayList<String> picturePaths;
 
     private LinearLayout filterOption;
-    private ImageView imgViewEdit, colorItemChosen;
-    private RelativeLayout emoteOption, cropOption, brightnessOption;
-    private RecyclerView filterRecView, colorRecView;
+    private ImageView imgViewEdit;
+    private RelativeLayout emoteOption, cropOption, brightnessOption,textOption;
+    private RecyclerView filterRecView, colorRecView, colorTxtRecView, stickerRecView;
 
-    private TextView viewTxtAdd;
+    private EditText edtTxtInput;
+
     private String path_image;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize, seekBarSticker;
 
-    private ArrayList<Brightness> brightnesses;
     private ArrayList<FilterItem> filterItems;
-    private ArrayList<ColorClass> colors;
+    private ArrayList<ColorClass> colors, text_colors;
 
-    private ColorRecViewAdapter adapterColor;
+    private ArrayList<Sticker> stickers;
+
+    private ColorRecViewAdapter adapterColor,adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
-    private Bitmap originImage;
+
+    private StickerRecViewAdapter adapterSticker;
+    private Bitmap originImage, mutableBitmap;
+    private ArrayList<Bitmap> previousBitmaps = new ArrayList<>();
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
 
@@ -139,7 +146,7 @@ public class ViewEdit extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.resetViewEdit:
-                Toast.makeText(this, "Undo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
                 refreshPicture();
                 break;
             case R.id.saveViewEdit:
@@ -150,6 +157,9 @@ public class ViewEdit extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 break;
+            case R.id.backViewEdit:
+                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
+//                backPreviousPicture();
             default:
                 break;
         }
@@ -161,7 +171,33 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
+        mutableBitmap= originImage.copy(Bitmap.Config.ARGB_8888, true);
+        previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
+    }
+    private void backPreviousPicture(){
+//        int sizeBitmaps = previousBitmaps.size();
+//        if (sizeBitmaps >= 2) {
+//            System.out.println(previousBitmaps.get(sizeBitmaps - 1));
+//            imgViewEdit.setImageBitmap(previousBitmaps.get(sizeBitmaps - 2));
+//            previousBitmaps.remove(sizeBitmaps - 1);
+//        }
+//        else if (sizeBitmaps <2 && sizeBitmaps >0){
+//            imgViewEdit.setImageBitmap(originImage);
+//            previousBitmaps.remove(0);
+//        }
+//        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
+
+        // Kiểm tra nếu danh sách có ít nhất 2 bitmap thì ta có thể khôi phục lại trạng thái trước đó
+        if (previousBitmaps.size() >= 2) {
+            // Lấy bitmap trước đó và set vào ImageView
+            Bitmap previousBitmap = previousBitmaps.get(previousBitmaps.size() - 2);
+            imgViewEdit.setImageBitmap(previousBitmap.copy(previousBitmap.getConfig(), true));
+            Log.d("Previous Bitmap", previousBitmap.toString());
+            // Xóa bitmap hiện tại khỏi danh sách
+            previousBitmaps.remove(previousBitmaps.size() - 1);
+        }
+
     }
 
     private void savePicture() throws IOException {
@@ -211,6 +247,7 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.cropPic:
                         cropOption.setVisibility(View.VISIBLE);
 
+                        textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -221,6 +258,7 @@ public class ViewEdit extends AppCompatActivity {
                         cropOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
+                        textOption.setVisibility(View.GONE);
 
                         Drawable drawable = imgViewEdit.getDrawable();
                         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -233,6 +271,7 @@ public class ViewEdit extends AppCompatActivity {
                         brightnessOption.setVisibility(View.VISIBLE);
                         nav_brightness_option.setSelectedItemId(R.id.brightnessLevelPic);
 
+                        textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
                         emoteOption.setVisibility(View.GONE);
@@ -241,12 +280,21 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.emotePic:
                         emoteOption.setVisibility(View.VISIBLE);
 
+                        textOption.setVisibility(View.GONE);
                         filterOption.setVisibility(View.GONE);
                         brightnessOption.setVisibility(View.GONE);
                         cropOption.setVisibility(View.GONE);
 
                         break;
+                    case R.id.textPic:
+                        textOption.setVisibility(View.VISIBLE);
 
+                        emoteOption.setVisibility(View.GONE);
+                        filterOption.setVisibility(View.GONE);
+                        brightnessOption.setVisibility(View.GONE);
+                        cropOption.setVisibility(View.GONE);
+
+                        handleAddTextImage();
                     default:
                         break;
                 }
@@ -293,17 +341,19 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.paintPic:
                         Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.VISIBLE);
+
+                        stickerRecView.setVisibility(View.GONE);
+                        seekBarSticker.setVisibility(View.GONE);
                         handleAddPaintImage();
                         break;
 
                     case R.id.stickerPic:
                         Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.GONE);
-                        break;
-                    case R.id.textPic:
-                        colorRecView.setVisibility(View.GONE);
-                        Toast.makeText(ViewEdit.this, "Text", Toast.LENGTH_SHORT).show();
-//                        handleAddText();
+
+                        stickerRecView.setVisibility(View.VISIBLE);
+                        seekBarSticker.setVisibility(View.VISIBLE);
+                        handleAddStickerImage();
                         break;
 
                     default:
@@ -356,7 +406,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleBlurLevel() {
-        Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Bitmap blurredBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
         imgViewEdit.setImageBitmap(blurredBitmap);
 
@@ -397,8 +447,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleRotateImage() {
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
+        Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
@@ -408,8 +457,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleFlipImageHorizontal() {
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
+        Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Matrix matrix = new Matrix();
         matrix.setScale(-1, 1);
         matrix.postTranslate(originalBitmap.getWidth(), 0);
@@ -421,8 +469,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleFlipImageVertical() {
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap originalBitmap = drawable.getBitmap();
+        Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Matrix matrix = new Matrix();
         matrix.setScale(1, -1);
         matrix.postTranslate(0, originalBitmap.getHeight());
@@ -464,55 +511,8 @@ public class ViewEdit extends AppCompatActivity {
         //originalBitmap.recycle();
     }
 
-    private void handleAddPaintImage() {
-        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-        Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-        imgViewEdit.setImageBitmap(bitmap);
-
-        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getActionMasked();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                        int x = (int) event.getX();
-                        int y = (int) event.getY();
-                        Canvas canvas = new Canvas(bitmap);
-                        Paint paint = new Paint();
-                        paint.setColor(adapterColor.getColorChosen());
-                        canvas.drawCircle(x, y, 10, paint);
-                        imgViewEdit.invalidate();
-                        break;
-                }
-                return true;
-            }
-        });
-    }
-
-    private void handleAddText(String text) {
-        //viewTxtAdd.setText(text);
-
-        // Set the text color of the TextView object to the desired color
-//        viewTxtAdd.setTextColor(Color.RED);
-        // Create a Bitmap object with the same size as the ImageView object
-        Bitmap bitmap = Bitmap.createBitmap(imgViewEdit.getWidth(), imgViewEdit.getHeight(), Bitmap.Config.ARGB_8888);
-
-// Create a Canvas object with the Bitmap object as its parameter
-        Canvas canvas = new Canvas(bitmap);
-// Draw the ImageView object onto the Canvas object
-        imgViewEdit.draw(canvas);
-
-// Draw the TextView object onto the Canvas object at the desired location
-        // canvas.drawText(text, 100, 100, viewTxtAdd.getPaint());
-
-// Set the ImageView object to the modified Bitmap object
-        imgViewEdit.setImageBitmap(bitmap);
-    }
-
     private void handleBrightnessLevel() {
-        Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        Bitmap tempBitmap = getOriginalBitmap(imgViewEdit);
         seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -560,7 +560,7 @@ public class ViewEdit extends AppCompatActivity {
     }
 
     private void handleContrastLevel() {
-        Bitmap tempBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        Bitmap tempBitmap = getOriginalBitmap(imgViewEdit);
         seekBarContrast.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -615,63 +615,145 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
-    //    private void handleShadowLevel(){
-//        seekBarShadow.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
-//                Bitmap originalBitmap = drawable.getBitmap();
-//                imgViewEdit.setImageBitmap(addShadow(originalBitmap, progress));
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {}
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {}
-//        });
-//
-//    }
-    private Bitmap addShadow(Bitmap bitmap, int shadowValue) {
-        Log.d("Shadow:", String.valueOf(shadowValue));
-        // Tạo một Bitmap mới để chứa ảnh đã đổ bóng
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+    private void handleAddPaintImage() {
+        BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
+        Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+        imgViewEdit.setImageBitmap(bitmap);
 
-        // Tạo một Canvas mới để vẽ ảnh đã đổ bóng lên Bitmap mới
-        Canvas canvas = new Canvas(output);
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        Canvas canvas = new Canvas(bitmap);
+                        Paint paint = new Paint();
+                        paint.setColor(adapterColor.getColorChosen());
+                        canvas.drawCircle(x, y, 10, paint);
+                        imgViewEdit.invalidate();
+                        break;
+                }
+                return true;
+            }
+        });
+    }
 
-        // Tạo một Paint mới để vẽ đổ bóng
-        Paint shadowPaint = new Paint();
-        shadowPaint.setColor(Color.BLACK);
-        shadowPaint.setAlpha(shadowValue);
+    private void handleAddTextImage() {
+        Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 
-        // Tính toán độ mờ dựa trên giá trị từ seekbar
-        int blurRadius = (int) (shadowValue / 2.55);
-
-        // Tạo một đổ bóng bằng cách tạo một mảnh hình chữ nhật bo tròn với một màu đen và độ mờ
-        RectF shadowRect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight() + 20);
-        canvas.drawRoundRect(shadowRect, 20, 20, shadowPaint);
-
-        // Tạo một đối tượng BlurMaskFilter để áp dụng hiệu ứng blur
-        BlurMaskFilter blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.NORMAL);
-
-        // Áp dụng hiệu ứng blur vào Paint
-        shadowPaint.setMaskFilter(blurMaskFilter);
-
-        // Vẽ ảnh
-
-        canvas.drawBitmap(bitmap, 0, 0, null);
-
-        // Trả về Bitmap mới chứa ảnh và đổ bóng
-        return output;
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        Paint paint = new Paint();
+                        int Size = seekBarSize.getProgress();
+                        int colorText = adapterTxtColor.getColorChosen();
+                        if (colorText != 0) {
+                            Log.d("Color", String.valueOf(colorText));
+                            paint.setColor(colorText);
+                            paint.setTextSize(Size);
+                            Canvas canvas = new Canvas(mutableBitmap);
+                            if (edtTxtInput.getText().length() > 0) {
+                                String text = edtTxtInput.getText().toString();
+                                canvas.drawText(text, x, y, paint);
+                                imgViewEdit.setImageBitmap(mutableBitmap);
+                            } else {
+                                Toast.makeText(ViewEdit.this, "Please provide text you want to add", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(ViewEdit.this, "Please choose your text's color", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
 
     }
 
     private void handleAddStickerImage() {
+        Bitmap originalBitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
+        mutableBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+        imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                int action = event.getActionMasked();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+
+                        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
+                        System.out.println(mutableBitmap);
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        int Size = seekBarSticker.getProgress();
+
+                        Bitmap originalSticker = adapterSticker.getStickerChosen() ;
+                        if(originalSticker != null) {
+                            Bitmap scaledSticker = Bitmap.createScaledBitmap(originalSticker, Size, Size, false);
+
+                            Canvas canvas = new Canvas(mutableBitmap);
+                            canvas.drawBitmap(mutableBitmap, 0, 0, null);
+                            canvas.drawBitmap(scaledSticker, x, y, null);
+                            imgViewEdit.setImageBitmap(mutableBitmap);
+
+
+                        }
+                        else{
+                            Toast.makeText(ViewEdit.this, "Plea§se choose your sticker", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
-    private void handleAddTextImage() {
+    private void addNewBitmap(Bitmap originalBitmap, Bitmap newBitmap){
+        // Khởi tạo một mảng để lưu trữ các Bitmap
+        ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
 
+
+
+// Thêm bản sao của bitmap ban đầu vào mảng
+        Bitmap copyBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
+        bitmapList.add(copyBitmap);
+
+//// Thực hiện thay đổi bitmap
+//        Bitmap newBitmap = copyBitmap.copy(copyBitmap.getConfig(), true);
+//        Canvas canvas = new Canvas(newBitmap);
+//        Paint paint = new Paint();
+//        paint.setColor(Color.RED);
+//        canvas.drawCircle(50, 50, 50, paint);
+//        imageView.setImageBitmap(newBitmap);
+
+// Thêm bản sao của bitmap mới vào mảng
+        Bitmap newCopyBitmap = newBitmap.copy(newBitmap.getConfig(), true);
+        bitmapList.add(newCopyBitmap);
+
+// Xoá các phần tử trong ArrayList trước đó
+        bitmapList.clear();
+
+// Thực hiện thay đổi mới và thêm vào mảng
+        Bitmap newestBitmap = newCopyBitmap.copy(newCopyBitmap.getConfig(), true);
+
+// Thêm bản sao của bitmap mới vào mảng
+        Bitmap newestCopyBitmap = newestBitmap.copy(newestBitmap.getConfig(), true);
+        bitmapList.add(newestCopyBitmap);
+        previousBitmaps.addAll((bitmapList));
     }
 
     private void initViews() {
@@ -684,6 +766,8 @@ public class ViewEdit extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         originImage = drawable.getBitmap();
 
+        edtTxtInput = findViewById(R.id.edtTxtInput);
+
 //        viewTxtAdd = findViewById(R.id.viewTxtAdd);
 
 
@@ -691,6 +775,7 @@ public class ViewEdit extends AppCompatActivity {
         cropOption = findViewById(R.id.cropOption);
         filterOption = findViewById(R.id.filterOption);
         brightnessOption = findViewById(R.id.brightnessOption);
+        textOption = findViewById(R.id.textOption);
 
 
         nav_edit_view = findViewById(R.id.navigation_edit_view);
@@ -700,9 +785,29 @@ public class ViewEdit extends AppCompatActivity {
 
 
         filterRecView = findViewById(R.id.filterRecView);
+        setFilterRecView();
+
+        colorRecView = findViewById(R.id.colorRecView);
+        setColorRecView();
+
+        colorTxtRecView = findViewById(R.id.colorTextRecView);
+        setTextColorRecView();
+
+        stickerRecView = findViewById(R.id.stickerRecView);
+        setStickerRecView();
+
+        seekBarContrast = findViewById(R.id.seekBarContrast);
+        seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
+        seekBarBlur = findViewById(R.id.seekBarBlur);
+        seekBarSize = findViewById(R.id.seekBarSize);
+        seekBarSticker = findViewById(R.id.seekBarSticker);
+
+    }
+
+    private void setFilterRecView(){
         setFilter(FilterImageKey.warm);
 
-        //set adapter to imgRecView
+        //set adapter to filterRecView
         filterItems = new ArrayList<>();
         setAllFilters();
 
@@ -711,8 +816,28 @@ public class ViewEdit extends AppCompatActivity {
         filterRecView.setAdapter(adapterFilter);
         filterRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        colorRecView = findViewById(R.id.colorRecView);
-        //set adapter to imgRecView
+    }
+
+    private void setTextColorRecView(){
+        //set adapter to textRecView
+        text_colors = new ArrayList<>();
+        text_colors.add(new ColorClass("BLACK", Color.BLACK));
+        text_colors.add(new ColorClass("WHITE", Color.WHITE));
+        text_colors.add(new ColorClass("RED", Color.RED));
+        text_colors.add(new ColorClass("GREEN", Color.GREEN));
+        text_colors.add(new ColorClass("BLUE", Color.BLUE));
+        text_colors.add(new ColorClass("YELLOW", Color.YELLOW));
+        text_colors.add(new ColorClass("GRAY", Color.GRAY));
+
+
+        adapterTxtColor = new ColorRecViewAdapter(this);
+        adapterTxtColor.setColors(text_colors);
+        colorTxtRecView.setAdapter(adapterTxtColor);
+        colorTxtRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+    }
+    private void setColorRecView(){
+        //set adapter to colorRecView
         colors = new ArrayList<>();
         colors.add(new ColorClass("RED", Color.RED));
         colors.add(new ColorClass("GREEN", Color.GREEN));
@@ -727,11 +852,35 @@ public class ViewEdit extends AppCompatActivity {
         colorRecView.setAdapter(adapterColor);
         colorRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        seekBarContrast = findViewById(R.id.seekBarContrast);
-        seekBarBrightnessLevel = findViewById(R.id.seekBarBrightnessLevel);
-        seekBarBlur = findViewById(R.id.seekBarBlur);
     }
 
+    private void setStickerRecView(){
+        //set adapter to stickerRecView
+        stickers = new ArrayList<>();
+        stickers.add(new Sticker("Birthday Cake Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_birthday_cake)));
+        stickers.add(new Sticker("Angry Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_angry_sticker)));
+        stickers.add(new Sticker("Thinking Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_thinking_sticker)));
+        stickers.add(new Sticker("Love Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_love_sticker)));
+        stickers.add(new Sticker("Surprise box Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_surpise_box_sticker)));
+        stickers.add(new Sticker("Mocking Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_mocking_sticker)));
+        stickers.add(new Sticker("Hard work Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_hard_work_sticker)));
+        stickers.add(new Sticker("Calendar Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_calendar_sticker)));
+        stickers.add(new Sticker("Toy gun Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_toy_gun_sticker)));
+        stickers.add(new Sticker("Banana Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_banana_sticker)));
+        stickers.add(new Sticker("Fish Bones Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_fishbones_sticker)));
+        stickers.add(new Sticker("Pie Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_pie_sticker)));
+        stickers.add(new Sticker("Hipster Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_hipster_sticker)));
+        stickers.add(new Sticker("Prank Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_prank_sticker)));
+        stickers.add(new Sticker("Ice cream Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_ice_cream_sticker)));
+        stickers.add(new Sticker("Balloons Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_balloons_sticker)));
+        stickers.add(new Sticker("Banner Sticker", BitmapFactory.decodeResource(getResources(), R.mipmap.ic_banner_sticker)));
+
+        adapterSticker = new StickerRecViewAdapter(this);
+        adapterSticker.setStickers(stickers);
+        stickerRecView.setAdapter(adapterSticker);
+        stickerRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+    }
     private void setAllFilters() {
         filterItems.add(setFilter(""));
         filterItems.add(setFilter(FilterImageKey.warm));
@@ -742,6 +891,10 @@ public class ViewEdit extends AppCompatActivity {
         filterItems.add(setFilter(FilterImageKey.flower));
         filterItems.add(setFilter(FilterImageKey.faded));
         filterItems.add(setFilter(FilterImageKey.gray));
+    }
+
+    private Bitmap getOriginalBitmap(ImageView img){
+        return ((BitmapDrawable) img.getDrawable()).getBitmap();
     }
 
     private FilterItem setFilter(String filter) {
@@ -834,9 +987,7 @@ public class ViewEdit extends AppCompatActivity {
         return filterItem;
     }
 
-    public void setOriginImage(Bitmap bitmap) {
-        originImage = bitmap;
-    }
+
 
     public void setImageViewEdit(Drawable drawable) {
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);

@@ -16,11 +16,4 @@
         android:layout_marginRight="30dp"
         android:icon="@mipmap/ic_sticker" />
 
-    <item
-        android:id="@+id/textPic"
-        android:title="text"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginRight="30dp"
-        android:icon="@mipmap/ic_text" />
 </menu>

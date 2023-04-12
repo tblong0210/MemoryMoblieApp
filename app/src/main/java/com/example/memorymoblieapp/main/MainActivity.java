@@ -1,7 +1,6 @@
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +28,7 @@ import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.adapter.ImageAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment;
@@ -42,15 +42,11 @@ import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
-import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -183,18 +179,18 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích");
+                    ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích", "Love");
                     fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;
 
                 case R.id.more:
                     PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
-                    popupMenu.inflate(R.menu.more_menu);
+                    popupMenu.inflate(R.menu.bottom_navigation_more_menu);
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();
                         if (R.id.recycleBin == itemId) {
-                            ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác");
+                            ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác", "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
@@ -288,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "selectImage":
                         frame_layout_selection_features_bar.removeAllViews();
+                        break;
                 }
             }
         }
@@ -297,6 +294,8 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setVisibility(View.VISIBLE);
         GalleryAdapter.clearListSelect();
+
+        ImageAdapter.ViewHolder.turnOffSelectMode();
     }
 
     public void onMsgToMain(String data, String request) {
@@ -308,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName());
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("album");

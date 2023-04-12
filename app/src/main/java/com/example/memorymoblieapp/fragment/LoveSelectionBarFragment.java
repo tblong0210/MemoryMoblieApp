@@ -4,15 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,55 +22,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.adapter.ImageAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.Album;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.jetbrains.annotations.Contract;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class SelectionFeaturesBarFragment extends Fragment {
+public class LoveSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ArrayList<String> listSelect;
-    String fragmentName;
     ArrayList<String> albumsName;
-
-    public SelectionFeaturesBarFragment(String fragmentName) {
-        this.fragmentName = fragmentName;
-    }
 
     @SuppressLint("NonConstantResourceId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View selectionFeaturesBarFragment = inflater.inflate(R.layout.selection_features_bar, container, false);
+        View selectionFeaturesBarFragment = inflater.inflate(R.layout.love_selection_bar, container, false);
         bottomNavigationView = selectionFeaturesBarFragment.findViewById(R.id.navigation_view);
         Context context = selectionFeaturesBarFragment.getContext();
         albumsName = new ArrayList<>(DataLocalManager.getSetList(KeyData.ALBUM_NAME_LIST.getKey()));
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (fragmentName) {
-                case "Home":
-                    listSelect = new ArrayList<>(GalleryAdapter.getListSelect());
-                    break;
-                case "Love":
-                    //
-                    break;
-                case "Trash":
-                    //
-                    break;
-            }
+            listSelect = new ArrayList<>(ImageAdapter.getListSelect());
 
             switch (item.getItemId()) {
                 case R.id.add2album:
@@ -82,7 +67,7 @@ public class SelectionFeaturesBarFragment extends Fragment {
                         builder.setTitle("Chọn album cần thêm");
 
                         Spinner spinner = new Spinner(context);
-                        ArrayAdapter arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, albumsName);
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, albumsName);
                         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(arrayAdapter);
 
@@ -113,19 +98,12 @@ public class SelectionFeaturesBarFragment extends Fragment {
                         dialog.show();
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                             if (albumChosenPos[0] >= 0 && !albumsName.isEmpty()) {
-                                for (String imageSelected : GalleryAdapter.getListSelect())
-                                    MainActivity.albumList.get(albumChosenPos[0]).insertNewImage(imageSelected);
+                                MainActivity.albumList.get(albumChosenPos[0]).insertNewImageArray(listSelect);
                                 DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                                 Toast.makeText(context, "Đã thêm ảnh vào album '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
 
                                 // Refresh and exit choose image mode
-                                ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
-                                AppCompatActivity activity = (AppCompatActivity) context;
-                                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                                MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
-                                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
-                                GalleryAdapter.clearListSelect();
+                                refresh(context);
 
                                 dialog.dismiss();
                             }
@@ -135,24 +113,15 @@ public class SelectionFeaturesBarFragment extends Fragment {
 
                     return true;
 
-                case R.id.duplicate:
-
-                    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                case R.id.unlove:
+                    DialogInterface.OnClickListener dialogClickListener2 = (dialog, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                duplicate(listSelect);
-                                MainActivity.updateData(context);
+                                MainActivity.lovedImageList.removeAll(listSelect);
+                                DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
 
-                                // Refresh and exit choose image mode
-                                ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
-                                AppCompatActivity activity = (AppCompatActivity) context;
-                                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                                MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
-                                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
-                                GalleryAdapter.clearListSelect();
-
-                                Toast.makeText(context, "Tạo bản sao thành công", Toast.LENGTH_SHORT).show();
+                                refresh(context);
+                                Toast.makeText(context, "Đã gỡ các ảnh được chọn khỏi mục yêu thích" + listSelect.size(), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -161,27 +130,81 @@ public class SelectionFeaturesBarFragment extends Fragment {
                                 break;
                         }
                     };
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("Bạn có chắc muốn tạo bản sao các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener)
-                            .setNegativeButton("Hủy", dialogClickListener).show();
+                    AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+                    builder2.setMessage("Bạn có chắc muốn gỡ các ảnh được chọn khỏi mục yêu thích không?").setPositiveButton("Đồng ý", dialogClickListener2)
+                            .setNegativeButton("Hủy", dialogClickListener2).show();
 
                     return true;
 
                 case R.id.delete:
-                    Toast.makeText(selectionFeaturesBarFragment.getContext(), "Xóa", Toast.LENGTH_LONG).show();
+                    DialogInterface.OnClickListener dialogClickListener1 = (dialog, which) -> {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                move2TrashBin(listSelect);
+                                MainActivity.updateData(context);
+
+                                // Refresh and exit choose image mode
+                                refresh(context);
+
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                dialog.cancel();
+                                break;
+                        }
+                    };
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                    builder1.setMessage("Bạn có chắc muốn xóa các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener1)
+                            .setNegativeButton("Hủy", dialogClickListener1).show();
+
                     return true;
 
-                case R.id.share:
-                    Toast.makeText(selectionFeaturesBarFragment.getContext(), "Chia sẻ", Toast.LENGTH_LONG).show();
+                case R.id.more:
+                    PopupMenu popupMenu = new PopupMenu(context, bottomNavigationView, Gravity.END);
+                    popupMenu.inflate(R.menu.love_selection_bar_more_menu);
+                    popupMenu.setOnMenuItemClickListener(menuItem -> {
+                        int itemId = menuItem.getItemId();
+
+                        if (R.id.share == itemId) {
+                            Toast.makeText(context, "Chia sẻ", Toast.LENGTH_SHORT).show();
+                        }
+
+                        else if (R.id.duplicate == itemId) {
+                            DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                                switch (which) {
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        duplicate(listSelect);
+                                        MainActivity.updateData(context);
+
+                                        // Refresh and exit choose image mode
+                                        refresh(context);
+
+                                        Toast.makeText(context, "Tạo bản sao thành công", Toast.LENGTH_SHORT).show();
+
+                                        break;
+
+                                    case DialogInterface.BUTTON_NEGATIVE:
+                                        dialog.cancel();
+                                        break;
+                                }
+                            };
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Bạn có chắc muốn tạo bản sao các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener)
+                                    .setNegativeButton("Hủy", dialogClickListener).show();
+                        }
+                        return true;
+                    });
+                    popupMenu.show();
                     return true;
             }
+
             return false;
         });
 
         return selectionFeaturesBarFragment;
     }
 
-    public void duplicate(@NonNull ArrayList<String> filePaths) {
+    void duplicate(@NonNull ArrayList<String> filePaths) {
         for (String filePath : filePaths) {
             File sourceFile = new File(filePath);
             String fileName = sourceFile.getName();
@@ -199,10 +222,46 @@ public class SelectionFeaturesBarFragment extends Fragment {
             }
             try {
                 Files.copy(sourceFile.toPath(), new File(newFilePath).toPath());
-                System.out.println("File duplicated: " + newFilePath);
+                MainActivity.lovedImageList.add(newFilePath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
+    }
+
+    void move2TrashBin(@NonNull ArrayList<String> filePaths) {
+        MainActivity.deletedImageList.addAll(filePaths);
+        MainActivity.deletedImageList = removeDuplicates(MainActivity.deletedImageList);
+        DataLocalManager.saveData(KeyData.TRASH_LIST.getKey(), MainActivity.deletedImageList);
+
+        MainActivity.lovedImageList.removeAll(filePaths);
+        DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
+
+        for (Album album : MainActivity.albumList)
+            for (String filePath : filePaths)
+                album.removeImage(filePath);
+
+        DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+    }
+
+    void refresh(Context context) {
+        // Refresh and exit choose image mode
+        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.lovedImageList, "Yêu thích", "Love");
+        AppCompatActivity activity = (AppCompatActivity) context;
+        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+        MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
+        MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        GalleryAdapter.clearListSelect();
+    }
+
+    @NonNull
+    @Contract("_ -> param1")
+    <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+        Set<T> set = new LinkedHashSet<>(list);
+        list.clear();
+        list.addAll(set);
+        return list;
     }
 }

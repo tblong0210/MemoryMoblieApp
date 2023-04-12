@@ -27,7 +27,7 @@ public class ColorClass {
 
     @Override
     public String toString() {
-        return "Image{" +
+        return "Sticker{" +
                 "name='" + name + '\'' +
                 ", color_type=" + color_type +
                 '}';
