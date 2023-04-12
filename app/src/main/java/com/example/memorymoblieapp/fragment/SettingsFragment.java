@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.SettingsAdapter;
+import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,11 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
+        isThemeDark = isThemeDark == null ? false : isThemeDark;
+
+        getActivity().setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
+
         View settingsFragment = inflater.inflate(R.layout.settings_fragment, container, false);
         RecyclerView recycler = settingsFragment.findViewById(R.id.settingsRecView);
         settings = new ArrayList<>();

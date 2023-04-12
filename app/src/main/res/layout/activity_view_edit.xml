@@ -5,6 +5,7 @@
     android:id="@+id/parentViewEdit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnBackground"
     tools:context=".view.ViewEdit">
 
 
@@ -33,14 +34,13 @@
     <RelativeLayout
         android:id="@+id/parentSelection"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_above="@+id/navigation_edit_view">
 
         <RelativeLayout
             android:id="@+id/cropOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:visibility="visible">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,11 +48,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/round_corner"
-                app:labelVisibilityMode="unlabeled"
+                android:padding="5dp"
+                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 app:menu="@menu/menu_crop_option" />
         </RelativeLayout>
 
@@ -85,18 +86,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
+                android:padding="5dp"
+                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 android:background="@drawable/round_corner"
-                app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/menu_brightness_option" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="bottom">
+                android:layout_gravity="bottom"
+                android:layout_marginTop="50dp">
 
                 <SeekBar
                     android:id="@+id/seekBarBrightnessLevel"
@@ -105,7 +107,7 @@
                     android:max="255"
                     android:min="-255"
                     android:progress="0"
-                    android:progressTint="@color/black"
+                    android:progressTint="?attr/colorSurface"
                     android:thumbTint="@color/design_default_color_primary"
                     android:visibility="visible" />
 
@@ -116,7 +118,7 @@
                     android:layout_gravity="bottom"
                     android:max="200"
                     android:progress="100"
-                    android:progressTint="@color/black"
+                    android:progressTint="?attr/colorSurface"
                     android:thumbTint="@color/design_default_color_primary"
                     android:visibility="gone" />
 
@@ -128,7 +130,7 @@
                     android:max="100"
                     android:min="10"
                     android:progress="10"
-                    android:progressTint="@color/black"
+                    android:progressTint="?attr/colorSurface"
                     android:thumbTint="@color/design_default_color_primary"
                     android:visibility="gone" />
             </RelativeLayout>
@@ -146,19 +148,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
+                android:padding="5dp"
+                app:itemBackground="@drawable/bg_selected_item_on_nav"
                 android:background="@drawable/round_corner"
-                app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/menu_emote_option" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/colorRecView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_centerHorizontal="true" />
+                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -167,7 +171,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="unlabeled"
+        android:background="?attr/colorOnBackground"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:itemBackground="@drawable/bg_selected_item_on_nav"
         app:menu="@menu/navigation_edit_view" />
 
 

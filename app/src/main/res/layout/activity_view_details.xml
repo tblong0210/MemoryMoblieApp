@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnBackground"
     tools:context=".view.ViewDetails">
 
     <LinearLayout
@@ -22,14 +23,16 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_calendar" />
+                android:src="@mipmap/ic_calendar"
+                android:tint="?attr/colorSurface"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:id="@+id/txtDateCreated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ngay thang nam gio"
-                android:textColor="@color/black" />
+                android:textColor="?attr/colorSurface" />
 
         </LinearLayout>
 
@@ -45,7 +48,9 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/ic_image" />
+                android:src="@mipmap/ic_image"
+                android:tint="?attr/colorSurface"
+                tools:ignore="UseAppTint" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ten anh"
-                    android:textColor="@color/black" />
+                    android:textColor="?attr/colorSurface" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,6 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1,31 MB"
+                        android:textColor="?attr/colorSurface"
                         android:textSize="13sp" />
 
                     <TextView
@@ -78,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:text="3000x4000"
+                        android:textColor="?attr/colorSurface"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -87,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="/Thẻ SD/DCIM/Camera"
+                    android:textColor="?attr/colorSurface"
                     android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>

@@ -40,6 +40,12 @@ public class ImageFragment extends Fragment {
     private Button searchBtn ;
     private Button sortBtn;
     private  int numberCol = 3;
+
+    public ImageFragment(){
+        images = new ArrayList<>();
+        imageDates = new ArrayList<>();
+    }
+
     public ImageFragment(ArrayList<String>images, List<String> imageDates ) {
         this.images=images;
         // Required empty public constructor

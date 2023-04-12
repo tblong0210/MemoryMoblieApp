@@ -20,6 +20,7 @@ import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -87,7 +88,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     }
                 });
 
-                holder.imageView.setImageResource(R.drawable.ic_folder);
+                if(DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey()))
+                    holder.imageView.setImageResource(R.drawable.ic_folder_white);
+                else
+                    holder.imageView.setImageResource(R.drawable.ic_folder);
             }
         }
     }

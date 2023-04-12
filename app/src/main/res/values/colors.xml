@@ -14,4 +14,8 @@
     <color name="light_blue">#E0FBFC</color>
     <color name="black_500">#293241</color>
     <color name="bg_nav">#F5F5FD</color>
+
+    <color name="primary_color">#3D5A80</color>
+    <color name="secondary_color">#EE6C4D</color>
+    <color name="accent_color">#293241</color>
 </resources>

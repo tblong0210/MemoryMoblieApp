@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ivAlbumContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,18 +20,17 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/avatars"
-                tools:ignore="ContentDescription">
-            </ImageView>
+                tools:ignore="ContentDescription"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
                 android:id="@+id/ivMore"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_more"
-                android:layout_gravity="end"
                 tools:ignore="ContentDescription,RtlHardcoded" />
         </FrameLayout>
 
@@ -43,20 +41,20 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivAlbumContainer"
-        android:text="Tên album"
-        android:textSize="20sp"
         android:layout_marginStart="10dp"
-        tools:ignore="HardcodedText">
-    </TextView>
+        android:text="Tên album"
+        android:textColor="?attr/colorSurface"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/txtImgQuantity"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtAlbumName"
-        android:text="0 ảnh"
-        android:textSize="20sp"
         android:layout_marginStart="10dp"
-        tools:ignore="HardcodedText">
-    </TextView>
+        android:text="0 ảnh"
+        android:textColor="?attr/colorSurface"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText" />
 </RelativeLayout>

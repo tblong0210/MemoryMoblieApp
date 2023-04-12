@@ -12,13 +12,12 @@
         android:background="@drawable/bg_image_border"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription"
-        tools:srcCompat="@tools:sample/backgrounds/scenic">
-    </ImageView>
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtImageName"
@@ -26,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Tên: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtCreatedDate"
@@ -36,9 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Ngày tạo: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtSize"
@@ -46,9 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Dung lượng: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtDimensions"
@@ -56,9 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Kích thước: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtLocation"
@@ -66,9 +65,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Vị trí: "
+            android:textColor="?attr/colorSurface"
             android:textSize="14sp"
-            tools:ignore="HardcodedText">
-        </TextView>
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

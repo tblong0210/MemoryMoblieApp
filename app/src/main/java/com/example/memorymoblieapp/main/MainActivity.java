@@ -3,6 +3,7 @@ package com.example.memorymoblieapp.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<String> images;
     static ArrayList<String> newImage;
     static ArrayList<String> trashListImage;
+    ImageFragment imageFragment;
+    FragmentTransaction fragmentTransaction;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
@@ -74,9 +78,15 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
+        isThemeDark = isThemeDark == null ? false : isThemeDark;
+
+        setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+//        binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
         String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
 
@@ -134,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
-//        Toast.makeText(this, newImage.size() + " "+ picturePath.size(), Toast.LENGTH_SHORT).show();
 
         detailed = false;
         albumList = new ArrayList<>(DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class));
@@ -145,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
 
         frame_layout_selection_features_bar = findViewById(R.id.frame_layout_selection_features_bar);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        ImageFragment imageFragment = new ImageFragment(newImage, imageDates);
+        imageFragment = new ImageFragment(newImage, imageDates);
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
         fragmentTransaction.addToBackStack("image");
 
@@ -159,24 +168,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.image:
-                    ImageFragment imageFragment1 = new ImageFragment(newImage, imageDates);
-                    fragmentTransaction1.replace(R.id.frame_layout_content, imageFragment1).commit();
-                    fragmentTransaction1.addToBackStack("image");
+                    imageFragment = new ImageFragment(newImage, imageDates);
+                    fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                    fragmentTransaction.addToBackStack("image");
                     return true;
 
                 case R.id.album:
                     AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
-                    fragmentTransaction1.replace(R.id.frame_layout_content, albumFragment).commit();
-                    fragmentTransaction1.addToBackStack("album");
+                    fragmentTransaction.replace(R.id.frame_layout_content, albumFragment).commit();
+                    fragmentTransaction.addToBackStack("album");
                     return true;
 
                 case R.id.love:
                     ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích");
-                    fragmentTransaction1.replace(R.id.frame_layout_content, loveImageFragment).commit();
-                    fragmentTransaction1.addToBackStack("love");
+                    fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
+                    fragmentTransaction.addToBackStack("love");
                     return true;
 
                 case R.id.more:
@@ -186,17 +195,17 @@ public class MainActivity extends AppCompatActivity {
                         int itemId = menuItem.getItemId();
                         if (R.id.recycleBin == itemId) {
                             ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác");
-                            fragmentTransaction1.replace(R.id.frame_layout_content, deletedImageFragment).commit();
+                            fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
-                            fragmentTransaction1.replace(R.id.frame_layout_content, settingsFragment).commit();
+                            fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
                         }
                         return true;
                     });
                     popupMenu.show();
-                    fragmentTransaction1.addToBackStack("more");
+                    fragmentTransaction.addToBackStack("more");
 
                     return true;
             }
@@ -310,7 +319,9 @@ public class MainActivity extends AppCompatActivity {
         return bottomNavigationView;
     }
 
-    public static FrameLayout getFrameLayoutSelectionFeaturesBar() { return frame_layout_selection_features_bar; }
+    public static FrameLayout getFrameLayoutSelectionFeaturesBar() {
+        return frame_layout_selection_features_bar;
+    }
 
     public static ArrayList<String> getNewImage() {
         return newImage;
@@ -320,5 +331,7 @@ public class MainActivity extends AppCompatActivity {
         return imageDates;
     }
 
-    public static ArrayList<String> getImages() { return images; }
+    public static ArrayList<String> getImages() {
+        return images;
+    }
 }

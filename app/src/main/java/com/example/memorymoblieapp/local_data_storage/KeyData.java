@@ -11,7 +11,8 @@ public enum KeyData {
     HISTORY_SEARCH_ALBUM,
     FAVORITE_LIST,
     TRASH_LIST,
-    UN_AVAILABLE_IMAGE;
+    UN_AVAILABLE_IMAGE,
+    DARK_MODE;
 
     public String getKey() {
         switch (this) {
@@ -37,6 +38,8 @@ public enum KeyData {
                 return "TRASH_LIST";
             case UN_AVAILABLE_IMAGE:
                 return "UNAVAILABLE_IMAGE";
+            case DARK_MODE:
+                return "DARK_MODE";
             default:
                 return null;
         }

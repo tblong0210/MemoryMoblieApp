@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -23,7 +22,6 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -39,10 +37,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
 
 public class ViewImage extends AppCompatActivity {
     private final int REQUEST_CODE_SHARE = 1111;
@@ -57,11 +53,15 @@ public class ViewImage extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
+        isThemeDark = isThemeDark == null ? false : isThemeDark;
+
+        setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
         super.onCreate(savedInstanceState);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        setContentView(R.layout.control_image_container);
+        setContentView(R.layout.activity_view_image);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         initViews();
@@ -116,8 +116,9 @@ public class ViewImage extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewImage.this, MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ViewImage.this, MainActivity.class);
+//                startActivity(intent);
+                finish();
             }
         });
         mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
