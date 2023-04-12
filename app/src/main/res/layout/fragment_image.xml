@@ -6,18 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.ImageFragment">
-
-    <Button
-        android:id="@+id/button_cancel_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hủy"
-        android:visibility="invisible" />
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+    <Button
+        android:id="@+id/button_cancel_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hủy"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
 
         <Button
             android:id="@+id/sort_image_button"

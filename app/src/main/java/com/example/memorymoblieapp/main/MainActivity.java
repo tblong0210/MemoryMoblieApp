@@ -1,8 +1,8 @@
 package com.example.memorymoblieapp.main;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -13,9 +13,15 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +30,7 @@ import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.memorymoblieapp.DownloadImageFromURL;
 import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 
@@ -34,6 +41,7 @@ import com.example.memorymoblieapp.fragment.AlbumFragment2;
 import com.example.memorymoblieapp.fragment.ImageFragment;
 import com.example.memorymoblieapp.fragment.ImageFragment2;
 
+import com.example.memorymoblieapp.fragment.UrlDialog;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
@@ -42,14 +50,23 @@ import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    ImageFragment imageFragment;
+    FragmentTransaction fragmentTransaction;
     public static boolean detailed; // view option of image fragment
     public static ArrayList<Album> albumList;
     public static ArrayList<String> lovedImageList;
@@ -62,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<String> images;
     static ArrayList<String> newImage;
     static ArrayList<String> trashListImage;
-    ImageFragment imageFragment;
-    FragmentTransaction fragmentTransaction;
     GalleryAdapter galleryAdapter;
     boolean isPermission = false;
     private static final int MY_READ_PERMISSION_CODE = 101;
@@ -78,11 +93,10 @@ public class MainActivity extends AppCompatActivity {
         isThemeDark = isThemeDark == null ? false : isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
-        super.onCreate(savedInstanceState);
-
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
         setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
 
@@ -126,8 +140,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
-//        ArrayList<String> arr = new ArrayList<>();
-//        arr.addAll(DataLocalManager.getSetList(KeyData.UN_AVAILABLE_IMAGE.getKey()));
         imageDates = new ArrayList<>();
 
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
@@ -167,10 +179,14 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.image:
+                    newImage.clear();
+                    imageDates.clear();
+                    newImage = handleSortListImageView();
                     imageFragment = new ImageFragment(newImage, imageDates);
                     fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                     fragmentTransaction.addToBackStack("image");
                     return true;
+
 
                 case R.id.album:
                     AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
@@ -193,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                             ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác", "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
+                            new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
                             Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
@@ -213,10 +230,12 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> handleSortListImageView() {
         ArrayList<String> newImage = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
+
         int flag = 0;
 
         for (String imagePath : images) {
-            if (imagePath != null) {
+            if (imagePath != null && trashListImage.contains(imagePath)==false) {
 
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
@@ -258,6 +277,81 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean checkInternetConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo == null) {
+            Toast.makeText(MainActivity.this, "No network is currently active!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!networkInfo.isConnected()) {
+            Toast.makeText(MainActivity.this, "Network is not connected!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!networkInfo.isAvailable()) {
+            Toast.makeText(MainActivity.this, "Network is not available!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        Toast.makeText(MainActivity.this, "Network is OK!", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+    public void onMsgFromFragToMain(String request) {
+        boolean network = checkInternetConnection();
+        if (!network)
+            return;
+        DownloadImageFromURL task = new DownloadImageFromURL();
+        task.execute(request);
+        try {
+            Bitmap bitmap = task.get();
+            //  picturesFragment.onMsgFromMainToFrag(bitmap);
+            File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "myImageFolder");
+
+            // Create the directory if it doesn't exist
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            String imageName = UUID.randomUUID().toString() + ".jpg";
+            // Create a file to save the image
+            File file = new File(directory, imageName);
+            OutputStream outputStream = new FileOutputStream(file);
+
+            // Compress the bitmap and write it to the output stream
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+
+            // Flush and close the output stream
+            outputStream.flush();
+            outputStream.close();
+
+            // Add the image to the gallery so it can be viewed in other apps
+            MediaScannerConnection.scanFile(MainActivity.this, new String[]{file.getAbsolutePath()}, null, null);
+            MediaScannerConnection.scanFile(MainActivity.this, new String[]{file.getAbsolutePath()}, null, new MediaScannerConnection.MediaScannerConnectionClient() {
+                @Override
+                public void onMediaScannerConnected() {
+                    // Do nothing
+                }
+
+                @Override
+                public void onScanCompleted(String path, Uri uri) {
+                    newImage.clear();
+                    imageDates.clear();
+//                    newImage = handleSortListImageView();
+                    File imageFile = new File(path);
+                    Date imageDate = new Date(imageFile.lastModified());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+
+                    Log.d("Taggg",path + dateFormat.format(imageDate));
+                }
+            });
+        }
+        catch (Exception e) {
+            Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -307,8 +401,7 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("album");
         }
@@ -318,9 +411,7 @@ public class MainActivity extends AppCompatActivity {
         return bottomNavigationView;
     }
 
-    public static FrameLayout getFrameLayoutSelectionFeaturesBar() {
-        return frame_layout_selection_features_bar;
-    }
+    public static FrameLayout getFrameLayoutSelectionFeaturesBar() { return frame_layout_selection_features_bar; }
 
     public static ArrayList<String> getNewImage() {
         return newImage;
@@ -330,7 +421,5 @@ public class MainActivity extends AppCompatActivity {
         return imageDates;
     }
 
-    public static ArrayList<String> getImages() {
-        return images;
-    }
+    public static ArrayList<String> getImages() { return images; }
 }
