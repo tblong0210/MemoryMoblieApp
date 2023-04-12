@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
                             ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác", "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
+                            new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
                             Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
