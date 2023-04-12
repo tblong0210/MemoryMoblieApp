@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
+        isThemeDark = isThemeDark == null ? false : isThemeDark;
+
+        setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
+        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -171,16 +176,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.image:
                     newImage.clear();
                     imageDates.clear();
                     newImage = handleSortListImageView();
-                    ImageFragment imageFragment1 = new ImageFragment(newImage, imageDates);
-
-                    fragmentTransaction1.replace(R.id.frame_layout_content, imageFragment1).commit();
-                    fragmentTransaction1.addToBackStack("image");
+                    imageFragment = new ImageFragment(newImage, imageDates);
+                    fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+                    fragmentTransaction.addToBackStack("image");
                     return true;
 
 
