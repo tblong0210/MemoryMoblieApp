@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ImageFragment"
     android:orientation="vertical"
-   >
-  <Button
-      android:id="@+id/button_cancel_select"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hủy"
-      android:visibility="invisible"
-    />
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
+    tools:context=".fragment.ImageFragment">
+
     <Button
-        android:layout_width="55dp"
-        android:id="@+id/sort_image_button"
+        android:id="@+id/button_cancel_select"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/baseline_sort" />
+        android:text="Hủy"
+        android:visibility="invisible" />
 
-<!--&lt;!&ndash;    <Button-->
-<!--        android:layout_width="55dp"-->
-<!--        android:id="@+id/search_image_button"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:background="@drawable/baseline_search" />&ndash;&gt;-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-  </RelativeLayout>
+        <Button
+            android:id="@+id/sort_image_button"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/baseline_sort" />
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
+        <!--&lt;!&ndash;    <Button-->
+        <!--        android:layout_width="55dp"-->
+        <!--        android:id="@+id/search_image_button"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_alignParentRight="true"-->
+        <!--        android:background="@drawable/baseline_search" />&ndash;&gt;-->
 
-      android:id="@+id/recyclerview_gallery_images"
-      tools:listitem="@layout/gallery_item">
+    </RelativeLayout>
 
-  </androidx.recyclerview.widget.RecyclerView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_gallery_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-</LinearLayout >
+            android:orientation="horizontal"
+            tools:listitem="@layout/gallery_item" />
+    </RelativeLayout>
+
+</LinearLayout>

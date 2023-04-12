@@ -47,7 +47,6 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/round_corner"
-                android:padding="5dp"
                 app:itemBackground="@drawable/bg_selected_item_on_nav"
                 app:menu="@menu/menu_crop_option" />
         </RelativeLayout>
@@ -84,7 +83,6 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:padding="5dp"
                 app:itemBackground="@drawable/bg_selected_item_on_nav"
                 android:background="@drawable/round_corner"
                 app:menu="@menu/menu_brightness_option" />
@@ -146,7 +144,6 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:padding="5dp"
                 app:itemBackground="@drawable/bg_selected_item_on_nav"
                 android:background="@drawable/round_corner"
                 app:menu="@menu/menu_emote_option" />
@@ -228,8 +225,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorOnBackground"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         app:itemBackground="@drawable/bg_selected_item_on_nav"
         app:menu="@menu/navigation_edit_view" />
 
