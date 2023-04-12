@@ -350,19 +350,14 @@ public class MainActivity extends AppCompatActivity {
                     case "more":
                         bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
                         break;
-                    case "selectImage":
-                        frame_layout_selection_features_bar.removeAllViews();
-                        break;
                 }
             }
         }
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
-
-        bottomNavigationView.setVisibility(View.VISIBLE);
-        GalleryAdapter.clearListSelect();
-
+        
+        ImageFragment.turnOffselectMode();
         ImageAdapter.ViewHolder.turnOffSelectMode();
     }
 

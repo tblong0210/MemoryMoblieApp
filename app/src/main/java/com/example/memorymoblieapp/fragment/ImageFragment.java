@@ -44,7 +44,8 @@ public class ImageFragment extends Fragment {
     List<String> imageDates = new ArrayList<>();
     private ImageView searchBtn ;
     private ImageView sortBtn;
-    private TextView cancelLongClick;
+    @SuppressLint("StaticFieldLeak")
+    private static TextView cancelLongClick;
     private  int numberCol = 3;
     private GalleryAdapter galleryAdapter;
 
@@ -107,6 +108,7 @@ public class ImageFragment extends Fragment {
                 galleryAdapter.setIsLongClick(false);
                 galleryAdapter.setListSelect();
                 galleryAdapter.notifyDataSetChanged();
+                GalleryAdapter.hideSelectionBar();
             }
         });
         recyclerview.setAdapter(galleryAdapter);
@@ -198,4 +200,7 @@ public class ImageFragment extends Fragment {
     }
 
 
+    public static void turnOffselectMode() {
+        cancelLongClick.callOnClick();
+    }
 }
