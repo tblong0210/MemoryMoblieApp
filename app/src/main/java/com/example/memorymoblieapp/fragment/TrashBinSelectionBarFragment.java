@@ -5,15 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,21 +18,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
-import com.example.memorymoblieapp.adapter.ImageAdapter;
+import com.example.memorymoblieapp.adapter.ImageListAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
-import com.example.memorymoblieapp.obj.Album;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.jetbrains.annotations.Contract;
-
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class TrashBinSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
@@ -53,7 +40,7 @@ public class TrashBinSelectionBarFragment extends Fragment {
         Context context = selectionFeaturesBarFragment.getContext();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            listSelect = new ArrayList<>(ImageAdapter.getListSelect());
+            listSelect = new ArrayList<>(ImageListAdapter.getListSelect());
 
             switch (item.getItemId()) {
                 case R.id.restore:
@@ -124,7 +111,7 @@ public class TrashBinSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.deletedImageList, context.getString(R.string.title_recycle_bin), "TrashBin");
+        ImageListFragment imageFragment = new ImageListFragment(MainActivity.deletedImageList, context.getString(R.string.title_recycle_bin), "TrashBin");
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();

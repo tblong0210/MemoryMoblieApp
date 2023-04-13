@@ -136,4 +136,10 @@
 
     <string name="title_loves">Yêu thích</string>
     <string name="title_recycle_bin">Thùng rác</string>
+
+    <string name="text_name">Tên</string>
+    <string name="text_created_date">Ngày tạo</string>
+    <string name="text_size">Dung lượng</string>
+    <string name="text_dimensions">Kích thước</string>
+    <string name="text_location">Vị trí</string>
 </resources>

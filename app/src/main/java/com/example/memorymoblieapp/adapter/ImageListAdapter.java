@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.AlbumSelectionBarFragment;
-import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.LoveSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.TrashBinSelectionBarFragment;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
@@ -33,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Vector;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
+public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
     static ArrayList<String> images;
     Context context;
     static boolean detailed;
@@ -43,26 +41,26 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     static ArrayList<ViewHolder> holders;
     static int albumPos;
 
-    public ImageAdapter(ArrayList<String> images, Context context, boolean detailed, String type) {
-        ImageAdapter.images = images;
+    public ImageListAdapter(ArrayList<String> images, Context context, boolean detailed, String type) {
+        ImageListAdapter.images = images;
         this.context = context;
-        ImageAdapter.detailed = detailed;
+        ImageListAdapter.detailed = detailed;
         holders = new ArrayList<>();
-        ImageAdapter.type = type;
+        ImageListAdapter.type = type;
     }
 
-    public ImageAdapter(ArrayList<String> images, Context context, boolean detailed, String type, int albumPos) {
-        ImageAdapter.images = images;
+    public ImageListAdapter(ArrayList<String> images, Context context, boolean detailed, String type, int albumPos) {
+        ImageListAdapter.images = images;
         this.context = context;
-        ImageAdapter.detailed = detailed;
+        ImageListAdapter.detailed = detailed;
         holders = new ArrayList<>();
-        ImageAdapter.type = type;
-        this.albumPos = albumPos;
+        ImageListAdapter.type = type;
+        ImageListAdapter.albumPos = albumPos;
     }
 
     @NonNull
     @Override
-    public ImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ImageListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         listSelect = new Vector<>();
@@ -78,7 +76,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImageListAdapter.ViewHolder holder, int position) {
         File currentFile = new File(images.get(position));
 
         if (currentFile.exists()) {
@@ -93,12 +91,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 fileSizeResult = String.format(Locale.ROOT, "%d KB", fileSizeNumber);
 
             if (detailed) {
-                holder.name.setText("Tên: " + currentFile.getName());
-                holder.createdDate.setText("Ngày tạo: " + sdf.format(currentFile.lastModified()));
-                holder.size.setText("Dung lượng: " + fileSizeResult);
+                holder.name.setText(context.getString(R.string.text_name) + ": " + currentFile.getName());
+                holder.createdDate.setText(context.getString(R.string.text_created_date) + ": " + sdf.format(currentFile.lastModified()));
+                holder.size.setText(context.getString(R.string.text_size) + ": " + fileSizeResult);
                 if (bitmap != null)
-                    holder.dimensions.setText("Kích thước: " + bitmap.getWidth() + "x" + bitmap.getHeight());
-                holder.location.setText("Vị trí: " + currentFile.getParent());
+                    holder.dimensions.setText(context.getString(R.string.text_dimensions) + ": " + bitmap.getWidth() + "x" + bitmap.getHeight());
+                holder.location.setText(context.getString(R.string.text_location) + ": " + currentFile.getParent());
             }
             holder.img.setImageBitmap(bitmap);
         }
@@ -122,13 +120,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             if (detailed) {
-                name = (TextView) itemView.findViewById(R.id.txtImageName);
-                createdDate = (TextView) itemView.findViewById(R.id.txtCreatedDate);
-                size = (TextView) itemView.findViewById(R.id.txtSize);
-                dimensions = (TextView) itemView.findViewById(R.id.txtDimensions);
-                location = (TextView) itemView.findViewById(R.id.txtLocation);
+                name = itemView.findViewById(R.id.txtImageName);
+                createdDate = itemView.findViewById(R.id.txtCreatedDate);
+                size = itemView.findViewById(R.id.txtSize);
+                dimensions = itemView.findViewById(R.id.txtDimensions);
+                location = itemView.findViewById(R.id.txtLocation);
             }
-            img = (ImageView) itemView.findViewById(R.id.ivImage);
+            img = itemView.findViewById(R.id.ivImage);
             ivSelect = itemView.findViewById(R.id.ivSelect);
             ivSelect.setVisibility(View.GONE);
 
@@ -145,11 +143,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                     if (listSelect.isEmpty())
                         turnOffSelectMode();
                 } else {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, ViewImage.class);
-                    intent.putStringArrayListExtra(KeyData.LIST_IMAGE_VIEW.getKey(), images);
-                    intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), images.get(getAdapterPosition()));
-                    context.startActivity(intent);
+                    if (!type.equals("TrashBin")) {
+                        Context context = view.getContext();
+                        Intent intent = new Intent(context, ViewImage.class);
+                        intent.putStringArrayListExtra(KeyData.LIST_IMAGE_VIEW.getKey(), images);
+                        intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), images.get(getAdapterPosition()));
+                        context.startActivity(intent);
+                    }
                 }
             });
 

@@ -63,7 +63,7 @@ public class AlbumBlockFragment extends Fragment {
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55, 10, 55, 10);
+            params.setMargins(50, 10, 50, 10);
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -128,7 +128,7 @@ public class AlbumBlockFragment extends Fragment {
             LinearLayout layout = new LinearLayout(context);
             layout.setOrientation(LinearLayout.VERTICAL);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55, 10, 55, 10);
+            params.setMargins(50, 10, 50, 10);
 
             final EditText oldPasswordInput = new EditText(context);
             oldPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -207,7 +207,7 @@ public class AlbumBlockFragment extends Fragment {
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55, 10, 55, 10);
+            params.setMargins(50, 10, 50, 10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 

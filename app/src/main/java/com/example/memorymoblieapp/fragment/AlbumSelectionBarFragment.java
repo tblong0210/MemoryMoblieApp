@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.ShareImageToMedia;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
-import com.example.memorymoblieapp.adapter.ImageAdapter;
+import com.example.memorymoblieapp.adapter.ImageListAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
@@ -55,7 +55,7 @@ public class AlbumSelectionBarFragment extends Fragment {
         Context context = selectionFeaturesBarFragment.getContext();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            listSelect = new ArrayList<>(ImageAdapter.getListSelect());
+            listSelect = new ArrayList<>(ImageListAdapter.getListSelect());
 
             switch (item.getItemId()) {
                 case R.id.removeFromAlbum:
@@ -221,7 +221,7 @@ public class AlbumSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.albumList.get(albumPos).getPathImages(), MainActivity.albumList.get(albumPos).getAlbumName(), "Album", albumPos);
+        ImageListFragment imageFragment = new ImageListFragment(MainActivity.albumList.get(albumPos).getPathImages(), MainActivity.albumList.get(albumPos).getAlbumName(), "Album", albumPos);
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();

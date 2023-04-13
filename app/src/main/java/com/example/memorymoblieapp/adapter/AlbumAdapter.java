@@ -25,8 +25,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.fragment.AlbumFragment2;
-import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.fragment.AlbumFragment;
+import com.example.memorymoblieapp.fragment.ImageListFragment;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
@@ -155,7 +155,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     final LinearLayout ll = new LinearLayout(context);
                     ll.removeAllViews();
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(55,10,55,10);
+                    params.setMargins(50,10,50,10);
                     input.setLayoutParams(params);
                     ll.addView(input);
 
@@ -170,13 +170,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         if (newAlbumName.isBlank()) {
                             Toast.makeText(context, context.getString(R.string.alert_dialog_blank_album_name_notification), Toast.LENGTH_SHORT).show();
                             input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                        } else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newAlbumName)) {
+                        } else if (Album.getAlbumNameArrayList(AlbumFragment.albumList).contains(newAlbumName)) {
                             Toast.makeText(context, context.getString(R.string.alert_dialog_existed_album_name_notification), Toast.LENGTH_SHORT).show();
                             input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_existed_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else {
                             Toast.makeText(context, context.getString(R.string.alert_dialog_create_album_successfully_notification), Toast.LENGTH_SHORT).show();
-                            AlbumFragment2.albumList.add(new Album(newAlbumName));
-                            AlbumFragment2.updateItem();
+                            AlbumFragment.albumList.add(new Album(newAlbumName));
+                            AlbumFragment.updateItem();
                             MainActivity.albumList.add(new Album(newAlbumName));
                             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                             DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
@@ -199,7 +199,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         final LinearLayout ll = new LinearLayout(context);
                         ll.removeAllViews();
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        params.setMargins(55,10,55,10);
+                        params.setMargins(50,10,50,10);
                         passwordInput.setLayoutParams(params);
                         ll.addView(passwordInput);
 
@@ -222,7 +222,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                 Toast.makeText(context, context.getString(R.string.alert_dialog_unblock_successfully_notification), Toast.LENGTH_SHORT).show();
 
                                 int pos = getAdapterPosition();
-                                ImageFragment2 imageFragment = new ImageFragment2(albums.get(pos).getPathImages(), albums.get(pos).getAlbumName(), "Album", pos - 1);
+                                ImageListFragment imageFragment = new ImageListFragment(albums.get(pos).getPathImages(), albums.get(pos).getAlbumName(), "Album", pos - 1);
                                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -234,7 +234,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
                     } else {
                         int pos = getAdapterPosition();
-                        ImageFragment2 imageFragment = new ImageFragment2(albums.get(pos).getPathImages(), albums.get(pos).getAlbumName(), "Album", pos - 1);
+                        ImageListFragment imageFragment = new ImageListFragment(albums.get(pos).getPathImages(), albums.get(pos).getAlbumName(), "Album", pos - 1);
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
@@ -260,7 +260,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(50,10,50,10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -305,15 +305,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         if (newName.isBlank()) {
                             Toast.makeText(context, context.getString(R.string.alert_dialog_blank_album_name_notification), Toast.LENGTH_SHORT).show();
                             input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                        } else if (newName.equals(AlbumFragment2.albumList.get(position).getAlbumName())) {
+                        } else if (newName.equals(AlbumFragment.albumList.get(position).getAlbumName())) {
                             Toast.makeText(context, context.getString(R.string.alert_dialog_change_album_name_successfully_notification), Toast.LENGTH_SHORT).show();
                             dialog1.dismiss();
-                        } else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newName)) {
+                        } else if (Album.getAlbumNameArrayList(AlbumFragment.albumList).contains(newName)) {
                             Toast.makeText(context, context.getString(R.string.alert_dialog_existed_album_name_notification), Toast.LENGTH_SHORT).show();
                             input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_existed_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else {
-                            AlbumFragment2.albumList.get(position).setAlbumName(newName);
-                            AlbumFragment2.updateItem();
+                            AlbumFragment.albumList.get(position).setAlbumName(newName);
+                            AlbumFragment.updateItem();
                             MainActivity.albumList.get(position - 1).setAlbumName(newName);
                             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                             DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
@@ -341,7 +341,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(50,10,50,10);
             input.setLayoutParams(params);
             ll.addView(input);
 
@@ -356,15 +356,15 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 if (newName.isBlank()) {
                     Toast.makeText(context, context.getString(R.string.alert_dialog_blank_album_name_notification), Toast.LENGTH_SHORT).show();
                     input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                } else if (newName.equals(AlbumFragment2.albumList.get(position).getAlbumName())) {
+                } else if (newName.equals(AlbumFragment.albumList.get(position).getAlbumName())) {
                     Toast.makeText(context, context.getString(R.string.alert_dialog_change_album_name_successfully_notification), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                } else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newName)) {
+                } else if (Album.getAlbumNameArrayList(AlbumFragment.albumList).contains(newName)) {
                     Toast.makeText(context, context.getString(R.string.alert_dialog_existed_album_name_notification), Toast.LENGTH_SHORT).show();
                     input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_existed_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
-                    AlbumFragment2.albumList.get(position).setAlbumName(newName);
-                    AlbumFragment2.updateItem();
+                    AlbumFragment.albumList.get(position).setAlbumName(newName);
+                    AlbumFragment.updateItem();
                     MainActivity.albumList.get(position - 1).setAlbumName(newName);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                     DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
@@ -392,7 +392,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(50,10,50,10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -416,8 +416,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 Toast.makeText(context,  context.getString(R.string.alert_dialog_deleted_album)+ " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
-                                AlbumFragment2.albumList.remove(position);
-                                AlbumFragment2.updateItem();
+                                AlbumFragment.albumList.remove(position);
+                                AlbumFragment.updateItem();
                                 MainActivity.albumList.remove(position - 1);
                                 DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                                 DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
@@ -429,7 +429,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         }
                     };
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
-                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_album_confirm) + " '" + AlbumFragment2.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_album_confirm) + " '" + AlbumFragment.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
                             .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
                 }
             });
@@ -441,8 +441,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         Toast.makeText(context,  context.getString(R.string.alert_dialog_deleted_album)+ " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
-                        AlbumFragment2.albumList.remove(position);
-                        AlbumFragment2.updateItem();
+                        AlbumFragment.albumList.remove(position);
+                        AlbumFragment.updateItem();
                         MainActivity.albumList.remove(position - 1);
                         DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                         DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
@@ -454,7 +454,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-            builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment2.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+            builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
                     .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
         }
     }
@@ -476,7 +476,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(50,10,50,10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -528,7 +528,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(55,10,55,10);
+            params.setMargins(50,10,50,10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 

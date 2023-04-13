@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:background="@drawable/bg_image_border"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"
@@ -41,7 +41,7 @@
             android:layout_marginStart="10dp"
             android:text="Tên: "
             android:textColor="?attr/colorSurface"
-            android:textSize="14sp"
+            android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_marginStart="10dp"
             android:text="Ngày tạo: "
             android:textColor="?attr/colorSurface"
-            android:textSize="14sp"
+            android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_marginStart="10dp"
             android:text="Dung lượng: "
             android:textColor="?attr/colorSurface"
-            android:textSize="14sp"
+            android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_marginStart="10dp"
             android:text="Kích thước: "
             android:textColor="?attr/colorSurface"
-            android:textSize="14sp"
+            android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -81,7 +81,7 @@
             android:layout_marginStart="10dp"
             android:text="Vị trí: "
             android:textColor="?attr/colorSurface"
-            android:textSize="14sp"
+            android:textSize="13sp"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>

@@ -1,7 +1,5 @@
 package com.example.memorymoblieapp.main;
 
-import static androidx.test.platform.app.InstrumentationRegistry.getArguments;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -24,9 +22,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -36,18 +31,17 @@ import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
-import com.example.memorymoblieapp.adapter.ImageAdapter;
+import com.example.memorymoblieapp.adapter.ImageListAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
-import com.example.memorymoblieapp.fragment.AlbumFragment2;
+import com.example.memorymoblieapp.fragment.AlbumFragment;
 import com.example.memorymoblieapp.fragment.ImageFragment;
-import com.example.memorymoblieapp.fragment.ImageFragment2;
+import com.example.memorymoblieapp.fragment.ImageListFragment;
 
 import com.example.memorymoblieapp.fragment.UrlDialog;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
 import com.example.memorymoblieapp.obj.Album;
-import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
@@ -182,13 +176,13 @@ public class MainActivity extends AppCompatActivity {
 
 
                 case R.id.album:
-                    AlbumFragment2 albumFragment = new AlbumFragment2(albumList);
+                    AlbumFragment albumFragment = new AlbumFragment(albumList);
                     fragmentTransaction.replace(R.id.frame_layout_content, albumFragment).commit();
                     fragmentTransaction.addToBackStack("album");
                     return true;
 
                 case R.id.love:
-                    ImageFragment2 loveImageFragment = new ImageFragment2(lovedImageList, "Yêu thích", "Love");
+                    ImageListFragment loveImageFragment = new ImageListFragment(lovedImageList, "Yêu thích", "Love");
                     fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;
@@ -199,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     popupMenu.setOnMenuItemClickListener(menuItem -> {
                         int itemId = menuItem.getItemId();
                         if (R.id.recycleBin == itemId) {
-                            ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác", "TrashBin");
+                            ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, "Thùng rác", "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
@@ -358,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         else super.onBackPressed();
         
         ImageFragment.turnOffselectMode();
-        ImageAdapter.ViewHolder.turnOffSelectMode();
+        ImageListAdapter.ViewHolder.turnOffSelectMode();
     }
 
     public Boolean set2FragmentLayout() {
@@ -378,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
+            ImageListFragment imageFragment = new ImageListFragment(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             bottomNavigationView.setSelectedItemId(R.id.album);
 
