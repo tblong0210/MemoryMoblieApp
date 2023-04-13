@@ -7,34 +7,72 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/txtAlbumBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Khóa album"
-        android:textSize="20sp"/>
-
-    <View style="@style/Divider" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ngôn ngữ"
+        android:textSize="24sp"
         android:layout_marginBottom="10dp"
-        android:textSize="20sp"/>
+        android:textColor="?attr/colorSurface"
+        android:text="@string/settings"/>
 
-    <Spinner
-        android:id="@+id/spinnerLanguage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <View style="@style/Divider" />
-
-    <Switch
-        android:id="@+id/switchDarkMode"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chế độ tối"
-        android:textSize="20sp"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        android:background="@drawable/bg_shape_conner_10"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/txtAlbumBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_security_album"
+                android:textColor="?attr/colorSurface"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/settings_language"
+                android:textColor="?attr/colorSurface"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinnerLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/colorSurface"/>
+        </LinearLayout>
+
+        <View style="@style/Divider" />
+
+        <Switch
+            android:id="@+id/switchDarkMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/settings_dark_mode"
+            android:textColor="?attr/colorSurface"
+            android:textSize="20sp"
+            android:thumbTint="#0099FF"
+            android:layout_marginBottom="10dp"
+            android:checked="true"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </LinearLayout>
 </LinearLayout>

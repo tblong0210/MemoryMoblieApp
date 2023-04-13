@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_view_edit">
     <item
         android:id="@+id/add2album"
         android:icon="@mipmap/ic_add"
-        android:title="Thêm vào album"
-        tools:ignore="HardcodedText" />
+        android:title="@string/selection_add_to_album" />
 
     <item
         android:id="@+id/unlove"
         android:icon="@mipmap/ic_unlove"
-        android:title="Bỏ yêu thích"
-        tools:ignore="HardcodedText" />
+        android:title="@string/selection_unlove" />
 
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash"
-        android:title="Xóa"
-        tools:ignore="HardcodedText" />
+        android:title="@string/selection_delete" />
 
     <item
         android:id="@+id/more"
         android:icon="@drawable/ic_more"
-        android:title="Khác"
-        tools:ignore="HardcodedText" />
+        android:title="@string/selection_more" />
 
 </menu>

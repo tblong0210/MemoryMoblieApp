@@ -12,7 +12,10 @@ public enum KeyData {
     FAVORITE_LIST,
     TRASH_LIST,
     UN_AVAILABLE_IMAGE,
-    DARK_MODE;
+    DARK_MODE,
+    CURRENT_FRAGMENT,
+    LIST_IMAGE_VIEW,
+    PATH_CURRENT_IMAGE_VIEW;
 
     public String getKey() {
         switch (this) {
@@ -40,6 +43,12 @@ public enum KeyData {
                 return "UNAVAILABLE_IMAGE";
             case DARK_MODE:
                 return "DARK_MODE";
+            case CURRENT_FRAGMENT:
+                return "CURRENT_FRAGMENT";
+            case LIST_IMAGE_VIEW:
+                return "LIST_IMAGE_VIEW";
+            case PATH_CURRENT_IMAGE_VIEW:
+                return "PATH_CURRENT_IMAGE_VIEW";
             default:
                 return null;
         }

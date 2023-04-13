@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_view_edit">
     <item
         android:id="@+id/restore"
         android:icon="@mipmap/ic_restore"
-        android:title="Khôi phục"
-        tools:ignore="HardcodedText" />
+        android:title="@string/selection_restore" />
 
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash"
-        android:title="Xóa vĩnh viễn"
-        tools:ignore="HardcodedText" />
+        android:title="@string/selection_permanently_delete" />
 
 </menu>

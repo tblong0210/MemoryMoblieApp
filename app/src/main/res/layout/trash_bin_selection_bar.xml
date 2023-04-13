@@ -2,9 +2,9 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/container"
@@ -16,7 +16,10 @@
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/trash_bin_selection_bar_menu"
-        app:labelVisibilityMode="labeled"/>
+        android:background="?attr/colorOnBackground"
+        app:itemBackground="@drawable/bg_selected_item_on_nav"
+        app:itemTextColor="@drawable/item_selected_on_bottom_nav"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/trash_bin_selection_bar_menu" />
 
 </LinearLayout>

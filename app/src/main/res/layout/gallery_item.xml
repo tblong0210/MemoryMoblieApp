@@ -15,8 +15,8 @@
         android:layout_height="0dp"
         android:visibility="invisible"
         android:text="text"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="?attr/colorSurface"
+        android:textSize="14sp"
         android:textStyle="bold"
         />
     <ToggleButton

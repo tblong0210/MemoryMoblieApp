@@ -50,7 +50,6 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.filterName.setText(filters.get(position).getName());
-        Log.d("ten filter", "onBindViewHolder: " + imageFilterView.toString());
 
         holder.filterItemViewEdit.setImageBitmap(imageFilterView);
         holder.filterItemViewEdit.setLayoutParams(new LinearLayout.LayoutParams(100, 100));
@@ -58,7 +57,7 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
         if (filters.get(position).getActived())
             holder.filterItemViewEdit.setBackground(context.getDrawable(R.drawable.bg_solid_seleted));
         else
-            holder.filterItemViewEdit.setBackground(context.getDrawable(R.drawable.bg_shape_conner_5));
+            holder.filterItemViewEdit.setBackground(context.getDrawable(R.drawable.bg_shape_conner_10_nocolor));
 
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.set(filters.get(position).getColorMatrix());

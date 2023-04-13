@@ -144,12 +144,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ivAlbum.setOnClickListener(view -> {
                 if (getAdapterPosition() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Tạo album");
+                    builder.setTitle(context.getString(R.string.action_new_album));
 
                     final EditText input = new EditText(context);
 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
-                    input.setHint("Nhập tên album");
+                    input.setHint(context.getString(R.string.alert_dialog_enter_album_name_hint));
                     input.requestFocus();
 
                     final LinearLayout ll = new LinearLayout(context);
@@ -160,21 +160,21 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     ll.addView(input);
 
                     builder.setView(ll);
-                    builder.setPositiveButton("Đồng ý", null);
-                    builder.setNegativeButton("Hủy", null);
+                    builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+                    builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                         String newAlbumName = input.getText().toString();
                         if (newAlbumName.isBlank()) {
-                            Toast.makeText(context, "Vui lòng nhập tên album!", Toast.LENGTH_SHORT).show();
-                            input.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập tên album!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_blank_album_name_notification), Toast.LENGTH_SHORT).show();
+                            input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newAlbumName)) {
-                            Toast.makeText(context, "Tên album đã tồn tại, vui lòng chọn tên khác!", Toast.LENGTH_SHORT).show();
-                            input.setError(HtmlCompat.fromHtml("<font>Tên album đã tồn tại, vui lòng chọn tên khác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_existed_album_name_notification), Toast.LENGTH_SHORT).show();
+                            input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_existed_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else {
-                            Toast.makeText(context, "Tạo album thành công!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_create_album_successfully_notification), Toast.LENGTH_SHORT).show();
                             AlbumFragment2.albumList.add(new Album(newAlbumName));
                             AlbumFragment2.updateItem();
                             MainActivity.albumList.add(new Album(newAlbumName));
@@ -189,11 +189,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 } else {
                     if (!MainActivity.isVerify && albums.get(getAdapterPosition()).getBlock() && albumPassword != null) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                        builder.setTitle("Album bị khóa. Hãy nhập mật khẩu");
+                        builder.setTitle(context.getString(R.string.alert_dialog_blocked_album));
 
                         final EditText passwordInput = new EditText(itemView.getContext());
                         passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        passwordInput.setHint("Nhập mật khẩu");
+                        passwordInput.setHint(context.getString(R.string.alert_dialog_enter_password_hint));
                         passwordInput.requestFocus();
 
                         final LinearLayout ll = new LinearLayout(context);
@@ -204,22 +204,22 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         ll.addView(passwordInput);
 
                         builder.setView(ll);
-                        builder.setPositiveButton("Đồng ý", null);
-                        builder.setNegativeButton("Hủy", null);
+                        builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+                        builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
                         AlertDialog dialog = builder.create();
                         dialog.show();
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                             String password = passwordInput.getText().toString();
                             if (password.isBlank()) {
-                                Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-                                passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                                Toast.makeText(context, context.getString(R.string.alert_dialog_blank_password_notification), Toast.LENGTH_SHORT).show();
+                                passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                             } else if (!BCrypt.checkpw(password, albumPassword)) {
-                                Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
-                                passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                                Toast.makeText(context, context.getString(R.string.alert_dialog_wrong_password_notification), Toast.LENGTH_SHORT).show();
+                                passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_wrong_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                             } else {
                                 MainActivity.isVerify = true;
-                                Toast.makeText(context, "Mở khóa thành công!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.alert_dialog_unblock_successfully_notification), Toast.LENGTH_SHORT).show();
 
                                 int pos = getAdapterPosition();
                                 ImageFragment2 imageFragment = new ImageFragment2(albums.get(pos).getPathImages(), albums.get(pos).getAlbumName(), "Album", pos - 1);
@@ -250,11 +250,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         if (albums.get(position).getBlock() && albumPassword != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Đổi tên album");
+            builder.setTitle(context.getString(R.string.alert_dialog_change_album_name));
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            passwordInput.setHint("Nhập mật khẩu xác thực");
+            passwordInput.setHint(context.getString(R.string.alert_dialog_enter_password_hint));
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -265,28 +265,28 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ll.addView(passwordInput);
 
             builder.setView(ll);
-            builder.setPositiveButton("Đồng ý", null);
-            builder.setNegativeButton("Hủy", null);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                 String password = passwordInput.getText().toString();
                 if (password.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else if (!BCrypt.checkpw(password, albumPassword)) {
-                    Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_wrong_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_wrong_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
                     dialog.dismiss();
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setTitle("Đổi tên album");
+                    builder1.setTitle(context.getString(R.string.alert_dialog_change_album_name));
 
                     final EditText input = new EditText(context);
 
                     input.setInputType(InputType.TYPE_CLASS_TEXT);
-                    input.setHint("Nhập tên mới");
+                    input.setHint(context.getString(R.string.alert_dialog_enter_new_name_hint));
                     input.requestFocus();
 
                     final LinearLayout ll1 = new LinearLayout(context);
@@ -295,29 +295,29 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     ll1.addView(input);
 
                     builder1.setView(ll1);
-                    builder1.setPositiveButton("Đồng ý", null);
-                    builder1.setNegativeButton("Hủy", null);
+                    builder1.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+                    builder1.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
                     AlertDialog dialog1 = builder1.create();
                     dialog1.show();
                     dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view12 -> {
                         String newName = input.getText().toString();
                         if (newName.isBlank()) {
-                            Toast.makeText(context, "Vui lòng nhập tên album!", Toast.LENGTH_SHORT).show();
-                            input.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập tên album!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_blank_album_name_notification), Toast.LENGTH_SHORT).show();
+                            input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else if (newName.equals(AlbumFragment2.albumList.get(position).getAlbumName())) {
-                            Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_change_album_name_successfully_notification), Toast.LENGTH_SHORT).show();
                             dialog1.dismiss();
                         } else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newName)) {
-                            Toast.makeText(context, "Tên album đã tồn tại, vui lòng chọn tên khác!", Toast.LENGTH_SHORT).show();
-                            input.setError(HtmlCompat.fromHtml("<font>Tên album đã tồn tại, vui lòng chọn tên khác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_existed_album_name_notification), Toast.LENGTH_SHORT).show();
+                            input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_existed_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                         } else {
                             AlbumFragment2.albumList.get(position).setAlbumName(newName);
                             AlbumFragment2.updateItem();
                             MainActivity.albumList.get(position - 1).setAlbumName(newName);
                             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                             DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
-                            Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_change_album_name_successfully_notification), Toast.LENGTH_SHORT).show();
                             dialog1.dismiss();
                         }
                     });
@@ -330,12 +330,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         if (!albums.get(position).getBlock() || albumPassword == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Đổi tên album");
+            builder.setTitle(context.getString(R.string.alert_dialog_change_album_name));
 
             final EditText input = new EditText(context);
 
             input.setInputType(InputType.TYPE_CLASS_TEXT);
-            input.setHint("Nhập tên mới");
+            input.setHint(context.getString(R.string.alert_dialog_enter_new_name_hint));
             input.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -346,29 +346,29 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ll.addView(input);
 
             builder.setView(ll);
-            builder.setPositiveButton("Đồng ý", null);
-            builder.setNegativeButton("Hủy", null);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                 String newName = input.getText().toString();
                 if (newName.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập tên album!", Toast.LENGTH_SHORT).show();
-                    input.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập tên album!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_album_name_notification), Toast.LENGTH_SHORT).show();
+                    input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else if (newName.equals(AlbumFragment2.albumList.get(position).getAlbumName())) {
-                    Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_change_album_name_successfully_notification), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } else if (Album.getAlbumNameArrayList(AlbumFragment2.albumList).contains(newName)) {
-                    Toast.makeText(context, "Tên album đã tồn tại, vui lòng chọn tên khác!", Toast.LENGTH_SHORT).show();
-                    input.setError(HtmlCompat.fromHtml("<font>Tên album đã tồn tại, vui lòng chọn tên khác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_existed_album_name_notification), Toast.LENGTH_SHORT).show();
+                    input.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_existed_album_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
                     AlbumFragment2.albumList.get(position).setAlbumName(newName);
                     AlbumFragment2.updateItem();
                     MainActivity.albumList.get(position - 1).setAlbumName(newName);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                     DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
-                    Toast.makeText(context, "Đổi tên album thành công!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_change_album_name_successfully_notification), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             });
@@ -382,11 +382,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         if (albums.get(position).getBlock() && albumPassword != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Xóa album");
+            builder.setTitle(context.getString(R.string.alert_dialog_delete_album));
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            passwordInput.setHint("Nhập mật khẩu xác thực");
+            passwordInput.setHint(context.getString(R.string.alert_dialog_enter_password_hint));
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -397,25 +397,25 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ll.addView(passwordInput);
 
             builder.setView(ll);
-            builder.setPositiveButton("Đồng ý", null);
-            builder.setNegativeButton("Hủy", null);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                 String password = passwordInput.getText().toString();
                 if (password.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else if (!BCrypt.checkpw(password, albumPassword)) {
-                    Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_wrong_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_wrong_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
                     dialog.dismiss();
                     DialogInterface.OnClickListener dialogClickListener = (dialog1, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                Toast.makeText(context, "Đã xóa album '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,  context.getString(R.string.alert_dialog_deleted_album)+ " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
                                 AlbumFragment2.albumList.remove(position);
                                 AlbumFragment2.updateItem();
                                 MainActivity.albumList.remove(position - 1);
@@ -429,8 +429,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         }
                     };
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
-                    builder1.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment2.albumList.get(position).getAlbumName() + "' không?").setPositiveButton("Đồng ý", dialogClickListener)
-                            .setNegativeButton("Hủy", dialogClickListener).show();
+                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_album_confirm) + " '" + AlbumFragment2.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
                 }
             });
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
@@ -440,7 +440,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Toast.makeText(context, "Đã xóa album '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,  context.getString(R.string.alert_dialog_deleted_album)+ " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
                         AlbumFragment2.albumList.remove(position);
                         AlbumFragment2.updateItem();
                         MainActivity.albumList.remove(position - 1);
@@ -454,8 +454,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-            builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment2.albumList.get(position).getAlbumName() + "' không?").setPositiveButton("Đồng ý", dialogClickListener)
-                    .setNegativeButton("Hủy", dialogClickListener).show();
+            builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment2.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                    .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
         }
     }
 
@@ -463,14 +463,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         Context context = itemView.getContext();
 
         if (albumPassword == null) {
-            Toast.makeText(context, "Mật khẩu album chưa được thiết lập. Vui lòng vào cài đặt để thiết lập.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.alert_dialog_not_setup_password), Toast.LENGTH_SHORT).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Khóa album");
+            builder.setTitle(context.getString(R.string.alert_dialog_block_album));
 
             final EditText passwordInput = new EditText(context);
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            passwordInput.setHint("Nhập mật khẩu xác thực");
+            passwordInput.setHint(context.getString(R.string.alert_dialog_enter_password_hint));
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -481,25 +481,25 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ll.addView(passwordInput);
 
             builder.setView(ll);
-            builder.setPositiveButton("Đồng ý", null);
-            builder.setNegativeButton("Hủy", null);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                 String password = passwordInput.getText().toString();
                 if (password.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else if (!BCrypt.checkpw(password, albumPassword)) {
-                    Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_wrong_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_wrong_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
                     albums.get(position).setBlock(true);
                     MainActivity.albumList.get(position - 1).setBlock(true);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                     DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
-                    Toast.makeText(context, "Khóa album thành công!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_block_album_successfully_notification), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             });
@@ -515,14 +515,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             MainActivity.albumList.get(position - 1).setBlock(false);
             DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
             DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
-            Toast.makeText(context, "Xóa khóa album thành công!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.alert_dialog_remove_block_album_successfully_notification), Toast.LENGTH_SHORT).show();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Xóa khóa album");
+            builder.setTitle(context.getString(R.string.alert_dialog_remove_block_album));
 
             final EditText passwordInput = new EditText(itemView.getContext());
             passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            passwordInput.setHint("Nhập mật khẩu xác thực");
+            passwordInput.setHint(context.getString(R.string.alert_dialog_enter_password_hint));
             passwordInput.requestFocus();
 
             final LinearLayout ll = new LinearLayout(context);
@@ -533,25 +533,25 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             ll.addView(passwordInput);
 
             builder.setView(ll);
-            builder.setPositiveButton("Đồng ý", null);
-            builder.setNegativeButton("Hủy", null);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
 
             AlertDialog dialog = builder.create();
             dialog.show();
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                 String password = passwordInput.getText().toString();
                 if (password.isBlank()) {
-                    Toast.makeText(context, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Vui lòng nhập mật khẩu!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else if (!BCrypt.checkpw(password, albumPassword)) {
-                    Toast.makeText(context, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
-                    passwordInput.setError(HtmlCompat.fromHtml("<font>Mật khẩu không chính xác!</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_wrong_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_wrong_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                 } else {
                     albums.get(position).setBlock(false);
                     MainActivity.albumList.get(position - 1).setBlock(false);
                     DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
                     DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
-                    Toast.makeText(context, "Xóa khóa album thành công!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_remove_block_album_successfully_notification), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             });

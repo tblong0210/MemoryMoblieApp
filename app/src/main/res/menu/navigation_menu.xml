@@ -3,20 +3,20 @@
     <item
         android:id="@+id/image"
         android:icon="@drawable/image"
-        android:title="Ảnh"/>
+        android:title="@string/bottom_navigation_image"/>
     <item
         android:id="@+id/album"
         android:icon="@drawable/album"
-        android:title="Album"
+        android:title="@string/bottom_navigation_album"
         />
     <item
         android:id="@+id/love"
         android:icon="@drawable/star"
-        android:title="Yêu thích"/>
+        android:title="@string/bottom_navigation_love"/>
     <item
         android:id="@+id/more"
         android:icon="@drawable/ic_more"
-        android:title="Khác"
+        android:title="@string/bottom_navigation_more"
         />
 </menu>
 

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.memorymoblieapp.R;
+import com.example.memorymoblieapp.ShareImageToMedia;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.adapter.ImageAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
@@ -137,7 +138,8 @@ public class AlbumSelectionBarFragment extends Fragment {
                         int itemId = menuItem.getItemId();
 
                         if (R.id.share == itemId) {
-                            Toast.makeText(context, "Chia sẻ", Toast.LENGTH_SHORT).show();
+                            ShareImageToMedia shareImageToMedia = new ShareImageToMedia(listSelect, context);
+                            shareImageToMedia.sharePictures();
                         }
 
                         else if (R.id.duplicate == itemId) {

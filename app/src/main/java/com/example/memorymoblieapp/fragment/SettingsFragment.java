@@ -2,6 +2,8 @@ package com.example.memorymoblieapp.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
+import com.example.memorymoblieapp.main.MainActivity;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class SettingsFragment extends Fragment {
@@ -50,9 +54,9 @@ public class SettingsFragment extends Fragment {
 
         // Language
         ArrayList<String> languages = new ArrayList<>();
-        languages.add("Tiếng Việt");
-        languages.add("Tiếng Anh");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, languages);
+        languages.add(getString(R.string.language_vietnamese));
+        languages.add(getString(R.string.language_united_states));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.item_text_view, languages);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguage.setAdapter(arrayAdapter);
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -60,6 +64,7 @@ public class SettingsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 Toast.makeText(context, languages.get(pos), Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -67,15 +72,24 @@ public class SettingsFragment extends Fragment {
 
         // Dark mode
         Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
-        isThemeDark = isThemeDark == null ? false : isThemeDark;
-
-        getActivity().setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
+        isThemeDark = isThemeDark != null && isThemeDark;
         switchDarkMode.setChecked(isThemeDark);
+
         switchDarkMode.setOnCheckedChangeListener((compoundButton, darkModeOn) -> {
-            if (darkModeOn)
+            if (darkModeOn) {
+                DataLocalManager.saveBooleanData(KeyData.DARK_MODE.getKey(), true);
+
                 Toast.makeText(context, "Bật chế độ tối", Toast.LENGTH_SHORT).show();
-            else
+            } else {
+                DataLocalManager.saveBooleanData(KeyData.DARK_MODE.getKey(), false);
+
                 Toast.makeText(context, "Tắt chế độ tối", Toast.LENGTH_SHORT).show();
+            }
+
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra(KeyData.CURRENT_FRAGMENT.getKey(), R.string.settings);
+            startActivity(intent);
+            getActivity().recreate();
         });
 
         return settingsFragment;

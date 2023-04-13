@@ -1,7 +1,8 @@
 package com.example.memorymoblieapp.main;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getArguments;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -52,15 +53,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,15 +87,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());
-        isThemeDark = isThemeDark == null ? false : isThemeDark;
+        isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
-        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
+//        binding = ActivityMainBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
 
-        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET};
+        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -131,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         images = ImagesGallery.listOfImages(context);
         newImage = handleSortListImageView();
         ArrayList<String> picturePath = new ArrayList<>(newImage);
-
         picturePath.removeAll(Collections.singleton(" "));
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
@@ -165,14 +162,10 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         imageFragment = new ImageFragment(newImage, imageDates);
-        fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-        fragmentTransaction.addToBackStack("image");
 
-        Intent intent = getIntent();
-        String request = intent.getStringExtra("request");
-        String albumName = intent.getStringExtra("album_name");
-        if (request != null && albumName != null) {
-            onMsgToMain(albumName, request);
+        if(!set2FragmentLayout()) {
+            fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
+            fragmentTransaction.addToBackStack("image");
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -210,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
-                            Toast.makeText(MainActivity.this, "Tải ảnh bằng URL", Toast.LENGTH_LONG).show();
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
@@ -235,8 +227,7 @@ public class MainActivity extends AppCompatActivity {
         int flag = 0;
 
         for (String imagePath : images) {
-            if (imagePath != null ) {
-
+            if (imagePath != null && (trashListImage == null || !trashListImage.contains(imagePath))) {
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
                 if (imageDates.size() != 0 && !dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1))) {
@@ -262,23 +253,6 @@ public class MainActivity extends AppCompatActivity {
         return newImage;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.item_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.actionSearch) {
-            Intent intent = new Intent(this, ViewSearch.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public boolean checkInternetConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -301,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Network is OK!", Toast.LENGTH_SHORT).show();
         return true;
     }
+
     public void onMsgFromFragToMain(String request) {
         boolean network = checkInternetConnection();
         if (!network)
@@ -345,11 +320,10 @@ public class MainActivity extends AppCompatActivity {
                     Date imageDate = new Date(imageFile.lastModified());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
 
-                    Log.d("Taggg",path + dateFormat.format(imageDate));
+                    Log.d("Taggg", path + dateFormat.format(imageDate));
                 }
             });
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
         }
     }
@@ -376,24 +350,27 @@ public class MainActivity extends AppCompatActivity {
                     case "more":
                         bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
                         break;
-                    case "selectImage":
-                        frame_layout_selection_features_bar.removeAllViews();
-                        break;
                 }
             }
         }
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
-
-        bottomNavigationView.setVisibility(View.VISIBLE);
-        GalleryAdapter.clearListSelect();
-
+        
+        ImageFragment.turnOffselectMode();
         ImageAdapter.ViewHolder.turnOffSelectMode();
     }
 
-    public void onMsgToMain(String data, String request) {
-        if (request.equals("VIEW_ALBUM_IMAGE")) {
+    public Boolean set2FragmentLayout() {
+        Intent intent = getIntent();
+        int idFragment = intent.getIntExtra(KeyData.CURRENT_FRAGMENT.getKey(), -1);
+        String data = intent.getStringExtra("data");
+        data = data == null ? "" : data;
+
+        if (idFragment == R.string.view_album) {
+            if(data.equals(""))
+                return false;
+
             int pos = 0;
             for (Album a : albumList) {
                 if (!a.getAlbumName().equals(data))
@@ -401,17 +378,29 @@ public class MainActivity extends AppCompatActivity {
                 else break;
             }
 
-            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            ImageFragment2 imageFragment = new ImageFragment2(albumList.get(pos).getPathImages(), albumList.get(pos).getAlbumName(), "Album");
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-            fragmentTransaction.addToBackStack("album");
+            bottomNavigationView.setSelectedItemId(R.id.album);
+
+            return true;
         }
+        else if(idFragment == R.string.settings){
+            SettingsFragment settingsFragment = new SettingsFragment();
+            fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
+            bottomNavigationView.setSelectedItemId(R.id.more);
+
+            return true;
+        }
+        return false;
     }
 
     public static BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
 
-    public static FrameLayout getFrameLayoutSelectionFeaturesBar() { return frame_layout_selection_features_bar; }
+    public static FrameLayout getFrameLayoutSelectionFeaturesBar() {
+        return frame_layout_selection_features_bar;
+    }
 
     public static ArrayList<String> getNewImage() {
         return newImage;
@@ -421,5 +410,7 @@ public class MainActivity extends AppCompatActivity {
         return imageDates;
     }
 
-    public static ArrayList<String> getImages() { return images; }
+    public static ArrayList<String> getImages() {
+        return images;
+    }
 }

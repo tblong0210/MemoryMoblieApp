@@ -16,11 +16,6 @@
         <!--        <item name="android:windowAnimationStyle">@style/CustomAnimation</item>-->
     </style>
 
-    <style name="MyBottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemIconTint">@drawable/item_selected_on_bottom_nav</item>
-        <item name="labelVisibilityMode">unlabeled</item>
-        <item name="android:padding">5dp</item>
-    </style>
 
     <style name="ThemeDark.MemoryMobileApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/black</item>
@@ -32,13 +27,13 @@
         <item name="colorOnBackground">@color/black</item>
         <item name="colorOnSurface">#4A4A4A</item>
         <!-- Status bar color. -->
-
+        <item name="android:statusBarColor">#777777</item>
         <!-- Customize your theme here. -->
-        <item name="bottomNavigationStyle">@style/MyBottomNavigationViewStyleDark</item>
+        <item name="bottomNavigationStyle">@style/MyBottomNavigationViewStyle</item>
         <!--        <item name="android:windowAnimationStyle">@style/CustomAnimation</item>-->
     </style>
 
-    <style name="MyBottomNavigationViewStyleDark" parent="Widget.MaterialComponents.BottomNavigationView">
+    <style name="MyBottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@drawable/item_selected_on_bottom_nav</item>
         <item name="labelVisibilityMode">unlabeled</item>
         <item name="android:padding">5dp</item>
