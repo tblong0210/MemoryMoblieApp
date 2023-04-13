@@ -64,7 +64,7 @@ import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
 
-
+    private boolean isMouseMoving = false;
     private CardView parent_list_color;
 
     private ArrayList<String> picturePaths;
@@ -91,7 +91,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private StickerRecViewAdapter adapterSticker;
     private Bitmap originImage, mutableBitmap;
-    private ArrayList<Bitmap> previousBitmaps = new ArrayList<>();
+    private ArrayList<Bitmap> previousBitmaps;
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
 
@@ -159,9 +159,9 @@ public class ViewEdit extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 break;
-//            case R.id.backViewEdit:
-//                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
-////                backPreviousPicture();
+            case R.id.backViewEdit:
+                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
+                backPreviousPicture();
             default:
                 break;
         }
@@ -186,31 +186,21 @@ public class ViewEdit extends AppCompatActivity {
                 return false;
             }
         });
-
         previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
     }
     private void backPreviousPicture(){
-//        int sizeBitmaps = previousBitmaps.size();
-//        if (sizeBitmaps >= 2) {
-//            System.out.println(previousBitmaps.get(sizeBitmaps - 1));
-//            imgViewEdit.setImageBitmap(previousBitmaps.get(sizeBitmaps - 2));
-//            previousBitmaps.remove(sizeBitmaps - 1);
-//        }
-//        else if (sizeBitmaps <2 && sizeBitmaps >0){
-//            imgViewEdit.setImageBitmap(originImage);
-//            previousBitmaps.remove(0);
-//        }
-//        Log.d("Bitmap num",String.valueOf(previousBitmaps.size()));
-
-        // Kiểm tra nếu danh sách có ít nhất 2 bitmap thì ta có thể khôi phục lại trạng thái trước đó
-        if (previousBitmaps.size() >= 2) {
-            // Lấy bitmap trước đó và set vào ImageView
-            Bitmap previousBitmap = previousBitmaps.get(previousBitmaps.size() - 2);
-            imgViewEdit.setImageBitmap(previousBitmap.copy(previousBitmap.getConfig(), true));
-            Log.d("Previous Bitmap", previousBitmap.toString());
-            // Xóa bitmap hiện tại khỏi danh sách
-            previousBitmaps.remove(previousBitmaps.size() - 1);
+        if(previousBitmaps.size()>0){
+            Log.d("Size before",String.valueOf(previousBitmaps.size()));
+            previousBitmaps.remove(previousBitmaps.size()-1);
+            Log.d("Size after", String.valueOf(previousBitmaps.size()));
+            if(previousBitmaps.size() == 0){
+                imgViewEdit.setImageBitmap(originImage);
+                previousBitmaps.clear();
+            }
+            else {
+                imgViewEdit.setImageBitmap(previousBitmaps.get(previousBitmaps.size() - 1));
+            }
         }
 
     }
@@ -281,6 +271,7 @@ public class ViewEdit extends AppCompatActivity {
                         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                         drawable.draw(canvas);
                         adapterFilter.setImageFilterView(bitmap);
+                        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
                         break;
                     case R.id.brightnessPic:
                         brightnessOption.setVisibility(View.VISIBLE);
@@ -442,6 +433,7 @@ public class ViewEdit extends AppCompatActivity {
                 if (blurredBitmap != null) {
                     blurBitmap(originalBitmap, blurredBitmap, blurRadius);
                     imgViewEdit.setImageBitmap(blurredBitmap);
+                    previousBitmaps.add(getOriginalBitmap(imgViewEdit));
                 }
             }
 
@@ -476,7 +468,7 @@ public class ViewEdit extends AppCompatActivity {
         Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(rotatedBitmap);
         //originalBitmap.recycle();
-
+        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
     private void handleFlipImageHorizontal() {
@@ -488,7 +480,7 @@ public class ViewEdit extends AppCompatActivity {
         Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(flippedBitmap);
         //originalBitmap.recycle();
-
+        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
     private void handleFlipImageVertical() {
@@ -499,7 +491,7 @@ public class ViewEdit extends AppCompatActivity {
         Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(flippedBitmap);
         //originalBitmap.recycle();
-
+        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
     private void handleCropImage(float firstRatio, float secondRatio) {
@@ -532,8 +524,9 @@ public class ViewEdit extends AppCompatActivity {
             Bitmap croppedImage = Bitmap.createBitmap(originImage, left, top, newWidth, newHeight);
             imgViewEdit.setImageBitmap(croppedImage);
 
+
         }
-        //originalBitmap.recycle();
+        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
     private void handleBrightnessLevel() {
@@ -570,7 +563,7 @@ public class ViewEdit extends AppCompatActivity {
 
                 // Hiển thị ảnh mới trên ImageView
                 imgViewEdit.setImageBitmap(newBitmap);
-
+                previousBitmaps.add(getOriginalBitmap(imgViewEdit));
             }
 
             @Override
@@ -625,6 +618,7 @@ public class ViewEdit extends AppCompatActivity {
 
                 // Hiển thị Bitmap mới lên ImageView hoặc lưu Bitmap mới vào file
                 imgViewEdit.setImageBitmap(newBitmap);
+                previousBitmaps.add(getOriginalBitmap(imgViewEdit));
             }
 
             @Override
@@ -670,6 +664,8 @@ public class ViewEdit extends AppCompatActivity {
                 return true;
             }
         });
+        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
+
     }
 
     private void handleAddTextImage() {
@@ -697,6 +693,7 @@ public class ViewEdit extends AppCompatActivity {
                                 String text = edtTxtInput.getText().toString();
                                 canvas.drawText(text, x, y, paint);
                                 imgViewEdit.setImageBitmap(mutableBitmap);
+                                previousBitmaps.add(getOriginalBitmap(imgViewEdit));
                             } else {
                                 Toast.makeText(ViewEdit.this, "Please provide text you want to add", Toast.LENGTH_SHORT).show();
                             }
@@ -736,6 +733,7 @@ public class ViewEdit extends AppCompatActivity {
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
                             imgViewEdit.setImageBitmap(mutableBitmap);
+                            previousBitmaps.add(getOriginalBitmap(imgViewEdit));
                             //imgViewEdit.invalidate();
                         }
                         else{
@@ -748,41 +746,10 @@ public class ViewEdit extends AppCompatActivity {
         });
     }
 
-    private void addNewBitmap(Bitmap originalBitmap, Bitmap newBitmap){
-        // Khởi tạo một mảng để lưu trữ các Bitmap
-        ArrayList<Bitmap> bitmapList = new ArrayList<Bitmap>();
-
-
-
-// Thêm bản sao của bitmap ban đầu vào mảng
-        Bitmap copyBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
-        bitmapList.add(copyBitmap);
-
-//// Thực hiện thay đổi bitmap
-//        Bitmap newBitmap = copyBitmap.copy(copyBitmap.getConfig(), true);
-//        Canvas canvas = new Canvas(newBitmap);
-//        Paint paint = new Paint();
-//        paint.setColor(Color.RED);
-//        canvas.drawCircle(50, 50, 50, paint);
-//        imageView.setImageBitmap(newBitmap);
-
-// Thêm bản sao của bitmap mới vào mảng
-        Bitmap newCopyBitmap = newBitmap.copy(newBitmap.getConfig(), true);
-        bitmapList.add(newCopyBitmap);
-
-// Xoá các phần tử trong ArrayList trước đó
-        bitmapList.clear();
-
-// Thực hiện thay đổi mới và thêm vào mảng
-        Bitmap newestBitmap = newCopyBitmap.copy(newCopyBitmap.getConfig(), true);
-
-// Thêm bản sao của bitmap mới vào mảng
-        Bitmap newestCopyBitmap = newestBitmap.copy(newestBitmap.getConfig(), true);
-        bitmapList.add(newestCopyBitmap);
-        previousBitmaps.addAll((bitmapList));
-    }
 
     private void initViews() {
+        previousBitmaps = new ArrayList<Bitmap>();
+
         parent_list_color = findViewById(R.id.parent_list_color);
         imgViewEdit = findViewById(R.id.imgViewEdit);
         Intent intent = getIntent();
@@ -905,6 +872,7 @@ public class ViewEdit extends AppCompatActivity {
         adapterSticker.setStickers(stickers);
         stickerRecView.setAdapter(adapterSticker);
         stickerRecView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
 
     }
     private void setAllFilters() {
