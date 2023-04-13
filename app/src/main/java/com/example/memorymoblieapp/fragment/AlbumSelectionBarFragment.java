@@ -117,7 +117,7 @@ public class AlbumSelectionBarFragment extends Fragment {
 
                                 // Refresh and exit choose image mode
                                 refresh(context);
-                                Toast.makeText(context, context.getString(R.string.toast_add_delete_successfully), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.toast_delete_successfully), Toast.LENGTH_SHORT).show();
 
                                 break;
 

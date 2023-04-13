@@ -67,6 +67,7 @@ public class TrashBinSelectionBarFragment extends Fragment {
 
                                 // Refresh and exit choose image mode
                                 refresh(context);
+                                Toast.makeText(context, context.getString(R.string.toast_restore_successfully), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -76,8 +77,8 @@ public class TrashBinSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("Bạn có chắc muốn khôi phục các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener)
-                            .setNegativeButton("Hủy", dialogClickListener).show();
+                    builder.setMessage(context.getString(R.string.alert_dialog_restore_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
 
                     return true;
 
@@ -88,10 +89,10 @@ public class TrashBinSelectionBarFragment extends Fragment {
                                 for (String filePath : listSelect) {
                                     File sourceFile = new File(filePath);
                                     if (sourceFile.delete()) {
-                                        Toast.makeText(context, "Đã xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, context.getString(R.string.toast_deleted) + " '" + sourceFile.getName() + "'", Toast.LENGTH_LONG).show();
                                         MainActivity.deletedImageList.remove(filePath);
                                     } else {
-                                        Toast.makeText(context, "Không thể xóa " + sourceFile.getName(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, context.getString(R.string.toast_cannot_delete) + " '" + sourceFile.getName() + "'", Toast.LENGTH_LONG).show();
                                     }
                                 }
 
@@ -109,8 +110,8 @@ public class TrashBinSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setMessage("Ảnh sẽ bị xóa vĩnh viễn. Bạn có chắc muốn xóa các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener1)
-                            .setNegativeButton("Hủy", dialogClickListener1).show();
+                    builder1.setMessage(context.getString(R.string.alert_dialog_permanently_delete_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener1)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener1).show();
 
                     return true;
             }
@@ -123,7 +124,7 @@ public class TrashBinSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.deletedImageList, "Thùng rác", "TrashBin");
+        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.deletedImageList, context.getString(R.string.title_recycle_bin), "TrashBin");
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();

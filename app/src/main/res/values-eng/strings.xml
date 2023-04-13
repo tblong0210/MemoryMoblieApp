@@ -115,15 +115,27 @@
     <string name="alert_dialog_block_album_successfully_notification">Block album successfully</string>
     <string name="alert_dialog_remove_block_album_successfully_notification">Remove block album successfully</string>
     <string name="alert_dialog_remove_block_album">Remove block album</string>
-    <string name="alert_dialog_remove_images_from_album_confirm">Are you sure to remove the selected photos from the album?</string>
-    <string name="alert_dialog_add_images_to_loves_confirm">Are you sure to add the selected photos to loves</string>
+    <string name="alert_dialog_remove_images_from_album_confirm">Are you sure to remove the selected images from the album?</string>
+    <string name="alert_dialog_add_images_to_loves_confirm">Are you sure to add the selected images to loves</string>
     <string name="alert_dialog_delete_images_confirm">Are you sure to delete the selected images?</string>
     <string name="alert_dialog_duplicate_images_confirm">Are you sure to duplicate the selected images?</string>
+    <string name="alert_dialog_select_album">Select album</string>
+    <string name="alert_dialog_remove_images_from_loves_confirm">Are you sure to remove the selected images from loves</string>
+    <string name="alert_dialog_restore_images_confirm">Are you sure to restore the selected images?</string>
+    <string name="alert_dialog_permanently_delete_confirm">The images will be permanently deleted. Are you sure?</string>
 
-    <string name="toast_remove_images_from_album">Removed selected photos from album</string>
-    <string name="toast_add_images_to_loves">Added selected photos to loves</string>
+    <string name="toast_remove_images_from_album">Removed selected images from album</string>
+    <string name="toast_add_images_to_loves">Added selected images to loves</string>
     <string name="toast_add_duplicate_successfully">Duplicate successfully</string>
-    <string name="toast_add_delete_successfully">Delete successfully</string>
+    <string name="toast_delete_successfully">Delete successfully</string>
+    <string name="toast_no_albums">There are no albums in the list. Please create at least one album</string>
+    <string name="toast_add_images_to">Added images to</string>
+    <string name="toast_remove_images_from_loves">Removed selected images from loves</string>
+    <string name="toast_deleted">Deleted</string>
+    <string name="toast_cannot_delete">Cannot delete</string>
+    <string name="toast_restore_successfully">Restore successfully</string>
 
+    <string name="title_loves">Loves</string>
+    <string name="title_recycle_bin">Recycle bin</string>
 
 </resources>
