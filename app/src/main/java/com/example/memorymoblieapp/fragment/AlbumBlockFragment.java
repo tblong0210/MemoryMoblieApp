@@ -149,7 +149,7 @@ public class AlbumBlockFragment extends Fragment {
             layout.addView(reNewPasswordInput);
 
             builder.setView(layout);
-            newPasswordInput.requestFocus();
+            oldPasswordInput.requestFocus();
 
             builder.setPositiveButton(getString(R.string.alert_dialog_confirm), null);
             builder.setNegativeButton(getString(R.string.alert_dialog_cancel), null);
