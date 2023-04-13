@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Memory</string>
+    <string name="action_new_album">New album</string>
     <string name="action_favorite">Add to favorites</string>
     <string name="action_unfavorite">Remove from favorites</string>
     <string name="action_edit">Edit</string>
@@ -97,4 +98,22 @@
     <string name="alert_dialog_delete_password">Delete password</string>
     <string name="alert_dialog_wrong_password_notification">Password does not right</string>
     <string name="alert_dialog_delete_password_successfully_notification">Delete password successfully</string>
+    <string name="alert_dialog_enter_album_name_hint">Enter album name</string>
+    <string name="alert_dialog_blank_album_name_notification">Please enter album name</string>
+    <string name="alert_dialog_existed_album_name_notification">The album name already existed. Please choose another one</string>
+    <string name="alert_dialog_create_album_successfully_notification">Create album successfully</string>
+    <string name="alert_dialog_blocked_album">Album has been blocked. Please enter password</string>
+    <string name="alert_dialog_unblock_successfully_notification">Unblock successfully</string>
+    <string name="alert_dialog_change_album_name">Change album name</string>
+    <string name="alert_dialog_enter_new_name_hint">Enter new name</string>
+    <string name="alert_dialog_change_album_name_successfully_notification">Change album name successfully</string>
+    <string name="alert_dialog_delete_album">Delete album</string>
+    <string name="alert_dialog_deleted_album">Deleted album </string>
+    <string name="alert_dialog_delete_album_confirm">Are you sure to delete</string>
+    <string name="alert_dialog_not_setup_password">The password has not been setup yet. Please go to settings to setup</string>
+    <string name="alert_dialog_block_album">Block album</string>
+    <string name="alert_dialog_block_album_successfully_notification">Block album successfully</string>
+    <string name="alert_dialog_remove_block_album_successfully_notification">Remove block album successfully</string>
+    <string name="alert_dialog_remove_block_album">Remove block album</string>
+
 </resources>

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Memory</string>
+    <string name="action_new_album">Album mới</string>
     <string name="action_favorite">Thêm vào yêu thích</string>
     <string name="action_unfavorite">Xóa khỏi yêu thích</string>
     <string name="action_edit">Chỉnh sửa</string>
@@ -96,4 +97,22 @@
     <string name="alert_dialog_delete_password">Xóa mật khẩu</string>
     <string name="alert_dialog_wrong_password_notification">Mật khẩu không chính xác</string>
     <string name="alert_dialog_delete_password_successfully_notification">Xóa mật khẩu thành công</string>
+    <string name="alert_dialog_enter_album_name_hint">Nhập tên album</string>
+    <string name="alert_dialog_blank_album_name_notification">Vui lòng nhập tên album</string>
+    <string name="alert_dialog_existed_album_name_notification">Tên album đã tồn tại, vui lòng chọn tên khác</string>
+    <string name="alert_dialog_create_album_successfully_notification">Tạo album thành công</string>
+    <string name="alert_dialog_blocked_album">Album bị khóa. Hãy nhập mật khẩu</string>
+    <string name="alert_dialog_unblock_successfully_notification">Mở khóa thành công</string>
+    <string name="alert_dialog_change_album_name">Đổi tên album</string>
+    <string name="alert_dialog_enter_new_name_hint">Nhập tên mới</string>
+    <string name="alert_dialog_change_album_name_successfully_notification">Đổi tên album thành công</string>
+    <string name="alert_dialog_delete_album">Xóa album</string>
+    <string name="alert_dialog_deleted_album">Đã xóa album </string>
+    <string name="alert_dialog_delete_album_confirm">Bạn có chắc muốn xóa</string>
+    <string name="alert_dialog_not_setup_password">Mật khẩu album chưa được thiết lập. Vui lòng vào cài đặt để thiết lập</string>
+    <string name="alert_dialog_block_album">Khóa album</string>
+    <string name="alert_dialog_block_album_successfully_notification">Khóa album thành công</string>
+    <string name="alert_dialog_remove_block_album_successfully_notification">Xóa khóa album thành công</string>
+    <string name="alert_dialog_remove_block_album">Xóa khóa album</string>
+
 </resources>

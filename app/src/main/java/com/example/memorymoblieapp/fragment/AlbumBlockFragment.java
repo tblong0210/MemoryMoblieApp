@@ -23,7 +23,6 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
-import com.example.memorymoblieapp.obj.Album;
 
 import org.mindrot.jbcrypt.BCrypt;
 
