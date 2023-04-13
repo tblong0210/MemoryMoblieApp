@@ -114,5 +114,14 @@
     <string name="alert_dialog_block_album_successfully_notification">Khóa album thành công</string>
     <string name="alert_dialog_remove_block_album_successfully_notification">Xóa khóa album thành công</string>
     <string name="alert_dialog_remove_block_album">Xóa khóa album</string>
+    <string name="alert_dialog_remove_images_from_album_confirm">Bạn có chắc muốn gỡ các ảnh được chọn khỏi album không?</string>
+    <string name="alert_dialog_add_images_to_loves_confirm">Bạn có chắc muốn đưa các ảnh vừa chọn vào mục yêu thích không?</string>
+    <string name="alert_dialog_delete_images_confirm">Bạn có chắc muốn đưa các ảnh vừa chọn vào mục yêu thích không?</string>
+    <string name="alert_dialog_duplicate_images_confirm">Bạn có chắc muốn tạo bản sao các ảnh vừa chọn không?</string>
+
+    <string name="toast_remove_images_from_album">Đã gỡ các ảnh được chọn khỏi album</string>
+    <string name="toast_add_images_to_loves">Đã thêm các ảnh được chọn vào mục yêu thích</string>
+    <string name="toast_add_duplicate_successfully">Tạo bản sao thành công</string>
+    <string name="toast_add_delete_successfully">Xóa thành công</string>
 
 </resources>
