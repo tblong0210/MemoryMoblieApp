@@ -50,7 +50,6 @@ public class StickerRecViewAdapter extends RecyclerView.Adapter<StickerRecViewAd
             @Override
             public void onClick(View view) {
                 StickerChosen= stickerChoose;
-                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         });
 

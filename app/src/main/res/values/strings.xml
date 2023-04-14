@@ -147,4 +147,10 @@
     <string name="text_size">Dung lượng</string>
     <string name="text_dimensions">Kích thước</string>
     <string name="text_location">Vị trí</string>
+
+    <string name="disable_back_edit_view">Ảnh đã quay về trạng thái lúc ban đầu</string>version
+    <string name="choose_color_paint">Vui lòng chọn màu để vẽ</string>
+    <string name="provide_text">Vui lòng nhập ký tự</string>
+    <string name="provide_text_color">Vui lòng chọn màu chữ</string>
+
 </resources>

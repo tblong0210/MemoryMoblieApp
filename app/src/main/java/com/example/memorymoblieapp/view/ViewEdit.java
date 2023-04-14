@@ -190,9 +190,7 @@ public class ViewEdit extends AppCompatActivity {
     }
     private void backPreviousPicture() {
         if (previousBitmaps.size() > 0) {
-            Log.d("Size before", String.valueOf(previousBitmaps.size()));
             previousBitmaps.remove(previousBitmaps.size() - 1);
-            Log.d("Size after", String.valueOf(previousBitmaps.size()));
             if (previousBitmaps.size() == 0) {
                 imgViewEdit.setImageBitmap(originImage);
                 previousBitmaps.clear();
@@ -201,7 +199,7 @@ public class ViewEdit extends AppCompatActivity {
             }
         }
         else{
-            Toast.makeText(this, "Ảnh đã quay về trạng thái lúc ban đầu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.disable_back_edit_view, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -646,7 +644,7 @@ public class ViewEdit extends AppCompatActivity {
                             canvas.drawCircle(x, y, 10, paint);
                             imgViewEdit.invalidate();
                         } else {
-                            Toast.makeText(ViewEdit.this, "Please choose your draw's color", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewEdit.this, R.string.choose_color_paint, Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
@@ -674,7 +672,6 @@ public class ViewEdit extends AppCompatActivity {
                         int Size = seekBarSize.getProgress();
                         int colorText = adapterTxtColor.getColorChosen();
                         if (colorText != 0) {
-                            Log.d("Color", String.valueOf(colorText));
                             paint.setColor(colorText);
                             paint.setTextSize(Size);
                             Canvas canvas = new Canvas(mutableBitmap);
@@ -684,10 +681,10 @@ public class ViewEdit extends AppCompatActivity {
                                 imgViewEdit.setImageBitmap(mutableBitmap);
                                 previousBitmaps.add(getOriginalBitmap(imgViewEdit));
                             } else {
-                                Toast.makeText(ViewEdit.this, "Please provide text you want to add", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ViewEdit.this, R.string.provide_text, Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(ViewEdit.this, "Please choose your text's color", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewEdit.this, R.string.provide_text_color, Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
@@ -709,7 +706,6 @@ public class ViewEdit extends AppCompatActivity {
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-                        Log.d("Bitmap num", String.valueOf(previousBitmaps.size()));
                         System.out.println(mutableBitmap);
                         int x = (int) event.getX();
                         int y = (int) event.getY();

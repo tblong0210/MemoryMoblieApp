@@ -149,4 +149,9 @@
     <string name="text_dimensions">Dimensions</string>
     <string name="text_location">Location</string>
 
+    <string name="disable_back_edit_view">Pictrue has already the oldest version</string>
+    <string name="choose_color_paint">Please choose color want to paint</string>
+    <string name="provide_text">Please enter your text</string>
+    <string name="provide_text_color">Please choose color of the text</string>
+
 </resources>
