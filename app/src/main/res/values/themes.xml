@@ -13,7 +13,7 @@
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/MyBottomNavigationViewStyle</item>
-        <!--        <item name="android:windowAnimationStyle">@style/CustomAnimation</item>-->
+                <item name="android:windowAnimationStyle">@style/CustomAnimation</item>
     </style>
 
 
@@ -30,7 +30,7 @@
         <item name="android:statusBarColor">#777777</item>
         <!-- Customize your theme here. -->
         <item name="bottomNavigationStyle">@style/MyBottomNavigationViewStyle</item>
-        <!--        <item name="android:windowAnimationStyle">@style/CustomAnimation</item>-->
+                <item name="android:windowAnimationStyle">@style/CustomAnimation</item>
     </style>
 
     <style name="MyBottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
@@ -38,11 +38,11 @@
         <item name="labelVisibilityMode">unlabeled</item>
         <item name="android:padding">5dp</item>
     </style>
-    <!--    <style name="CustomAnimation" parent="@android:style/Animation.Activity">-->
-    <!--        <item name="android:activityOpenEnterAnimation">@anim/slide_in</item>-->
-    <!--        <item name="android:activityOpenExitAnimation">@anim/slide_in</item>-->
-    <!--        <item name="android:activityCloseEnterAnimation">@anim/slide_out</item>-->
-    <!--        <item name="android:activityCloseExitAnimation">@anim/slide_in</item>-->
 
-    <!--    </style>-->
+    <style name="CustomAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_1</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_in_2</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_out_1</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_2</item>
+    </style>
 </resources>

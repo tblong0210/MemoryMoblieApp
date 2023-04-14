@@ -8,4 +8,9 @@
         <item name="android:layout_marginBottom">15dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="CustomPopupAnimation" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/menu_button_show</item>
+        <item name="android:windowExitAnimation">@anim/menu_bottom_hide</item>
+    </style>
+
 </resources>

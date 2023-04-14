@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.memorymoblieapp.DownloadImageFromURL;
@@ -196,8 +197,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.more:
                     PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
                     popupMenu.inflate(R.menu.bottom_navigation_more_menu);
-                    popupMenu.setOnMenuItemClickListener(menuItem -> {
+
+                    popupMenu.setOnMenuItemClickListener( menuItem -> {
+
                         int itemId = menuItem.getItemId();
+
                         if (R.id.recycleBin == itemId) {
                             ImageFragment2 deletedImageFragment = new ImageFragment2(deletedImageList, "Thùng rác", "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
@@ -207,8 +211,10 @@ public class MainActivity extends AppCompatActivity {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
                         }
+
                         return true;
                     });
+
                     popupMenu.show();
                     fragmentTransaction.addToBackStack("more");
 
@@ -356,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
-        
+
         ImageFragment.turnOffselectMode();
         ImageAdapter.ViewHolder.turnOffSelectMode();
     }
