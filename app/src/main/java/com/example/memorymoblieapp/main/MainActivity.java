@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isVerify = false; // Status of album blocking
     @SuppressLint("StaticFieldLeak")
     static FrameLayout frame_layout_selection_features_bar;
-    ArrayList<String> zipList;
+    public static ArrayList<String> zipList;
+    public static String zipPath;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -99,19 +100,19 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
 
         // Go to settings to turn on all files access permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-                && !Environment.isExternalStorageManager()) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivity(intent);
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+//                && !Environment.isExternalStorageManager()) {
+//            try {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent.setData(uri);
+//                startActivity(intent);
+//            } catch (ActivityNotFoundException e) {
+//                Intent intent = new Intent();
+//                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+//                startActivity(intent);
+//            }
+//        }
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -150,6 +151,14 @@ public class MainActivity extends AppCompatActivity {
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
     }
 
+    public static void updateZipList() {
+        zipPath = Environment.getExternalStorageDirectory() + "/MemoryZip";
+        File directory = new File(zipPath);
+        if (!directory.exists())
+            directory.mkdirs();
+        zipList = getZipList(zipPath);
+    }
+
     @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
         imageDates = new ArrayList<>();
@@ -161,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> picturePath = new ArrayList<>(newImage);
 
         picturePath.removeAll(Collections.singleton(" "));
+
+        zipPath = Environment.getExternalStorageDirectory() + "/MemoryZip";
+        File directory = new File(zipPath);
+        if (!directory.exists())
+            directory.mkdirs();
+        zipList = getZipList(zipPath);
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
@@ -178,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         imageFragment = new ImageFragment(newImage, imageDates);
 
-        if(!set2FragmentLayout()) {
+        if (!set2FragmentLayout()) {
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
             fragmentTransaction.addToBackStack("image");
         }
@@ -212,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     PopupMenu popupMenu = new PopupMenu(MainActivity.this, bottomNavigationView, Gravity.END);
                     popupMenu.inflate(R.menu.bottom_navigation_more_menu);
 
-                    popupMenu.setOnMenuItemClickListener( menuItem -> {
+                    popupMenu.setOnMenuItemClickListener(menuItem -> {
 
                         int itemId = menuItem.getItemId();
 
@@ -225,8 +240,6 @@ public class MainActivity extends AppCompatActivity {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
                         } else if (R.id.zip == itemId) {
-                            zipList = new ArrayList<>();
-                            zipList.add("123");
                             ZipFileFragment zipFileFragment = new ZipFileFragment(zipList);
                             fragmentTransaction.replace(R.id.frame_layout_content, zipFileFragment).commit();
                         }
@@ -393,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
         data = data == null ? "" : data;
 
         if (idFragment == R.string.view_album) {
-            if(data.equals(""))
+            if (data.equals(""))
                 return false;
 
             int pos = 0;
@@ -408,8 +421,7 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.album);
 
             return true;
-        }
-        else if(idFragment == R.string.settings){
+        } else if (idFragment == R.string.settings) {
             SettingsFragment settingsFragment = new SettingsFragment();
             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
             bottomNavigationView.setSelectedItemId(R.id.more);
@@ -437,5 +449,19 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<String> getImages() {
         return images;
+    }
+
+    static ArrayList<String> getZipList(String folderPath) {
+        File directory = new File(folderPath);
+        File[] files = directory.listFiles();
+        ArrayList<String> zipFilePaths = new ArrayList<>();
+
+        for (File file : files) {
+            if (file.isFile() && file.getName().endsWith(".zip")) {
+                zipFilePaths.add(file.getAbsolutePath());
+            }
+        }
+
+        return zipFilePaths;
     }
 }

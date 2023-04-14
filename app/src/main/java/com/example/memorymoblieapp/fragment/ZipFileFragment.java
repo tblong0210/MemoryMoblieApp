@@ -30,7 +30,8 @@ import java.util.ArrayList;
 
 public class ZipFileFragment extends Fragment {
     ArrayList<String> zipList;
-    ZipFileAdapter adapter;
+    @SuppressLint("StaticFieldLeak")
+    static ZipFileAdapter adapter;
     private Context context;
 
     public ZipFileFragment(ArrayList<String> zipList) {
@@ -62,5 +63,10 @@ public class ZipFileFragment extends Fragment {
         recycler.setAdapter(adapter);
 
         return zipFileFragment;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    static public void updateItem() {
+        adapter.notifyDataSetChanged();
     }
 }
