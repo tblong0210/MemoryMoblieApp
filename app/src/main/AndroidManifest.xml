@@ -18,6 +18,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoryMobileApp"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
 
         <activity

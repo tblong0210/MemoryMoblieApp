@@ -18,17 +18,17 @@ import com.example.memorymoblieapp.obj.Album;
 
 import java.util.ArrayList;
 
-public class AlbumFragment2 extends Fragment {
+public class AlbumFragment extends Fragment {
     public static ArrayList<Album> albumList;
     @SuppressLint("StaticFieldLeak")
     static AlbumAdapter adapter;
     private Context context;
 
-    public AlbumFragment2(){
-        AlbumFragment2.albumList = new ArrayList<>();
+    public AlbumFragment(){
+        AlbumFragment.albumList = new ArrayList<>();
     }
-    public AlbumFragment2(ArrayList<Album> albumList) {
-        AlbumFragment2.albumList = new ArrayList<>(albumList);
+    public AlbumFragment(ArrayList<Album> albumList) {
+        AlbumFragment.albumList = new ArrayList<>(albumList);
     }
 
     @Override

@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.ShareImageToMedia;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
-import com.example.memorymoblieapp.adapter.ImageAdapter;
+import com.example.memorymoblieapp.adapter.ImageListAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
@@ -55,7 +55,7 @@ public class AlbumSelectionBarFragment extends Fragment {
         Context context = selectionFeaturesBarFragment.getContext();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            listSelect = new ArrayList<>(ImageAdapter.getListSelect());
+            listSelect = new ArrayList<>(ImageListAdapter.getListSelect());
 
             switch (item.getItemId()) {
                 case R.id.removeFromAlbum:
@@ -68,7 +68,7 @@ public class AlbumSelectionBarFragment extends Fragment {
                                 // Refresh and exit choose image mode
                                 refresh(context);
 
-                                Toast.makeText(context, "Đã gỡ các ảnh được chọn khỏi album", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.toast_remove_images_from_album), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -78,8 +78,8 @@ public class AlbumSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder4 = new AlertDialog.Builder(context);
-                    builder4.setMessage("Bạn có chắc muốn gỡ các ảnh được chọn khỏi album không?").setPositiveButton("Đồng ý", dialogClickListener4)
-                            .setNegativeButton("Hủy", dialogClickListener4).show();
+                    builder4.setMessage(context.getString(R.string.alert_dialog_remove_images_from_album_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener4)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener4).show();
 
 
                     return true;
@@ -93,7 +93,7 @@ public class AlbumSelectionBarFragment extends Fragment {
                                 DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
 
                                 refresh(context);
-                                Toast.makeText(context, "Đã thêm các ảnh được chọn vào mục yêu thích", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.toast_add_images_to_loves), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -103,8 +103,8 @@ public class AlbumSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-                    builder2.setMessage("Bạn có chắc muốn đưa các ảnh vừa chọn vào mục yêu thích không?").setPositiveButton("Đồng ý", dialogClickListener2)
-                            .setNegativeButton("Hủy", dialogClickListener2).show();
+                    builder2.setMessage(context.getString(R.string.alert_dialog_add_images_to_loves_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener2)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener2).show();
 
                     return true;
 
@@ -117,6 +117,7 @@ public class AlbumSelectionBarFragment extends Fragment {
 
                                 // Refresh and exit choose image mode
                                 refresh(context);
+                                Toast.makeText(context, context.getString(R.string.toast_delete_successfully), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -126,8 +127,8 @@ public class AlbumSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setMessage("Bạn có chắc muốn xóa các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener1)
-                            .setNegativeButton("Hủy", dialogClickListener1).show();
+                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener1)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener1).show();
 
                     return true;
 
@@ -152,7 +153,7 @@ public class AlbumSelectionBarFragment extends Fragment {
                                         // Refresh and exit choose image mode
                                         refresh(context);
 
-                                        Toast.makeText(context, "Tạo bản sao thành công", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, context.getString(R.string.toast_add_duplicate_successfully), Toast.LENGTH_SHORT).show();
 
                                         break;
 
@@ -162,8 +163,8 @@ public class AlbumSelectionBarFragment extends Fragment {
                                 }
                             };
                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setMessage("Bạn có chắc muốn tạo bản sao các ảnh vừa chọn không?").setPositiveButton("Đồng ý", dialogClickListener)
-                                    .setNegativeButton("Hủy", dialogClickListener).show();
+                            builder.setMessage(context.getString(R.string.alert_dialog_duplicate_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                                    .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
                         }
                         return true;
                     });
@@ -220,7 +221,7 @@ public class AlbumSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        ImageFragment2 imageFragment = new ImageFragment2(MainActivity.albumList.get(albumPos).getPathImages(), MainActivity.albumList.get(albumPos).getAlbumName(), "Album", albumPos);
+        ImageListFragment imageFragment = new ImageListFragment(MainActivity.albumList.get(albumPos).getPathImages(), MainActivity.albumList.get(albumPos).getAlbumName(), "Album", albumPos);
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();

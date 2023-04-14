@@ -75,6 +75,11 @@
     <string name="selection_share">Chia sẻ</string>
     <string name="selection_restore">Khôi phục</string>
     <string name="selection_permanently_delete">Xóa vĩnh viễn</string>
+    <string name="album_menu_change_name">Đổi tên</string>
+    <string name="album_menu_block_album">Khóa album</string>
+    <string name="album_menu_remove_album_block">Xóa khóa album</string>
+    <string name="album_menu_delete_album">Xóa album</string>
+    <string name="album_menu_export_zip">Xuất zip</string>
 
     <string name="alert_dialog_create_password">Khởi tạo mật khẩu</string>
     <string name="alert_dialog_enter_password_hint">Nhập mật khẩu</string>
@@ -114,5 +119,38 @@
     <string name="alert_dialog_block_album_successfully_notification">Khóa album thành công</string>
     <string name="alert_dialog_remove_block_album_successfully_notification">Xóa khóa album thành công</string>
     <string name="alert_dialog_remove_block_album">Xóa khóa album</string>
+    <string name="alert_dialog_remove_images_from_album_confirm">Bạn có chắc muốn gỡ các ảnh được chọn khỏi album không?</string>
+    <string name="alert_dialog_add_images_to_loves_confirm">Bạn có chắc muốn đưa các ảnh vừa chọn vào mục yêu thích không?</string>
+    <string name="alert_dialog_delete_images_confirm">Bạn có chắc muốn xóa các ảnh vừa chọn không?</string>
+    <string name="alert_dialog_duplicate_images_confirm">Bạn có chắc muốn tạo bản sao các ảnh vừa chọn không?</string>
+    <string name="alert_dialog_select_album">Chọn album</string>
+    <string name="alert_dialog_remove_images_from_loves_confirm">Bạn có chắc muốn gỡ các ảnh được chọn khỏi mục yêu thích không?</string>
+    <string name="alert_dialog_restore_images_confirm">Bạn có chắc muốn khôi phục các ảnh vừa chọn không?</string>
+    <string name="alert_dialog_permanently_delete_confirm">Ảnh sẽ bị xóa vĩnh viễn. Bạn có chắc muốn xóa các ảnh vừa chọn không?</string>
+
+    <string name="toast_remove_images_from_album">Đã gỡ các ảnh được chọn khỏi album</string>
+    <string name="toast_add_images_to_loves">Đã thêm các ảnh được chọn vào mục yêu thích</string>
+    <string name="toast_add_duplicate_successfully">Tạo bản sao thành công</string>
+    <string name="toast_delete_successfully">Xóa thành công</string>
+    <string name="toast_no_albums">Không có album nào trong danh sách. Vui lòng tạo ít nhất một album</string>
+    <string name="toast_add_images_to">Đã thêm ảnh vào</string>
+    <string name="toast_remove_images_from_loves">Đã gỡ các ảnh được chọn khỏi mục yêu thích</string>
+    <string name="toast_deleted">Đã xóa</string>
+    <string name="toast_cannot_delete">Không thể xóa</string>
+    <string name="toast_restore_successfully">Khôi phục thành công</string>
+
+    <string name="title_loves">Yêu thích</string>
+    <string name="title_recycle_bin">Thùng rác</string>
+
+    <string name="text_name">Tên</string>
+    <string name="text_created_date">Ngày tạo</string>
+    <string name="text_size">Dung lượng</string>
+    <string name="text_dimensions">Kích thước</string>
+    <string name="text_location">Vị trí</string>
+
+    <string name="disable_back_edit_view">Ảnh đã quay về trạng thái lúc ban đầu</string>version
+    <string name="choose_color_paint">Vui lòng chọn màu để vẽ</string>
+    <string name="provide_text">Vui lòng nhập ký tự</string>
+    <string name="provide_text_color">Vui lòng chọn màu chữ</string>
 
 </resources>

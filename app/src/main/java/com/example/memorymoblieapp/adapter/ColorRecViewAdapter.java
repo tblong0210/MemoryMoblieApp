@@ -48,7 +48,6 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
             @Override
             public void onClick(View view) {
                 ColorChosen= colorChoose;
-                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         });
 
