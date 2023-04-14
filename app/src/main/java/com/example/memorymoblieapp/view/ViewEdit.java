@@ -148,11 +148,9 @@ public class ViewEdit extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.resetViewEdit:
-                Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
                 refreshPicture();
                 break;
             case R.id.saveViewEdit:
-                Toast.makeText(this, "Save Picture", Toast.LENGTH_SHORT).show();
                 try {
                     savePicture();
                 } catch (IOException e) {
@@ -160,7 +158,6 @@ public class ViewEdit extends AppCompatActivity {
                 }
                 break;
             case R.id.backViewEdit:
-                Toast.makeText(this, "Back Picture", Toast.LENGTH_SHORT).show();
                 backPreviousPicture();
             default:
                 break;
@@ -202,6 +199,9 @@ public class ViewEdit extends AppCompatActivity {
             } else {
                 imgViewEdit.setImageBitmap(previousBitmaps.get(previousBitmaps.size() - 1));
             }
+        }
+        else{
+            Toast.makeText(this, "Ảnh đã quay về trạng thái lúc ban đầu", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -323,12 +323,9 @@ public class ViewEdit extends AppCompatActivity {
                         break;
 
                     case R.id.flipHorizontalPic:
-                        Toast.makeText(ViewEdit.this, "Flip", Toast.LENGTH_SHORT).show();
                         handleFlipImageHorizontal();
                         break;
                     case R.id.flipVerticalPic:
-
-                        Toast.makeText(ViewEdit.this, "Resize", Toast.LENGTH_SHORT).show();
                         handleFlipImageVertical();
                         break;
                     case R.id.firstResizePic:
@@ -352,7 +349,6 @@ public class ViewEdit extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.paintPic:
-                        Toast.makeText(ViewEdit.this, "Paint", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.VISIBLE);
 
                         stickerRecView.setVisibility(View.GONE);
@@ -361,7 +357,6 @@ public class ViewEdit extends AppCompatActivity {
                         break;
 
                     case R.id.stickerPic:
-                        Toast.makeText(ViewEdit.this, "Sticker", Toast.LENGTH_SHORT).show();
                         colorRecView.setVisibility(View.GONE);
 
                         stickerRecView.setVisibility(View.VISIBLE);
@@ -381,18 +376,14 @@ public class ViewEdit extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.brightnessLevelPic:
-                        Toast.makeText(ViewEdit.this, "brightness", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.GONE);
-//                        seekBarShadow.setVisibility(View.GONE);
                         seekBarBlur.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.VISIBLE);
                         handleBrightnessLevel();
                         break;
 
                     case R.id.contrastPic:
-                        Toast.makeText(ViewEdit.this, "contrast", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.VISIBLE);
-//                        seekBarShadow.setVisibility(View.GONE);
                         seekBarBlur.setVisibility(View.GONE);
                         seekBarBrightnessLevel.setVisibility(View.GONE);
                         handleContrastLevel();
@@ -400,7 +391,6 @@ public class ViewEdit extends AppCompatActivity {
                         break;
 
                     case R.id.blurPic:
-                        Toast.makeText(ViewEdit.this, "Blur", Toast.LENGTH_SHORT).show();
                         seekBarContrast.setVisibility(View.GONE);
                         seekBarBlur.setVisibility(View.VISIBLE);
                         seekBarBrightnessLevel.setVisibility(View.GONE);
