@@ -75,6 +75,11 @@
     <string name="selection_share">Chia sẻ</string>
     <string name="selection_restore">Khôi phục</string>
     <string name="selection_permanently_delete">Xóa vĩnh viễn</string>
+    <string name="album_menu_change_name">Đổi tên</string>
+    <string name="album_menu_block_album">Khóa album</string>
+    <string name="album_menu_remove_album_block">Xóa khóa album</string>
+    <string name="album_menu_delete_album">Xóa album</string>
+    <string name="album_menu_export_zip">Xuất zip</string>
 
     <string name="alert_dialog_create_password">Khởi tạo mật khẩu</string>
     <string name="alert_dialog_enter_password_hint">Nhập mật khẩu</string>

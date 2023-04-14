@@ -34,8 +34,13 @@ import com.example.memorymoblieapp.obj.Album;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
     static ArrayList<Album> albums;
@@ -135,6 +140,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         removeBlockAlbum(view, getAdapterPosition());
                     } else if (R.id.delete == itemId) {
                         deleteAlbum(view, getAdapterPosition());
+                    } else if (R.id.export == itemId) {
+                        try {
+                            exportAlbum(view, getAdapterPosition());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                     return true;
                 });
@@ -557,5 +568,34 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             });
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
         }
+    }
+
+    private static void exportAlbum(@NonNull View itemView, int position) throws Exception {
+        Context context = itemView.getContext();
+
+        File currentFile = new File( albums.get(position).getPathImages().get(0));
+        zip(albums.get(position).getPathImages(), currentFile.getParent() + "/test.zip");
+    }
+
+    public static void zip(@NonNull ArrayList<String> files, String zipFileName) throws Exception {
+        byte[] buffer = new byte[1024];
+        FileOutputStream fos = new FileOutputStream(zipFileName);
+        ZipOutputStream zos = new ZipOutputStream(fos);
+
+        for (String file : files) {
+            ZipEntry ze = new ZipEntry(file);
+            zos.putNextEntry(ze);
+            FileInputStream in = new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(in);
+            int len;
+            while ((len = bis.read(buffer)) > 0) {
+                zos.write(buffer, 0, len);
+            }
+            bis.close();
+            in.close();
+        }
+
+        zos.closeEntry();
+        zos.close();
     }
 }

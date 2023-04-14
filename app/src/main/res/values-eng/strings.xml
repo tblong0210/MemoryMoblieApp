@@ -76,6 +76,11 @@
     <string name="selection_share">Share</string>
     <string name="selection_restore">Restore</string>
     <string name="selection_permanently_delete">Permanently delete</string>
+    <string name="album_menu_change_name">Change name</string>
+    <string name="album_menu_block_album">Block album</string>
+    <string name="album_menu_remove_album_block">Remove album block</string>
+    <string name="album_menu_delete_album">Delete album</string>
+    <string name="album_menu_export_zip">Export zip</string>
 
     <string name="alert_dialog_create_password">Create password</string>
     <string name="alert_dialog_enter_password_hint">Enter password</string>

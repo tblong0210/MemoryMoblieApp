@@ -82,6 +82,7 @@ public class ImageListFragment extends Fragment {
         imgBtnChangeView.setOnClickListener(view -> {
             MainActivity.detailed = !MainActivity.detailed;
             ImageListFragment imageFragment = new ImageListFragment(imageList, title, type);
+            ImageListAdapter.ViewHolder.turnOffSelectMode();
 
             @SuppressLint("CommitTransaction") FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
