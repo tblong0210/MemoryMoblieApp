@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.HomeSelectionBarFragment;
 
+import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
@@ -190,7 +191,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 }
                 else {
                     Intent intent = new Intent(context, ViewImage.class);
-                    intent.putExtra("path_image", images.get(position));
+                    intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), images.get(position));
                     context.startActivity(intent);
                     photoListener.onPhotoClick(image);
                 }

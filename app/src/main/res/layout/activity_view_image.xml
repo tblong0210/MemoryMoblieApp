@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?attr/colorOnBackground"
-        app:itemBackground="@drawable/bg_selected_item_on_nav"
+        app:itemTextColor="?attr/colorSurface"
+        app:itemIconTint="?attr/colorSurface"
         app:menu="@menu/navigation_setting_image" />
 </RelativeLayout>

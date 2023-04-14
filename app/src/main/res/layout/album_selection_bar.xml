@@ -17,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorOnBackground"
-        app:itemBackground="@drawable/bg_selected_item_on_nav"
-        app:itemTextColor="@drawable/item_selected_on_bottom_nav"
+        app:itemTextColor="?attr/colorSurface"
+        app:itemIconTint="?attr/colorSurface"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/album_selection_bar_menu" />
 

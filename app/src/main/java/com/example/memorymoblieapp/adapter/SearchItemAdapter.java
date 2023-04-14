@@ -54,7 +54,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(context, ViewImage.class);
-                        intent.putExtra("path_image", element.get(position));
+                        intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), element.get(position));
                         context.startActivity(intent);
 
                         Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey());

@@ -124,7 +124,7 @@ public class ImageFragment extends Fragment {
                 int flag =0;
 
                 for (int i=0;i<images.size();i++) {
-                    if(images.get(i)!=" ") {
+                    if(!images.get(i).equals(" ")) {
                         newImageDateFlag.add( imageDates.get(i));
                         newImagesFlag.add(images.get(i));
              /*           newImageDateFlag.add( Integer.toString(i));
@@ -152,8 +152,8 @@ public class ImageFragment extends Fragment {
                 Log.d("Tagggg",newImageDateFlag.size()+ "  -  "+newImageDateFlag.size());
 
                 for (int i=0;i<newImagesFlag.size();i++) {
-                    if(newImagesFlag.get(i)!=" ") {
-                        if(i!=0 && newImageDateFlag.get(i).equals(newImageDateFlag.get(i-1))==false )
+                    if(!newImagesFlag.get(i).equals(" ")) {
+                        if(i!=0 && !newImageDateFlag.get(i).equals(newImageDateFlag.get(i - 1)))
                         {
 
                             if(flag%3==2)

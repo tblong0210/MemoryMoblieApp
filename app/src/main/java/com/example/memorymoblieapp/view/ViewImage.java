@@ -79,7 +79,6 @@ public class ViewImage extends AppCompatActivity {
         if (getFavorList != null)
             favorList.addAll(getFavorList);
 
-
         int currentPosition = picturePaths.indexOf(intent.getStringExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey()));
 
         parentHeader = findViewById(R.id.parentHeader);
