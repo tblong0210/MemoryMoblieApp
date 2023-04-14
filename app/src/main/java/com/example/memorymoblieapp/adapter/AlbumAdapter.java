@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,12 +35,15 @@ import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.Album;
 
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -142,7 +148,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         deleteAlbum(view, getAdapterPosition());
                     } else if (R.id.export == itemId) {
                         try {
-                            exportAlbum(view, getAdapterPosition());
+                            exportAlbum(view, getAdapterPosition(), albums.get(getAdapterPosition()).getAlbumName());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
@@ -570,32 +576,82 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         }
     }
 
-    private static void exportAlbum(@NonNull View itemView, int position) throws Exception {
+    private static void exportAlbum(@NonNull View itemView, int position, String folderName) throws Exception {
         Context context = itemView.getContext();
 
         File currentFile = new File( albums.get(position).getPathImages().get(0));
-        zip(albums.get(position).getPathImages(), currentFile.getParent() + "/test.zip");
+        compressFiles(albums.get(position).getPathImages(), currentFile.getParent() + "/" + folderName + ".zip", folderName);
+
+        shareZip(currentFile.getParent() + "/" + folderName + ".zip", itemView.getContext());
     }
 
-    public static void zip(@NonNull ArrayList<String> files, String zipFileName) throws Exception {
-        byte[] buffer = new byte[1024];
-        FileOutputStream fos = new FileOutputStream(zipFileName);
-        ZipOutputStream zos = new ZipOutputStream(fos);
+    public static void compressFiles(@NonNull ArrayList<String> filePaths, String outputZipFilePath, String folderName) throws IOException {
+//        // Tạo đối tượng ZipOutputStream
+//        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(outputZipFilePath));
+//
+//        // Duyệt qua danh sách đường dẫn file và thêm chúng vào zip file
+//        for (String filePath : filePaths) {
+//            File file = new File(filePath);
+//            FileInputStream fileInputStream = new FileInputStream(file);
+//            ZipEntry zipEntry = new ZipEntry(folderName + "/" + file.getName());
+//            zipOutputStream.putNextEntry(zipEntry);
+//
+//            byte[] buffer = new byte[1024];
+//            int length;
+//            while ((length = fileInputStream.read(buffer)) > 0) {
+//                zipOutputStream.write(buffer, 0, length);
+//            }
+//
+//            fileInputStream.close();
+//            zipOutputStream.closeEntry();
+//        }
+//
+//        // Đóng ZipOutputStream
+//        zipOutputStream.close();
 
-        for (String file : files) {
-            ZipEntry ze = new ZipEntry(file);
-            zos.putNextEntry(ze);
-            FileInputStream in = new FileInputStream(file);
-            BufferedInputStream bis = new BufferedInputStream(in);
-            int len;
-            while ((len = bis.read(buffer)) > 0) {
-                zos.write(buffer, 0, len);
+
+
+// Tạo đối tượng ZipOutputStream
+        ZipArchiveOutputStream zipOutputStream = new ZipArchiveOutputStream(new FileOutputStream(outputZipFilePath));
+
+        // Duyệt qua danh sách đường dẫn file và thêm chúng vào zip file
+        for (String filePath : filePaths) {
+            File file = new File(filePath);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ZipArchiveEntry zipEntry = new ZipArchiveEntry(folderName + "/" + file.getName());
+            zipOutputStream.putArchiveEntry(zipEntry);
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fileInputStream.read(buffer)) > 0) {
+                zipOutputStream.write(buffer, 0, length);
             }
-            bis.close();
-            in.close();
+
+            fileInputStream.close();
+            zipOutputStream.closeArchiveEntry();
         }
 
-        zos.closeEntry();
-        zos.close();
+        // Đóng ZipOutputStream
+        zipOutputStream.close();
+    }
+
+    @SuppressLint("QueryPermissionsNeeded")
+    private static void shareZip(String path, Context context) {
+        int REQUEST_CODE_SHARE = 1111;
+        File fileImage = new File(path);
+        // Khởi tạo đường dẫn zip và nội dung chia sẻ
+
+        Uri mImageUri = FileProvider.getUriForFile(context, "com.example.memorymoblieapp.fileprovider", fileImage);
+        String mShareContent = "";
+
+        // Tạo Intent để chia sẻ nội dung
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, mImageUri);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mShareContent);
+
+        // Tạo Intent chooser để hiển thị danh sách các ứng dụng cho phép chia sẻ nội dung
+        Intent chooserIntent = Intent.createChooser(shareIntent, "Chọn ứng dụng");
+        ((AppCompatActivity)context).startActivityForResult(chooserIntent, REQUEST_CODE_SHARE);
     }
 }

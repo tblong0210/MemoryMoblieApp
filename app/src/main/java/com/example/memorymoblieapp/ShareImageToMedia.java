@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ShareImageToMedia {
-    private int REQUEST_CODE_SHARE = 1111;
     private ArrayList<String> paths;
     private Context context;
 
@@ -57,6 +56,7 @@ public class ShareImageToMedia {
 
         // Tạo Intent chooser để hiển thị danh sách các ứng dụng cho phép chia sẻ nội dung
         Intent chooserIntent = Intent.createChooser(shareIntent, "Chọn ứng dụng");
+        int REQUEST_CODE_SHARE = 1111;
         ((AppCompatActivity) context).startActivityForResult(chooserIntent, REQUEST_CODE_SHARE);
     }
 

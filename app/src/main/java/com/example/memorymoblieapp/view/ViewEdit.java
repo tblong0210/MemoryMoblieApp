@@ -14,13 +14,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -39,11 +36,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.example.memorymoblieapp.Brightness;
 import com.example.memorymoblieapp.FilterItem;
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.ColorRecViewAdapter;
@@ -210,12 +204,15 @@ public class ViewEdit extends AppCompatActivity {
 
         String new_path = path_image;
         ArrayList<Integer> numberSlag = new ArrayList<>();
+        // Tính số thư mục trong đường dẫn chứa ảnh cũ
         for (int i = 0; i < new_path.length(); i++) {
             if (new_path.charAt(i) == '/') {
                 numberSlag.add(i);
             }
         }
+        // Cắt đường dẫn trong thư mục cuối cùng
         new_path = new_path.substring(0, numberSlag.get(numberSlag.size() - 1));
+        //Tạo một tên file mới và gắn tên file đó với đường dẫn đến thư mục cũ
         UUID uuid = UUID.randomUUID(); // Tạo một đối tượng UUID ngẫu nhiên
         String uniqueString = uuid.toString(); // Chuyển UUID thành chuỗi
         new_path = new_path + "/" + uniqueString + ".jpeg";
@@ -229,7 +226,7 @@ public class ViewEdit extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
-// Lưu ảnh vào thư mục trong bộ nhớ trong
+        // Lưu ảnh vào thư mục trong bộ nhớ trong
         FileOutputStream fileOutputStream = new FileOutputStream(new_path);
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
         fileOutputStream.flush();
@@ -243,6 +240,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private void initOptionActions() {
 
+        // Điều hướng các chức năng trong edit view
         nav_edit_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -312,6 +310,9 @@ public class ViewEdit extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        // Chọn chức năng trong cắt ảnh
         nav_crop_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -342,6 +343,7 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
 
+        // Chọn chức năng trong emote
         nav_emote_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -369,6 +371,7 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
 
+        // Chọn chức năng trong chỉnh độ sáng ảnh
         nav_brightness_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -400,10 +403,6 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
 
-
-//        imgViewEdit.setImageResource(R.drawable.image1);
-
-
     }
 
     private void handleBlurLevel() {
@@ -411,7 +410,7 @@ public class ViewEdit extends AppCompatActivity {
         Bitmap blurredBitmap = originalBitmap.copy(originalBitmap.getConfig(), true);
         imgViewEdit.setImageBitmap(blurredBitmap);
 
-
+        // Điều chỉnh độ mờ của ảnh dựa trên thanh seekbar
         seekBarBlur.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -448,16 +447,17 @@ public class ViewEdit extends AppCompatActivity {
         output.copyTo(blurredBitmap);
     }
 
+    // Xoay ảnh
     private void handleRotateImage() {
         Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
         Bitmap rotatedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(rotatedBitmap);
-        //originalBitmap.recycle();
         previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
+    // Lật ảnh theo chiều ngang
     private void handleFlipImageHorizontal() {
         Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Matrix matrix = new Matrix();
@@ -470,6 +470,7 @@ public class ViewEdit extends AppCompatActivity {
         previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
+    // Lật ảnh theo chiều dọc
     private void handleFlipImageVertical() {
         Bitmap originalBitmap = getOriginalBitmap(imgViewEdit);
         Matrix matrix = new Matrix();
@@ -477,27 +478,27 @@ public class ViewEdit extends AppCompatActivity {
         matrix.postTranslate(0, originalBitmap.getHeight());
         Bitmap flippedBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getHeight(), matrix, true);
         imgViewEdit.setImageBitmap(flippedBitmap);
-        //originalBitmap.recycle();
         previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
+    // Cắt ảnh
     private void handleCropImage(float firstRatio, float secondRatio) {
         refreshPicture();
         int width = originImage.getWidth();
         int height = originImage.getHeight();
 
+        //Cắt ảnh 3:4
         if (firstRatio == 3f && secondRatio == 4f) {
             int newHeight = (int) (width * firstRatio / secondRatio);
 
-            // Calculate the y-coordinate for the top of the new image
 
             int y = (height - newHeight) / 2;
-//            y = y < 0 ? -y : y;
-            // Create a new bitmap with the desired dimensions
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
             imgViewEdit.setImageBitmap(croppedBitmap);
 
-        } else {
+        }
+        // Cắt ảnh 16:9
+        else {
             int originalWidth = originImage.getWidth();
             int originalHeight = originImage.getHeight();
             int newWidth = originalWidth;
@@ -519,6 +520,8 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleBrightnessLevel() {
         Bitmap tempBitmap = getOriginalBitmap(imgViewEdit);
+
+        // Chỉnh độ sáng của ảnh dựa trên thanh seekbar
         seekBarBrightnessLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -567,6 +570,8 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleContrastLevel() {
         Bitmap tempBitmap = getOriginalBitmap(imgViewEdit);
+
+        //Chỉnh độ tương phản của ảnh
         seekBarContrast.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -611,12 +616,10 @@ public class ViewEdit extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // Not needed
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Not needed
             }
         });
 
@@ -627,6 +630,7 @@ public class ViewEdit extends AppCompatActivity {
         Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
         imgViewEdit.setImageBitmap(bitmap);
 
+        // Vẽ ảnh dựa vào việc bắt sự kiện click chuột
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -657,6 +661,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleAddTextImage() {
 
+        // Thêm text dựa vào việc bắt sự kiện click chuột
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -696,7 +701,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private void handleAddStickerImage() {
 
-
+        // Thêm sticker dựa vào việc bắt sự kiện click chuột
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -720,7 +725,6 @@ public class ViewEdit extends AppCompatActivity {
                             canvas.drawBitmap(scaledSticker, x, y, null);
                             imgViewEdit.setImageBitmap(mutableBitmap);
                             previousBitmaps.add(getOriginalBitmap(imgViewEdit));
-                            //imgViewEdit.invalidate();
                         }
                         else {
                             Toast.makeText(ViewEdit.this, "Please choose your sticker", Toast.LENGTH_SHORT).show();
@@ -746,8 +750,6 @@ public class ViewEdit extends AppCompatActivity {
         originImage = drawable.getBitmap();
 
         edtTxtInput = findViewById(R.id.edtTxtInput);
-
-//        viewTxtAdd = findViewById(R.id.viewTxtAdd);
 
 
         emoteOption = findViewById(R.id.emoteOption);
