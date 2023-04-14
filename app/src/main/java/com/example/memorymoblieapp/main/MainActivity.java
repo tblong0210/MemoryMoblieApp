@@ -100,19 +100,19 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
 
         // Go to settings to turn on all files access permission
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-//                && !Environment.isExternalStorageManager()) {
-//            try {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-//                Uri uri = Uri.fromParts("package", getPackageName(), null);
-//                intent.setData(uri);
-//                startActivity(intent);
-//            } catch (ActivityNotFoundException e) {
-//                Intent intent = new Intent();
-//                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-//                startActivity(intent);
-//            }
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                && !Environment.isExternalStorageManager()) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivity(intent);
+            }
+        }
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);

@@ -648,6 +648,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                         case DialogInterface.BUTTON_POSITIVE:
                                             try {
                                                 compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
+                                                MainActivity.updateZipList();
                                                 Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
                                             } catch (IOException e) {
                                                 throw new RuntimeException(e);
@@ -667,10 +668,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                             else {
                                 try {
                                     compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
+                                    MainActivity.updateZipList();
+                                    Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
-                                Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
                             }
 
                             dialog1.dismiss();
@@ -737,6 +739,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     else {
                         try {
                             compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
+                            Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
+                            MainActivity.updateZipList();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
