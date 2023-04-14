@@ -66,6 +66,7 @@
     <string name="bottom_navigation_recycle_bin">Recycle bin</string>
     <string name="bottom_navigation_download_from_url">Download image from URL</string>
     <string name="bottom_navigation_settings">Settings</string>
+    <string name="bottom_navigation_zip">Zip</string>
     <string name="selection_add_to_album">Add to album</string>
     <string name="selection_remove_from_album">Remove from album</string>
     <string name="selection_love">Love</string>

@@ -65,6 +65,7 @@
     <string name="bottom_navigation_recycle_bin">Thùng rác</string>
     <string name="bottom_navigation_download_from_url">Tải ảnh bằng URL</string>
     <string name="bottom_navigation_settings">Cài đặt</string>
+    <string name="bottom_navigation_zip">Zip</string>
     <string name="selection_add_to_album">Thêm vào album</string>
     <string name="selection_remove_from_album">Gỡ khỏi album</string>
     <string name="selection_love">Yêu thích</string>

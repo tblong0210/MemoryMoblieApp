@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,8 +19,10 @@ import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.FrameLayout;
@@ -39,6 +42,7 @@ import com.example.memorymoblieapp.fragment.ImageFragment;
 import com.example.memorymoblieapp.fragment.ImageListFragment;
 
 import com.example.memorymoblieapp.fragment.UrlDialog;
+import com.example.memorymoblieapp.fragment.ZipFileFragment;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.fragment.SettingsFragment;
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isVerify = false; // Status of album blocking
     @SuppressLint("StaticFieldLeak")
     static FrameLayout frame_layout_selection_features_bar;
+    ArrayList<String> zipList;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -92,6 +97,21 @@ public class MainActivity extends AppCompatActivity {
 
         String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
+
+        // Go to settings to turn on all files access permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                && !Environment.isExternalStorageManager()) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivity(intent);
+            }
+        }
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -204,6 +224,11 @@ public class MainActivity extends AppCompatActivity {
                         } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
+                        } else if (R.id.zip == itemId) {
+                            zipList = new ArrayList<>();
+                            zipList.add("123");
+                            ZipFileFragment zipFileFragment = new ZipFileFragment(zipList);
+                            fragmentTransaction.replace(R.id.frame_layout_content, zipFileFragment).commit();
                         }
 
                         return true;
