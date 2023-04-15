@@ -6,7 +6,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -27,14 +26,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.memorymoblieapp.DownloadImageFromURL;
 import com.example.memorymoblieapp.ImagesGallery;
 import com.example.memorymoblieapp.R;
 
-import com.example.memorymoblieapp.adapter.GalleryAdapter;
 import com.example.memorymoblieapp.adapter.ImageListAdapter;
 import com.example.memorymoblieapp.databinding.ActivityMainBinding;
 import com.example.memorymoblieapp.fragment.AlbumFragment;
@@ -54,6 +51,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -68,16 +66,10 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> lovedImageList;
     public static ArrayList<String> deletedImageList;
     static BottomNavigationView bottomNavigationView;
-    private static final int PERMISSION_REQUEST_CODE = 200;
-    //    private ArrayList<String> imagePaths = new ArrayList<String>();
-    private RecyclerView recyclerView;
     private static List<String> imageDates;
     static ArrayList<String> images;
     static ArrayList<String> newImage;
     static ArrayList<String> trashListImage;
-    GalleryAdapter galleryAdapter;
-    boolean isPermission = false;
-    private static final int MY_READ_PERMISSION_CODE = 101;
     public static boolean isVerify = false; // Status of album blocking
     @SuppressLint("StaticFieldLeak")
     static FrameLayout frame_layout_selection_features_bar;
@@ -93,26 +85,25 @@ public class MainActivity extends AppCompatActivity {
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
 
-        String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
+        @SuppressLint("InlinedApi") String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER
+                , Manifest.permission.MANAGE_EXTERNAL_STORAGE};
 
         // Go to settings to turn on all files access permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-                && !Environment.isExternalStorageManager()) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivity(intent);
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+//                && !Environment.isExternalStorageManager()) {
+//            try {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+//                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                intent.setData(uri);
+//                startActivity(intent);
+//            } catch (ActivityNotFoundException e) {
+//                Intent intent = new Intent();
+//                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+//                startActivity(intent);
+//            }
+//        }
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -259,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     public static ArrayList<String> handleSortListImageView() {
         ArrayList<String> newImage = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
 
         int flag = 0;
@@ -285,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
                 newImage.add(imagePath);
                 imageDates.add(dateFormat.format(imageDate));
                 flag++;
-//                Log.d("MyTag", dateFormat.format(imageDate) + imagePath);
             }
         }
         return newImage;
@@ -349,14 +339,21 @@ public class MainActivity extends AppCompatActivity {
                     // Do nothing
                 }
 
+                @SuppressLint("SimpleDateFormat")
                 @Override
                 public void onScanCompleted(String path, Uri uri) {
                     newImage.clear();
                     imageDates.clear();
-//                    newImage = handleSortListImageView();
+                    newImage = handleSortListImageView();
                     File imageFile = new File(path);
                     Date imageDate = new Date(imageFile.lastModified());
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat;
+
+                    if (imageDate.getYear() == calendar.get(Calendar.YEAR))
+                        dateFormat = new SimpleDateFormat("dd/MM");
+                    else
+                        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
                     Log.d("Taggg", path + dateFormat.format(imageDate));
                 }
@@ -455,6 +452,8 @@ public class MainActivity extends AppCompatActivity {
         File directory = new File(folderPath);
         File[] files = directory.listFiles();
         ArrayList<String> zipFilePaths = new ArrayList<>();
+
+        if (files == null || files.length == 0) return zipFilePaths;
 
         for (File file : files) {
             if (file.isFile() && file.getName().endsWith(".zip")) {

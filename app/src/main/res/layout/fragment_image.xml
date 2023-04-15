@@ -51,17 +51,48 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="30dp">
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:elevation="10dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_shape_conner_10"
-            android:tint="@color/black"
-            android:src="@drawable/ic_search"/>
+            android:id="@+id/btnUrl"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_shape_conner_20"
+            android:padding="10dp"
+            android:src="@drawable/ic_link"
+            android:tint="?attr/colorOnPrimary"
+            android:visibility="gone"
+            tools:ignore="ContentDescription,UseAppTint" />
+
+        <ImageView
+            android:id="@+id/btnCamera"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/btnUrl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_shape_conner_20"
+            android:padding="10dp"
+            android:src="@drawable/ic_camera"
+            android:tint="?attr/colorOnPrimary"
+            android:visibility="gone"
+            tools:ignore="ContentDescription,UseAppTint" />
+
+        <ImageView
+            android:id="@+id/btnAddImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/btnCamera"
+            android:background="@drawable/bg_shape_conner_20"
+            android:padding="15dp"
+            android:src="@drawable/ic_add"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
