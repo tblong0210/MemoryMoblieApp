@@ -19,12 +19,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
-import com.example.memorymoblieapp.fragment.AlbumFragment;
 import com.example.memorymoblieapp.fragment.ZipFileFragment;
-import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
-import com.example.memorymoblieapp.local_data_storage.KeyData;
-import com.example.memorymoblieapp.main.MainActivity;
-import com.example.memorymoblieapp.obj.Album;
 
 import java.io.File;
 import java.util.ArrayList;
