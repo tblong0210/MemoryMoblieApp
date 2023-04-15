@@ -4,11 +4,10 @@
         android:id="@+id/recycleBin"
         android:title="@string/bottom_navigation_recycle_bin" />
     <item
-        android:id="@+id/URL"
-        android:title="@string/bottom_navigation_download_from_url" />
+        android:id="@+id/zip"
+        android:title="@string/bottom_navigation_zip" />
     <item
         android:id="@+id/settings"
         android:title="@string/bottom_navigation_settings" />
-    <item android:id="@+id/zip"
-        android:title="@string/bottom_navigation_zip" />
+
 </menu>

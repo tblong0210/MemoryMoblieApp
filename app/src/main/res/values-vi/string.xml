@@ -27,6 +27,7 @@
     <string name="action_search_by_name">Tên</string>
     <string name="action_search_by_album">Album</string>
     <string name="view_album">Xem album</string>
+    <string name="view_image">Xem danh sách ảnh</string>
     <string name="query_hint_name">Tìm kiếm theo tên</string>
     <string name="query_hint_album">Tìm kiếm theo album</string>
     <string name="notif_delete_image">Xóa thành công</string>

@@ -1,7 +1,9 @@
 package com.example.memorymoblieapp.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,10 +28,13 @@ import android.widget.TextView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.GalleryAdapter;
+import com.example.memorymoblieapp.local_data_storage.KeyData;
+import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewSearch;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -229,6 +235,41 @@ public class ImageFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_CAPTURED) {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                saveImage(bitmap);
+            }
+        }
+    }
+
+    void saveImage(Bitmap bitmap) {
+        File pictureFile = new File(getFolderDirectory(), bitmap.toString() + ".jpg");
+        FileOutputStream output = null;
+        try {
+            output = new FileOutputStream(pictureFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+            output.flush();
+            output.close();
+        } catch (Exception e) {
+            Log.e("Error to save image! ", e.getMessage());
+        }
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.putExtra(KeyData.CURRENT_FRAGMENT.getKey(), R.string.view_image);
+        startActivity(intent);
+    }
+
+    private File getFolderDirectory() {
+        String pathFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString() + "/Camera";
+        File pictureDirectory = new File(pathFolder);
+        if (!pictureDirectory.exists())
+            pictureDirectory.mkdirs();
+        return pictureDirectory;
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -242,12 +283,12 @@ public class ImageFragment extends Fragment {
 
     void setAnimationButton(boolean isPressed) {
         if (isPressed) {
-            btnAddImage.setImageResource(R.drawable.ic_close);
+            btnAddImage.setImageResource(R.drawable.ic_add);
             btnCamera.startAnimation(menuFABHide);
             btnUrl.startAnimation(menuFABHide);
         }
         else {
-            btnAddImage.setImageResource(R.drawable.ic_add);
+            btnAddImage.setImageResource(R.drawable.ic_close);
             btnCamera.startAnimation(menuFABShow);
             btnUrl.startAnimation(menuFABShow);
         }

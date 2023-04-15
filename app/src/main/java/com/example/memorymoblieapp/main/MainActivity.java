@@ -248,9 +248,7 @@ public class MainActivity extends AppCompatActivity {
                         if (R.id.recycleBin == itemId) {
                             ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, getString(R.string.bottom_navigation_recycle_bin), "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
-                        } else if (R.id.URL == itemId) {
-                            new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
-                        } else if (R.id.settings == itemId) {
+                        }  else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
                         } else if (R.id.zip == itemId) {
@@ -365,20 +363,22 @@ public class MainActivity extends AppCompatActivity {
                 @SuppressLint("SimpleDateFormat")
                 @Override
                 public void onScanCompleted(String path, Uri uri) {
-                    newImage.clear();
-                    imageDates.clear();
-                    newImage = handleSortListImageView();
-                    File imageFile = new File(path);
-                    Date imageDate = new Date(imageFile.lastModified());
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat dateFormat;
-
-                    if (imageDate.getYear() == calendar.get(Calendar.YEAR))
-                        dateFormat = new SimpleDateFormat("dd/MM");
-                    else
-                        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-                    Log.d("Taggg", path + dateFormat.format(imageDate));
+//                    newImage.clear();
+////                    imageDates.clear();
+////                    images = ImagesGallery.listOfImages(MainActivity.this);
+////                    newImage = handleSortListImageView();
+////                    File imageFile = new File(path);
+////                    Date imageDate = new Date(imageFile.lastModified());
+////                    Calendar calendar = Calendar.getInstance();
+////                    SimpleDateFormat dateFormat;
+////
+////                    if (imageDate.getYear() == calendar.get(Calendar.YEAR))
+////                        dateFormat = new SimpleDateFormat("dd/MM");
+////                    else
+////                        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+////
+////                    Log.d("Taggg", path + dateFormat.format(imageDate));
+                    initiateApp();
                 }
             });
         } catch (Exception e) {
@@ -447,6 +447,9 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.more);
 
             return true;
+        }
+        else if(idFragment == R.string.view_image){
+            initiateApp();
         }
         return false;
     }

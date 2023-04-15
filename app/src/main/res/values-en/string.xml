@@ -11,6 +11,7 @@
     <string name="action_wallpaper">Set as wallpaper</string>
     <string name="action_lockscreen">Set as lock pattern</string>
     <string name="view_details">Details</string>
+    <string name="view_image">View image fragment</string>
     <string name="action_crop_edit_view">Crop</string>
     <string name="action_filter_edit_view">Filter</string>
     <string name="action_brightness_edit_view">Brightness</string>
