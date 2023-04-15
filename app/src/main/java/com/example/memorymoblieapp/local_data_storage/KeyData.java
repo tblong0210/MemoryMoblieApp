@@ -15,7 +15,10 @@ public enum KeyData {
     DARK_MODE,
     CURRENT_FRAGMENT,
     LIST_IMAGE_VIEW,
+    LANGUAGE_CURRENT,
     PATH_CURRENT_IMAGE_VIEW;
+
+
 
     public String getKey() {
         switch (this) {
@@ -49,6 +52,8 @@ public enum KeyData {
                 return "LIST_IMAGE_VIEW";
             case PATH_CURRENT_IMAGE_VIEW:
                 return "PATH_CURRENT_IMAGE_VIEW";
+            case LANGUAGE_CURRENT:
+                return "LANGUAGE_CURRENT";
             default:
                 return null;
         }
