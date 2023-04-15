@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,9 +139,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                     if (listSelect.contains(imagePath)) {
                         listSelect.remove(imagePath);
                         ivSelect.setImageResource(R.drawable.circle_unfill);
+                        changeBrightness(holders.get(getAdapterPosition()).img, 1f);
                     } else {
                         listSelect.add(imagePath);
                         ivSelect.setImageResource(R.drawable.checked);
+                        changeBrightness(holders.get(getAdapterPosition()).img, 0.6f);
                     }
                     if (listSelect.isEmpty())
                         turnOffSelectMode();
@@ -195,8 +199,10 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
             if (listSelect != null) {
                 selectMode = false;
                 listSelect.clear();
-                for (ViewHolder holder : holders)
+                for (ViewHolder holder : holders) {
                     holder.ivSelect.setVisibility(View.GONE);
+                    changeBrightness(holder.img, 1f);
+                }
 
                 ImageListFragment.imgBtnChangeViewContainer.setVisibility(View.VISIBLE);
                 ImageListFragment.imgBtnBackContainer.setVisibility(View.GONE);
@@ -207,6 +213,14 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    static void changeBrightness(@NonNull ImageView iv, float scale) {
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        colorMatrix.setScale(scale, scale, scale, 1f);
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
+        iv.setColorFilter(colorFilter);
     }
 
     public static Vector<String> getListSelect() {
