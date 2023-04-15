@@ -44,7 +44,7 @@ public class AlbumFragment extends Fragment {
         if (albumList.isEmpty() || !albumList.get(0).getAlbumName().isBlank())
             albumList.add(0, new Album(""));
 
-        adapter = new AlbumAdapter(albumList, context);
+        adapter = new AlbumAdapter(albumList, albumsFragment.getContext());
         recycler.setAdapter(adapter);
 
         return albumsFragment;

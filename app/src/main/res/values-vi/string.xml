@@ -139,6 +139,7 @@
     <string name="toast_deleted">Đã xóa</string>
     <string name="toast_cannot_delete">Không thể xóa</string>
     <string name="toast_restore_successfully">Khôi phục thành công</string>
+    <string name="toast_blank_album">Không có ảnh trong album</string>
 
     <string name="title_loves">Yêu thích</string>
     <string name="title_recycle_bin">Thùng rác</string>
@@ -158,4 +159,8 @@
     <string name="alert_dialog_blank_file_name_notification">Vui lòng nhập tên file</string>
     <string name="alert_dialog_overwrite_confirm">File đã tồn tại, bạn có muốn ghi đè không?</string>
     <string name="toast_compress_file_successfully">Nén file thành công</string>
+
+    <string name="album_image">Ảnh</string>
+    <string name="album_new_album">Album mới</string>
+
 </resources>

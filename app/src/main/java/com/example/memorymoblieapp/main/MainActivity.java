@@ -101,11 +101,10 @@ public class MainActivity extends AppCompatActivity {
         isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
-        
-        String lang ="vi";
-       if( DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey())==true)
-        {
-            lang="en";
+
+        String lang = "vi";
+        if (DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey()) == true) {
+            lang = "en";
         }
 
         Locale locale = new Locale(lang);
@@ -114,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 
-        
-        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -180,13 +178,13 @@ public class MainActivity extends AppCompatActivity {
         File directory = new File(zipPath);
         if (!directory.exists())
             directory.mkdirs();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager())
-            zipList = getZipList(zipPath);
+        zipList = getZipList(zipPath);
     }
 
     @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
         imageDates = new ArrayList<>();
+        zipList = new ArrayList<>();
 
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
 
@@ -243,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    ImageListFragment loveImageFragment = new ImageListFragment(lovedImageList, "Yêu thích", "Love");
+                    ImageListFragment loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");
                     fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;
@@ -257,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                         int itemId = menuItem.getItemId();
 
                         if (R.id.recycleBin == itemId) {
-                            ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, "Thùng rác", "TrashBin");
+                            ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, getString(R.string.bottom_navigation_recycle_bin), "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
@@ -415,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-        }
+        } else finish();
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();
