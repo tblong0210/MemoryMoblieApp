@@ -36,6 +36,9 @@ public class SettingsFragment extends Fragment {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchDarkMode;
     boolean isSpinnerInitialized = true;
+
+    public SettingsFragment() {}
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View settingsFragment = inflater.inflate(R.layout.settings_fragment, container, false);
@@ -73,11 +76,10 @@ public class SettingsFragment extends Fragment {
                     isSpinnerInitialized = false;
                     return;
                 }
-                if(getString(R.string.language_vietnamese)==languages.get(pos)) {
+                if (getString(R.string.language_vietnamese) == languages.get(pos)) {
                     DataLocalManager.saveBooleanData(KeyData.LANGUAGE_CURRENT.getKey(), false);
                     Log.d("langg", "vietnam1");
-                }
-                else {
+                } else {
                     Log.d("langg", "english1");
                     DataLocalManager.saveBooleanData(KeyData.LANGUAGE_CURRENT.getKey(), true);
                 }

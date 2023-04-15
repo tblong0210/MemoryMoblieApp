@@ -91,8 +91,9 @@
             android:layout_below="@+id/btnCamera"
             android:background="@drawable/bg_shape_conner_20"
             android:padding="15dp"
+            android:tint="?attr/colorOnPrimary"
             android:src="@drawable/ic_add"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription,UseAppTint" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

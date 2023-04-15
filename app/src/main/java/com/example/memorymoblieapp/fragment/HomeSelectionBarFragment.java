@@ -46,6 +46,11 @@ public class HomeSelectionBarFragment extends Fragment {
     ArrayList<String> listSelect;
     ArrayList<String> albumsName;
 
+    public HomeSelectionBarFragment() {
+        listSelect = new ArrayList<>();
+        albumsName = new ArrayList<>();
+    }
+
     @SuppressLint("NonConstantResourceId")
     @Nullable
     @Override
@@ -171,9 +176,7 @@ public class HomeSelectionBarFragment extends Fragment {
                         if (R.id.share == itemId) {
                             ShareImageToMedia shareImageToMedia = new ShareImageToMedia(listSelect, context);
                             shareImageToMedia.sharePictures();
-                        }
-
-                        else if (R.id.duplicate == itemId) {
+                        } else if (R.id.duplicate == itemId) {
                             DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                                 switch (which) {
                                     case DialogInterface.BUTTON_POSITIVE:

@@ -25,17 +25,19 @@ public class StickerRecViewAdapter extends RecyclerView.Adapter<StickerRecViewAd
     private ArrayList<Sticker> stickers = new ArrayList<>();
     private Context context;
     private Bitmap StickerChosen;
+
     public StickerRecViewAdapter(Context context) {
-        this.context= context;
+        this.context = context;
     }
 
-    public Bitmap getStickerChosen(){
+    public Bitmap getStickerChosen() {
         return StickerChosen;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sticker_list_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sticker_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -49,7 +51,7 @@ public class StickerRecViewAdapter extends RecyclerView.Adapter<StickerRecViewAd
         holder.parent_list_sticker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StickerChosen= stickerChoose;
+                StickerChosen = stickerChoose;
             }
         });
 
@@ -65,14 +67,15 @@ public class StickerRecViewAdapter extends RecyclerView.Adapter<StickerRecViewAd
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView stickerItemViewEdit;
         private CardView parent_list_sticker;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            parent_list_sticker=itemView.findViewById(R.id.parent_list_sticker);
+            parent_list_sticker = itemView.findViewById(R.id.parent_list_sticker);
             stickerItemViewEdit = itemView.findViewById(R.id.stickerItemViewEdit);
         }
     }

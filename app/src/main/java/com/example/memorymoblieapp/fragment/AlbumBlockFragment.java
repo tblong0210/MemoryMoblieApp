@@ -35,7 +35,7 @@ public class AlbumBlockFragment extends Fragment {
     View dividerSetupPassword;
     View dividerDeletePassword;
 
-
+    public AlbumBlockFragment(){}
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

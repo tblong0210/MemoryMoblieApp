@@ -31,6 +31,10 @@ public class TrashBinSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ArrayList<String> listSelect;
 
+    public TrashBinSelectionBarFragment() {
+        listSelect = new ArrayList<>();
+    }
+
     @SuppressLint("NonConstantResourceId")
     @Nullable
     @Override

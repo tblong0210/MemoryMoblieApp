@@ -62,8 +62,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    ImageFragment imageFragment;
-    FragmentTransaction fragmentTransaction;
+    static ImageFragment imageFragment;
+    static FragmentTransaction fragmentTransaction;
     public static boolean detailed; // view option of image fragment
     public static ArrayList<Album> albumList;
     public static ArrayList<String> lovedImageList;
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
 
         String lang = "vi";
-        if (DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey()) == true) {
+        if (DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey())) {
             lang = "en";
         }
 
@@ -145,14 +145,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void updateData(Context context) {
+        imageDates.clear();
+        images.clear();
+        newImage.clear();
+
         imageDates = new ArrayList<>();
-
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
-
         images = ImagesGallery.listOfImages(context);
         newImage = handleSortListImageView();
+
         ArrayList<String> picturePath = new ArrayList<>(newImage);
         picturePath.removeAll(Collections.singleton(" "));
+
+        imageFragment.setImages(newImage);
+        imageFragment.setImageDates(imageDates);
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePath);
@@ -212,13 +218,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.image:
                     newImage.clear();
                     imageDates.clear();
-                    newImage = handleSortListImageView();
+                    updateData(this);
                     imageFragment = new ImageFragment(newImage, imageDates);
                     fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                     fragmentTransaction.addToBackStack("image");
                     return true;
-
-
                 case R.id.album:
                     AlbumFragment albumFragment = new AlbumFragment(albumList);
                     fragmentTransaction.replace(R.id.frame_layout_content, albumFragment).commit();
@@ -242,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                         if (R.id.recycleBin == itemId) {
                             ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, getString(R.string.bottom_navigation_recycle_bin), "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
-                        }  else if (R.id.settings == itemId) {
+                        } else if (R.id.settings == itemId) {
                             SettingsFragment settingsFragment = new SettingsFragment();
                             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
                         } else if (R.id.zip == itemId) {
@@ -416,6 +420,8 @@ public class MainActivity extends AppCompatActivity {
     public Boolean set2FragmentLayout() {
         Intent intent = getIntent();
         int idFragment = intent.getIntExtra(KeyData.CURRENT_FRAGMENT.getKey(), -1);
+        intent.removeExtra(KeyData.CURRENT_FRAGMENT.getKey());
+
         String data = intent.getStringExtra("data");
         data = data == null ? "" : data;
 
@@ -441,8 +447,7 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.more);
 
             return true;
-        }
-        else if(idFragment == R.string.view_image){
+        } else if (idFragment == R.string.view_image) {
             initiateApp();
         }
         return false;

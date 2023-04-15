@@ -42,6 +42,11 @@ public class AlbumSelectionBarFragment extends Fragment {
     ArrayList<String> listSelect;
     int albumPos;
 
+    public AlbumSelectionBarFragment() {
+        albumPos = 0;
+        listSelect = new ArrayList<>();
+    }
+
     public AlbumSelectionBarFragment(int albumPos) {
         this.albumPos = albumPos;
     }
@@ -141,9 +146,7 @@ public class AlbumSelectionBarFragment extends Fragment {
                         if (R.id.share == itemId) {
                             ShareImageToMedia shareImageToMedia = new ShareImageToMedia(listSelect, context);
                             shareImageToMedia.sharePictures();
-                        }
-
-                        else if (R.id.duplicate == itemId) {
+                        } else if (R.id.duplicate == itemId) {
                             DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                                 switch (which) {
                                     case DialogInterface.BUTTON_POSITIVE:

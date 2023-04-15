@@ -46,6 +46,7 @@ import com.example.memorymoblieapp.adapter.StickerRecViewAdapter;
 import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 
+import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.obj.FilterImageKey;
 import com.example.memorymoblieapp.obj.ColorClass;
 import com.example.memorymoblieapp.obj.Sticker;
@@ -174,6 +175,7 @@ public class ViewEdit extends AppCompatActivity {
             mutableBitmap = originImage.copy(Bitmap.Config.ARGB_8888, true);
         }
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return false;
@@ -233,8 +235,9 @@ public class ViewEdit extends AppCompatActivity {
         fileOutputStream.close();
         DataLocalManager.saveData(KeyData.IMAGE_PATH_LIST.getKey(), picturePaths);
         Intent intent = new Intent(ViewEdit.this, ViewImage.class);
-        intent.putExtra("path_image", new_path);
+        intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), new_path);
         startActivity(intent);
+        MainActivity.updateData(this);
     }
 
 

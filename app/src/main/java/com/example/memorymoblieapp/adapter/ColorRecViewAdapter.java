@@ -23,17 +23,19 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
     private ArrayList<ColorClass> colors = new ArrayList<>();
     private Context context;
     private int ColorChosen;
+
     public ColorRecViewAdapter(Context context) {
-        this.context= context;
+        this.context = context;
     }
 
-    public int getColorChosen(){
+    public int getColorChosen() {
         return ColorChosen;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.paint_list_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.paint_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -47,7 +49,7 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
         holder.parent_list_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ColorChosen= colorChoose;
+                ColorChosen = colorChoose;
             }
         });
 
@@ -63,14 +65,15 @@ public class ColorRecViewAdapter extends RecyclerView.Adapter<ColorRecViewAdapte
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView colorItemViewEdit;
         private CardView parent_list_color;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            parent_list_color=itemView.findViewById(R.id.parent_list_color);
+            parent_list_color = itemView.findViewById(R.id.parent_list_color);
             colorItemViewEdit = itemView.findViewById(R.id.colorItemViewEdit);
         }
     }

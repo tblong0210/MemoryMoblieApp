@@ -26,13 +26,16 @@ public class UrlDialog extends DialogFragment {
     private EditText edtURL;
     MainActivity main;
 
+    public UrlDialog() {
+        url = "";
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
             main = (MainActivity) getActivity();
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             throw new IllegalStateException("MainActivity must implement callbacks");
         }
     }
@@ -49,7 +52,7 @@ public class UrlDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         url = edtURL.getText().toString();
                         dismiss();
-                        main.onMsgFromFragToMain( url);
+                        main.onMsgFromFragToMain(url);
                     }
                 });
 

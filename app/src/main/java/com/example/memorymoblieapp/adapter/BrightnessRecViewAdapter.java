@@ -21,16 +21,16 @@ import java.util.ArrayList;
 public class BrightnessRecViewAdapter extends RecyclerView.Adapter<BrightnessRecViewAdapter.ViewHolder> {
     private ArrayList<Brightness> brightnesses = new ArrayList<>();
     private Context context;
-    public BrightnessRecViewAdapter(Context context) {
-        this.context= context;
-    }
 
+    public BrightnessRecViewAdapter(Context context) {
+        this.context = context;
+    }
 
 
     @NonNull
     @Override
     public BrightnessRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.brightness_list_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.brightness_list_item, parent, false);
         BrightnessRecViewAdapter.ViewHolder holder = new BrightnessRecViewAdapter.ViewHolder(view);
         return holder;
     }
@@ -59,14 +59,15 @@ public class BrightnessRecViewAdapter extends RecyclerView.Adapter<BrightnessRec
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView brightnessName;
         private ImageView brightnessItemViewEdit;
         private CardView parent_list_brightness;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            brightnessName= itemView.findViewById(R.id.brightnessName);
-            parent_list_brightness=itemView.findViewById(R.id.parent_list_brightness);
+            brightnessName = itemView.findViewById(R.id.brightnessName);
+            parent_list_brightness = itemView.findViewById(R.id.parent_list_brightness);
             brightnessItemViewEdit = itemView.findViewById(R.id.brightnessItemViewEdit);
         }
     }

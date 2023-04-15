@@ -52,7 +52,7 @@ public class ImageFragment extends Fragment {
     private String mParam2;
     private RecyclerView recyclerview;
     private ArrayList<String> images;
-    List<String> imageDates = new ArrayList<>();
+    List<String> imageDates;
     private ImageView searchBtn;
     private ImageView sortBtn;
     private ImageView btnAddImage, btnUrl, btnCamera;
@@ -167,10 +167,8 @@ public class ImageFragment extends Fragment {
                 Log.d("tag", "Clicked sort button");
 
                 ArrayList<String> newImageDateFlag = new ArrayList<>();
-                ;
                 ArrayList<String> newImagesFlag = new ArrayList<String>();
                 ArrayList<String> newImageDate = new ArrayList<>();
-                ;
                 ArrayList<String> newImages = new ArrayList<String>();
                 int flag = 0;
 
@@ -245,6 +243,30 @@ public class ImageFragment extends Fragment {
         }
     }
 
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        if (images == null) return;
+
+        this.images = images;
+        galleryAdapter.setImages(images);
+        galleryAdapter.notifyDataSetChanged();
+    }
+
+    public List<String> getImageDates() {
+        return imageDates;
+    }
+
+    public void setImageDates(List<String> imageDates) {
+        if (imageDates == null) return;
+
+        this.imageDates = imageDates;
+        galleryAdapter.setImageDates(imageDates);
+        galleryAdapter.notifyDataSetChanged();
+    }
+
     void saveImage(Bitmap bitmap) {
         File pictureFile = new File(getFolderDirectory(), bitmap.toString() + ".jpg");
         FileOutputStream output = null;
@@ -256,9 +278,7 @@ public class ImageFragment extends Fragment {
         } catch (Exception e) {
             Log.e("Error to save image! ", e.getMessage());
         }
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.putExtra(KeyData.CURRENT_FRAGMENT.getKey(), R.string.view_image);
-        startActivity(intent);
+        MainActivity.updateData(getContext());
     }
 
     private File getFolderDirectory() {
@@ -286,8 +306,7 @@ public class ImageFragment extends Fragment {
             btnAddImage.setImageResource(R.drawable.ic_add);
             btnCamera.startAnimation(menuFABHide);
             btnUrl.startAnimation(menuFABHide);
-        }
-        else {
+        } else {
             btnAddImage.setImageResource(R.drawable.ic_close);
             btnCamera.startAnimation(menuFABShow);
             btnUrl.startAnimation(menuFABShow);
@@ -298,8 +317,7 @@ public class ImageFragment extends Fragment {
         if (isPressed) {
             btnCamera.setVisibility(FloatingActionButton.INVISIBLE);
             btnUrl.setVisibility(FloatingActionButton.INVISIBLE);
-        }
-        else {
+        } else {
             btnCamera.setVisibility(FloatingActionButton.VISIBLE);
             btnUrl.setVisibility(FloatingActionButton.VISIBLE);
         }
@@ -309,8 +327,7 @@ public class ImageFragment extends Fragment {
         try {
             Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             getActivity().startActivityFromFragment(this, takePhotoIntent, CAMERA_CAPTURED);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e("Error to open camera! ", e.getMessage());
         }
     }

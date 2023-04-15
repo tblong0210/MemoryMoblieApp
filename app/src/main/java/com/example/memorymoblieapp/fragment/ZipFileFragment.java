@@ -34,6 +34,11 @@ public class ZipFileFragment extends Fragment {
     static ZipFileAdapter adapter;
     private Context context;
 
+    public ZipFileFragment(){
+        this.context = null;
+        this.zipList = new ArrayList<>();
+    }
+
     public ZipFileFragment(ArrayList<String> zipList) {
         this.zipList = zipList;
     }

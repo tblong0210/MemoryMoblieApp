@@ -30,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="test.zip"
+            android:textColor="?attr/colorSurface"
             android:textSize="20sp"
             tools:ignore="HardcodedText" />
 
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="/storage/emulated/0/MemoryZip"
             android:textSize="12sp"
+            android:textColor="?attr/colorSurface"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

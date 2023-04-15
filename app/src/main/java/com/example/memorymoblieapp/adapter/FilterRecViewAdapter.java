@@ -41,7 +41,7 @@ public class FilterRecViewAdapter extends RecyclerView.Adapter<FilterRecViewAdap
         return holder;
     }
 
-    public void setImageFilterView(Bitmap bitmap){
+    public void setImageFilterView(Bitmap bitmap) {
         this.imageFilterView = bitmap;
         notifyDataSetChanged();
     }
