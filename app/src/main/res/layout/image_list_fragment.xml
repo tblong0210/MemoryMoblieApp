@@ -24,7 +24,23 @@
         </TextView>
 
         <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/ivAlbumContainer"
+            android:id="@+id/imgBtnBackContainer"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            app:cardCornerRadius="20dp">
+
+            <ImageButton
+                android:id="@+id/imgBtnBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_back"
+                android:tint="?attr/colorOnPrimary"
+                android:background="@drawable/bg_shape_conner_5"                android:layout_gravity="center"
+                tools:ignore="ContentDescription,UseAppTint" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgBtnChangeViewContainer"
             android:layout_width="65dp"
             android:layout_height="35dp"
             app:cardCornerRadius="20dp">
