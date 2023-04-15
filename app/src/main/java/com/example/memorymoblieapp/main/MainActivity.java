@@ -1,18 +1,24 @@
 package com.example.memorymoblieapp.main;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
@@ -47,7 +53,9 @@ import com.example.memorymoblieapp.obj.Album;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,6 +64,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -76,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> zipList;
     public static String zipPath;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,27 +93,39 @@ public class MainActivity extends AppCompatActivity {
         isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
+
+        String lang = "vi";
+        if (DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey()) == true) {
+            lang = "en";
+        }
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        @SuppressLint("InlinedApi") String[] permissionList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER
-                , Manifest.permission.MANAGE_EXTERNAL_STORAGE};
+        String[] permissionList = new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.REQUEST_INSTALL_PACKAGES,
+                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
 
         // Go to settings to turn on all files access permission
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-//                && !Environment.isExternalStorageManager()) {
-//            try {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-//                Uri uri = Uri.fromParts("package", getPackageName(), null);
-//                intent.setData(uri);
-//                startActivity(intent);
-//            } catch (ActivityNotFoundException e) {
-//                Intent intent = new Intent();
-//                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-//                startActivity(intent);
-//            }
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivity(intent);
+            }
+        }
+
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -143,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void updateZipList() {
-        zipPath = Environment.getExternalStorageDirectory() + "/MemoryZip";
+        zipPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/MemoryZip";
         File directory = new File(zipPath);
         if (!directory.exists())
             directory.mkdirs();
@@ -153,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     private void initiateApp() {
         imageDates = new ArrayList<>();
+        zipList = new ArrayList<>();
 
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
 
@@ -162,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
         picturePath.removeAll(Collections.singleton(" "));
 
-        zipPath = Environment.getExternalStorageDirectory() + "/MemoryZip";
+        zipPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/MemoryZip";
         File directory = new File(zipPath);
         if (!directory.exists())
             directory.mkdirs();
@@ -209,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    ImageListFragment loveImageFragment = new ImageListFragment(lovedImageList, "Yêu thích", "Love");
+                    ImageListFragment loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");
                     fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;
@@ -223,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                         int itemId = menuItem.getItemId();
 
                         if (R.id.recycleBin == itemId) {
-                            ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, "Thùng rác", "TrashBin");
+                            ImageListFragment deletedImageFragment = new ImageListFragment(deletedImageList, getString(R.string.bottom_navigation_recycle_bin), "TrashBin");
                             fragmentTransaction.replace(R.id.frame_layout_content, deletedImageFragment).commit();
                         } else if (R.id.URL == itemId) {
                             new UrlDialog().show(getSupportFragmentManager(), UrlDialog.Tag);
@@ -387,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-        }
+        } else finish();
 
         if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
         else super.onBackPressed();

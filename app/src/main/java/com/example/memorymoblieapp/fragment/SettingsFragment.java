@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class SettingsFragment extends Fragment {
     Spinner spinnerLanguage;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchDarkMode;
-
+    boolean isSpinnerInitialized = true;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View settingsFragment = inflater.inflate(R.layout.settings_fragment, container, false);
@@ -54,21 +55,45 @@ public class SettingsFragment extends Fragment {
 
         // Language
         ArrayList<String> languages = new ArrayList<>();
-        languages.add(getString(R.string.language_vietnamese));
+
+        languages.add("Chọn ngôn ngữ");
         languages.add(getString(R.string.language_united_states));
+        languages.add(getString(R.string.language_vietnamese));
+
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.item_text_view, languages);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguage.setAdapter(arrayAdapter);
+//
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 Toast.makeText(context, languages.get(pos), Toast.LENGTH_SHORT).show();
+                if (isSpinnerInitialized) {
+                    isSpinnerInitialized = false;
+                    return;
+                }
+                if(getString(R.string.language_vietnamese)==languages.get(pos)) {
+                    DataLocalManager.saveBooleanData(KeyData.LANGUAGE_CURRENT.getKey(), false);
+                    Log.d("langg", "vietnam1");
+                }
+                else {
+                    Log.d("langg", "english1");
+                    DataLocalManager.saveBooleanData(KeyData.LANGUAGE_CURRENT.getKey(), true);
+                }
+
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra(KeyData.CURRENT_FRAGMENT.getKey(), R.string.settings);
+                startActivity(intent);
+                getActivity().recreate();
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
 
         // Dark mode
         Boolean isThemeDark = DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey());

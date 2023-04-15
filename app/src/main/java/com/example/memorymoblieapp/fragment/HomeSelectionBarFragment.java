@@ -133,7 +133,7 @@ public class HomeSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-                    builder2.setMessage(context.getString(R.string.alert_dialog_delete_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener2)
+                    builder2.setMessage(context.getString(R.string.alert_dialog_add_images_to_loves_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener2)
                             .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener2).show();
 
                     return true;
