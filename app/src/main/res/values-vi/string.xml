@@ -153,5 +153,9 @@
     <string name="choose_color_paint">Vui lòng chọn màu để vẽ</string>
     <string name="provide_text">Vui lòng nhập ký tự</string>
     <string name="provide_text_color">Vui lòng chọn màu chữ</string>
-
+    <string name="alert_dialog_export_zip">Xuất zip</string>
+    <string name="alert_dialog_enter_file_name_hint">Nhập tên file</string>
+    <string name="alert_dialog_blank_file_name_notification">Vui lòng nhập tên file</string>
+    <string name="alert_dialog_overwrite_confirm">File đã tồn tại, bạn có muốn ghi đè không?</string>
+    <string name="toast_compress_file_successfully">Nén file thành công</string>
 </resources>
