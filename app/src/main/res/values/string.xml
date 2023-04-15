@@ -128,10 +128,6 @@
     <string name="alert_dialog_remove_images_from_loves_confirm">Bạn có chắc muốn gỡ các ảnh được chọn khỏi mục yêu thích không?</string>
     <string name="alert_dialog_restore_images_confirm">Bạn có chắc muốn khôi phục các ảnh vừa chọn không?</string>
     <string name="alert_dialog_permanently_delete_confirm">Ảnh sẽ bị xóa vĩnh viễn. Bạn có chắc muốn xóa các ảnh vừa chọn không?</string>
-    <string name="alert_dialog_export_zip">Xuất zip</string>
-    <string name="alert_dialog_enter_file_name_hint">Nhập tên file</string>
-    <string name="alert_dialog_blank_file_name_notification">Vui lòng nhập tên file</string>
-    <string name="alert_dialog_overwrite_confirm">File đã tồn tại, bạn có muốn ghi đè không?</string>
 
     <string name="toast_remove_images_from_album">Đã gỡ các ảnh được chọn khỏi album</string>
     <string name="toast_add_images_to_loves">Đã thêm các ảnh được chọn vào mục yêu thích</string>
@@ -143,7 +139,6 @@
     <string name="toast_deleted">Đã xóa</string>
     <string name="toast_cannot_delete">Không thể xóa</string>
     <string name="toast_restore_successfully">Khôi phục thành công</string>
-    <string name="toast_compress_file_successfully">Nén file thành công</string>
 
     <string name="title_loves">Yêu thích</string>
     <string name="title_recycle_bin">Thùng rác</string>
