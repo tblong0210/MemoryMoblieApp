@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -31,6 +32,9 @@ public class ImageListFragment extends Fragment {
     private final String title;
     String type;
     int albumPos;
+
+    public static CardView imgBtnBackContainer;
+    public static CardView imgBtnChangeViewContainer;
 
     public ImageListFragment() {
         imageList = new ArrayList<>();
@@ -73,11 +77,24 @@ public class ImageListFragment extends Fragment {
         txtTitle.setText(title);
 
         ImageButton imgBtnChangeView = imagesFragment.findViewById(R.id.imgBtnChangeView);
+        ImageButton imgBtnBack = imagesFragment.findViewById(R.id.imgBtnBack);
+
+        imgBtnBackContainer = imagesFragment.findViewById(R.id.imgBtnBackContainer);
+        imgBtnBackContainer.setVisibility(View.GONE);
+        imgBtnChangeViewContainer = imagesFragment.findViewById(R.id.imgBtnChangeViewContainer);
+        imgBtnChangeViewContainer.setVisibility(View.VISIBLE);
 
         if (MainActivity.detailed)
             imgBtnChangeView.setImageDrawable(imagesFragment.getContext().getResources().getDrawable(R.drawable.ic_view_detail));
         else
             imgBtnChangeView.setImageDrawable(imagesFragment.getContext().getResources().getDrawable(R.drawable.ic_view_grid));
+
+        imgBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageListAdapter.ViewHolder.turnOffSelectMode();
+            }
+        });
 
         imgBtnChangeView.setOnClickListener(view -> {
             MainActivity.detailed = !MainActivity.detailed;

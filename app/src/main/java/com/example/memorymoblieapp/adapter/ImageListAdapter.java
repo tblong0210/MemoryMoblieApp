@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.fragment.AlbumSelectionBarFragment;
+import com.example.memorymoblieapp.fragment.ImageListFragment;
 import com.example.memorymoblieapp.fragment.LoveSelectionBarFragment;
 import com.example.memorymoblieapp.fragment.TrashBinSelectionBarFragment;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
@@ -182,6 +183,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFragment).commit();
                 fragmentTransaction.addToBackStack("");
 
+                ImageListFragment.imgBtnChangeViewContainer.setVisibility(View.GONE);
+                ImageListFragment.imgBtnBackContainer.setVisibility(View.VISIBLE);
+
                 MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                 MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.VISIBLE);
             }
@@ -193,6 +197,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 listSelect.clear();
                 for (ViewHolder holder : holders)
                     holder.ivSelect.setVisibility(View.GONE);
+
+                ImageListFragment.imgBtnChangeViewContainer.setVisibility(View.VISIBLE);
+                ImageListFragment.imgBtnBackContainer.setVisibility(View.GONE);
 
                 // Display bottom navigation bar, hide selection features bar
                 MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
