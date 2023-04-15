@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -148,7 +149,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         deleteAlbum(view, getAdapterPosition());
                     } else if (R.id.export == itemId) {
                         try {
-                            exportAlbum(view, getAdapterPosition(), albums.get(getAdapterPosition()).getAlbumName());
+                            exportAlbum(view, getAdapterPosition());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
@@ -172,7 +173,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     final LinearLayout ll = new LinearLayout(context);
                     ll.removeAllViews();
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(50,10,50,10);
+                    params.setMargins(50, 10, 50, 10);
                     input.setLayoutParams(params);
                     ll.addView(input);
 
@@ -216,7 +217,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         final LinearLayout ll = new LinearLayout(context);
                         ll.removeAllViews();
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        params.setMargins(50,10,50,10);
+                        params.setMargins(50, 10, 50, 10);
                         passwordInput.setLayoutParams(params);
                         ll.addView(passwordInput);
 
@@ -277,7 +278,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(50,10,50,10);
+            params.setMargins(50, 10, 50, 10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -358,7 +359,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(50,10,50,10);
+            params.setMargins(50, 10, 50, 10);
             input.setLayoutParams(params);
             ll.addView(input);
 
@@ -409,7 +410,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(50,10,50,10);
+            params.setMargins(50, 10, 50, 10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -432,7 +433,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                     DialogInterface.OnClickListener dialogClickListener = (dialog1, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                Toast.makeText(context,  context.getString(R.string.alert_dialog_deleted_album)+ " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, context.getString(R.string.alert_dialog_deleted_album) + " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
                                 AlbumFragment.albumList.remove(position);
                                 AlbumFragment.updateItem();
                                 MainActivity.albumList.remove(position - 1);
@@ -457,7 +458,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Toast.makeText(context,  context.getString(R.string.alert_dialog_deleted_album)+ " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.alert_dialog_deleted_album) + " '" + albums.get(position).getAlbumName() + "'", Toast.LENGTH_LONG).show();
                         AlbumFragment.albumList.remove(position);
                         AlbumFragment.updateItem();
                         MainActivity.albumList.remove(position - 1);
@@ -493,7 +494,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(50,10,50,10);
+            params.setMargins(50, 10, 50, 10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -545,7 +546,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             final LinearLayout ll = new LinearLayout(context);
             ll.removeAllViews();
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(50,10,50,10);
+            params.setMargins(50, 10, 50, 10);
             passwordInput.setLayoutParams(params);
             ll.addView(passwordInput);
 
@@ -576,42 +577,185 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         }
     }
 
-    private static void exportAlbum(@NonNull View itemView, int position, String folderName) throws Exception {
+    private static void exportAlbum(@NonNull View itemView, int position) throws Exception {
         Context context = itemView.getContext();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        File currentFile = new File( albums.get(position).getPathImages().get(0));
-        compressFiles(albums.get(position).getPathImages(), currentFile.getParent() + "/" + folderName + ".zip", folderName);
+        if (!MainActivity.isVerify && albums.get(position).getBlock() && albumPassword != null) {
+            builder.setTitle(context.getString(R.string.alert_dialog_blocked_album));
 
-        shareZip(currentFile.getParent() + "/" + folderName + ".zip", itemView.getContext());
+            final EditText passwordInput = new EditText(itemView.getContext());
+            passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            passwordInput.setHint(context.getString(R.string.alert_dialog_enter_password_hint));
+            passwordInput.requestFocus();
+
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(50, 10, 50, 10);
+            passwordInput.setLayoutParams(params);
+            ll.addView(passwordInput);
+
+            builder.setView(ll);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
+                String password = passwordInput.getText().toString();
+                if (password.isBlank()) {
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                } else if (!BCrypt.checkpw(password, albumPassword)) {
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_wrong_password_notification), Toast.LENGTH_SHORT).show();
+                    passwordInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_wrong_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                } else {
+                    MainActivity.isVerify = true;
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_unblock_successfully_notification), Toast.LENGTH_SHORT).show();
+
+                    AlertDialog.Builder builder5 = new AlertDialog.Builder(context);
+                    builder5.setTitle(context.getString(R.string.alert_dialog_export_zip));
+
+                    final EditText folderNameInput = new EditText(context);
+                    folderNameInput.setInputType(InputType.TYPE_CLASS_TEXT);
+                    folderNameInput.setHint(context.getString(R.string.alert_dialog_enter_file_name_hint));
+                    folderNameInput.requestFocus();
+
+                    final LinearLayout ll1 = new LinearLayout(context);
+                    ll1.removeAllViews();
+                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params1.setMargins(50, 10, 50, 10);
+                    folderNameInput.setLayoutParams(params1);
+                    ll1.addView(folderNameInput);
+
+                    builder5.setView(ll1);
+                    builder5.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+                    builder5.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
+
+                    AlertDialog dialog1 = builder5.create();
+                    dialog1.show();
+                    dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view2 -> {
+                        String folderName = folderNameInput.getText().toString();
+                        if (folderName.isBlank()) {
+                            Toast.makeText(context, context.getString(R.string.alert_dialog_blank_file_name_notification), Toast.LENGTH_SHORT).show();
+                            folderNameInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_file_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                        } else {
+                            File file = new File(MainActivity.zipPath + "/" + folderName + ".zip");
+                            if (file.exists()) {
+                                DialogInterface.OnClickListener dialogClickListener = (dialog2, which) -> {
+                                    switch (which) {
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            try {
+                                                compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
+                                                MainActivity.updateZipList();
+                                                Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+                                            break;
+
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            dialog2.cancel();
+                                            break;
+                                    }
+                                };
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
+                                builder1.setMessage(context.getString(R.string.alert_dialog_overwrite_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                                        .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+                            }
+
+                            else {
+                                try {
+                                    compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
+                                    MainActivity.updateZipList();
+                                    Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+
+                            dialog1.dismiss();
+                        }
+                    });
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+
+                    dialog.dismiss();
+                }
+            });
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+        } else {
+            builder.setTitle(context.getString(R.string.alert_dialog_export_zip));
+
+            final EditText folderNameInput = new EditText(context);
+            folderNameInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            folderNameInput.setHint(context.getString(R.string.alert_dialog_enter_file_name_hint));
+            folderNameInput.requestFocus();
+
+            final LinearLayout ll = new LinearLayout(context);
+            ll.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(50, 10, 50, 10);
+            folderNameInput.setLayoutParams(params);
+            ll.addView(folderNameInput);
+
+            builder.setView(ll);
+            builder.setPositiveButton(context.getString(R.string.alert_dialog_confirm), null);
+            builder.setNegativeButton(context.getString(R.string.alert_dialog_cancel), null);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
+                String folderName = folderNameInput.getText().toString();
+                if (folderName.isBlank()) {
+                    Toast.makeText(context, context.getString(R.string.alert_dialog_blank_file_name_notification), Toast.LENGTH_SHORT).show();
+                    folderNameInput.setError(HtmlCompat.fromHtml("<font>" + context.getString(R.string.alert_dialog_blank_file_name_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                } else {
+                    File file = new File(MainActivity.zipPath + "/" + folderName + ".zip");
+                    if (file.exists()) {
+                        DialogInterface.OnClickListener dialogClickListener = (dialog1, which) -> {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    try {
+                                        String outputZipFilePath = MainActivity.zipPath + "/" + folderName + ".zip";
+                                        compressFiles(albums.get(position).getPathImages(), outputZipFilePath, folderName);
+                                        Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
+                                        MainActivity.updateZipList();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    dialog1.cancel();
+                                    break;
+                            }
+                        };
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
+                        builder1.setMessage(context.getString(R.string.alert_dialog_overwrite_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                                .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+                    }
+
+                    else {
+                        try {
+                            compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
+                            Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
+                            MainActivity.updateZipList();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Toast.makeText(context, context.getString(R.string.toast_compress_file_successfully), Toast.LENGTH_SHORT).show();
+                    }
+
+                    dialog.dismiss();
+                }
+            });
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
+        }
     }
 
     public static void compressFiles(@NonNull ArrayList<String> filePaths, String outputZipFilePath, String folderName) throws IOException {
-//        // Tạo đối tượng ZipOutputStream
-//        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(outputZipFilePath));
-//
-//        // Duyệt qua danh sách đường dẫn file và thêm chúng vào zip file
-//        for (String filePath : filePaths) {
-//            File file = new File(filePath);
-//            FileInputStream fileInputStream = new FileInputStream(file);
-//            ZipEntry zipEntry = new ZipEntry(folderName + "/" + file.getName());
-//            zipOutputStream.putNextEntry(zipEntry);
-//
-//            byte[] buffer = new byte[1024];
-//            int length;
-//            while ((length = fileInputStream.read(buffer)) > 0) {
-//                zipOutputStream.write(buffer, 0, length);
-//            }
-//
-//            fileInputStream.close();
-//            zipOutputStream.closeEntry();
-//        }
-//
-//        // Đóng ZipOutputStream
-//        zipOutputStream.close();
-
-
-
-// Tạo đối tượng ZipOutputStream
+        // Tạo đối tượng ZipOutputStream
         ZipArchiveOutputStream zipOutputStream = new ZipArchiveOutputStream(new FileOutputStream(outputZipFilePath));
 
         // Duyệt qua danh sách đường dẫn file và thêm chúng vào zip file
@@ -633,25 +777,5 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         // Đóng ZipOutputStream
         zipOutputStream.close();
-    }
-
-    @SuppressLint("QueryPermissionsNeeded")
-    private static void shareZip(String path, Context context) {
-        int REQUEST_CODE_SHARE = 1111;
-        File fileImage = new File(path);
-        // Khởi tạo đường dẫn zip và nội dung chia sẻ
-
-        Uri mImageUri = FileProvider.getUriForFile(context, "com.example.memorymoblieapp.fileprovider", fileImage);
-        String mShareContent = "";
-
-        // Tạo Intent để chia sẻ nội dung
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("image/*");
-        shareIntent.putExtra(Intent.EXTRA_STREAM, mImageUri);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, mShareContent);
-
-        // Tạo Intent chooser để hiển thị danh sách các ứng dụng cho phép chia sẻ nội dung
-        Intent chooserIntent = Intent.createChooser(shareIntent, "Chọn ứng dụng");
-        ((AppCompatActivity)context).startActivityForResult(chooserIntent, REQUEST_CODE_SHARE);
     }
 }

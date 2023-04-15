@@ -66,6 +66,7 @@
     <string name="bottom_navigation_recycle_bin">Recycle bin</string>
     <string name="bottom_navigation_download_from_url">Download image from URL</string>
     <string name="bottom_navigation_settings">Settings</string>
+    <string name="bottom_navigation_zip">Zip</string>
     <string name="selection_add_to_album">Add to album</string>
     <string name="selection_remove_from_album">Remove from album</string>
     <string name="selection_love">Love</string>
@@ -128,6 +129,10 @@
     <string name="alert_dialog_remove_images_from_loves_confirm">Are you sure to remove the selected images from loves</string>
     <string name="alert_dialog_restore_images_confirm">Are you sure to restore the selected images?</string>
     <string name="alert_dialog_permanently_delete_confirm">The images will be permanently deleted. Are you sure?</string>
+    <string name="alert_dialog_export_zip">Export zip</string>
+    <string name="alert_dialog_enter_file_name_hint">Enter file name</string>
+    <string name="alert_dialog_blank_file_name_notification">Please enter file name</string>
+    <string name="alert_dialog_overwrite_confirm">The file already exists. Do you want to overwrite it?</string>
 
     <string name="toast_remove_images_from_album">Removed selected images from album</string>
     <string name="toast_add_images_to_loves">Added selected images to loves</string>
@@ -139,6 +144,7 @@
     <string name="toast_deleted">Deleted</string>
     <string name="toast_cannot_delete">Cannot delete</string>
     <string name="toast_restore_successfully">Restore successfully</string>
+    <string name="toast_compress_file_successfully">Compress file successfully</string>
 
     <string name="title_loves">Loves</string>
     <string name="title_recycle_bin">Recycle bin</string>
