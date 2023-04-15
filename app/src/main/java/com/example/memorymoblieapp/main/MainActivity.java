@@ -65,6 +65,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -99,6 +100,21 @@ public class MainActivity extends AppCompatActivity {
         isThemeDark = isThemeDark != null && isThemeDark;
 
         setTheme(isThemeDark ? R.style.ThemeDark_MemoryMobileApp : R.style.Theme_MemoryMobileApp);
+        
+        String lang ="vi";
+       if( DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey())==true)
+        {
+            lang="en";
+        }
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        binding = ActivityMainBinding.inflate(getLayoutInflater());
