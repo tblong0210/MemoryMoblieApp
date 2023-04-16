@@ -163,4 +163,6 @@
 
     <string name="album_image">Ảnh</string>
     <string name="album_new_album">Album mới</string>
+
+    <string name="choose_language">Chọn ngôn ngữ</string>
 </resources>

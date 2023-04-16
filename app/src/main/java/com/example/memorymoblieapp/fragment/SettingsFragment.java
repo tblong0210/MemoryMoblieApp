@@ -58,8 +58,7 @@ public class SettingsFragment extends Fragment {
 
         // Language
         ArrayList<String> languages = new ArrayList<>();
-
-        languages.add("Chọn ngôn ngữ");
+        languages.add(getString(R.string.choose_language));
         languages.add(getString(R.string.language_united_states));
         languages.add(getString(R.string.language_vietnamese));
 
