@@ -127,7 +127,7 @@ public class LoveSelectionBarFragment extends Fragment {
                                 DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
 
                                 refresh(context);
-                                Toast.makeText(context, context.getString(R.string.toast_remove_images_from_loves) + listSelect.size(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.toast_remove_images_from_loves), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -142,16 +142,16 @@ public class LoveSelectionBarFragment extends Fragment {
 
                     return true;
 
-                case R.id.delete:
-                    DialogInterface.OnClickListener dialogClickListener1 = (dialog, which) -> {
+                case R.id.duplicate:
+                    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                move2TrashBin(listSelect);
+                                duplicate(listSelect);
                                 MainActivity.updateData(context);
 
                                 // Refresh and exit choose image mode
                                 refresh(context);
-                                Toast.makeText(context, context.getString(R.string.toast_delete_successfully), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, context.getString(R.string.toast_add_duplicate_successfully), Toast.LENGTH_SHORT).show();
 
                                 break;
 
@@ -160,46 +160,16 @@ public class LoveSelectionBarFragment extends Fragment {
                                 break;
                         }
                     };
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener1)
-                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener1).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage(context.getString(R.string.alert_dialog_duplicate_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
+                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
 
                     return true;
 
-                case R.id.more:
-                    PopupMenu popupMenu = new PopupMenu(context, bottomNavigationView, Gravity.END);
-                    popupMenu.inflate(R.menu.love_selection_bar_more_menu);
-                    popupMenu.setOnMenuItemClickListener(menuItem -> {
-                        int itemId = menuItem.getItemId();
+                case R.id.share:
+                    ShareImageToMedia shareImageToMedia = new ShareImageToMedia(listSelect, context);
+                    shareImageToMedia.sharePictures();
 
-                        if (R.id.share == itemId) {
-                            ShareImageToMedia shareImageToMedia = new ShareImageToMedia(listSelect, context);
-                            shareImageToMedia.sharePictures();
-                        } else if (R.id.duplicate == itemId) {
-                            DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
-                                switch (which) {
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        duplicate(listSelect);
-                                        MainActivity.updateData(context);
-
-                                        // Refresh and exit choose image mode
-                                        refresh(context);
-                                        Toast.makeText(context, context.getString(R.string.toast_add_duplicate_successfully), Toast.LENGTH_SHORT).show();
-
-                                        break;
-
-                                    case DialogInterface.BUTTON_NEGATIVE:
-                                        dialog.cancel();
-                                        break;
-                                }
-                            };
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setMessage(context.getString(R.string.alert_dialog_duplicate_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
-                                    .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
-                        }
-                        return true;
-                    });
-                    popupMenu.show();
                     return true;
             }
 
@@ -235,22 +205,7 @@ public class LoveSelectionBarFragment extends Fragment {
         DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
     }
 
-    void move2TrashBin(@NonNull ArrayList<String> filePaths) {
-        MainActivity.deletedImageList.addAll(filePaths);
-        MainActivity.deletedImageList = removeDuplicates(MainActivity.deletedImageList);
-        DataLocalManager.saveData(KeyData.TRASH_LIST.getKey(), MainActivity.deletedImageList);
-
-        MainActivity.lovedImageList.removeAll(filePaths);
-        DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
-
-        for (Album album : MainActivity.albumList)
-            for (String filePath : filePaths)
-                album.removeImage(filePath);
-
-        DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
-    }
-
-    void refresh(Context context) {
+    void refresh(@NonNull Context context) {
         // Refresh and exit choose image mode
         ImageListFragment imageFragment = new ImageListFragment(MainActivity.lovedImageList, context.getString(R.string.title_loves), "Love");
         AppCompatActivity activity = (AppCompatActivity) context;

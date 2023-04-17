@@ -164,4 +164,6 @@
     <string name="album_image">images</string>
     <string name="album_new_album">New album</string>
 
+    <string name="choose_language">Choose language</string>
+
 </resources>

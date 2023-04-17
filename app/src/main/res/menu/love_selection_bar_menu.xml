@@ -11,14 +11,12 @@
         android:icon="@mipmap/ic_unlove"
         android:title="@string/selection_unlove" />
 
-    <item
-        android:id="@+id/delete"
-        android:icon="@drawable/ic_trash"
-        android:title="@string/selection_delete" />
+    <item android:id="@+id/duplicate"
+        android:icon="@mipmap/ic_duplicate"
+        android:title="@string/selection_duplicate" />
 
-    <item
-        android:id="@+id/more"
-        android:icon="@drawable/ic_more"
-        android:title="@string/selection_more" />
+    <item android:id="@+id/share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/selection_share" />
 
 </menu>

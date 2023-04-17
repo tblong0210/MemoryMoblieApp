@@ -4,6 +4,8 @@ package com.example.memorymoblieapp.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 
 import android.util.TypedValue;
@@ -141,7 +143,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
                 if (listSelect.contains(image)) {
                     Drawable drawable = context.getDrawable(R.drawable.checked);
-                    holder.iconLongSelect.setBackground(drawable);
+                    holder.iconLongSelect.setForeground(drawable);
+                    Drawable shadow = context.getDrawable(R.drawable.shadow);
+                    holder.iconLongSelect.setBackground(shadow);
+                    changeBrightness(holder.image, 0.6f);
                 }
                 int sizeInDp = 25;
                 int sizeInPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sizeInDp, context.getResources().getDisplayMetrics());
@@ -168,12 +173,17 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 if (isLongClick) {
                     if (listSelect.contains(image)) {
                         Drawable drawable = context.getDrawable(R.drawable.circle_unfill);
-                        holder.iconLongSelect.setBackground(drawable);
-
+                        holder.iconLongSelect.setForeground(drawable);
+                        Drawable shadow = context.getDrawable(R.drawable.shadow);
+                        holder.iconLongSelect.setBackground(shadow);
+                        changeBrightness(holder.image, 1f);
                         listSelect.remove(image);
                     } else {
                         Drawable drawable = context.getDrawable(R.drawable.checked);
-                        holder.iconLongSelect.setBackground(drawable);
+                        holder.iconLongSelect.setForeground(drawable);
+                        Drawable shadow = context.getDrawable(R.drawable.shadow);
+                        holder.iconLongSelect.setBackground(shadow);
+                        changeBrightness(holder.image, 0.6f);
                         listSelect.add(image);
                     }
                 } else {
@@ -255,5 +265,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     public static void clearListSelect() {
         listSelect.clear();
+    }
+
+    void changeBrightness(@NonNull ImageView iv, float scale) {
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        colorMatrix.setScale(scale, scale, scale, 1f);
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
+        iv.setColorFilter(colorFilter);
     }
 }

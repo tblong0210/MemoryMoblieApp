@@ -53,7 +53,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -223,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                     fragmentTransaction.addToBackStack("image");
                     return true;
+
                 case R.id.album:
                     AlbumFragment albumFragment = new AlbumFragment(albumList);
                     fragmentTransaction.replace(R.id.frame_layout_content, albumFragment).commit();

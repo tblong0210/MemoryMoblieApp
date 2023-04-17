@@ -27,6 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/circle_unfill"
+            android:background="@drawable/shadow"
             tools:ignore="ContentDescription,RtlHardcoded" />
 
     </FrameLayout>
