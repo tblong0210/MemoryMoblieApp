@@ -33,6 +33,7 @@ import com.example.memorymoblieapp.main.MainActivity;
 import com.example.memorymoblieapp.view.ViewImage;
 
 
+import java.io.File;
 import java.util.List;
 import java.util.Vector;
 
@@ -112,7 +113,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         } else {
             holder.textDate.setText(" ");
         }
-
 
         if (position == 0
                 || position == 1 || position == 2 || (position > 0 && imageDates.get(position - 1).equals(imageDates.get(position)) == false)

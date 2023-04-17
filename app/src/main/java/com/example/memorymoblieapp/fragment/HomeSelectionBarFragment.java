@@ -251,7 +251,7 @@ public class HomeSelectionBarFragment extends Fragment {
 
     void refresh(Context context) {
         // Refresh and exit choose image mode
-        MainActivity.updateData(getContext());
+        MainActivity.updateData(context);
         ImageFragment imageFragment = new ImageFragment(MainActivity.getNewImage(), MainActivity.getImageDates());
         AppCompatActivity activity = (AppCompatActivity) context;
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();

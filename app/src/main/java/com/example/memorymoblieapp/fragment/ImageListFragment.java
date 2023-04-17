@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -23,6 +24,7 @@ import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.adapter.ImageListAdapter;
 import com.example.memorymoblieapp.main.MainActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ImageListFragment extends Fragment {
@@ -62,6 +64,12 @@ public class ImageListFragment extends Fragment {
         View imagesFragment;
         imagesFragment = inflater.inflate(R.layout.image_list_fragment, container, false);
 
+        for (String image : imageList) {
+            File file = new File(image);
+            if (!file.exists())
+                imageList.remove(image);
+        }
+
         RecyclerView recycler = imagesFragment.findViewById(R.id.imageRecView);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -89,12 +97,7 @@ public class ImageListFragment extends Fragment {
         else
             imgBtnChangeView.setImageDrawable(imagesFragment.getContext().getResources().getDrawable(R.drawable.ic_view_grid));
 
-        imgBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageListAdapter.ViewHolder.turnOffSelectMode();
-            }
-        });
+        imgBtnBack.setOnClickListener(view -> ImageListAdapter.ViewHolder.turnOffSelectMode());
 
         imgBtnChangeView.setOnClickListener(view -> {
             MainActivity.detailed = !MainActivity.detailed;
