@@ -177,7 +177,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                         listSelect.add(image);
                     }
                 } else {
-                    if (!images.equals(" ")) {
+                    if (!images.get(position).equals(" ")) {
                         Intent intent = new Intent(context, ViewImage.class);
                         intent.putExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey(), images.get(position));
                         context.startActivity(intent);
