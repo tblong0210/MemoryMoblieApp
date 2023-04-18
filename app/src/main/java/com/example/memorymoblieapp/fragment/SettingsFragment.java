@@ -58,10 +58,9 @@ public class SettingsFragment extends Fragment {
 
         // Language
         ArrayList<String> languages = new ArrayList<>();
-        languages.add(getString(R.string.choose_language));
-        languages.add(getString(R.string.language_united_states));
+//        languages.add(getString(R.string.choose_language));
         languages.add(getString(R.string.language_vietnamese));
-
+        languages.add(getString(R.string.language_united_states));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.item_text_view, languages);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,12 +69,11 @@ public class SettingsFragment extends Fragment {
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                Toast.makeText(context, languages.get(pos), Toast.LENGTH_SHORT).show();
                 if (isSpinnerInitialized) {
                     isSpinnerInitialized = false;
                     return;
                 }
-                if (getString(R.string.language_vietnamese) == languages.get(pos)) {
+                if (getString(R.string.language_vietnamese).equals(languages.get(pos))) {
                     DataLocalManager.saveBooleanData(KeyData.LANGUAGE_CURRENT.getKey(), false);
                     Log.d("langg", "vietnam1");
                 } else {
@@ -104,12 +102,8 @@ public class SettingsFragment extends Fragment {
         switchDarkMode.setOnCheckedChangeListener((compoundButton, darkModeOn) -> {
             if (darkModeOn) {
                 DataLocalManager.saveBooleanData(KeyData.DARK_MODE.getKey(), true);
-
-                Toast.makeText(context, "Bật chế độ tối", Toast.LENGTH_SHORT).show();
             } else {
                 DataLocalManager.saveBooleanData(KeyData.DARK_MODE.getKey(), false);
-
-                Toast.makeText(context, "Tắt chế độ tối", Toast.LENGTH_SHORT).show();
             }
 
             Intent intent = new Intent(context, MainActivity.class);

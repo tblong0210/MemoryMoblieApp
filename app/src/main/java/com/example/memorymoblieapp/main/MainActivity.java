@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
-
 
         if (!checkPermissionList(permissionList))
             ActivityCompat.requestPermissions(MainActivity.this, permissionList, 1);
@@ -221,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
                     imageFragment = new ImageFragment(newImage, imageDates);
                     fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
                     fragmentTransaction.addToBackStack("image");
-                    Toast.makeText(MainActivity.this, "" + images.size(), Toast.LENGTH_SHORT).show();
                     return true;
 
                 case R.id.album:
