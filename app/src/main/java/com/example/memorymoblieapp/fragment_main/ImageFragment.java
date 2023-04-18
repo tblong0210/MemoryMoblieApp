@@ -191,12 +191,6 @@ public class ImageFragment extends Fragment {
                 }
 
                 for (int i = 0; i < newImagesFlag.size(); i++) {
-                    Log.d("Imagess", newImagesFlag.get(i) + " - " + newImageDateFlag.get(i));
-                }
-
-                Log.d("Tagggg", newImageDateFlag.size() + "  -  " + newImageDateFlag.size());
-
-                for (int i = 0; i < newImagesFlag.size(); i++) {
                     if (!newImagesFlag.get(i).equals(" ")) {
                         if (i != 0 && !newImageDateFlag.get(i).equals(newImageDateFlag.get(i - 1))) {
 
@@ -289,13 +283,6 @@ public class ImageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-//        recyclerview = view.findViewById(R.id.recyclerview_gallery_images);
-//        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-//        recyclerview.setLayoutManager(layoutManager);
-//        recyclerview.setHasFixedSize(true);
-//        GalleryAdapter galleryAdapter = new GalleryAdapter(getContext(), images);
-//        recyclerview.setAdapter(galleryAdapter);
     }
 
     void setAnimationButton(boolean isPressed) {

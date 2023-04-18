@@ -8,6 +8,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +58,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         this.context = context;
         this.images = images;
         this.imageDates = imageDates;
-
-//        , PhotoListener photoListener
         this.photoListener = photoListener;
     }
 
@@ -86,13 +85,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        return new ViewHolder(
-//                LayoutInflater.from(context).inflate(R.layout.gallery_item,parent,false)
-//        );
-
         View v = LayoutInflater.from(context).inflate(R.layout.gallery_item, parent, false);
-
-
         return new ViewHolder(v);
     }
 
@@ -102,36 +95,43 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
         String image = images.get(position);
         Glide.with(context).load(image)
-//                .placeholder(R.drawable.image1)
-//                .error(R.drawable.image3)
                 .into(holder.image);
 
         // set text ngày tạo ảnh
         holder.textDate.setVisibility(View.VISIBLE);
-        if (position == 0 || imageDates.get(position - 1).equals(" ") || (position > 0 && !imageDates.get(position - 1).equals(imageDates.get(position)))) {
+        if (position == 0 || imageDates.get(position - 1).equals(" ") || ( !imageDates.get(position - 1).equals(imageDates.get(position)))) {
             holder.textDate.setText(imageDates.get(position));
         } else {
             holder.textDate.setText(" ");
         }
 
-        if (position == 0
-                || position == 1 || position == 2 || (position > 0 && !imageDates.get(position - 1).equals(imageDates.get(position)))
+        if(position == 0
+                || position == 1 || position == 2 ||
+                ((!imageDates.get(position).equals(" ") )&& (  !imageDates.get(position - 1).equals(imageDates.get(position))
                 || (!imageDates.get(position - 2).equals(imageDates.get(position)))
-                || (!imageDates.get(position - 3).equals(imageDates.get(position)))) {
+                || (!imageDates.get(position - 3).equals(imageDates.get(position)))))) {
             //set size text date
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, // width
                     LinearLayout.LayoutParams.WRAP_CONTENT // height
             );
+            if(position!=0)
+            {
+                Log.d("Image", images.get(position-1));
+                Log.d("Image", String.valueOf(position-1));
+                Log.d("Image", imageDates.get(position-1));
+            }
+            Log.d("Image", images.get(position));
+            Log.d("Image", String.valueOf(position));
             holder.textDate.setLayoutParams(layoutParams);
+            Log.d("Image", imageDates.get(position));
             ViewGroup.MarginLayoutParams layoutParamss =
                     (ViewGroup.MarginLayoutParams) holder.textDate.getLayoutParams();
             layoutParamss.setMargins(30, 50, 16, 10);
             holder.textDate.setLayoutParams(layoutParamss);
         } else {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    0, // width
-                    0
+                    0,0
             );
             holder.textDate.setLayoutParams(layoutParams);
         }
