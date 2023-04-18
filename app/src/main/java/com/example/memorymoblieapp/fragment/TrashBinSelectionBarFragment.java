@@ -80,7 +80,6 @@ public class TrashBinSelectionBarFragment extends Fragment {
                                 for (String filePath : listSelect) {
                                     File sourceFile = new File(filePath);
                                     if (sourceFile.delete()) {
-                                        Toast.makeText(context, context.getString(R.string.toast_deleted) + " '" + sourceFile.getName() + "'", Toast.LENGTH_LONG).show();
                                         MainActivity.deletedImageList.remove(filePath);
                                     } else {
                                         Toast.makeText(context, context.getString(R.string.toast_cannot_delete) + " '" + sourceFile.getName() + "'", Toast.LENGTH_LONG).show();
