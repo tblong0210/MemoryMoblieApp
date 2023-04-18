@@ -246,7 +246,7 @@ public class ImageFragment extends Fragment {
     }
 
     public void setImages(ArrayList<String> images) {
-        if (images == null) return;
+        if (images == null || galleryAdapter == null) return;
 
         this.images = images;
         galleryAdapter.setImages(images);
@@ -258,7 +258,7 @@ public class ImageFragment extends Fragment {
     }
 
     public void setImageDates(List<String> imageDates) {
-        if (imageDates == null) return;
+        if (imageDates == null || galleryAdapter == null) return;
 
         this.imageDates = imageDates;
         galleryAdapter.setImageDates(imageDates);
