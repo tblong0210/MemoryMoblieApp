@@ -28,6 +28,8 @@
     <string name="action_search_by_album">Album</string>
     <string name="view_album">Xem album</string>
     <string name="view_image">Xem danh sách ảnh</string>
+    <string name="notif_completed">Thiết lập thành công!</string>
+    <string name="notif_uncompleted">Thiết lập thất bại!</string>
     <string name="query_hint_name">Tìm kiếm theo tên</string>
     <string name="query_hint_album">Tìm kiếm theo album</string>
     <string name="notif_delete_image">Xóa thành công</string>
@@ -165,5 +167,15 @@
     <string name="album_new_album">Album mới</string>
 
     <string name="choose_language">Chọn ngôn ngữ</string>
+    <string name="notif_available">Mạng ổn định!</string>
+    <string name="notif_unavailable">Mạng không có sẵn!!!</string>
+    <string name="notif_unconnected">Chưa có kết nối mạng!!!</string>
+    <string name="notif_unactivated">Không có mạng hiện đang hoạt động!!!</string>
+
+    <string name="notif_download_OK">Tải ảnh bằng URL thành công!</string>
+    <string name="notif_download_fail">Tải ảnh bằng URL thất bại!!!!</string>
+
+    <string name="notif_unselected">Bạn chưa chọn sticker!!!!</string>
+    <string name="notif_empty_array">Danh sách rỗng!!!</string>
 
 </resources>

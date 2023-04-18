@@ -12,6 +12,8 @@
     <string name="action_lockscreen">Set as lock pattern</string>
     <string name="view_details">Details</string>
     <string name="view_image">View image fragment</string>
+    <string name="notif_completed">Setup completed!</string>
+    <string name="notif_uncompleted">Setup failed!</string>
     <string name="action_crop_edit_view">Crop</string>
     <string name="action_filter_edit_view">Filter</string>
     <string name="action_brightness_edit_view">Brightness</string>
@@ -151,7 +153,8 @@
     <string name="text_dimensions">Dimensions</string>
     <string name="text_location">Location</string>
 
-    <string name="disable_back_edit_view">Image has been restored to its original state</string>version
+    <string name="disable_back_edit_view">Image has been restored to its original state</string>
+    version
     <string name="choose_color_paint">Please choose a color to paint</string>
     <string name="provide_text">Please enter characters</string>
     <string name="provide_text_color">Please select text color</string>
@@ -165,5 +168,17 @@
     <string name="album_new_album">New album</string>
 
     <string name="choose_language">Choose language</string>
+
+    <string name="notif_available">Network is OK!</string>
+    <string name="notif_unavailable">Network is not available!</string>
+    <string name="notif_unconnected">Network is not connected!</string>
+    <string name="notif_unactivated">No network is currently active!</string>
+
+    <string name="notif_download_OK">Download image by URL completed!</string>
+    <string name="notif_download_fail">Download image by URL fail!</string>
+
+    <string name="notif_unselected">Please choose your sticker!</string>
+
+    <string name="notif_empty_array">List is empty!!!</string>
 
 </resources>

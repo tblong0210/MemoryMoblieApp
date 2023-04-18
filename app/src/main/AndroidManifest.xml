@@ -26,23 +26,23 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".view.ViewEdit"
+            android:name=".activity.page_edit.ViewEdit"
             android:exported="false"
             android:label="@string/activity_edit_view" />
         <activity
-            android:name=".view.ViewImage"
+            android:name=".activity.page_image.ViewImage"
             android:exported="false"
             android:label="@string/activity_image_view" />
         <activity
-            android:name=".view.ViewDetails"
+            android:name=".activity.ViewDetails"
             android:exported="false"
             android:label="@string/activity_detail_view" />
         <activity
-            android:name=".view.ViewSearch"
+            android:name=".activity.page_search.ViewSearch"
             android:exported="false"
             android:label="@string/activity_view_search" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

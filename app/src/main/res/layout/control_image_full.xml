@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.memorymoblieapp.controI_image.ZoomableImageView
+    <com.example.memorymoblieapp.activity.page_image.controI_image.ZoomableImageView
         android:id="@+id/largePictureFull"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

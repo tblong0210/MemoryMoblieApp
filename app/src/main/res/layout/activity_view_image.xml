@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ViewImage">
+    tools:context=".activity.page_image.ViewImage">
 
     <RelativeLayout
         android:id="@+id/parentHeader"
@@ -38,7 +38,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <com.example.memorymoblieapp.controI_image.ZoomableViewPager
+    <com.example.memorymoblieapp.activity.page_image.controI_image.ZoomableViewPager
         android:id="@+id/viewPaperMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

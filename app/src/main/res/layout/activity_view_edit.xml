@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnBackground"
-    tools:context=".view.ViewEdit">
+    tools:context=".activity.page_edit.ViewEdit">
 
     <RelativeLayout
         android:layout_width="match_parent"
