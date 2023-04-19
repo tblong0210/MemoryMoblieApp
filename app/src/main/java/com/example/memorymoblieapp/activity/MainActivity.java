@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> images;
     static ArrayList<String> newImage;
     static ArrayList<String> trashListImage;
+
     public static boolean isVerify = false; // Status of album blocking
     @SuppressLint("StaticFieldLeak")
     static FrameLayout frame_layout_selection_features_bar;
@@ -229,8 +231,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");
-                    fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
+                    loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");                    fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;
 
@@ -270,11 +271,33 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> newImage = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
-
+         ArrayList<String> blockistImage = new ArrayList<>();
         int flag = 0;
 
+        if(albumList!=null)
+        {
+            for(int i=0; i<albumList.size();i++)
+            {
+                if(albumList.get(i).getBlock())
+                {
+                    Log.d("hahaha", String.valueOf(albumList.get(i).getPathImages().size()));
+                    ArrayList<String> listImageBlocked = albumList.get(i).getPathImages();
+                    if(blockistImage!=null)
+                    {
+                        for (String imagePath : listImageBlocked) {
+                            Log.d("hahaha", imagePath);
+                            blockistImage.add(imagePath);
+                        }
+                    }
+
+                }
+            }
+        }
+
+
         for (String imagePath : images) {
-            if (imagePath != null && (trashListImage == null || !trashListImage.contains(imagePath))) {
+            if (imagePath != null && (blockistImage == null || !blockistImage.contains(imagePath)) &&
+                    (trashListImage == null || !trashListImage.contains(imagePath))) {
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
                 if (imageDates.size() != 0 && !dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1))) {
