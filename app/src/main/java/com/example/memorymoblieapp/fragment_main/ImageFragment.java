@@ -155,6 +155,7 @@ public class ImageFragment extends Fragment {
                 galleryAdapter.setListSelect();
                 galleryAdapter.notifyDataSetChanged();
                 GalleryAdapter.hideSelectionBar();
+                GalleryAdapter.restoreBrightnessAll();
             }
         });
         recyclerview.setAdapter(galleryAdapter);

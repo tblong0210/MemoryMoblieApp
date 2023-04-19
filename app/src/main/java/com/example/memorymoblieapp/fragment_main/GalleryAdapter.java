@@ -30,6 +30,7 @@ import com.example.memorymoblieapp.R;
 
 import com.example.memorymoblieapp.activity.MainActivity;
 import com.example.memorymoblieapp.activity.page_image.ViewImage;
+import com.example.memorymoblieapp.fragment_love.ImageListAdapter;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 
 
@@ -47,11 +48,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     private boolean isLongClick = false;
     Button cancelLongClickButton;
     private static Vector<String> listSelect = new Vector<String>();
+    public static ArrayList<ViewHolder> holders;
 
     public GalleryAdapter(){
         context = null;
         images = new ArrayList<>();
         imageDates = new ArrayList<>();
+        holders = new ArrayList<>();
     }
 
     public GalleryAdapter(Context context, List<String> images, List<String> imageDates, PhotoListener photoListener) {
@@ -59,6 +62,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         this.images = images;
         this.imageDates = imageDates;
         this.photoListener = photoListener;
+        holders = new ArrayList<>();
     }
 
     public void setImages(List<String> images) {
@@ -147,7 +151,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     holder.iconLongSelect.setForeground(drawable);
                     Drawable shadow = context.getDrawable(R.drawable.shadow);
                     holder.iconLongSelect.setBackground(shadow);
-                    changeBrightness(holder.image, 0.6f);
+                    changeBrightness(holder.image, 1f);
                 }
                 int sizeInDp = 25;
                 int sizeInPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sizeInDp, context.getResources().getDisplayMetrics());
@@ -225,7 +229,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 return false;
             }
         });
-
+        holders.add(holder);
     }
 
     public static void hideSelectionBar() {
@@ -271,11 +275,17 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         listSelect.clear();
     }
 
-    void changeBrightness(@NonNull ImageView iv, float scale) {
+    static void changeBrightness(@NonNull ImageView iv, float scale) {
         ColorMatrix colorMatrix = new ColorMatrix();
         colorMatrix.setSaturation(0);
         colorMatrix.setScale(scale, scale, scale, 1f);
         ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
         iv.setColorFilter(colorFilter);
+    }
+
+    public static void restoreBrightnessAll() {
+        for (ViewHolder holder : holders) {
+            changeBrightness(holder.image, 1f);
+        }
     }
 }
