@@ -115,16 +115,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     LinearLayout.LayoutParams.MATCH_PARENT, // width
                     LinearLayout.LayoutParams.WRAP_CONTENT // height
             );
-            if(position!=0)
-            {
-                Log.d("Image", images.get(position-1));
-                Log.d("Image", String.valueOf(position-1));
-                Log.d("Image", imageDates.get(position-1));
-            }
-            Log.d("Image", images.get(position));
-            Log.d("Image", String.valueOf(position));
+
             holder.textDate.setLayoutParams(layoutParams);
-            Log.d("Image", imageDates.get(position));
             ViewGroup.MarginLayoutParams layoutParamss =
                     (ViewGroup.MarginLayoutParams) holder.textDate.getLayoutParams();
             layoutParamss.setMargins(30, 50, 16, 10);
@@ -136,13 +128,22 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             holder.textDate.setLayoutParams(layoutParams);
         }
 
+        Log.d("sizelist", String.valueOf(listSelect.size()));
 
         if (!image.equals(" ")) {
 
             if (isLongClick) {
 
                 if (listSelect.contains(image)) {
+
                     Drawable drawable = context.getDrawable(R.drawable.checked);
+                    holder.iconLongSelect.setForeground(drawable);
+                    Drawable shadow = context.getDrawable(R.drawable.shadow);
+                    holder.iconLongSelect.setBackground(shadow);
+                    changeBrightness(holder.image, 0.6f);
+                }
+                else {
+                    Drawable drawable = context.getDrawable(R.drawable.circle_unfill);
                     holder.iconLongSelect.setForeground(drawable);
                     Drawable shadow = context.getDrawable(R.drawable.shadow);
                     holder.iconLongSelect.setBackground(shadow);
@@ -166,12 +167,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             holder.iconLongSelect.setVisibility(View.INVISIBLE);
         }
 
-
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isLongClick) {
                     if (listSelect.contains(image)) {
+
                         Drawable drawable = context.getDrawable(R.drawable.circle_unfill);
                         holder.iconLongSelect.setForeground(drawable);
                         Drawable shadow = context.getDrawable(R.drawable.shadow);
@@ -179,6 +180,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                         changeBrightness(holder.image, 1f);
                         listSelect.remove(image);
                     } else {
+
                         Drawable drawable = context.getDrawable(R.drawable.checked);
                         holder.iconLongSelect.setForeground(drawable);
                         Drawable shadow = context.getDrawable(R.drawable.shadow);
@@ -186,6 +188,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                         changeBrightness(holder.image, 0.6f);
                         listSelect.add(image);
                     }
+                    notifyDataSetChanged();
                 } else {
                     if (!images.get(position).equals(" ")) {
                         Intent intent = new Intent(context, ViewImage.class);
