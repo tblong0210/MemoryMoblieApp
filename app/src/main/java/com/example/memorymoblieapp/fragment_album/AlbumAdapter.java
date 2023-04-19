@@ -82,22 +82,25 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         if (position == 0) {
             holder.name.setText(context.getString(R.string.album_new_album));
             holder.quantity.setText("");
-            holder.more.setImageResource(0);
             holder.img.setImageResource(R.mipmap.ic_add_album);
+            holder.more.setVisibility(View.GONE);
         } else {
             holder.quantity.setText(albums.get(position).getPathImages().size() + " " + context.getString(R.string.album_image));
 
-            for (int i = 0; i < albums.get(position).getPathImages().size(); i++) {
-                File currentFile = new File(albums.get(position).getPathImages().get(0));
-                Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
-                if (bitmap != null) {
-                    holder.img.setImageBitmap(bitmap);
-                    break;
+            if (holder.quantity.getText().toString().equals("0 " + context.getString(R.string.album_image)))
+                holder.img.setImageResource(R.mipmap.ic_album);
+
+            else {
+                Toast.makeText(context, holder.quantity.getText().toString(), Toast.LENGTH_SHORT).show();
+                for (String path : albums.get(position).getPathImages()) {
+                    File currentFile = new File(path);
+                    Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
+                    if (bitmap != null) {
+                        holder.img.setImageBitmap(bitmap);
+                        break;
+                    }
                 }
             }
-
-            if (holder.img.getDrawable() == null)
-                holder.img.setImageResource(R.mipmap.ic_album);
         }
     }
 

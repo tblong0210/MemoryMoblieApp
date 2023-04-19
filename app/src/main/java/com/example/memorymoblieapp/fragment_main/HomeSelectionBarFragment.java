@@ -105,12 +105,18 @@ public class HomeSelectionBarFragment extends Fragment {
                         dialog.show();
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view1 -> {
                             if (albumChosenPos[0] >= 0 && !albumsName.isEmpty()) {
-                                MainActivity.albumList.get(albumChosenPos[0]).insertNewImageArray(listSelect);
-                                DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
-                                Toast.makeText(context, context.getString(R.string.toast_add_images_to) + " '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
+                                String albumName = albumsName.get(albumChosenPos[0]);
+                                for (int i = 0; i < MainActivity.albumList.size(); i++) {
+                                    if (albumName.equals(MainActivity.albumList.get(i).getAlbumName())) {
+                                        MainActivity.albumList.get(i).insertNewImageArray(listSelect);
+                                        DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                                        Toast.makeText(context, context.getString(R.string.toast_add_images_to) + " '" + albumsName.get(albumChosenPos[0]) + "'", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    }
+                                }
 
-                                // Refresh and exit choose image mode
-                                refresh(context);
+                                    // Refresh and exit choose image mode
+                                    refresh(context);
 
                                 dialog.dismiss();
                             }

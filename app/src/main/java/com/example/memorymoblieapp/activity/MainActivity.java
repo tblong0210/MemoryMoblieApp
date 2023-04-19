@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     static FrameLayout frame_layout_selection_features_bar;
     public static ArrayList<String> zipList;
     public static String zipPath;
+    @SuppressLint("StaticFieldLeak")
+    public static ImageListFragment loveImageFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @SuppressLint("MissingInflatedId")
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    ImageListFragment loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");
+                    loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");
                     fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;

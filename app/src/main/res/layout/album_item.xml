@@ -30,7 +30,10 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_more"
+                android:src="@drawable/more"
+                android:background="@drawable/shadow"
+                app:itemIconTint="?attr/colorOnPrimary"
+                android:backgroundTint="?attr/colorPrimary"
                 tools:ignore="ContentDescription,RtlHardcoded" />
         </FrameLayout>
 

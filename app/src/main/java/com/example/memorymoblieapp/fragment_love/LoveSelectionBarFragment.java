@@ -117,7 +117,7 @@ public class LoveSelectionBarFragment extends Fragment {
 
                 case R.id.unlove:
                     DialogInterface.OnClickListener dialogClickListener2 = (dialog, which) -> {
-                        switch (which) {
+                        switch (which) {    
                             case DialogInterface.BUTTON_POSITIVE:
                                 MainActivity.lovedImageList.removeAll(listSelect);
                                 DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
