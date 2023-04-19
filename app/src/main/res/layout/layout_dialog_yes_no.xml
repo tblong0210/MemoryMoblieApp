@@ -12,7 +12,7 @@
         android:background="@drawable/bg_shape_conner_16_tl_tr"
         android:gravity="center"
         android:padding="12dp"
-        android:text="Chuyển ảnh này vào thùng rác?"
+        android:text="@string/title_move_image"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -30,13 +30,13 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
             android:backgroundTint="@color/red_200"
-            android:text="Thoát" />
+            android:text="@string/action_cancel" />
 
         <Button
             android:id="@+id/btnMove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue_800"
-            android:text="Di chuyển" />
+            android:text="@string/action_move" />
     </LinearLayout>
 </LinearLayout>

@@ -169,6 +169,7 @@ public class ViewImage extends AppCompatActivity {
                         item.setTitle(R.string.action_favorite);
                     }
                     DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), favorList);
+
                     break;
                 case R.id.edit:
                     Intent intent = new Intent(ViewImage.this, ViewEdit.class);

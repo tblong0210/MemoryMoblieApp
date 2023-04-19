@@ -178,4 +178,6 @@
     <string name="notif_unselected">Bạn chưa chọn sticker!!!!</string>
     <string name="notif_empty_array">Danh sách rỗng!!!</string>
 
+    <string name="action_move">Di chuyển</string>
+    <string name="title_move_image">Chuyển ảnh này vào thùng rác?</string>
 </resources>

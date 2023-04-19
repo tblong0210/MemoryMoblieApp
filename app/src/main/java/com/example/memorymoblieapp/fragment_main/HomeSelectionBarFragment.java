@@ -39,6 +39,8 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeSelectionBarFragment extends Fragment {
     BottomNavigationView bottomNavigationView;

@@ -180,5 +180,8 @@
     <string name="notif_unselected">Please choose your sticker!</string>
 
     <string name="notif_empty_array">List is empty!!!</string>
+    <string name="action_move">Move</string>
+
+    <string name="title_move_image">Move this photo to the trash?</string>
 
 </resources>
