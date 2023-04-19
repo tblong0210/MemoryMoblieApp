@@ -273,15 +273,15 @@ public class MainActivity extends AppCompatActivity {
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
          ArrayList<String> blockistImage = new ArrayList<>();
         int flag = 0;
-
-        if(albumList!=null)
+        List<Album> LISTALBUM = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
+        if(LISTALBUM!=null)
         {
-            for(int i=0; i<albumList.size();i++)
+            for(int i=0; i<LISTALBUM.size();i++)
             {
-                if(albumList.get(i).getBlock())
+                if(LISTALBUM.get(i).getBlock())
                 {
-                    Log.d("hahaha", String.valueOf(albumList.get(i).getPathImages().size()));
-                    ArrayList<String> listImageBlocked = albumList.get(i).getPathImages();
+                    Log.d("hahaha", String.valueOf(LISTALBUM.get(i).getPathImages().size()));
+                    ArrayList<String> listImageBlocked = LISTALBUM.get(i).getPathImages();
                     if(blockistImage!=null)
                     {
                         for (String imagePath : listImageBlocked) {
