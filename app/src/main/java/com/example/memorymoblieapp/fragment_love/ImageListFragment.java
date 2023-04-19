@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class ImageListFragment extends Fragment {
     ArrayList<String> imageList;
-    ImageListAdapter adapter;
+    static ImageListAdapter adapter;
     private Context context;
     private final String title;
     String type;
@@ -130,5 +130,10 @@ public class ImageListFragment extends Fragment {
         recycler.setAdapter(adapter);
 
         return imagesFragment;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    static public void updateItem() {
+        adapter.notifyDataSetChanged();
     }
 }

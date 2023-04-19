@@ -156,6 +156,7 @@ public class ViewImage extends AppCompatActivity {
 
                         favorList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
                         MainActivity.lovedImageList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
+                        MainActivity.loveImageFragment.updateItem();
 
                         item.setIcon(R.drawable.ic_unfavorite);
                         item.setTitle(R.string.action_unfavorite);
