@@ -17,9 +17,6 @@ public enum KeyData {
     LIST_IMAGE_VIEW,
     LANGUAGE_CURRENT,
     PATH_CURRENT_IMAGE_VIEW;
-
-
-
     public String getKey() {
         switch (this) {
             case SHARED_PREFERENCES:

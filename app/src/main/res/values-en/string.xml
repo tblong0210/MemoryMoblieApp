@@ -183,5 +183,7 @@
     <string name="action_move">Move</string>
 
     <string name="title_move_image">Move this photo to the trash?</string>
+    <string name="title_block_album">Password not initialized!!!</string>
+    <string name="notif_agree_create">Create</string>
 
 </resources>

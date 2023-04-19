@@ -2,15 +2,21 @@ package com.example.memorymoblieapp.fragment_album;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,7 +97,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 holder.img.setImageResource(R.mipmap.ic_album);
 
             else {
-                Toast.makeText(context, holder.quantity.getText().toString(), Toast.LENGTH_SHORT).show();
                 for (String path : albums.get(position).getPathImages()) {
                     File currentFile = new File(path);
                     Bitmap bitmap = BitmapFactory.decodeFile(currentFile.getAbsolutePath());
@@ -476,7 +481,50 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         Context context = itemView.getContext();
 
         if (albumPassword == null) {
-            Toast.makeText(context, context.getString(R.string.alert_dialog_not_setup_password), Toast.LENGTH_SHORT).show();
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.layout_dialog_yes_no);
+
+            Window window = dialog.getWindow();
+            if (window == null) return;
+
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            WindowManager.LayoutParams windowAtrr = window.getAttributes();
+            windowAtrr.gravity = Gravity.CENTER;
+            window.setAttributes(windowAtrr);
+
+            dialog.setCancelable(true);
+            Button btnBack = dialog.findViewById(R.id.btnBack);
+            Button btnMove = dialog.findViewById(R.id.btnMove);
+            TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+
+            btnBack.setText(context.getString(R.string.action_cancel));
+            btnMove.setText(context.getString(R.string.notif_agree_create));
+            txtTitle.setText(context.getString(R.string.title_block_album));
+
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            btnMove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    AlbumBlockFragment albumBlockFragment = new AlbumBlockFragment();
+                    AppCompatActivity activity = (AppCompatActivity) context;
+                    FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout_content, albumBlockFragment).commit();
+                    fragmentTransaction.addToBackStack("more");
+                }
+            });
+
+            dialog.show();
+
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(context.getString(R.string.alert_dialog_block_album));

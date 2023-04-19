@@ -24,8 +24,11 @@ import com.example.memorymoblieapp.local_data_storage.DataLocalManager;
 import com.example.memorymoblieapp.local_data_storage.KeyData;
 import com.example.memorymoblieapp.activity.MainActivity;
 import com.example.memorymoblieapp.more.SettingsFragment;
+import com.example.memorymoblieapp.object.Album;
 
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.ArrayList;
 
 public class AlbumBlockFragment extends Fragment {
     TextView txtSetupPassword;
@@ -229,12 +232,23 @@ public class AlbumBlockFragment extends Fragment {
                 } else {
                     Toast.makeText(context, getString(R.string.alert_dialog_delete_password_successfully_notification), Toast.LENGTH_SHORT).show();
                     DataLocalManager.remove(KeyData.ALBUM_PASSWORD.getKey());
+
+                    for (int i = 0; i < MainActivity.albumList.size(); i++){
+                        if(MainActivity.albumList.get(i).getBlock()){
+                            MainActivity.albumList.get(i).setBlock(false);
+                        }
+                    }
+
+                    DataLocalManager.saveObjectList(KeyData.ALBUM_DATA_LIST.getKey(), MainActivity.albumList);
+                    DataLocalManager.saveSetStringData(KeyData.ALBUM_NAME_LIST.getKey(), Album.getAlbumNameSet(MainActivity.albumList));
+
                     albumPassword = null;
                     txtSetupPassword.setVisibility(View.VISIBLE);
                     txtChangePassword.setVisibility(View.GONE);
                     txtDeletePassword.setVisibility(View.GONE);
                     dividerDeletePassword.setVisibility(View.GONE);
                     dialog.dismiss();
+                    MainActivity.updateData(context);
                 }
             });
 
