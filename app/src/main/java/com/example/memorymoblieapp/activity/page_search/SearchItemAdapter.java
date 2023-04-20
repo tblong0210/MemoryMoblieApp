@@ -84,7 +84,8 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
                 if (DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey()))
                     holder.imageView.setImageResource(R.drawable.ic_folder_white);
-                else holder.imageView.setImageResource(R.drawable.ic_folder);
+                else
+                    holder.imageView.setImageResource(R.drawable.ic_folder);
             }
         }
     }
