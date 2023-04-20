@@ -351,26 +351,16 @@ public class MainActivity extends AppCompatActivity {
         task.execute(request);
         try {
             Bitmap bitmap = task.get();
-            //  picturesFragment.onMsgFromMainToFrag(bitmap);
             File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "myImageFolder");
-
-            // Create the directory if it doesn't exist
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             String imageName = UUID.randomUUID().toString() + ".jpg";
-            // Create a file to save the image
             File file = new File(directory, imageName);
             OutputStream outputStream = new FileOutputStream(file);
-
-            // Compress the bitmap and write it to the output stream
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-
-            // Flush and close the output stream
             outputStream.flush();
             outputStream.close();
-
-            // Add the image to the gallery so it can be viewed in other apps
             MediaScannerConnection.scanFile(MainActivity.this, new String[]{file.getAbsolutePath()}, null, null);
             MediaScannerConnection.scanFile(MainActivity.this, new String[]{file.getAbsolutePath()}, null, new MediaScannerConnection.MediaScannerConnectionClient() {
                 @Override
