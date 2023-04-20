@@ -104,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] permissionList = new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.REQUEST_INSTALL_PACKAGES,
-                Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
+        String[] permissionList = new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.REQUEST_INSTALL_PACKAGES, Manifest.permission.CAMERA, Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.SET_WALLPAPER};
 
         // Go to settings to turn on all files access permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
@@ -167,8 +166,7 @@ public class MainActivity extends AppCompatActivity {
     public static void updateZipList() {
         zipPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/MemoryZip";
         File directory = new File(zipPath);
-        if (!directory.exists())
-            directory.mkdirs();
+        if (!directory.exists()) directory.mkdirs();
         zipList = getZipList(zipPath);
     }
 
@@ -187,8 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
         zipPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/MemoryZip";
         File directory = new File(zipPath);
-        if (!directory.exists())
-            directory.mkdirs();
+        if (!directory.exists()) directory.mkdirs();
         zipList = getZipList(zipPath);
 
         DataLocalManager.saveData(KeyData.IMAGE_PATH_VIEW_LIST.getKey(), newImage);
@@ -231,7 +228,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.love:
-                    loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");                    fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
+                    loveImageFragment = new ImageListFragment(lovedImageList, getString(R.string.bottom_navigation_love), "Love");
+                    fragmentTransaction.replace(R.id.frame_layout_content, loveImageFragment).commit();
                     fragmentTransaction.addToBackStack("love");
                     return true;
 
@@ -271,19 +269,15 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> newImage = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         trashListImage = DataLocalManager.getStringList(KeyData.TRASH_LIST.getKey());
-         ArrayList<String> blockistImage = new ArrayList<>();
+        ArrayList<String> blockistImage = new ArrayList<>();
         int flag = 0;
         List<Album> LISTALBUM = DataLocalManager.getObjectList(KeyData.ALBUM_DATA_LIST.getKey(), Album.class);
-        if(LISTALBUM!=null)
-        {
-            for(int i=0; i<LISTALBUM.size();i++)
-            {
-                if(LISTALBUM.get(i).getBlock())
-                {
+        if (LISTALBUM != null) {
+            for (int i = 0; i < LISTALBUM.size(); i++) {
+                if (LISTALBUM.get(i).getBlock()) {
                     Log.d("hahaha", String.valueOf(LISTALBUM.get(i).getPathImages().size()));
                     ArrayList<String> listImageBlocked = LISTALBUM.get(i).getPathImages();
-                    if(blockistImage!=null)
-                    {
+                    if (blockistImage != null) {
                         for (String imagePath : listImageBlocked) {
                             Log.d("hahaha", imagePath);
                             blockistImage.add(imagePath);
@@ -296,8 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         for (String imagePath : images) {
-            if (imagePath != null && (blockistImage == null || !blockistImage.contains(imagePath)) &&
-                    (trashListImage == null || !trashListImage.contains(imagePath))) {
+            if (imagePath != null && (blockistImage == null || !blockistImage.contains(imagePath)) && (trashListImage == null || !trashListImage.contains(imagePath))) {
                 File imageFile = new File(imagePath);
                 Date imageDate = new Date(imageFile.lastModified());
                 if (imageDates.size() != 0 && !dateFormat.format(imageDate).equals(imageDates.get(imageDates.size() - 1))) {
@@ -347,8 +340,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMsgFromFragToMain(String request) {
         boolean network = checkInternetConnection();
-        if (!network)
-            return;
+        if (!network) return;
         DownloadImageFromURL task = new DownloadImageFromURL();
         task.execute(request);
         try {
@@ -434,13 +426,11 @@ public class MainActivity extends AppCompatActivity {
         data = data == null ? "" : data;
 
         if (idFragment == R.string.view_album) {
-            if (data.equals(""))
-                return false;
+            if (data.equals("")) return false;
 
             int pos = 0;
             for (Album a : albumList) {
-                if (!a.getAlbumName().equals(data))
-                    pos++;
+                if (!a.getAlbumName().equals(data)) pos++;
                 else break;
             }
 

@@ -115,8 +115,8 @@ public class HomeSelectionBarFragment extends Fragment {
                                     }
                                 }
 
-                                    // Refresh and exit choose image mode
-                                    refresh(context);
+                                // Refresh and exit choose image mode
+                                refresh(context);
 
                                 dialog.dismiss();
                             }

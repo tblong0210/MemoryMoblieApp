@@ -50,7 +50,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     private static Vector<String> listSelect = new Vector<String>();
     public static ArrayList<ViewHolder> holders;
 
-    public GalleryAdapter(){
+    public GalleryAdapter() {
         context = null;
         images = new ArrayList<>();
         imageDates = new ArrayList<>();
@@ -103,17 +103,17 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
         // set text ngày tạo ảnh
         holder.textDate.setVisibility(View.VISIBLE);
-        if (position == 0 || imageDates.get(position - 1).equals(" ") || ( !imageDates.get(position - 1).equals(imageDates.get(position)))) {
+        if (position == 0 || imageDates.get(position - 1).equals(" ") || (!imageDates.get(position - 1).equals(imageDates.get(position)))) {
             holder.textDate.setText(imageDates.get(position));
         } else {
             holder.textDate.setText(" ");
         }
 
-        if(position == 0
+        if (position == 0
                 || position == 1 || position == 2 ||
-                ((!imageDates.get(position).equals(" ") )&& (  !imageDates.get(position - 1).equals(imageDates.get(position))
-                || (!imageDates.get(position - 2).equals(imageDates.get(position)))
-                || (!imageDates.get(position - 3).equals(imageDates.get(position)))))) {
+                ((!imageDates.get(position).equals(" ")) && (!imageDates.get(position - 1).equals(imageDates.get(position))
+                        || (!imageDates.get(position - 2).equals(imageDates.get(position)))
+                        || (!imageDates.get(position - 3).equals(imageDates.get(position)))))) {
             //set size text date
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, // width
@@ -127,7 +127,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             holder.textDate.setLayoutParams(layoutParamss);
         } else {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    0,0
+                    0, 0
             );
             holder.textDate.setLayoutParams(layoutParams);
         }
@@ -145,8 +145,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                     Drawable shadow = context.getDrawable(R.drawable.shadow);
                     holder.iconLongSelect.setBackground(shadow);
                     changeBrightness(holder.image, 0.6f);
-                }
-                else {
+                } else {
                     Drawable drawable = context.getDrawable(R.drawable.circle_unfill);
                     holder.iconLongSelect.setForeground(drawable);
                     Drawable shadow = context.getDrawable(R.drawable.shadow);

@@ -24,7 +24,7 @@ public class ZipFileFragment extends Fragment {
     static ZipFileAdapter adapter;
     private Context context;
 
-    public ZipFileFragment(){
+    public ZipFileFragment() {
         this.context = null;
         this.zipList = new ArrayList<>();
     }
@@ -45,14 +45,14 @@ public class ZipFileFragment extends Fragment {
         );
 
 
-            // LayoutManager
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
-            gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-            recycler.setLayoutManager(gridLayoutManager);
+        // LayoutManager
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        recycler.setLayoutManager(gridLayoutManager);
 
-            // Divider
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycler.getContext(), gridLayoutManager.getOrientation());
-            recycler.addItemDecoration(dividerItemDecoration);
+        // Divider
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycler.getContext(), gridLayoutManager.getOrientation());
+        recycler.addItemDecoration(dividerItemDecoration);
 
         adapter = new ZipFileAdapter(zipList, zipFileFragment.getContext());
         recycler.setAdapter(adapter);

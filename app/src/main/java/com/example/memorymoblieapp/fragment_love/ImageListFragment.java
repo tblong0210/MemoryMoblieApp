@@ -134,6 +134,7 @@ public class ImageListFragment extends Fragment {
 
     @SuppressLint("NotifyDataSetChanged")
     static public void updateItem() {
-        adapter.notifyDataSetChanged();
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
     }
 }

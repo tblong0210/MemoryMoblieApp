@@ -32,8 +32,7 @@ public class DownloadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             return bitmap;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

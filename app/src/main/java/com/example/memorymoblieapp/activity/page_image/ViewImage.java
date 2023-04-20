@@ -78,8 +78,7 @@ public class ViewImage extends AppCompatActivity {
         favorList = new ArrayList<>();
 
         getFavorList = DataLocalManager.getStringList(KeyData.FAVORITE_LIST.getKey());
-        if (getFavorList != null)
-            favorList.addAll(getFavorList);
+        if (getFavorList != null) favorList.addAll(getFavorList);
 
         int currentPosition = picturePaths.indexOf(intent.getStringExtra(KeyData.PATH_CURRENT_IMAGE_VIEW.getKey()));
 
@@ -156,7 +155,6 @@ public class ViewImage extends AppCompatActivity {
 
                         favorList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
                         MainActivity.lovedImageList.remove(picturePaths.get(mViewPaper.getCurrentItem()));
-                        MainActivity.loveImageFragment.updateItem();
 
                         item.setIcon(R.drawable.ic_unfavorite);
                         item.setTitle(R.string.action_unfavorite);
@@ -169,6 +167,7 @@ public class ViewImage extends AppCompatActivity {
                         item.setIcon(R.drawable.ic_favorite);
                         item.setTitle(R.string.action_favorite);
                     }
+                    MainActivity.loveImageFragment.updateItem();
                     DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), favorList);
 
                     break;
@@ -310,7 +309,8 @@ public class ViewImage extends AppCompatActivity {
                         wallpaperManager.setBitmap(viewToBitmap(largeImage, largeImage.getWidth(), largeImage.getHeight()), null, true, WallpaperManager.FLAG_LOCK);
                     } catch (IOException e) {
                         Log.e("Error set as lockscreen: ", e.getMessage());
-                        Toast.makeText(ViewImage.this, getString(R.string.notif_uncompleted), Toast.LENGTH_SHORT).show();                    }
+                        Toast.makeText(ViewImage.this, getString(R.string.notif_uncompleted), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 return true;
             }

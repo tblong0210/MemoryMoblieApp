@@ -8,7 +8,7 @@ import android.provider.MediaStore;
 import java.util.ArrayList;
 
 public class ImagesGallery {
-    public static ArrayList<String> listOfImages(Context context){
+    public static ArrayList<String> listOfImages(Context context) {
         Uri uri;
         Cursor cursor;
         int column_index_data, column_index_folder_name;
@@ -24,7 +24,7 @@ public class ImagesGallery {
 
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             absolutePathOfImage = cursor.getString(column_index_data);
             listOfAllImages.add(absolutePathOfImage);
         }

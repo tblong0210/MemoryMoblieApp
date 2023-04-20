@@ -181,6 +181,7 @@ public class ViewEdit extends AppCompatActivity {
         previousBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
     }
+
     private void backPreviousPicture() {
         if (previousBitmaps.size() > 0) {
             previousBitmaps.remove(previousBitmaps.size() - 1);
@@ -190,8 +191,7 @@ public class ViewEdit extends AppCompatActivity {
             } else {
                 imgViewEdit.setImageBitmap(previousBitmaps.get(previousBitmaps.size() - 1));
             }
-        }
-        else{
+        } else {
             Toast.makeText(this, R.string.disable_back_edit_view, Toast.LENGTH_SHORT).show();
         }
     }
@@ -723,10 +723,8 @@ public class ViewEdit extends AppCompatActivity {
                             Canvas canvas = new Canvas(mutableBitmap);
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
-                            imgViewEdit.setImageBitmap(mutableBitmap);
                             previousBitmaps.add(getOriginalBitmap(imgViewEdit));
-                        }
-                        else {
+                        } else {
                             Toast.makeText(ViewEdit.this, getString(R.string.notif_unselected), Toast.LENGTH_SHORT).show();
                         }
                         break;

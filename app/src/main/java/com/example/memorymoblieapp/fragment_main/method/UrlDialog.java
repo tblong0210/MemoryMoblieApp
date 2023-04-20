@@ -46,15 +46,14 @@ public class UrlDialog extends DialogFragment {
         AlertDialog.Builder urlDialog = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.url_dialog, null);
-        urlDialog.setView(view)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        url = edtURL.getText().toString();
-                        dismiss();
-                        main.onMsgFromFragToMain(url);
-                    }
-                });
+        urlDialog.setView(view).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                url = edtURL.getText().toString();
+                dismiss();
+                main.onMsgFromFragToMain(url);
+            }
+        });
 
         edtURL = (EditText) view.findViewById(R.id.edtURL);
         return urlDialog.create();

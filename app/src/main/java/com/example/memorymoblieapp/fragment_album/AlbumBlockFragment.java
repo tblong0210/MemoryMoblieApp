@@ -39,7 +39,9 @@ public class AlbumBlockFragment extends Fragment {
     View dividerSetupPassword;
     View dividerDeletePassword;
 
-    public AlbumBlockFragment(){}
+    public AlbumBlockFragment() {
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -179,7 +181,7 @@ public class AlbumBlockFragment extends Fragment {
                     reNewPasswordInput.requestFocus();
                 } else if (!newPassword.equals(reNewPassword)) {
                     Toast.makeText(context, getString(R.string.alert_dialog_not_match_confirm_password_notification), Toast.LENGTH_SHORT).show();
-                    reNewPasswordInput.setError(HtmlCompat.fromHtml("<font>"  + getString(R.string.alert_dialog_not_match_confirm_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                    reNewPasswordInput.setError(HtmlCompat.fromHtml("<font>" + getString(R.string.alert_dialog_not_match_confirm_password_notification) + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
                     reNewPasswordInput.requestFocus();
                 } else if (!BCrypt.checkpw(oldPassword, albumPassword)) {
                     Toast.makeText(context, getString(R.string.alert_dialog_wrong_old_password_notification), Toast.LENGTH_SHORT).show();
@@ -233,8 +235,8 @@ public class AlbumBlockFragment extends Fragment {
                     Toast.makeText(context, getString(R.string.alert_dialog_delete_password_successfully_notification), Toast.LENGTH_SHORT).show();
                     DataLocalManager.remove(KeyData.ALBUM_PASSWORD.getKey());
 
-                    for (int i = 0; i < MainActivity.albumList.size(); i++){
-                        if(MainActivity.albumList.get(i).getBlock()){
+                    for (int i = 0; i < MainActivity.albumList.size(); i++) {
+                        if (MainActivity.albumList.get(i).getBlock()) {
                             MainActivity.albumList.get(i).setBlock(false);
                         }
                     }

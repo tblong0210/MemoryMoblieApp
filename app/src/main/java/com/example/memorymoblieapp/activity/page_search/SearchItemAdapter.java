@@ -28,7 +28,6 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
     private ArrayList<String> element;
     private Context context;
-    private Context mainContext;
     private int type;
 
     public SearchItemAdapter(int type) {
@@ -58,16 +57,13 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                         context.startActivity(intent);
 
                         Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_IMAGE.getKey());
-                        if (history == null)
-                            history = new HashSet<>();
+                        if (history == null) history = new HashSet<>();
                         history.add(element.get(position));
                         DataLocalManager.saveSetStringData(KeyData.HISTORY_SEARCH_IMAGE.getKey(), history);
                     }
                 });
 
-                Glide.with(context)
-                        .load(element.get(position))
-                        .override(300, 300) // giảm kích thước ảnh xuống 300x300
+                Glide.with(context).load(element.get(position)).override(300, 300) // giảm kích thước ảnh xuống 300x300
                         .centerCrop() // cắt ảnh với kích thước mới
                         .into(holder.imageView);
             } else {
@@ -80,8 +76,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
                         view.getContext().startActivity(intent);
 
                         Set<String> history = DataLocalManager.getSetList(KeyData.HISTORY_SEARCH_ALBUM.getKey());
-                        if (history == null)
-                            history = new HashSet<>();
+                        if (history == null) history = new HashSet<>();
                         history.add(element.get(position));
                         DataLocalManager.saveSetStringData(KeyData.HISTORY_SEARCH_ALBUM.getKey(), history);
                     }
@@ -89,16 +84,14 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
 
                 if (DataLocalManager.getBooleanData(KeyData.DARK_MODE.getKey()))
                     holder.imageView.setImageResource(R.drawable.ic_folder_white);
-                else
-                    holder.imageView.setImageResource(R.drawable.ic_folder);
+                else holder.imageView.setImageResource(R.drawable.ic_folder);
             }
         }
     }
 
     @Override
     public int getItemCount() {
-        if (element == null)
-            return 0;
+        if (element == null) return 0;
         return element.size();
     }
 

@@ -37,7 +37,7 @@ public class ShareImageToMedia {
 
     @SuppressLint("QueryPermissionsNeeded")
     public void sharePictures() {
-        if (paths.isEmpty()){
+        if (paths.isEmpty()) {
             Toast.makeText(context, context.getString(R.string.notif_empty_array), Toast.LENGTH_SHORT).show();
             return;
         }

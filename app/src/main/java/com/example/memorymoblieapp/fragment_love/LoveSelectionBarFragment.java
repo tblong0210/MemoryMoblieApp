@@ -117,7 +117,7 @@ public class LoveSelectionBarFragment extends Fragment {
 
                 case R.id.unlove:
                     DialogInterface.OnClickListener dialogClickListener2 = (dialog, which) -> {
-                        switch (which) {    
+                        switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 MainActivity.lovedImageList.removeAll(listSelect);
                                 DataLocalManager.saveData(KeyData.FAVORITE_LIST.getKey(), MainActivity.lovedImageList);
@@ -133,8 +133,7 @@ public class LoveSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-                    builder2.setMessage(context.getString(R.string.alert_dialog_remove_images_from_loves_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener2)
-                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener2).show();
+                    builder2.setMessage(context.getString(R.string.alert_dialog_remove_images_from_loves_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener2).setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener2).show();
 
                     return true;
 
@@ -157,8 +156,7 @@ public class LoveSelectionBarFragment extends Fragment {
                         }
                     };
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage(context.getString(R.string.alert_dialog_duplicate_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
-                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+                    builder.setMessage(context.getString(R.string.alert_dialog_duplicate_images_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener).setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
 
                     return true;
 

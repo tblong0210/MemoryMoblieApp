@@ -66,11 +66,10 @@ public class SettingsFragment extends Fragment {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLanguage.setAdapter(arrayAdapter);
 
-        if(DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey())){
+        if (DataLocalManager.getBooleanData(KeyData.LANGUAGE_CURRENT.getKey())) {
             currentLaguage = getString(R.string.language_united_states);
             spinnerLanguage.setSelection(1);
-        }
-        else{
+        } else {
             currentLaguage = getString(R.string.language_vietnamese);
             spinnerLanguage.setSelection(0);
         }

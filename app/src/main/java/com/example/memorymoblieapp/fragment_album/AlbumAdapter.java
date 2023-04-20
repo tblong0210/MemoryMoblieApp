@@ -134,8 +134,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                 if (albums.get(getAdapterPosition()).getBlock())
                     popupMenu.getMenu().getItem(1).setVisible(false);
-                else
-                    popupMenu.getMenu().getItem(2).setVisible(false);
+                else popupMenu.getMenu().getItem(2).setVisible(false);
 
                 popupMenu.setOnMenuItemClickListener(menuItem -> {
                     int itemId = menuItem.getItemId();
@@ -447,8 +446,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         }
                     };
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
-                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_album_confirm) + " '" + AlbumFragment.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
-                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+                    builder1.setMessage(context.getString(R.string.alert_dialog_delete_album_confirm) + " '" + AlbumFragment.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener).setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
                 }
             });
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(view12 -> dialog.cancel());
@@ -472,8 +470,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-            builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
-                    .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+            builder.setMessage("Bạn có chắc muốn xóa album '" + AlbumFragment.albumList.get(position).getAlbumName() + "'?").setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener).setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
         }
     }
 
@@ -707,8 +704,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                         }
                                     };
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
-                                    builder1.setMessage(context.getString(R.string.alert_dialog_overwrite_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
-                                            .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+                                    builder1.setMessage(context.getString(R.string.alert_dialog_overwrite_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener).setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
                                 } else {
                                     try {
                                         compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
@@ -776,8 +772,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                 }
                             };
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(itemView.getContext());
-                            builder1.setMessage(context.getString(R.string.alert_dialog_overwrite_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener)
-                                    .setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
+                            builder1.setMessage(context.getString(R.string.alert_dialog_overwrite_confirm)).setPositiveButton(context.getString(R.string.alert_dialog_confirm), dialogClickListener).setNegativeButton(context.getString(R.string.alert_dialog_cancel), dialogClickListener).show();
                         } else {
                             try {
                                 compressFiles(albums.get(position).getPathImages(), MainActivity.zipPath + "/" + folderName + ".zip", folderName);
