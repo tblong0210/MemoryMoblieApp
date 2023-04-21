@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.REQUEST_INSTALL_PACKAGES, Manifest.permission.CAMERA,
                 Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.SET_WALLPAPER};
+                Manifest.permission.SET_WALLPAPER, Manifest.permission.WAKE_LOCK};
 
         // Go to settings to turn on all files access permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
@@ -347,37 +348,8 @@ public class MainActivity extends AppCompatActivity {
     public void onMsgFromFragToMain(String request) {
         boolean network = checkInternetConnection();
         if (!network) return;
-        DownloadImageFromURL task = new DownloadImageFromURL();
+        DownloadImageFromURL task = new DownloadImageFromURL(this);
         task.execute(request);
-        try {
-            Bitmap bitmap = task.get();
-            File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "myImageFolder");
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            String imageName = UUID.randomUUID().toString() + ".jpg";
-            File file = new File(directory, imageName);
-            OutputStream outputStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-            outputStream.flush();
-            outputStream.close();
-            MediaScannerConnection.scanFile(MainActivity.this, new String[]{file.getAbsolutePath()}, null, null);
-            MediaScannerConnection.scanFile(MainActivity.this, new String[]{file.getAbsolutePath()}, null, new MediaScannerConnection.MediaScannerConnectionClient() {
-                @Override
-                public void onMediaScannerConnected() {
-                    // Do nothing
-                }
-
-                @SuppressLint("SimpleDateFormat")
-                @Override
-                public void onScanCompleted(String path, Uri uri) {
-                    updateData(getApplicationContext());
-                    Toast.makeText(MainActivity.this, getString(R.string.notif_download_OK), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (Exception e) {
-            Toast.makeText(MainActivity.this, getString(R.string.notif_download_fail), Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override

@@ -183,4 +183,6 @@
 
     <string name="title_block_album">Mật khẩu chưa được khởi tạo!!!</string>
     <string name="notif_agree_create">Tạo ngay</string>
+    <string name="title_download_url">Tải ảnh từ URL</string>
+
 </resources>

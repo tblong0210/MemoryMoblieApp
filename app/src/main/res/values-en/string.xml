@@ -186,4 +186,7 @@
     <string name="title_block_album">Password not initialized!!!</string>
     <string name="notif_agree_create">Create</string>
 
+    <string name="title_download_url">Download picture from URL</string>
+
+
 </resources>

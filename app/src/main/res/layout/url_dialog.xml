@@ -7,16 +7,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tải ảnh từ URL"
+        android:text="@string/title_download_url"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:textSize="15sp"
-        android:textColor="?attr/colorOnSecondary"/>
+        android:textColor="?attr/colorPrimary"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtURL"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
         android:hint="https://i.pinimg.com/9854.jpg"/>
 
 
