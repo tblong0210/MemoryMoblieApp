@@ -473,22 +473,26 @@ public class ViewEdit extends AppCompatActivity {
 
     // Cắt ảnh
     private void handleCropImage(float firstRatio, float secondRatio) {
-        refreshPicture();
-        int width = originImage.getWidth();
-        int height = originImage.getHeight();
+//        refreshPicture();
+        Bitmap bitmap = originImage;
+        if(previousBitmaps.size() > 0){
+            bitmap = previousBitmaps.get(previousBitmaps.size()-1);
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
 
         //Cắt ảnh 3:4
         if (firstRatio == 3f && secondRatio == 4f) {
             int newHeight = (int) (width * firstRatio / secondRatio);
             int y = (height - newHeight) / 2;
-            Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
-//            imgViewEdit.setImageBitmap(croppedBitmap);
+            Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, y, width, newHeight);
+            imgViewEdit.setImageBitmap(croppedBitmap);
 
         }
         // Cắt ảnh 16:9
         else {
-            int originalWidth = originImage.getWidth();
-            int originalHeight = originImage.getHeight();
+            int originalWidth = bitmap.getWidth();
+            int originalHeight = bitmap.getHeight();
             int newWidth = originalWidth;
             int newHeight = originalWidth * 16 / 9;
             if (newHeight > originalHeight) {
@@ -498,12 +502,12 @@ public class ViewEdit extends AppCompatActivity {
             int left = (originalWidth - newWidth) / 2;
             int top = (originalHeight - newHeight) / 2;
 
-            Bitmap croppedImage = Bitmap.createBitmap(originImage, left, top, newWidth, newHeight);
+            Bitmap croppedImage = Bitmap.createBitmap(bitmap, left, top, newWidth, newHeight);
             imgViewEdit.setImageBitmap(croppedImage);
 
 
         }
-        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
+//        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
     }
 
     private void handleBrightnessLevel() {
