@@ -303,6 +303,7 @@ public class ViewEdit extends AppCompatActivity {
 
         // Chọn chức năng trong cắt ảnh
         nav_crop_option.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -475,11 +476,9 @@ public class ViewEdit extends AppCompatActivity {
         //Cắt ảnh 3:4
         if (firstRatio == 3f && secondRatio == 4f) {
             int newHeight = (int) (width * firstRatio / secondRatio);
-
-
             int y = (height - newHeight) / 2;
             Bitmap croppedBitmap = Bitmap.createBitmap(originImage, 0, y, width, newHeight);
-            imgViewEdit.setImageBitmap(croppedBitmap);
+//            imgViewEdit.setImageBitmap(croppedBitmap);
 
         }
         // Cắt ảnh 16:9
@@ -624,21 +623,84 @@ public class ViewEdit extends AppCompatActivity {
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_MOVE:
-                        int imageViewWidth = imgViewEdit.getWidth();
-                        int imageViewHeight = imgViewEdit.getHeight();
-                        Drawable imageDrawable = imgViewEdit.getDrawable();
-                        int imageWidth = imageDrawable.getIntrinsicWidth();
-                        int imageHeight = imageDrawable.getIntrinsicHeight();
+                        float imageViewWidth = imgViewEdit.getWidth(),
+                                imageViewHeight = imgViewEdit.getHeight();
 
-                        int x = (int) event.getX() * imageWidth / imageViewWidth;
-                        int y = (int) event.getY() * imageHeight / imageViewHeight;
+                        Drawable imageDrawable = imgViewEdit.getDrawable();
+                        float imageWidth = imageDrawable.getIntrinsicWidth(),
+                                imageHeight = imageDrawable.getIntrinsicHeight();
+
+                        float x = event.getX(), y = event.getY();
+                        float x1_image = 0, x2_image = imageViewWidth,
+                                y1_image = 0, y2_image = imageViewHeight;
+                        float newHeightImage = 0, newWidthImage = 0;
+
+                        //Khi ảnh có kích thước lớn hơn ImageView
+                        if (imageHeight > imageViewHeight || imageWidth > imageViewWidth) {
+                            float diffH = imageHeight - imageViewHeight;
+                            float diffW = imageWidth - imageViewWidth;
+
+                            if (diffH > diffW) {
+                                //Set lại kích thước ảnh
+                                newHeightImage = imageViewHeight;
+                                newWidthImage = newHeightImage * imageWidth / imageHeight;
+
+                                //Set position của ảnh trên ImageView
+                                x1_image = (imageViewWidth - newWidthImage) / 2;
+                                x2_image = x1_image + newWidthImage;
+                                y2_image = imageViewHeight;
+                            } else {
+                                //Set lại kích thước ảnh
+                                newWidthImage = imageViewWidth;
+                                newHeightImage = newWidthImage * imageHeight / imageWidth;
+
+                                //Set position của ảnh trên ImageView
+                                y1_image = (imageViewHeight - newHeightImage) / 2;
+                                y2_image = y1_image + newHeightImage;
+                                x2_image = imageViewWidth;
+                            }
+                        }
+                        //Khi ảnh có kích thước nhỏ hơn ImageView
+                        else if (imageHeight < imageViewHeight && imageWidth < imageViewWidth) {
+                            float diffH = imageViewHeight - imageHeight;
+                            float diffW = imageViewWidth - imageWidth;
+
+                            if (diffH < diffW) {
+                                //Set lại kích thước ảnh
+                                newHeightImage = imageViewHeight;
+                                newWidthImage = newHeightImage * imageWidth / imageHeight;
+
+                                //Set position của ảnh trên ImageView
+                                x1_image = (imageViewWidth - newWidthImage) / 2;
+                                x2_image = x1_image + newWidthImage;
+                                y2_image = imageViewHeight;
+                            } else {
+                                //Set lại kích thước ảnh
+                                newWidthImage = imageViewWidth;
+                                newHeightImage = newWidthImage * imageHeight / imageWidth;
+
+                                //Set position của ảnh trên ImageView
+                                y1_image = (imageViewHeight - newHeightImage) / 2;
+                                y2_image = y1_image + newHeightImage;
+                                x2_image = imageViewWidth;
+                            }
+                        }
+
+                        //Từ position trên ImageView, set lại position lên kích thước ảnh ban đầu
+                        if (x >= x1_image && x <= x2_image && y >= y1_image && y <= y2_image) {
+                            x = (x - x1_image) * imageWidth / newWidthImage;
+                            y = (y - y1_image) * imageHeight / newHeightImage;
+                        } else {
+                            x = y = 0;
+                        }
+
                         Canvas canvas = new Canvas(bitmap);
                         Paint paint = new Paint();
-                        if (adapterColor.getColorChosen() != 0) {
+                        if (adapterColor.getColorChosen() != 0 && x != 0 && y != 0) {
                             paint.setColor(adapterColor.getColorChosen());
-                            canvas.drawCircle(x, y, 10, paint);
+                            canvas.drawCircle(x, y, 10 * imageWidth / newWidthImage, paint);
                             imgViewEdit.invalidate();
-                        } else {
+                        } else if (adapterColor.getColorChosen() == 0) {
                             Toast.makeText(ViewEdit.this, R.string.choose_color_paint, Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -649,6 +711,7 @@ public class ViewEdit extends AppCompatActivity {
         previousBitmaps.add(getOriginalBitmap(imgViewEdit));
 
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private void handleAddTextImage() {
@@ -661,14 +724,77 @@ public class ViewEdit extends AppCompatActivity {
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-                        int imageViewWidth = imgViewEdit.getWidth();
-                        int imageViewHeight = imgViewEdit.getHeight();
-                        Drawable imageDrawable = imgViewEdit.getDrawable();
-                        int imageWidth = imageDrawable.getIntrinsicWidth();
-                        int imageHeight = imageDrawable.getIntrinsicHeight();
+                        float imageViewWidth = imgViewEdit.getWidth(),
+                                imageViewHeight = imgViewEdit.getHeight();
 
-                        int x = (int) event.getX() * imageWidth / imageViewWidth;
-                        int y = (int) event.getY() * imageHeight / imageViewHeight;
+                        Drawable imageDrawable = imgViewEdit.getDrawable();
+                        float imageWidth = imageDrawable.getIntrinsicWidth(),
+                                imageHeight = imageDrawable.getIntrinsicHeight();
+
+                        float x = event.getX(), y = event.getY();
+                        float x1_image = 0, x2_image = imageViewWidth,
+                                y1_image = 0, y2_image = imageViewHeight;
+                        float newHeightImage = 0, newWidthImage = 0;
+
+                        //Khi ảnh có kích thước lớn hơn ImageView
+                        if (imageHeight > imageViewHeight || imageWidth > imageViewWidth) {
+                            float diffH = imageHeight - imageViewHeight;
+                            float diffW = imageWidth - imageViewWidth;
+
+                            if (diffH > diffW) {
+                                //Set lại kích thước ảnh
+                                newHeightImage = imageViewHeight;
+                                newWidthImage = newHeightImage * imageWidth / imageHeight;
+
+                                //Set position của ảnh trên ImageView
+                                x1_image = (imageViewWidth - newWidthImage) / 2;
+                                x2_image = x1_image + newWidthImage;
+                                y2_image = imageViewHeight;
+                            } else {
+                                //Set lại kích thước ảnh
+                                newWidthImage = imageViewWidth;
+                                newHeightImage = newWidthImage * imageHeight / imageWidth;
+
+                                //Set position của ảnh trên ImageView
+                                y1_image = (imageViewHeight - newHeightImage) / 2;
+                                y2_image = y1_image + newHeightImage;
+                                x2_image = imageViewWidth;
+                            }
+                        }
+                        //Khi ảnh có kích thước nhỏ hơn ImageView
+                        else if (imageHeight < imageViewHeight && imageWidth < imageViewWidth) {
+                            float diffH = imageViewHeight - imageHeight;
+                            float diffW = imageViewWidth - imageWidth;
+
+                            if (diffH < diffW) {
+                                //Set lại kích thước ảnh
+                                newHeightImage = imageViewHeight;
+                                newWidthImage = newHeightImage * imageWidth / imageHeight;
+
+                                //Set position của ảnh trên ImageView
+                                x1_image = (imageViewWidth - newWidthImage) / 2;
+                                x2_image = x1_image + newWidthImage;
+                                y2_image = imageViewHeight;
+                            } else {
+                                //Set lại kích thước ảnh
+                                newWidthImage = imageViewWidth;
+                                newHeightImage = newWidthImage * imageHeight / imageWidth;
+
+                                //Set position của ảnh trên ImageView
+                                y1_image = (imageViewHeight - newHeightImage) / 2;
+                                y2_image = y1_image + newHeightImage;
+                                x2_image = imageViewWidth;
+                            }
+                        }
+
+                        //Từ position trên ImageView, set lại position lên kích thước ảnh ban đầu
+                        if (x >= x1_image && x <= x2_image && y >= y1_image && y <= y2_image) {
+                            x = (x - x1_image) * imageWidth / newWidthImage;
+                            y = (y - y1_image) * imageHeight / newHeightImage;
+                        } else {
+                            x = y = 0;
+                        }
+
                         Paint paint = new Paint();
                         int Size = seekBarSize.getProgress();
                         int colorText = adapterTxtColor.getColorChosen();
@@ -676,12 +802,12 @@ public class ViewEdit extends AppCompatActivity {
                             paint.setColor(colorText);
                             paint.setTextSize(Size);
                             Canvas canvas = new Canvas(mutableBitmap);
-                            if (edtTxtInput.getText().length() > 0) {
+                            if (edtTxtInput.getText().length() > 0 && x != 0 && y != 0) {
                                 String text = edtTxtInput.getText().toString();
                                 canvas.drawText(text, x, y, paint);
                                 imgViewEdit.setImageBitmap(mutableBitmap);
                                 previousBitmaps.add(getOriginalBitmap(imgViewEdit));
-                            } else {
+                            } else if (edtTxtInput.getText().length() <= 0) {
                                 Toast.makeText(ViewEdit.this, R.string.provide_text, Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -708,25 +834,88 @@ public class ViewEdit extends AppCompatActivity {
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-                        int imageViewWidth = imgViewEdit.getWidth();
-                        int imageViewHeight = imgViewEdit.getHeight();
-                        Drawable imageDrawable = imgViewEdit.getDrawable();
-                        int imageWidth = imageDrawable.getIntrinsicWidth();
-                        int imageHeight = imageDrawable.getIntrinsicHeight();
+                        float imageViewWidth = imgViewEdit.getWidth(),
+                                imageViewHeight = imgViewEdit.getHeight();
 
-                        int x = (int) event.getX() * imageWidth / imageViewWidth;
-                        int y = (int) event.getY() * imageHeight / imageViewHeight;
+                        Drawable imageDrawable = imgViewEdit.getDrawable();
+                        float imageWidth = imageDrawable.getIntrinsicWidth(),
+                                imageHeight = imageDrawable.getIntrinsicHeight();
+
+                        float x = event.getX(), y = event.getY();
+                        float x1_image = 0, x2_image = imageViewWidth,
+                                y1_image = 0, y2_image = imageViewHeight;
+                        float newHeightImage = 0, newWidthImage = 0;
+
+                        //Khi ảnh có kích thước lớn hơn ImageView
+                        if (imageHeight > imageViewHeight || imageWidth > imageViewWidth) {
+                            float diffH = imageHeight - imageViewHeight;
+                            float diffW = imageWidth - imageViewWidth;
+
+                            if (diffH > diffW) {
+                                //Set lại kích thước ảnh
+                                newHeightImage = imageViewHeight;
+                                newWidthImage = newHeightImage * imageWidth / imageHeight;
+
+                                //Set position của ảnh trên ImageView
+                                x1_image = (imageViewWidth - newWidthImage) / 2;
+                                x2_image = x1_image + newWidthImage;
+                                y2_image = imageViewHeight;
+                            } else {
+                                //Set lại kích thước ảnh
+                                newWidthImage = imageViewWidth;
+                                newHeightImage = newWidthImage * imageHeight / imageWidth;
+
+                                //Set position của ảnh trên ImageView
+                                y1_image = (imageViewHeight - newHeightImage) / 2;
+                                y2_image = y1_image + newHeightImage;
+                                x2_image = imageViewWidth;
+                            }
+                        }
+                        //Khi ảnh có kích thước nhỏ hơn ImageView
+                        else if (imageHeight < imageViewHeight && imageWidth < imageViewWidth) {
+                            float diffH = imageViewHeight - imageHeight;
+                            float diffW = imageViewWidth - imageWidth;
+
+                            if (diffH < diffW) {
+                                //Set lại kích thước ảnh
+                                newHeightImage = imageViewHeight;
+                                newWidthImage = newHeightImage * imageWidth / imageHeight;
+
+                                //Set position của ảnh trên ImageView
+                                x1_image = (imageViewWidth - newWidthImage) / 2;
+                                x2_image = x1_image + newWidthImage;
+                                y2_image = imageViewHeight;
+                            } else {
+                                //Set lại kích thước ảnh
+                                newWidthImage = imageViewWidth;
+                                newHeightImage = newWidthImage * imageHeight / imageWidth;
+
+                                //Set position của ảnh trên ImageView
+                                y1_image = (imageViewHeight - newHeightImage) / 2;
+                                y2_image = y1_image + newHeightImage;
+                                x2_image = imageViewWidth;
+                            }
+                        }
+
+                        //Từ position trên ImageView, set lại position lên kích thước ảnh ban đầu
+                        if (x >= x1_image && x <= x2_image && y >= y1_image && y <= y2_image) {
+                            x = (x - x1_image) * imageWidth / newWidthImage;
+                            y = (y - y1_image) * imageHeight / newHeightImage;
+                        } else {
+                            x = y = 0;
+                        }
+
                         int Size = seekBarSticker.getProgress();
 
                         Bitmap originalSticker = adapterSticker.getStickerChosen();
-                        if (originalSticker != null) {
+                        if (originalSticker != null && x != 0 && y != 0) {
                             Bitmap scaledSticker = Bitmap.createScaledBitmap(originalSticker, Size, Size, false);
 
                             Canvas canvas = new Canvas(mutableBitmap);
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
                             previousBitmaps.add(getOriginalBitmap(imgViewEdit));
-                        } else {
+                        } else if (originalSticker == null) {
                             Toast.makeText(ViewEdit.this, getString(R.string.notif_unselected), Toast.LENGTH_SHORT).show();
                         }
                         break;
