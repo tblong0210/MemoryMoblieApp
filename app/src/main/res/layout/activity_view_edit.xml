@@ -164,6 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/round_corner"
+                android:layout_marginTop="25dp"
                 android:padding="5dp"
                 android:visibility="gone" />
 
@@ -172,7 +173,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="5dp"
                 android:max="350"
                 android:min="100"
                 android:progress="100"
