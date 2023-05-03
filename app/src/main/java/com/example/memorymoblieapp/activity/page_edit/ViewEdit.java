@@ -64,7 +64,7 @@ public class ViewEdit extends AppCompatActivity {
     private RecyclerView filterRecView, colorRecView, colorTxtRecView, stickerRecView;
     private EditText edtTxtInput;
     private String path_image;
-    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize, seekBarSticker;
+    private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize, seekBarSticker, seekBarPaint;
     private ArrayList<FilterItem> filterItems;
     private ArrayList<ColorClass> colors, text_colors;
     private ArrayList<Sticker> stickers;
@@ -151,6 +151,7 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBrightnessLevel.setProgress(0);
         seekBarContrast.setProgress(100);
         seekBarBlur.setProgress(10);
+        seekBarPaint.setProgress(10);
         mutableBitmap = originImage.copy(Bitmap.Config.ARGB_8888, true);
 
         seekBarSticker.setProgress(100);
@@ -273,6 +274,7 @@ public class ViewEdit extends AppCompatActivity {
 
                         if (nav_emote_option.getSelectedItemId() == R.id.paintPic) {
                             colorRecView.setVisibility(View.VISIBLE);
+                            seekBarPaint.setVisibility(View.VISIBLE);
                             handleAddPaintImage();
                         } else if (nav_emote_option.getSelectedItemId() == R.id.stickerPic) {
                             handleAddStickerImage();
@@ -335,6 +337,7 @@ public class ViewEdit extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.paintPic:
                         colorRecView.setVisibility(View.VISIBLE);
+                        seekBarPaint.setVisibility(View.VISIBLE);
 
                         stickerRecView.setVisibility(View.GONE);
                         seekBarSticker.setVisibility(View.GONE);
@@ -343,6 +346,7 @@ public class ViewEdit extends AppCompatActivity {
 
                     case R.id.stickerPic:
                         colorRecView.setVisibility(View.GONE);
+                        seekBarPaint.setVisibility(View.GONE);
 
                         stickerRecView.setVisibility(View.VISIBLE);
                         seekBarSticker.setVisibility(View.VISIBLE);
@@ -636,7 +640,7 @@ public class ViewEdit extends AppCompatActivity {
                         Paint paint = new Paint();
                         if (adapterColor.getColorChosen() != 0) {
                             paint.setColor(adapterColor.getColorChosen());
-                            canvas.drawCircle(x, y, 10, paint);
+                            canvas.drawCircle(x, y, seekBarPaint.getProgress(), paint);
                             imgViewEdit.invalidate();
                         } else {
                             Toast.makeText(ViewEdit.this, R.string.choose_color_paint, Toast.LENGTH_SHORT).show();
@@ -784,6 +788,8 @@ public class ViewEdit extends AppCompatActivity {
         seekBarBlur = findViewById(R.id.seekBarBlur);
         seekBarSize = findViewById(R.id.seekBarSize);
         seekBarSticker = findViewById(R.id.seekBarSticker);
+        seekBarPaint = findViewById(R.id.seekBarPaint);
+
 
     }
 

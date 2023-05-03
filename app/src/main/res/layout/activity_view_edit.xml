@@ -157,6 +157,18 @@
                 android:background="@drawable/round_corner"
                 android:padding="5dp"
                 android:visibility="gone" />
+            <SeekBar
+                android:id="@+id/seekBarPaint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="5dp"
+                android:max="100"
+                android:min="10"
+                android:progress="10"
+                android:progressTint="?attr/colorSurface"
+                android:thumbTint="@color/design_default_color_primary"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/stickerRecView"
