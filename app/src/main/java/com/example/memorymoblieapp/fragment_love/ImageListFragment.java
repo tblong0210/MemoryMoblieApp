@@ -2,16 +2,19 @@ package com.example.memorymoblieapp.fragment_love;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -21,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorymoblieapp.R;
 import com.example.memorymoblieapp.activity.MainActivity;
+import com.example.memorymoblieapp.fragment_album.AlbumFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -83,7 +87,8 @@ public class ImageListFragment extends Fragment {
         txtTitle.setText(title);
 
         ImageButton imgBtnChangeView = imagesFragment.findViewById(R.id.imgBtnChangeView);
-        ImageButton imgBtnBack = imagesFragment.findViewById(R.id.imgBtnBack);
+        ImageButton imgBtnCancelSelect = imagesFragment.findViewById(R.id.imgBtnCancelSelect);
+        ImageView ivBack = imagesFragment.findViewById(R.id.ivBack);
 
         imgBtnBackContainer = imagesFragment.findViewById(R.id.imgBtnBackContainer);
         imgBtnBackContainer.setVisibility(View.GONE);
@@ -95,7 +100,13 @@ public class ImageListFragment extends Fragment {
         else
             imgBtnChangeView.setImageDrawable(imagesFragment.getContext().getResources().getDrawable(R.drawable.ic_view_grid));
 
-        imgBtnBack.setOnClickListener(view -> ImageListAdapter.ViewHolder.turnOffSelectMode());
+        if (!type.equals("Album"))
+            ivBack.setVisibility(View.GONE);
+        ivBack.setOnClickListener(view -> {
+            requireActivity().onBackPressed();
+        });
+
+        imgBtnCancelSelect.setOnClickListener(view -> ImageListAdapter.ViewHolder.turnOffSelectMode());
 
         imgBtnChangeView.setOnClickListener(view -> {
             MainActivity.detailed = !MainActivity.detailed;
@@ -115,6 +126,7 @@ public class ImageListFragment extends Fragment {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
             gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
             recycler.setLayoutManager(gridLayoutManager);
+            recycler.addItemDecoration(new GridSpacingItemDecoration(5, 1));
 
             // Divider
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recycler.getContext(), gridLayoutManager.getOrientation());
@@ -124,6 +136,7 @@ public class ImageListFragment extends Fragment {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
             gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
             recycler.setLayoutManager(gridLayoutManager);
+            recycler.addItemDecoration(new GridSpacingItemDecoration(5, 3));
         }
 
         adapter = new ImageListAdapter(imageList, imagesFragment.getContext(), MainActivity.detailed, type, albumPos);
@@ -136,5 +149,28 @@ public class ImageListFragment extends Fragment {
     static public void updateItem() {
         if (adapter != null)
             adapter.notifyDataSetChanged();
+    }
+}
+
+class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+    private final int spacing;
+    private final int spanCount;
+
+    public GridSpacingItemDecoration(int spacing, int spanCount) {
+        this.spacing = spacing;
+        this.spanCount = spanCount;
+    }
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, View view, @NonNull RecyclerView parent, RecyclerView.State state) {
+        int position = parent.getChildAdapterPosition(view);
+        int column = position % spanCount;
+
+        outRect.left = spacing - column * spacing / spanCount;
+        outRect.right = (column + 1) * spacing / spanCount;
+        if (position < spanCount) {
+            outRect.top = spacing;
+        }
+        outRect.bottom = spacing;
     }
 }

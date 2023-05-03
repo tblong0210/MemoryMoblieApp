@@ -243,7 +243,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                                fragmentTransaction.addToBackStack("album");
+                                fragmentTransaction.addToBackStack("viewAlbum");
+                                MainActivity.getBottomNavigationView().setVisibility(View.GONE);
 
                                 dialog.dismiss();
                             }
@@ -255,7 +256,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                         AppCompatActivity activity = (AppCompatActivity) view.getContext();
                         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame_layout_content, imageFragment).commit();
-                        fragmentTransaction.addToBackStack("album");
+                        fragmentTransaction.addToBackStack("viewAlbum");
+                        MainActivity.getBottomNavigationView().setVisibility(View.GONE);
                     }
                 }
             });

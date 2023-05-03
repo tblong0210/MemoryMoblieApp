@@ -262,6 +262,7 @@ public class AlbumBlockFragment extends Fragment {
             FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
             SettingsFragment settingsFragment = new SettingsFragment();
             fragmentTransaction.replace(R.id.frame_layout_content, settingsFragment).commit();
+            MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
         });
 
         if (albumPassword == null) {

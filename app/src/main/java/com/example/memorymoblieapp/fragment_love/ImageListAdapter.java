@@ -183,7 +183,6 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout_selection_features_bar, selectionFragment).commit();
-                fragmentTransaction.addToBackStack("");
 
                 ImageListFragment.imgBtnChangeViewContainer.setVisibility(View.GONE);
                 ImageListFragment.imgBtnBackContainer.setVisibility(View.VISIBLE);
@@ -208,7 +207,8 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 // Display bottom navigation bar, hide selection features bar
                 MainActivity.getFrameLayoutSelectionFeaturesBar().removeAllViews();
                 MainActivity.getFrameLayoutSelectionFeaturesBar().setVisibility(View.GONE);
-                MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
+                if (!type.equals("Album"))
+                    MainActivity.getBottomNavigationView().setVisibility(View.VISIBLE);
             }
         }
     }

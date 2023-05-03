@@ -54,6 +54,7 @@ public class SettingsFragment extends Fragment {
             FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout_content, albumBlockFragment).commit();
             fragmentTransaction.addToBackStack("more");
+            MainActivity.getBottomNavigationView().setVisibility(View.GONE);
         });
 
         // Language

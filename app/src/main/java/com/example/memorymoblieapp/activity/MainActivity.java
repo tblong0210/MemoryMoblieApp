@@ -27,6 +27,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -357,6 +358,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         int backStackEntryCount = fragmentManager.getBackStackEntryCount();
 
+        if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
+        else super.onBackPressed();
+
         if (backStackEntryCount >= 2) {
             FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(backStackEntryCount - 2);
             String fragmentName = backStackEntry.getName();
@@ -364,24 +368,26 @@ public class MainActivity extends AppCompatActivity {
                 switch (fragmentName) {
                     case "image":
                         bottomNavigationView.getMenu().findItem(R.id.image).setChecked(true);
+                        ImageFragment.turnOffselectMode();
                         break;
                     case "album":
                         bottomNavigationView.getMenu().findItem(R.id.album).setChecked(true);
+                        bottomNavigationView.setVisibility(View.VISIBLE);
                         break;
                     case "love":
                         bottomNavigationView.getMenu().findItem(R.id.love).setChecked(true);
                         break;
                     case "more":
+                        bottomNavigationView.setVisibility(View.VISIBLE);
                         bottomNavigationView.getMenu().findItem(R.id.more).setChecked(true);
+                        break;
+                    case "viewAlbum":
+                        bottomNavigationView.setVisibility(View.GONE);
                         break;
                 }
             }
         } else finish();
 
-        if (fragmentManager.getBackStackEntryCount() > 0) fragmentManager.popBackStack();
-        else super.onBackPressed();
-
-        ImageFragment.turnOffselectMode();
         ImageListAdapter.ViewHolder.turnOffSelectMode();
     }
 
