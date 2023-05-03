@@ -38,7 +38,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <com.example.memorymoblieapp.activity.page_image.controI_image.ZoomableViewPager
+    <com.example.memorymoblieapp.activity.page_image.control_image.ZoomableViewPager
         android:id="@+id/viewPaperMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

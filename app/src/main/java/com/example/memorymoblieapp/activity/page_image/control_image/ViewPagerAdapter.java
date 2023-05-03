@@ -1,4 +1,4 @@
-package com.example.memorymoblieapp.activity.page_image.controI_image;
+package com.example.memorymoblieapp.activity.page_image.control_image;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

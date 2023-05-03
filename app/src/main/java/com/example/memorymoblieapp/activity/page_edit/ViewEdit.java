@@ -55,37 +55,26 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ViewEdit extends AppCompatActivity {
-
     private boolean isMouseMoving = false;
     private CardView parent_list_color;
-
     private ArrayList<String> picturePaths;
-
     private LinearLayout filterOption;
     private ImageView imgViewEdit;
     private RelativeLayout emoteOption, cropOption, brightnessOption, textOption;
     private RecyclerView filterRecView, colorRecView, colorTxtRecView, stickerRecView;
-
     private EditText edtTxtInput;
-
     private String path_image;
     private SeekBar seekBarBrightnessLevel, seekBarContrast, seekBarBlur, seekBarSize, seekBarSticker;
-
     private ArrayList<FilterItem> filterItems;
     private ArrayList<ColorClass> colors, text_colors;
-
     private ArrayList<Sticker> stickers;
-
     private ColorRecViewAdapter adapterColor, adapterTxtColor;
     private FilterRecViewAdapter adapterFilter;
-
     private Boolean CROPPED_3_4 = false, CROPPED_16_9 = false;
-
     private StickerRecViewAdapter adapterSticker;
     private Bitmap originImage, mutableBitmap;
     private ArrayList<Bitmap> previousBitmaps;
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -320,7 +309,6 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.rotatePic:
                         handleRotateImage();
                         break;
-
                     case R.id.flipHorizontalPic:
                         handleFlipImageHorizontal();
                         break;
@@ -330,12 +318,9 @@ public class ViewEdit extends AppCompatActivity {
                     case R.id.firstResizePic:
                         handleCropImage(9f, 16f);
                         break;
-
                     case R.id.secondResizePic:
                         handleCropImage(3f, 4f);
                         break;
-
-
                     default:
                         break;
                 }
@@ -625,6 +610,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void handleAddPaintImage() {
         BitmapDrawable drawable = (BitmapDrawable) imgViewEdit.getDrawable();
         Bitmap bitmap = drawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
@@ -632,15 +618,20 @@ public class ViewEdit extends AppCompatActivity {
 
         // Vẽ ảnh dựa vào việc bắt sự kiện click chuột
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getActionMasked();
+                int action = event.getAction();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_MOVE:
-                        int x = (int) event.getX();
-                        int y = (int) event.getY();
+                        int imageViewWidth = imgViewEdit.getWidth();
+                        int imageViewHeight = imgViewEdit.getHeight();
+                        Drawable imageDrawable = imgViewEdit.getDrawable();
+                        int imageWidth = imageDrawable.getIntrinsicWidth();
+                        int imageHeight = imageDrawable.getIntrinsicHeight();
+
+                        int x = (int) event.getX() * imageWidth / imageViewWidth;
+                        int y = (int) event.getY() * imageHeight / imageViewHeight;
                         Canvas canvas = new Canvas(bitmap);
                         Paint paint = new Paint();
                         if (adapterColor.getColorChosen() != 0) {
@@ -659,11 +650,10 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void handleAddTextImage() {
-
         // Thêm text dựa vào việc bắt sự kiện click chuột
         imgViewEdit.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Bitmap bitmap = ((BitmapDrawable) imgViewEdit.getDrawable()).getBitmap();
@@ -671,8 +661,14 @@ public class ViewEdit extends AppCompatActivity {
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-                        int x = (int) event.getX();
-                        int y = (int) event.getY();
+                        int imageViewWidth = imgViewEdit.getWidth();
+                        int imageViewHeight = imgViewEdit.getHeight();
+                        Drawable imageDrawable = imgViewEdit.getDrawable();
+                        int imageWidth = imageDrawable.getIntrinsicWidth();
+                        int imageHeight = imageDrawable.getIntrinsicHeight();
+
+                        int x = (int) event.getX() * imageWidth / imageViewWidth;
+                        int y = (int) event.getY() * imageHeight / imageViewHeight;
                         Paint paint = new Paint();
                         int Size = seekBarSize.getProgress();
                         int colorText = adapterTxtColor.getColorChosen();
@@ -699,6 +695,7 @@ public class ViewEdit extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void handleAddStickerImage() {
 
         // Thêm sticker dựa vào việc bắt sự kiện click chuột
@@ -711,9 +708,14 @@ public class ViewEdit extends AppCompatActivity {
                 int action = event.getActionMasked();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
-                        System.out.println(mutableBitmap);
-                        int x = (int) event.getX();
-                        int y = (int) event.getY();
+                        int imageViewWidth = imgViewEdit.getWidth();
+                        int imageViewHeight = imgViewEdit.getHeight();
+                        Drawable imageDrawable = imgViewEdit.getDrawable();
+                        int imageWidth = imageDrawable.getIntrinsicWidth();
+                        int imageHeight = imageDrawable.getIntrinsicHeight();
+
+                        int x = (int) event.getX() * imageWidth / imageViewWidth;
+                        int y = (int) event.getY() * imageHeight / imageViewHeight;
                         int Size = seekBarSticker.getProgress();
 
                         Bitmap originalSticker = adapterSticker.getStickerChosen();
