@@ -716,6 +716,7 @@ public class ViewEdit extends AppCompatActivity {
 
                         int x = (int) event.getX() * imageWidth / imageViewWidth;
                         int y = (int) event.getY() * imageHeight / imageViewHeight;
+
                         int Size = seekBarSticker.getProgress();
 
                         Bitmap originalSticker = adapterSticker.getStickerChosen();
@@ -725,6 +726,7 @@ public class ViewEdit extends AppCompatActivity {
                             Canvas canvas = new Canvas(mutableBitmap);
                             canvas.drawBitmap(mutableBitmap, 0, 0, null);
                             canvas.drawBitmap(scaledSticker, x, y, null);
+                            imgViewEdit.setImageBitmap(mutableBitmap);
                             previousBitmaps.add(getOriginalBitmap(imgViewEdit));
                         } else {
                             Toast.makeText(ViewEdit.this, getString(R.string.notif_unselected), Toast.LENGTH_SHORT).show();
