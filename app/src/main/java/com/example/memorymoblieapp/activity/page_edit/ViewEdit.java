@@ -25,6 +25,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -73,7 +74,7 @@ public class ViewEdit extends AppCompatActivity {
     private Boolean CROPPED_3_4 = false, CROPPED_16_9 = false;
     private StickerRecViewAdapter adapterSticker;
     private Bitmap originImage, mutableBitmap;
-    private ArrayList<Bitmap> previousBitmaps;
+    private ArrayList<Bitmap> previousBitmaps, savedBitmaps;
     BottomNavigationView nav_edit_view, nav_crop_option, nav_emote_option, nav_brightness_option;
 
     @Override
@@ -140,6 +141,10 @@ public class ViewEdit extends AppCompatActivity {
                 break;
             case R.id.backViewEdit:
                 backPreviousPicture();
+                break;
+            case R.id.nextViewEdit:
+                backToSavedPicture();
+                break;
             default:
                 break;
         }
@@ -169,11 +174,13 @@ public class ViewEdit extends AppCompatActivity {
             }
         });
         previousBitmaps.clear();
+        savedBitmaps.clear();
         imgViewEdit.setImageBitmap(originImage);
     }
 
     private void backPreviousPicture() {
         if (previousBitmaps.size() > 0) {
+            savedBitmaps.add(previousBitmaps.get(previousBitmaps.size() - 1));
             previousBitmaps.remove(previousBitmaps.size() - 1);
             if (previousBitmaps.size() == 0) {
                 imgViewEdit.setImageBitmap(originImage);
@@ -183,6 +190,16 @@ public class ViewEdit extends AppCompatActivity {
             }
         } else {
             Toast.makeText(this, R.string.disable_back_edit_view, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void backToSavedPicture() {
+        if (savedBitmaps.size() > 0) {
+            previousBitmaps.add(savedBitmaps.get(savedBitmaps.size()-1));
+            imgViewEdit.setImageBitmap(savedBitmaps.get(savedBitmaps.size() -1));
+            savedBitmaps.remove(savedBitmaps.size() - 1);
+        } else {
+            Toast.makeText(this, R.string.disable_next_edit_view, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -938,6 +955,7 @@ public class ViewEdit extends AppCompatActivity {
 
     private void initViews() {
         previousBitmaps = new ArrayList<Bitmap>();
+        savedBitmaps = new ArrayList<Bitmap>();
 
         parent_list_color = findViewById(R.id.parent_list_color);
         imgViewEdit = findViewById(R.id.imgViewEdit);

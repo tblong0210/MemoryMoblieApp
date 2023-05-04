@@ -48,6 +48,7 @@
     <string name="filter_faded">Nhạt dần</string>
     <string name="action_save_image">Lưu ảnh</string>
     <string name="action_back_image">Hoàn tác</string>
+    <string name="action_next_image">Trở về</string>
     <string name="action_reset_edit">Quay lại</string>
     <string name="action_cancel">Hủy</string>
     <string name="settings">Cài đặt</string>
@@ -153,7 +154,8 @@
     <string name="text_dimensions">Kích thước</string>
     <string name="text_location">Vị trí</string>
 
-    <string name="disable_back_edit_view">Ảnh đã quay về trạng thái lúc ban đầu</string>version
+    <string name="disable_back_edit_view">Ảnh đã quay về trạng thái lúc ban đầu</string>versiondisa#
+    <string name="disable_next_edit_view">Ảnh đã quay về trạng thái mới nhất</string>
     <string name="choose_color_paint">Vui lòng chọn màu để vẽ</string>
     <string name="provide_text">Vui lòng nhập ký tự</string>
     <string name="provide_text_color">Vui lòng chọn màu chữ</string>

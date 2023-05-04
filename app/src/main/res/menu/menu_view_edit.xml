@@ -6,13 +6,13 @@
         android:id="@+id/resetViewEdit"
         android:icon="@drawable/ic_reset"
         android:title="@string/action_save_image"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/saveViewEdit"
         android:icon="@drawable/ic_save_image"
         android:title="@string/action_save_image"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/backViewEdit"
@@ -24,5 +24,15 @@
         android:title="@string/action_back_image"
         app:showAsAction="always"
         tools:ignore="UnusedAttribute" />
+    <item
+        android:id="@+id/nextViewEdit"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="30dp"
+        android:icon="@drawable/ic_next"
+        android:iconTint="@color/white"
+        android:title="@string/action_next_image"
+        app:showAsAction="always"
+        />
 
 </menu>

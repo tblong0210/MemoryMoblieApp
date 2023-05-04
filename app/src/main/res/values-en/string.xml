@@ -48,6 +48,7 @@
     <string name="filter_faded">Faded</string>
     <string name="action_save_image">Save image</string>
     <string name="action_back_image">Undo</string>
+    <string name="action_next_image">Reverse</string>
     <string name="action_reset_edit">Back</string>
     <string name="action_cancel">Cancel</string>
     <string name="settings">Settings</string>
@@ -155,6 +156,8 @@
 
     <string name="disable_back_edit_view">Image has been restored to its original state</string>
     version
+    <string name="disable_next_edit_view">Image has been restored to its latest state</string>
+
     <string name="choose_color_paint">Please choose a color to paint</string>
     <string name="provide_text">Please enter characters</string>
     <string name="provide_text_color">Please select text color</string>
