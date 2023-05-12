@@ -187,4 +187,6 @@
     <string name="notif_agree_create">Tạo ngay</string>
     <string name="title_download_url">Tải ảnh từ URL</string>
 
+    <string name="crop_image_error">Kích thước ảnh không hợp lệ</string>
+
 </resources>

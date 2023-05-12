@@ -191,5 +191,8 @@
 
     <string name="title_download_url">Download picture from URL</string>
 
+    <string name="crop_image_error">The size of image is invalid</string>
+
+
 
 </resources>
