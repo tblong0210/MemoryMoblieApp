@@ -1,6 +1,7 @@
 package com.example.memorymoblieapp.activity.page_edit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -195,8 +196,8 @@ public class ViewEdit extends AppCompatActivity {
 
     private void backToSavedPicture() {
         if (savedBitmaps.size() > 0) {
-            previousBitmaps.add(savedBitmaps.get(savedBitmaps.size()-1));
-            imgViewEdit.setImageBitmap(savedBitmaps.get(savedBitmaps.size() -1));
+            previousBitmaps.add(savedBitmaps.get(savedBitmaps.size() - 1));
+            imgViewEdit.setImageBitmap(savedBitmaps.get(savedBitmaps.size() - 1));
             savedBitmaps.remove(savedBitmaps.size() - 1);
         } else {
             Toast.makeText(this, R.string.disable_next_edit_view, Toast.LENGTH_SHORT).show();
@@ -492,8 +493,8 @@ public class ViewEdit extends AppCompatActivity {
     private void handleCropImage(float firstRatio, float secondRatio) {
 //        refreshPicture();
         Bitmap bitmap = originImage;
-        if(previousBitmaps.size() > 0){
-            bitmap = previousBitmaps.get(previousBitmaps.size()-1);
+        if (previousBitmaps.size() > 0) {
+            bitmap = previousBitmaps.get(previousBitmaps.size() - 1);
         }
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
@@ -723,7 +724,7 @@ public class ViewEdit extends AppCompatActivity {
                         Paint paint = new Paint();
                         if (adapterColor.getColorChosen() != 0 && x != 0 && y != 0) {
                             paint.setColor(adapterColor.getColorChosen());
-                            canvas.drawCircle(x, y, seekBarPaint.getProgress()* imageWidth / newWidthImage, paint);
+                            canvas.drawCircle(x, y, seekBarPaint.getProgress() * imageWidth / newWidthImage, paint);
 
                             imgViewEdit.invalidate();
                         } else if (adapterColor.getColorChosen() == 0) {
@@ -822,7 +823,7 @@ public class ViewEdit extends AppCompatActivity {
                         }
 
                         Paint paint = new Paint();
-                        int Size = seekBarSize.getProgress();
+                        int Size = (int) (seekBarSize.getProgress() * imageWidth / newWidthImage);
                         int colorText = adapterTxtColor.getColorChosen();
                         if (colorText != 0) {
                             paint.setColor(colorText);
@@ -931,7 +932,7 @@ public class ViewEdit extends AppCompatActivity {
                             x = y = 0;
                         }
 
-                        int Size = seekBarSticker.getProgress();
+                        int Size = (int) (seekBarSticker.getProgress() * imageWidth / newWidthImage);
 
                         Bitmap originalSticker = adapterSticker.getStickerChosen();
                         if (originalSticker != null && x != 0 && y != 0) {
