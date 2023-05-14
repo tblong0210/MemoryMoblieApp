@@ -498,34 +498,37 @@ public class ViewEdit extends AppCompatActivity {
         }
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-
-        //Cắt ảnh 3:4
-        if (firstRatio == 3f && secondRatio == 4f) {
-            int newHeight = (int) (width * firstRatio / secondRatio);
-            int y = (height - newHeight) / 2;
-            Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, y, width, newHeight);
-            imgViewEdit.setImageBitmap(croppedBitmap);
-
-        }
-        // Cắt ảnh 16:9
-        else {
-            int originalWidth = bitmap.getWidth();
-            int originalHeight = bitmap.getHeight();
-            int newWidth = originalWidth;
-            int newHeight = originalWidth * 16 / 9;
-            if (newHeight > originalHeight) {
-                newHeight = originalHeight;
-                newWidth = originalHeight * 9 / 16;
+        try {
+            //Cắt ảnh 3:4
+            if (firstRatio == 3f && secondRatio == 4f) {
+                int newHeight = (int) (width * firstRatio / secondRatio);
+                int y = (height - newHeight) / 2;
+                Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, y, width, newHeight);
+                imgViewEdit.setImageBitmap(croppedBitmap);
+//                previousBitmaps.add(getOriginalBitmap(imgViewEdit));
             }
-            int left = (originalWidth - newWidth) / 2;
-            int top = (originalHeight - newHeight) / 2;
+            // Cắt ảnh 16:9
+            else {
+                int originalWidth = bitmap.getWidth();
+                int originalHeight = bitmap.getHeight();
+                int newWidth = originalWidth;
+                int newHeight = originalWidth * 16 / 9;
+                if (newHeight > originalHeight) {
+                    newHeight = originalHeight;
+                    newWidth = originalHeight * 9 / 16;
+                }
+                int left = (originalWidth - newWidth) / 2;
+                int top = (originalHeight - newHeight) / 2;
 
-            Bitmap croppedImage = Bitmap.createBitmap(bitmap, left, top, newWidth, newHeight);
-            imgViewEdit.setImageBitmap(croppedImage);
+                Bitmap croppedImage = Bitmap.createBitmap(bitmap, left, top, newWidth, newHeight);
+                imgViewEdit.setImageBitmap(croppedImage);
+//                previousBitmaps.add(getOriginalBitmap(imgViewEdit));
+            }
 
-
+        }catch(IllegalArgumentException e){
+            Toast.makeText(this,R.string.crop_image_error, Toast.LENGTH_SHORT).show();
         }
-//        previousBitmaps.add(getOriginalBitmap(imgViewEdit));
+
     }
 
     private void handleBrightnessLevel() {
